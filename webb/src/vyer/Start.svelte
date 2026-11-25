@@ -49,10 +49,9 @@
   // På smala skärmar är filtret hopfällt, så att träffarna syns direkt.
   const bred = typeof matchMedia === 'function' ? matchMedia('(min-width: 52rem)').matches : true;
 
+  // Sökningen och filtren följer med till kartvyn, så att listan där visar samma träffar.
   function kartlank(id: string): string {
-    const p = new URLSearchParams();
-    if (lang === 'en') p.set('lang', 'en');
-    return byggRutt({ vy: 'karta', id, q: p });
+    return byggRutt({ vy: 'karta', id, q: new URLSearchParams(rutt.q) });
   }
 
   function skriv(text: string) {

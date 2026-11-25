@@ -36,6 +36,7 @@ export const TEXT = {
   falt_livsmiljo: { sv: 'Livsmiljö', en: 'Habitat' },
   falt_simblasa: { sv: 'Simblåsa', en: 'Swim bladder' },
   alla_kartor: { sv: 'Alla kartor', en: 'All maps' },
+  traffar: { sv: 'Träffar', en: 'Results' },
   visa_lager: { sv: 'Visa', en: 'Show' },
   lager_klassad: { sv: 'Klassad', en: 'Classified' },
   lager_kontinuerlig: { sv: 'Kontinuerlig', en: 'Continuous' },

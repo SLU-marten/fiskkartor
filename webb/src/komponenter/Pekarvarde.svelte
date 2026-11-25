@@ -1,6 +1,8 @@
 <script lang="ts">
   // Värdet under pekaren med koordinater. Nära full upplösning hämtas det exakta värdet när pekaren
   // stannat 250 ms; varje rörelse avbryter förra hämtningen, så ett gammalt svar visas aldrig.
+  // Värdet räknas om när kartan flyttas eller zoomas under en stilla pekare, och när rutor börjar
+  // eller slutar laddas: medan rutor laddas kan getData ge en grövre ersättningsruta.
   import { onDestroy } from 'svelte';
   import type MapBrowserEvent from 'ol/MapBrowserEvent.js';
   import { NODATA, VY, type KartFil, type Kartan } from '../karta/karta';
@@ -17,6 +19,8 @@
   let koord = $state<{ sweref: string; wgs84: string } | null>(null);
   let pagaende: AbortController | null = null;
   let timer: ReturnType<typeof setTimeout> | undefined;
+  let pixel: [number, number] | null = null;
+  let laddar = false;
 
   function avbryt() {
     pagaende?.abort();
@@ -31,13 +35,20 @@
   }
 
   function rorelse(e: MapBrowserEvent) {
+    pixel = [e.pixel[0], e.pixel[1]];
+    berakna();
+  }
+
+  function berakna() {
     avbryt();
     const lager = kartan.lager();
     const kalla = lager?.getSource();
-    if (!lager || !kalla) return;
-    const [x, y] = e.coordinate;
+    if (!lager || !kalla || !pixel) return;
+    const koordinat = kartan.karta.getCoordinateFromPixel(pixel);
+    if (!koordinat) return;
+    const [x, y] = koordinat;
     koord = koordinater(x, y);
-    const v = lagrat(lager.getData(e.pixel) as ArrayLike<number> | null);
+    const v = lagrat(lager.getData(pixel) as ArrayLike<number> | null);
     if (v === null) {
       // En översikt utan data betyder att ingen cell i rutan har data.
       text = '—';
@@ -49,7 +60,9 @@
     const upp = vy.getResolution() ?? 0;
     const maxZ = grid.getMaxZoom();
     const z = grid.getZForResolution(upp, (kalla as unknown as { zDirection?: number }).zDirection ?? 0);
-    const lage = vardeLage(z, maxZ, upp, grid.getResolution(maxZ));
+    let lage = vardeLage(z, maxZ, upp, grid.getResolution(maxZ));
+    // Full upplösning som inte har laddats än: getData kan ha gett en grövre ruta.
+    if (lage === 'exakt' && laddar) lage = 'hamta';
     if (lage === 'exakt') {
       text = formatera(v, roll, klasser);
       tips = false;
@@ -72,16 +85,34 @@
 
   function lamna() {
     avbryt();
+    pixel = null;
     text = '';
     koord = null;
   }
 
+  const flyttad = () => berakna();
+  const borjarLadda = () => {
+    laddar = true;
+    berakna();
+  };
+  const klarLaddad = () => {
+    laddar = false;
+    berakna();
+  };
+
   $effect(() => {
-    kartan.karta.on('pointermove', rorelse);
-    const mal = kartan.karta.getTargetElement();
+    const k = kartan.karta;
+    k.on('pointermove', rorelse);
+    k.on('moveend', flyttad);
+    k.on('loadstart', borjarLadda);
+    k.on('loadend', klarLaddad);
+    const mal = k.getTargetElement();
     mal?.addEventListener('pointerleave', lamna);
     return () => {
-      kartan.karta.un('pointermove', rorelse);
+      k.un('pointermove', rorelse);
+      k.un('moveend', flyttad);
+      k.un('loadstart', borjarLadda);
+      k.un('loadend', klarLaddad);
       mal?.removeEventListener('pointerleave', lamna);
     };
   });

@@ -476,3 +476,63 @@ test.describe('om-sidan', () => {
     await expect(page.getByRole('heading', { name: 'How to cite' })).toBeVisible();
   });
 });
+
+test.describe('efter granskningen', () => {
+  test('mobil: listan är hopfälld och kartan syns direkt', async ({ page }) => {
+    await page.setViewportSize({ width: 390, height: 844 });
+    await cartoTom(page);
+    await page.goto(KARTA('torsk-test'));
+    await vantaKarta(page);
+    expect(await page.locator('.lista details').evaluate((d) => (d as HTMLDetailsElement).open)).toBe(false);
+    const ruta = (await page.locator('.kartyta').boundingBox())!;
+    expect(ruta.y).toBeLessThan(844);
+  });
+
+  test('att byta karta många gånger läcker inga WebGL-ytor', async ({ page }) => {
+    await cartoTom(page);
+    const varningar: string[] = [];
+    page.on('console', (m) => /WebGL/.test(m.text()) && varningar.push(m.text()));
+    await page.goto(KARTA('torsk-test'));
+    await vantaKarta(page);
+    const titlar = ['Perch spawning, Baltic Sea (test)', 'Trålfångst, en klass (test)', 'Torsk större än 20 cm, uppväxt, västkusten (test)'];
+    for (let i = 0; i < 18; i++) {
+      await page.locator('.lista').getByRole('link', { name: titlar[i % 3] }).click();
+      await vantaKarta(page);
+    }
+    expect(varningar).toEqual([]);
+  });
+
+  test('listan i kartvyn visar sökträffarna', async ({ page }) => {
+    await cartoTom(page);
+    await page.goto(START());
+    await page.getByRole('combobox').fill('torsk');
+    await page.getByTestId('traff').getByRole('link').click();
+    await vantaKarta(page);
+    await expect(page.locator('.lista').getByTestId('traff')).toHaveCount(1);
+    await page.goBack();
+    await expect(page.getByRole('combobox')).toHaveValue('torsk');
+  });
+
+  test('zoom utan att flytta pekaren uppdaterar värdet', async ({ page }) => {
+    await page.goto(KARTA('torsk-test', 'bakgrund=ingen'));
+    await vantaKarta(page);
+    await stallVy(page, 630762.5, 6619237.5, 400);
+    await hovra(page, 630762.5, 6619237.5, 3006);
+    await expect(page.getByTestId('varde')).toHaveText('≈ Mycket viktigt');
+    await stallVy(page, 630762.5, 6619237.5, 6.25);
+    await expect(page.getByTestId('varde')).toHaveText('—');
+    await expect(page.getByTestId('varde-tips')).toHaveCount(0);
+  });
+
+  test('medan full upplösning laddas visas inte en grövre ruta som exakt', async ({ page }) => {
+    await page.goto(KARTA('torsk-test', 'bakgrund=ingen'));
+    await vantaKarta(page);
+    await stallVy(page, 630762.5, 6619237.5, 400);
+    await hovra(page, 630762.5, 6619237.5, 3006);
+    await fordroj(page, '**/visning.tif', 1500);
+    await page.evaluate(() => (window as any).__karta.karta.getView().setResolution(25));
+    await page.waitForTimeout(400);
+    await expect(page.getByTestId('varde')).not.toHaveText('Mycket viktigt');
+    await expect(page.getByTestId('varde')).toHaveText('—', { timeout: 10_000 });
+  });
+});

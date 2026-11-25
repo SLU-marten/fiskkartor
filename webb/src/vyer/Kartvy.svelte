@@ -3,8 +3,9 @@
   import Panel from '../komponenter/Panel.svelte';
   import Traffar from '../komponenter/Traffar.svelte';
   import type { Bakgrund, Kartan } from '../karta/karta';
-  import { aktuellVersion, kartfil, synliga, type Karta as KartaTyp, type Roll } from '../lib/katalog';
+  import { aktuellVersion, FALTNAMN, kartfil, synliga, type Karta as KartaTyp, type Roll } from '../lib/katalog';
   import { franUrl } from '../lib/permalank';
+  import { filterFranQ, sok } from '../lib/sok';
   import { byggRutt, medParametrar, skrivRutt, type Rutt, type Sprak } from '../lib/rutt';
   import { antalKartor, t } from '../lib/text';
 
@@ -13,7 +14,13 @@
 
   const sv = new Intl.Collator('sv');
   const karta = $derived(kartor.find((k) => k.id === rutt.id));
-  const lista = $derived([...synliga(kartor)].sort((a, b) => sv.compare(a.titel, b.titel)));
+  // Listan visar träffarna från startsidan (sökning och filter följer med i adressen), annars alla kartor.
+  const sokning = $derived(rutt.q.has('q') || FALTNAMN.some((f) => rutt.q.has(f)));
+  const lista = $derived(
+    [...sok(synliga(kartor), rutt.q.get('q') ?? '', filterFranQ(rutt.q))].sort((a, b) => sv.compare(a.titel, b.titel)),
+  );
+  // På smala skärmar är listan hopfälld, så att kartan syns direkt.
+  const bred = typeof matchMedia === 'function' ? matchMedia('(min-width: 60rem)').matches : true;
   const version = $derived(karta ? aktuellVersion(karta, rutt.q.has('v') ? Number(rutt.q.get('v')) : undefined) : null);
   const roll = $derived<Roll>(rutt.q.get('lager') === 'kontinuerlig' && version?.kontinuerlig ? 'kontinuerlig' : 'klassad');
   const fil = $derived(version ? (roll === 'kontinuerlig' ? version.kontinuerlig! : version.klassad) : null);
@@ -26,7 +33,7 @@
   // Den öppna kartan ska synas i listan även när den ligger långt ned.
   $effect(() => {
     void karta?.id;
-    document.querySelector('.lista [aria-current="page"]')?.scrollIntoView({ block: 'nearest' });
+    if (bred) document.querySelector('.lista [aria-current="page"]')?.scrollIntoView({ block: 'nearest' });
   });
 
   let kartan = $state<Kartan | null>(null);
@@ -43,9 +50,10 @@
   function satt(andra: Record<string, string | null>) {
     skrivRutt(medParametrar(rutt, andra), 'ersatt');
   }
+  // Byte av karta i listan behåller sökningen och språket, men inte vyn eller lagret.
   function lank(id: string): string {
     const q = new URLSearchParams();
-    if (lang === 'en') q.set('lang', 'en');
+    for (const [k, v] of rutt.q) if (k === 'q' || k === 'lang' || (FALTNAMN as readonly string[]).includes(k)) q.append(k, v);
     return byggRutt({ vy: 'karta', id, q });
   }
 </script>
@@ -59,8 +67,8 @@
 {:else}
   <div class="kartvy">
     <nav class="lista" aria-label={t('alla_kartor', lang)}>
-      <details open>
-        <summary>{t('alla_kartor', lang)} <span>({antalKartor(lista.length, lang)})</span></summary>
+      <details open={bred}>
+        <summary>{t(sokning ? 'traffar' : 'alla_kartor', lang)} <span>({antalKartor(lista.length, lang)})</span></summary>
         <Traffar kartor={lista} {lank} aktiv={karta.id} />
       </details>
     </nav>

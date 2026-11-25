@@ -40,7 +40,12 @@
       if (kartan?.lager()?.getSource()?.getState() === 'ready') laddar = false;
     });
   });
-  onDestroy(() => kartan?.karta.setTarget(undefined));
+  // Släpp kartans WebGL-yta, annars tar webbläsaren slut på dem efter ett tjugotal kartbyten.
+  onDestroy(() => {
+    kartan?.lager()?.dispose();
+    kartan?.karta.setTarget(undefined);
+    kartan?.karta.dispose();
+  });
 
   $effect(() => {
     if (!kartan) return;

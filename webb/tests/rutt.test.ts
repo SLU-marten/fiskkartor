@@ -18,6 +18,12 @@ describe('tolkaRutt', () => {
     expect(sprak(tolkaRutt('#/'))).toBe('sv');
   });
 
+  it('en trasig adress (ofullständig %-kod) ger ingen krasch', () => {
+    const r = tolkaRutt('#/karta/abc%');
+    expect(r.vy).toBe('karta');
+    expect(r.id).toBe('abc%');
+  });
+
   it('karta utan id ger startsidan', () => {
     expect(tolkaRutt('#/karta/').vy).toBe('start');
   });

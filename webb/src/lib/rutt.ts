@@ -5,13 +5,22 @@ export type Vy = 'start' | 'karta' | 'om';
 export type Rutt = { vy: Vy; id?: string; q: URLSearchParams };
 export type Sprak = 'sv' | 'en';
 
+// En avklippt länk (t.ex. "abc%") ska ge "kartan finns inte", inte en krasch.
+function avkoda(s: string): string {
+  try {
+    return decodeURIComponent(s);
+  } catch {
+    return s;
+  }
+}
+
 export function tolkaRutt(hash: string): Rutt {
   const utan = hash.replace(/^#/, '');
   const i = utan.indexOf('?');
   const sokvag = i < 0 ? utan : utan.slice(0, i);
   const q = new URLSearchParams(i < 0 ? '' : utan.slice(i + 1));
   const delar = sokvag.split('/').filter(Boolean);
-  if (delar[0] === 'karta' && delar[1]) return { vy: 'karta', id: decodeURIComponent(delar[1]), q };
+  if (delar[0] === 'karta' && delar[1]) return { vy: 'karta', id: avkoda(delar[1]), q };
   if (delar[0] === 'om') return { vy: 'om', q };
   return { vy: 'start', q };
 }
