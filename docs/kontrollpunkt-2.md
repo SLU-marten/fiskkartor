@@ -7,7 +7,7 @@
 ## Vad som finns nu
 
 - **Startsida.** Sök med förslag på art, vetenskapligt namn och titel. Versaler, å, ä och ö spelar ingen
-  roll. Det finns kort per projekt och filter för tio fält; grupper med fler än åtta värden fälls ihop.
+  roll. Det finns kort per projekt och filter för nio fält (Fiskbarometern är inget filter, men visas i metadatan); grupper med fler än åtta värden fälls ihop.
   Under filtren visas träfflistan. Sökning och filter står i adressen, så de överlever omladdning och
   bakåtknappen.
 - **Kartvy i SWEREF 99 TM** med CARTO Positron som bakgrund. Man kan växla mellan klassad och
