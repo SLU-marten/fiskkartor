@@ -116,7 +116,8 @@ Så är det också i dag med YlGnBu (1,4:1). Låga sannolikheter får hellre tr�
 
 - **Bakgrund och mönster:** Havsvik med mönsterremsan, upprepad i sidled och lika hög som sidhuvudet.
   Höjden är densamma som i dag: 4.5rem på dator och 4.25rem på mobil.
-- **Mönsterremsan** är 1440 × 144 i sitt eget koordinatsystem, med cirka 35 fiskar. Den går ihop i
+- **Mönsterremsan** är 1440 × 144 i sitt eget koordinatsystem, med cirka 35 fiskar. En torsk ligger
+  alltid under namnet Fiskkartor (x 168–333, nedre halvan), resten slumpas runt den. Den går ihop i
   skarven, så fiskar som korsar en kant ritas på båda sidor. Fiskarna är vita med 7,5 % opacitet. Vit
   text mot bandet med fisk under ger minst 4,7:1.
 - **Logotyp:** SLU:s vita logotyp (PNG med den fria zonen inbyggd, som den färgade), i samma storlek som
