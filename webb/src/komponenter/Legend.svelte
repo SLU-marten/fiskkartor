@@ -45,6 +45,29 @@
     font-size: 0.9rem;
     color: var(--dampad);
   }
+  /* En låg karta (mobil i liggande läge): teckenförklaringen blir en rad, och etiketten finns
+     bara för skärmläsare, så att den inte krockar med zoomknapparna och Lagerval. */
+  @container kartyta (max-height: 16rem) {
+    .legend {
+      bottom: 1.4rem;
+      padding: 0.25rem 0.6rem;
+    }
+    .rubrik {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip-path: inset(50%);
+      white-space: nowrap;
+    }
+    ul {
+      display: flex;
+      gap: 0.75rem;
+    }
+    li {
+      margin: 0;
+    }
+  }
   ul {
     list-style: none;
     margin: 0;

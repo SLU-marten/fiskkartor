@@ -113,6 +113,8 @@
   $effect(() => {
     const k = kartan.karta;
     k.on('pointermove', rorelse);
+    // En pekskärm ger ingen pointermove vid ett tryck; värdet visas där man trycker.
+    k.on('singleclick', rorelse);
     k.on('moveend', flyttad);
     k.on('loadstart', borjarLadda);
     k.on('loadend', klarLaddad);
@@ -120,6 +122,7 @@
     mal?.addEventListener('pointerleave', lamna);
     return () => {
       k.un('pointermove', rorelse);
+      k.un('singleclick', rorelse);
       k.un('moveend', flyttad);
       k.un('loadstart', borjarLadda);
       k.un('loadend', klarLaddad);

@@ -16,8 +16,12 @@
     lang: Sprak;
     kartan: Kartan | null;
     rutt: Rutt;
+    /** Mobilpanelens läge. Nere visas bara rubriken, notiserna och snabbraden. */
+    uppe: boolean;
+    /** Knappen Ladda ned i snabbraden (bara på mobil): drar upp panelen och visar nedladdningen. */
+    onladdaned: () => void;
   };
-  let { karta, version, roll, dataUrl, lang, kartan, rutt }: Props = $props();
+  let { karta, version, roll, dataUrl, lang, kartan, rutt, uppe, onladdaned }: Props = $props();
 
   // ?v= med en version som inte finns: den aktuella visas, och det sägs.
   const begard = $derived(rutt.q.get('v'));
@@ -86,6 +90,9 @@
   }
 </script>
 
+<h1>{karta.titel}</h1>
+<p class="kalla" class:uppe>{karta.kalla}, {karta.ar}</p>
+
 {#if !karta.visas}
   <p class="notis" role="note">{t('inte_aktuell', lang)}</p>
 {/if}
@@ -99,25 +106,21 @@
   <p class="notis" role="note">{versionSaknas(saknadVersion, version.version, lang)}</p>
 {/if}
 
-<h1>{karta.titel}</h1>
-
-
-<p>
+<div class="snabb" class:uppe>
+  <button type="button" class="knapp mobil" onclick={onladdaned}>{t('ladda_ned', lang)}</button>
   <button type="button" class="knapp" onclick={kopieraLank}>{t('kopiera_lank', lang)}</button>
-  <span role="status">{lankKopierad}</span>
-</p>
-<p>
-  <button type="button" class="knapp" onclick={sparaBild} disabled={!kartan || sparar} aria-busy={sparar}>
+  <button type="button" class="knapp spara" onclick={sparaBild} disabled={!kartan || sparar} aria-busy={sparar}>
     {sparar ? t('sparar_bild', lang) : t('spara_bild', lang)}
   </button>
-  <span role="status">{bildstatus}</span>
-</p>
+</div>
+<p class="status"><span role="status">{lankKopierad}</span> <span role="status">{bildstatus}</span></p>
 
+<div class="resten" class:uppe>
 <Nedladdning {karta} {version} {dataUrl} {lang} />
 
 <section>
   <h2>{t('citera', lang)}</h2>
-  <p class="citering" lang={karta.sprak}>{citering}</p>
+  <p class="citering lopande" lang={karta.sprak}>{citering}</p>
   <button type="button" class="knapp" onclick={kopiera}>{t('kopiera_citering', lang)}</button>
   <span role="status">{kopierat}</span>
 </section>
@@ -138,6 +141,7 @@
     {/each}
   </ul>
 </section>
+</div>
 
 <style>
   /* Kartans namn står kvar överst när panelen skrollas. Bakgrunden täcker texten under.
@@ -152,10 +156,48 @@
     background: var(--yta);
     border-bottom: 1px solid var(--linje);
   }
-  /* På mobil skrollar hela sidan, och fönstret har ingen utfyllnad att ta bort. */
+  .kalla {
+    margin: -0.4rem 0 0.75rem;
+    color: var(--dampad);
+  }
+  .snabb {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .status {
+    min-height: 1.5em;
+    margin: 0.25rem 0 0;
+  }
+  .mobil {
+    display: none;
+  }
+  /* På mobil skrollar panelen själv och har ingen utfyllnad upptill. Nere visas bara rubriken,
+     källan, notiserna och snabbraden. */
   @media (max-width: 60rem) {
     h1 {
       top: 0;
+    }
+    .mobil {
+      display: inline-block;
+    }
+    .status {
+      min-height: 0;
+    }
+    .snabb:not(.uppe) .spara,
+    .resten:not(.uppe) {
+      display: none;
+    }
+  }
+  /* Liggande telefon: fliken tar mindre plats när den är nere, så att kartan syns. */
+  @media (max-width: 60rem) and (max-height: 30rem) {
+    h1 {
+      padding-top: 0.25rem;
+      padding-bottom: 0.25rem;
+      margin-bottom: 0.4rem;
+    }
+    .kalla:not(.uppe) {
+      display: none;
     }
   }
   :global(.panel h2) {
@@ -174,12 +216,21 @@
     overflow-wrap: anywhere;
   }
   .knapp {
+    min-height: 40px;
     border: 1px solid var(--gron);
     background: var(--yta);
     color: var(--gron);
     border-radius: 4px;
-    padding: 0.3rem 0.7rem;
+    padding: 0 0.8rem;
     cursor: pointer;
+  }
+  .knapp:hover {
+    border-color: var(--gron-mork);
+    color: var(--gron-mork);
+  }
+  .knapp:disabled {
+    cursor: default;
+    opacity: 0.6;
   }
   [role='status'] {
     margin-left: 0.5rem;

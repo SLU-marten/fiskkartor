@@ -528,16 +528,6 @@ test.describe('om-sidan', () => {
 });
 
 test.describe('efter granskningen', () => {
-  test('mobil: listan är hopfälld och kartan syns direkt', async ({ page }) => {
-    await page.setViewportSize({ width: 390, height: 844 });
-    await cartoTom(page);
-    await page.goto(KARTA('torsk-test'));
-    await vantaKarta(page);
-    expect(await page.locator('.lista details').evaluate((d) => (d as HTMLDetailsElement).open)).toBe(false);
-    const ruta = (await page.locator('.kartyta').boundingBox())!;
-    expect(ruta.y).toBeLessThan(844);
-  });
-
   test('att byta karta många gånger läcker inga WebGL-ytor', async ({ page }) => {
     await cartoTom(page);
     const varningar: string[] = [];
@@ -774,5 +764,119 @@ test.describe('Lagerval och teckenförklaring i kartan', () => {
         const skar = a.x < b.x + b.width && b.x < a.x + a.width && a.y < b.y + b.height && b.y < a.y + a.height;
         expect(skar, `${rutor[i].d} och ${rutor[j].d}`).toBe(false);
       }
+  });
+});
+
+test.describe('mobil', () => {
+  test.use({ viewport: { width: 390, height: 844 } });
+  const greppet = (page: import('@playwright/test').Page) => page.locator('.grepp');
+
+  test('mobil: länken går till träffarna och kartan syns direkt', async ({ page }) => {
+    await cartoTom(page);
+    await page.goto(KARTA('torsk-test', 'q=torsk'));
+    await vantaKarta(page);
+    await expect(page.locator('.lista')).toBeHidden();
+    const lank = page.getByRole('link', { name: /Till träffarna \(\d+\)/ });
+    await expect(lank).toBeVisible();
+    expect(await lank.getAttribute('href')).toContain('q=torsk');
+    const ruta = (await page.locator('.kartyta').boundingBox())!;
+    expect(ruta.height).toBeGreaterThan(0.45 * 844);
+    expect(await page.evaluate(() => document.documentElement.scrollHeight <= innerHeight)).toBe(true);
+  });
+
+  test('mobil: fliken startar nere och greppet växlar', async ({ page }) => {
+    await cartoTom(page);
+    await page.goto(KARTA('torsk-test'));
+    await vantaKarta(page);
+    const nere = page.getByRole('button', { name: 'Visa mer om kartan' });
+    await expect(nere).toHaveAttribute('aria-expanded', 'false');
+    await expect(page.locator('.panel h1')).toBeVisible();
+    await expect(page.locator('#nedladdning')).toBeHidden();
+    await expect(page.getByTestId('legend')).toBeVisible();
+    await nere.click();
+    const uppe = page.getByRole('button', { name: 'Visa mindre' });
+    await expect(uppe).toHaveAttribute('aria-expanded', 'true');
+    await expect(page.locator('#nedladdning')).toBeVisible();
+    await expect(page.getByTestId('legend')).toBeHidden();
+    await uppe.click();
+    await expect(page.locator('#nedladdning')).toBeHidden();
+    await expect(page.getByTestId('legend')).toBeVisible();
+  });
+
+  test('mobil: svep på greppet', async ({ page }) => {
+    await cartoTom(page);
+    await page.goto(KARTA('torsk-test'));
+    await vantaKarta(page);
+    const svep = async (dy: number) => {
+      const r = (await greppet(page).boundingBox())!;
+      const x = r.x + r.width / 2, y = r.y + r.height / 2;
+      await page.mouse.move(x, y);
+      await page.mouse.down();
+      await page.mouse.move(x, y + dy, { steps: 6 });
+      await page.mouse.up();
+    };
+    await svep(-100);
+    await expect(greppet(page)).toHaveAttribute('aria-expanded', 'true');
+    await svep(100);
+    await expect(greppet(page)).toHaveAttribute('aria-expanded', 'false');
+  });
+
+  test('mobil: Ladda ned i fliken drar upp fliken och visar nedladdningen', async ({ page }) => {
+    await cartoTom(page);
+    await page.goto(KARTA('torsk-test'));
+    await vantaKarta(page);
+    await page.locator('.panel').getByRole('button', { name: 'Ladda ned' }).click();
+    await expect(greppet(page)).toHaveAttribute('aria-expanded', 'true');
+    await expect(page.locator('#nedladdning')).toBeInViewport();
+  });
+
+  test.describe('pekskärm', () => {
+    test.use({ hasTouch: true });
+    test('mobil: ett tryck på kartan visar värdet', async ({ page }) => {
+      await page.goto(KARTA('torsk-test', 'bakgrund=ingen'));
+      await vantaKarta(page);
+      const [px, py] = await page.evaluate(() => (window as any).__karta.pixelFor(613287.5, 6636712.5, 3006) as [number, number]);
+      await page.touchscreen.tap(px, py);
+      await expect(page.getByTestId('varde')).toBeVisible();
+      await expect(page.getByTestId('varde')).not.toHaveText('');
+    });
+  });
+
+  test('mobil, engelska och lång titel: fliken flödar inte över', async ({ page }) => {
+    await cartoTom(page);
+    await page.goto(KARTA('torsk-test', 'lang=en'));
+    await vantaKarta(page);
+    const panel = page.locator('.panel');
+    expect(await panel.evaluate((p) => p.scrollWidth <= p.clientWidth)).toBe(true);
+    const p = (await panel.boundingBox())!, h = (await page.locator('.panel h1').boundingBox())!;
+    expect(h.x).toBeGreaterThanOrEqual(p.x);
+    expect(h.y).toBeGreaterThanOrEqual(p.y);
+    expect(h.x + h.width).toBeLessThanOrEqual(p.x + p.width + 0.5);
+    expect(h.y + h.height).toBeLessThanOrEqual(p.y + p.height + 0.5);
+  });
+
+  test('mobil liggande: kartan syns och greppet går att nå', async ({ page }) => {
+    await cartoTom(page);
+    await page.setViewportSize({ width: 844, height: 390 });
+    await page.goto(KARTA('torsk-test'));
+    await vantaKarta(page);
+    expect((await page.locator('.kartyta').boundingBox())!.height).toBeGreaterThanOrEqual(100);
+    await expect(greppet(page)).toBeInViewport();
+    const delar = ['.ol-zoom', '.lagerval > button', '.kartyta [data-testid=legend]'];
+    const rutor = [];
+    for (const d of delar) rutor.push({ d, r: (await page.locator(d).first().boundingBox())! });
+    for (let i = 0; i < rutor.length; i++)
+      for (let j = i + 1; j < rutor.length; j++) {
+        const a = rutor[i].r, b = rutor[j].r;
+        const skar = a.x < b.x + b.width && b.x < a.x + a.width && a.y < b.y + b.height && b.y < a.y + a.height;
+        expect(skar, `${rutor[i].d} och ${rutor[j].d}`).toBe(false);
+      }
+  });
+
+  test('mobil: en dold karta visar notisen i fliken', async ({ page }) => {
+    await cartoTom(page);
+    await page.goto(KARTA('dold-test'));
+    await expect(greppet(page)).toHaveAttribute('aria-expanded', 'false');
+    await expect(page.locator('.panel .notis').first()).toBeVisible();
   });
 });

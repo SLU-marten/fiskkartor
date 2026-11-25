@@ -3,6 +3,9 @@
   import Panel from '../komponenter/Panel.svelte';
   import Lagerval from '../komponenter/Lagerval.svelte';
   import Legend from '../komponenter/Legend.svelte';
+  import Grepp from '../komponenter/Grepp.svelte';
+  import Ikon from '../komponenter/Ikon.svelte';
+  import { tick } from 'svelte';
   import Traffar from '../komponenter/Traffar.svelte';
   import type { Bakgrund, Kartan } from '../karta/karta';
   import { aktuellVersion, FALTNAMN, kartfil, synliga, type Karta as KartaTyp, type Roll } from '../lib/katalog';
@@ -40,6 +43,25 @@
 
   let kartan = $state<Kartan | null>(null);
 
+  // Mobilpanelens läge. En ny karta öppnas alltid med panelen nere.
+  let uppe = $state(false);
+  $effect(() => {
+    void karta?.id;
+    uppe = false;
+  });
+  async function visaNedladdning() {
+    uppe = true;
+    await tick();
+    document.getElementById('nedladdning')?.scrollIntoView({ block: 'start' });
+  }
+
+  // På mobil ersätts listan av en länk tillbaka till träffarna, med samma sökning, filter och språk.
+  const traffLank = $derived.by(() => {
+    const q = new URLSearchParams();
+    for (const [k, v] of rutt.q) if (k === 'q' || k === 'lang' || (FALTNAMN as readonly string[]).includes(k)) q.append(k, v);
+    return byggRutt({ vy: 'start', q });
+  });
+
   // Vyn ur adressen, om länken har en. Kartan läser den bara när den öppnas.
   const start = $derived.by(() => {
     const l = franUrl(rutt.q);
@@ -67,7 +89,8 @@
     <p><a href={byggRutt({ vy: 'start', q: new URLSearchParams(lang === 'en' ? 'lang=en' : '') })}>{t('till_alla_kartor', lang)}</a></p>
   </div>
 {:else}
-  <div class="kartvy">
+  <div class="kartvy" class:uppe>
+    <a class="tillbaka" href={traffLank}><Ikon namn="pil-vanster" storlek={14} />{t('till_traffarna', lang)} ({lista.length})</a>
     <nav class="lista" aria-label={t('alla_kartor', lang)}>
       <details open={bred}>
         <summary>{t(sokning ? 'traffar' : 'alla_kartor', lang)} <span>({antalKartor(lista.length, lang)})</span></summary>
@@ -95,7 +118,8 @@
       <Legend {version} {roll} {lang} />
     </div>
     <aside class="panel">
-      <Panel {karta} {version} {roll} {dataUrl} {lang} {kartan} {rutt} />
+      <Grepp {uppe} {lang} onvaxla={(v) => (uppe = v)} />
+      <Panel {karta} {version} {roll} {dataUrl} {lang} {kartan} {rutt} {uppe} onladdaned={visaNedladdning} />
     </aside>
   </div>
 {/if}
@@ -123,6 +147,10 @@
   .kartyta {
     position: relative;
     min-height: 24rem;
+    container: kartyta / size;
+  }
+  .tillbaka {
+    display: none;
   }
   .panel {
     overflow: auto;
@@ -134,21 +162,50 @@
     max-width: 40rem;
     padding: 2rem 1.25rem;
   }
+  /* Mobil: ingen sidskroll. Länkraden, kartan och panelen (fliken) delar fönstret. När fliken är
+     uppe krymper kartan, och teckenförklaringen och värdet under pekaren döljs. */
   @media (max-width: 60rem) {
     .kartvy {
       grid-template-columns: 1fr;
-      height: auto;
-    }
-    .kartyta {
-      height: 70vh;
+      grid-template-rows: auto minmax(0, 1fr) auto;
+      height: calc(100dvh - 3.5rem);
     }
     .lista {
-      border-right: 0;
+      display: none;
+    }
+    .tillbaka {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      height: 44px;
+      padding: 0 1rem;
+      background: var(--mjuk);
       border-bottom: 1px solid var(--linje);
     }
-    /* Sidan skrollar på mobil, så rubriken i panelen ska fastna mot fönstret och inte mot panelen. */
+    .kartyta {
+      min-height: 0;
+    }
     .panel {
-      overflow: visible;
+      overflow: auto;
+      padding: 0 1.25rem 0.75rem;
+      border-left: 0;
+      border-radius: 12px 12px 0 0;
+      box-shadow: 0 -2px 8px rgb(0 0 0 / 15%);
+    }
+    .kartvy.uppe .panel {
+      height: calc(100dvh - 12.5rem);
+      box-sizing: border-box;
+    }
+    @media (max-height: 30rem) {
+      .tillbaka {
+        height: 36px;
+      }
+    }
+    .kartvy.uppe :global(.legend),
+    .kartvy.uppe :global(.pekare),
+    .kartvy.uppe :global(.ol-zoom),
+    .kartvy.uppe :global(.ol-scale-line) {
+      display: none;
     }
   }
 </style>

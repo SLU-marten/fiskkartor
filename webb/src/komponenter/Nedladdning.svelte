@@ -21,7 +21,7 @@
   });
 </script>
 
-<section data-testid="nedladdning">
+<section id="nedladdning" data-testid="nedladdning">
   <h2>{t('ladda_ned', lang)}</h2>
   <ul>
     <li>
