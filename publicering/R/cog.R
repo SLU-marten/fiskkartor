@@ -86,3 +86,25 @@ statistik <- function(cog, roll = c("klassad", "kontinuerlig")) {
   .skriv_portal_cog(terra::rast(tmp), mal, roll)
   list(sha256 = digest::digest(file = mal, algo = "sha256"), bytes = file.size(mal))
 }
+
+#' Cellstorlek för visningskopian i markmeter: halva den minsta cellstorleken på marken någonstans
+#' i kartan. Med närmaste granne hamnar då minst en cellmitt i varje källcell, så ingen cell försvinner,
+#' även långt från mittlatituden och när rutnäten är vridna mot varandra (gradnät, Web Mercator, LAEA).
+.upplosning_vy3006 <- function(r, epsg) {
+  upp <- terra::res(r)
+  e <- terra::ext(r)
+  minst <- if (epsg == 4326L) {
+    lat <- if (abs(e$ymax) > abs(e$ymin)) e$ymax else e$ymin
+    lat <- unname(lat)
+    lon <- unname((e$xmin + e$xmax) / 2)
+    fran <- matrix(c(lon, lat), ncol = 2)
+    min(terra::distance(fran, matrix(c(lon + upp[1], lat), ncol = 2), lonlat = TRUE),
+        terra::distance(fran, matrix(c(lon, lat - sign(lat) * upp[2]), ncol = 2), lonlat = TRUE))
+  } else if (epsg == 3857L) {
+    ytter <- unname(max(abs(e$ymin), abs(e$ymax)))
+    min(upp) * cos(2 * atan(exp(ytter / 6378137)) - pi / 2)
+  } else {
+    min(upp)
+  }
+  floor(minst / 2 * 10) / 10
+}

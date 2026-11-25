@@ -53,11 +53,13 @@ mal_lokal <- function(mapp) list(typ = "lokal", mapp = mapp)
 }
 
 # Kartor i andra koordinatsystem får en visningskopia i SWEREF 99 TM bredvid originalet
-# (visning.tif -> visning_3006.tif). Nedladdningen är alltid originalet.
+# (visning.tif -> visning_3006.tif), med halva den minsta cellstorleken så att ingen cell försvinner.
+# Nedladdningen är alltid originalet.
 .vy3006 <- function(cog, mapp, rel, fil, roll) {
   if (cog$epsg == 3006L) return(NULL)
   kopia <- sub("\\.tif$", "_3006.tif", fil)
-  vy <- .skriv_vy3006(file.path(mapp, fil), file.path(mapp, kopia), roll, cog$upplosning)
+  upp <- .upplosning_vy3006(terra::rast(file.path(mapp, fil)), cog$epsg)
+  vy <- .skriv_vy3006(file.path(mapp, fil), file.path(mapp, kopia), roll, upp)
   list(fil = paste(rel, kopia, sep = "/"), sha256 = vy$sha256, bytes = vy$bytes)
 }
 

@@ -129,3 +129,40 @@ test_that("upplösning i markmeter för EPSG:3857, och visningskopian får den c
   expect_identical(kopia$sha256, digest::digest(file = vy, algo = "sha256"))
   expect_identical(kopia$bytes, file.size(vy))
 })
+
+# Källceller med data som ingen cellmitt i visningskopian hamnar i (de skulle inte synas i kartan).
+osynliga_celler <- function(kalla, kopia) {
+  src <- terra::rast(kalla)
+  cp <- terra::rast(kopia)
+  xy <- terra::xyFromCell(cp, seq_len(terra::ncell(cp)))
+  pts <- terra::project(xy, from = terra::crs(cp), to = terra::crs(src))
+  traffade <- unique(terra::cellFromXY(src, pts))
+  setdiff(which(!is.na(terra::values(src)[, 1])), traffade)
+}
+
+kopia_av <- function(r) {
+  src <- tempfile(fileext = ".tif")
+  terra::writeRaster(r, src, datatype = "INT1U", NAflag = 255)
+  cog <- tempfile(fileext = ".tif")
+  res <- skriv_cog(src, cog, "klassad")
+  vy <- tempfile(fileext = ".tif")
+  .skriv_vy3006(cog, vy, "klassad", .upplosning_vy3006(terra::rast(cog), res$epsg))
+  list(cog = cog, vy = vy)
+}
+
+test_that("visningskopian visar varje källcell, även långt från mittlatituden (EPSG:4326)", {
+  r <- terra::rast(nrows = 60, ncols = 40, crs = "EPSG:4326", xmin = 11, xmax = 17, ymin = 55, ymax = 67)
+  set.seed(2)
+  terra::values(r) <- sample(c(5L, 10L), terra::ncell(r), replace = TRUE)
+  k <- kopia_av(r)
+  expect_length(osynliga_celler(k$cog, k$vy), 0)
+})
+
+test_that("visningskopian visar varje källcell i Web Mercator över många breddgrader (EPSG:3857)", {
+  r <- terra::rast(nrows = 40, ncols = 30, crs = "EPSG:3857", xmin = 1.2e6, xmax = 1.2e6 + 30 * 70000,
+                   ymin = 7.17e6, ymax = 7.17e6 + 40 * 70000)
+  set.seed(3)
+  terra::values(r) <- sample(c(5L, 10L), terra::ncell(r), replace = TRUE)
+  k <- kopia_av(r)
+  expect_length(osynliga_celler(k$cog, k$vy), 0)
+})
