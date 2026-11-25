@@ -2,11 +2,13 @@
   import { onMount } from 'svelte';
   import { lasKatalog, synliga, type Karta } from './lib/katalog';
   import Start from './vyer/Start.svelte';
+  import Kartvy from './vyer/Kartvy.svelte';
   import { byggRutt, medParametrar, RUTT_ANDRAD, sprak, tolkaRutt, type Rutt, type Vy } from './lib/rutt';
   import { t } from './lib/text';
 
   // Datamappen ligger bredvid sidan. ?data=<url> pekar om den, för tester.
   const dataUrl = new URLSearchParams(location.search).get('data') ?? 'data/';
+  const cartoNyckel = import.meta.env.VITE_CARTO_NYCKEL ?? '';
 
   let rutt = $state<Rutt>(tolkaRutt(location.hash));
   const lang = $derived(sprak(rutt));
@@ -62,7 +64,7 @@
   {:else if rutt.vy === 'start'}
     <Start kartor={synliga(kartor)} {rutt} {lang} />
   {:else if rutt.vy === 'karta'}
-    <div class="sida"><h1>{rutt.id}</h1></div>
+    <Kartvy {kartor} {rutt} {lang} {dataUrl} {cartoNyckel} />
   {:else}
     <div class="sida"><h1>{t('meny_om', lang)}</h1></div>
   {/if}

@@ -35,6 +35,26 @@ export const TEXT = {
   falt_fiskbarometern: { sv: 'Fiskbarometern', en: 'Fiskbarometern' },
   falt_livsmiljo: { sv: 'Livsmiljö', en: 'Habitat' },
   falt_simblasa: { sv: 'Simblåsa', en: 'Swim bladder' },
+  alla_kartor: { sv: 'Alla kartor', en: 'All maps' },
+  visa_lager: { sv: 'Visa', en: 'Show' },
+  lager_klassad: { sv: 'Klassad', en: 'Classified' },
+  lager_kontinuerlig: { sv: 'Kontinuerlig', en: 'Continuous' },
+  opacitet: { sv: 'Opacitet', en: 'Opacity' },
+  bakgrundskarta: { sv: 'Bakgrundskarta', en: 'Background map' },
+  bakgrund_carto: { sv: 'CARTO', en: 'CARTO' },
+  bakgrund_ingen: { sv: 'Ingen', en: 'None' },
+  laddar_karta: { sv: 'Laddar kartan …', en: 'Loading the map …' },
+  kartfil_fel: {
+    sv: 'Kartfilen kunde inte hämtas. Ladda om sidan eller försök igen senare.',
+    en: 'The map file could not be loaded. Reload the page or try again later.',
+  },
+  karta_finns_inte: { sv: 'Kartan finns inte', en: 'Map not found' },
+  karta_finns_inte_text: {
+    sv: 'Det finns ingen karta med den adressen. Den kan ha bytt namn, eller så är länken fel.',
+    en: 'There is no map at this address. It may have been renamed, or the link is wrong.',
+  },
+  till_alla_kartor: { sv: 'Till alla kartor', en: 'To all maps' },
+  varde_under_pekaren: { sv: 'Värde under pekaren', en: 'Value under the pointer' },
 } as const satisfies Record<string, Record<Sprak, string>>;
 
 export type Nyckel = keyof typeof TEXT;

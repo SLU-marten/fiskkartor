@@ -103,3 +103,98 @@ test.describe('startsidan', () => {
     await expect(page.getByTestId('traff').first().getByRole('link')).toHaveAttribute('href', /#\/karta\/[a-z-]+\?lang=en$/);
   });
 });
+
+const TOM_PNG = Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=', 'base64');
+const KARTA = (id: string, q = '') => `${server.url}/dist/index.html?data=/tests/fixtures/data/#/karta/${id}${q ? `?${q}` : ''}`;
+
+async function cartoTom(page: import('@playwright/test').Page): Promise<string[]> {
+  const rutor: string[] = [];
+  await page.route('https://basemaps.cartocdn.com/**', (r) => {
+    rutor.push(r.request().url());
+    return r.fulfill({ body: TOM_PNG, contentType: 'image/png', headers: { 'Access-Control-Allow-Origin': '*' } });
+  });
+  return rutor;
+}
+async function vantaKarta(page: import('@playwright/test').Page, minst = 1) {
+  await page.waitForFunction((n) => ((window as any).__karta?.rendercomplete ?? 0) >= n, minst, { timeout: 30_000 });
+}
+async function hovra(page: import('@playwright/test').Page, x: number, y: number, epsg: number) {
+  const [px, py] = await page.evaluate(([x, y, e]) => (window as any).__karta.pixelFor(x, y, e) as [number, number], [x, y, epsg] as const);
+  await page.mouse.move(px, py);
+  return [px, py] as const;
+}
+async function fargVid(page: import('@playwright/test').Page, x: number, y: number): Promise<number[]> {
+  const png = await page.screenshot({ clip: { x: Math.round(x), y: Math.round(y), width: 1, height: 1 } });
+  return page.evaluate(async (b64) => {
+    const bild = await createImageBitmap(await (await fetch(`data:image/png;base64,${b64}`)).blob());
+    const duk = new OffscreenCanvas(1, 1);
+    const ctx = duk.getContext('2d')!;
+    ctx.drawImage(bild, 0, 0);
+    return Array.from(ctx.getImageData(0, 0, 1, 1).data.slice(0, 3));
+  }, png.toString('base64'));
+}
+
+test.describe('kartvyn', () => {
+  test('visar kartan, värdet under pekaren och växlar till den kontinuerliga', async ({ page }) => {
+    const rutor = await cartoTom(page);
+    await page.goto(KARTA('torsk-test'));
+    await vantaKarta(page);
+    expect(rutor.length).toBeGreaterThan(0);
+    await hovra(page, 613287.5, 6636712.5, 3006);
+    await expect(page.getByTestId('varde')).toHaveText('Mycket viktigt');
+    await page.getByRole('radio', { name: 'Kontinuerlig' }).check();
+    await vantaKarta(page, 2);
+    await hovra(page, 613287.5, 6636712.5, 3006);
+    await expect(page.getByTestId('varde')).toHaveText('0.75');
+    expect(new URL(page.url()).hash).toContain('lager=kontinuerlig');
+  });
+
+  test('PanBalticScope: ingen växling, klass 0 och nodata under pekaren, visningskopian laddas', async ({ page }) => {
+    await cartoTom(page);
+    const tif: string[] = [];
+    page.on('request', (r) => r.url().endsWith('.tif') && tif.push(r.url()));
+    await page.goto(KARTA('pbs-test'));
+    await vantaKarta(page);
+    await expect(page.getByRole('radio', { name: 'Kontinuerlig' })).toHaveCount(0);
+    await hovra(page, 1801000, 8003000, 3857);
+    await expect(page.getByTestId('varde')).toHaveText('Ej viktigt område');
+    await hovra(page, 1803000, 8001000, 3857);
+    await expect(page.getByTestId('varde')).toHaveText('—');
+    expect(tif.every((u) => u.endsWith('/v2/visning_3006.tif'))).toBe(true);
+  });
+
+  test('genomskinlighet 0 döljer kartan men pekaren visar värdet', async ({ page }) => {
+    await page.goto(KARTA('torsk-test', 'bakgrund=ingen&opacitet=0'));
+    await vantaKarta(page);
+    const [px, py] = await hovra(page, 613287.5, 6636712.5, 3006);
+    await expect(page.getByTestId('varde')).toHaveText('Mycket viktigt');
+    await page.mouse.move(5, 5);
+    // Kartytans egen bakgrund (#eef2f3) syns rakt igenom datalagret.
+    expect(await fargVid(page, px, py)).toEqual([238, 242, 243]);
+    await expect(page.getByLabel('Opacitet')).toHaveValue('0');
+  });
+
+  test('bakgrund=ingen hämtar inga CARTO-rutor', async ({ page }) => {
+    const rutor = await cartoTom(page);
+    await page.goto(KARTA('torsk-test', 'bakgrund=ingen'));
+    await vantaKarta(page);
+    expect(rutor).toHaveLength(0);
+    await page.getByRole('radio', { name: 'CARTO' }).check();
+    await expect.poll(() => rutor.length).toBeGreaterThan(0);
+  });
+
+  test('alla fyra testkartor öppnas utan fel i konsolen', async ({ page }) => {
+    await cartoTom(page);
+    const fel: string[] = [];
+    page.on('console', (m) => m.type() === 'error' && fel.push(m.text()));
+    page.on('pageerror', (e) => fel.push(String(e)));
+    const tif: string[] = [];
+    page.on('request', (r) => r.url().endsWith('.tif') && tif.push(r.url()));
+    for (const id of ['torsk-test', 'pbs-test', 'tral-test', 'dold-test']) {
+      await page.goto(KARTA(id));
+      await vantaKarta(page);
+    }
+    expect(tif.some((u) => u.endsWith('tral-test/v1/visning_3006.tif'))).toBe(true);
+    expect(fel).toEqual([]);
+  });
+});

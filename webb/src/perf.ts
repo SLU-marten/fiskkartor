@@ -1,22 +1,21 @@
 // Prestandasida: visar en COG utan bakgrundskarta och mäter rendering.
 // perf.html?cog=<url>&roll=klassad|kontinuerlig&epsg=<n>&res=<m>[&lon=&lat=&z=]
 //   [&vy=3857|3006]  vyns projektion (3006 = SWEREF 99 TM, ingen omprojicering av 3006-kartor)
-//   [&transition=ms] intoning av nya rutor (OpenLayers standard 250)
-//   [&preload=n]     håll n grövre nivåer laddade, så att något alltid syns medan skarpa rutor laddas
-//   [&reserv=n]      visa som ersättning bara rutor högst n nivåer grövre än den som laddas
+//   [&transition=ms] intoning av nya rutor (portalens standard 0, OpenLayers 250)
+//   [&preload=n]     håll n grövre nivåer laddade (portalens standard Infinity, OpenLayers 0)
+//   [&reserv=n]      visa som ersättning bara rutor högst n nivåer grövre (portalens standard 1)
 //   [&bakgrund=carto] CARTO Positron under kartlagret (nyckel från bygget, VITE_CARTO_NYCKEL, eller &nyckel=)
 import Map from 'ol/Map.js';
 import DragPan from 'ol/interaction/DragPan.js';
 import { defaults as standardInteraktioner } from 'ol/interaction/defaults.js';
 import View from 'ol/View.js';
 import Attribution from 'ol/control/Attribution.js';
-import TileLayer from 'ol/layer/Tile.js';
-import XYZ from 'ol/source/XYZ.js';
 import { fromLonLat, toLonLat, transform, transformExtent } from 'ol/proj.js';
 import type { Coordinate } from 'ol/coordinate.js';
 import { registreraProjektioner } from './karta/projektioner';
 import { klassadStil, kontinuerligStil, type Klass } from './karta/stil';
-import { markUpplosning, skapaCogLager } from './karta/lager';
+import { markUpplosning, reservFor, skapaCogLager } from './karta/lager';
+import { skapaCarto } from './karta/bakgrund';
 
 declare global {
   interface Window {
@@ -56,26 +55,13 @@ const lager = skapaCogLager(
   epsg,
   nodata,
   klassad ? klassadStil(STANDARDKLASSER) : kontinuerligStil(SKALA, 0, 1, nodata),
-  { transition: tal('transition'), preload: tal('preload') },
+  { transition: tal('transition'), preload: tal('preload'), reserv: tal('reserv') },
 );
 const vy = new View({ projection: vyProjektion });
 
 // CARTO:s nyckel är en webbläsarnyckel, begränsad till portalens adresser hos CARTO.
 const cartoNyckel = q.get('nyckel') ?? import.meta.env.VITE_CARTO_NYCKEL ?? '';
-const bakgrund =
-  q.get('bakgrund') === 'carto'
-    ? [
-        new TileLayer({
-          source: new XYZ({
-            url: `https://basemaps.cartocdn.com/rastertiles/light_all/{z}/{x}/{y}.png?key=${encodeURIComponent(cartoNyckel)}`,
-            crossOrigin: 'anonymous',
-            maxZoom: 20,
-            attributions:
-              '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>, © <a href="https://carto.com/attributions">CARTO</a>',
-          }),
-        }),
-      ]
-    : [];
+const bakgrund = q.get('bakgrund') === 'carto' ? [skapaCarto(cartoNyckel)] : [];
 // Panorering utan glid (kinetic), så att tiden efter en dragning bara mäter hämtning och rendering.
 const karta = new Map({
   target: 'karta',
@@ -84,21 +70,6 @@ const karta = new Map({
   controls: bakgrund.length ? [new Attribution({ collapsible: false })] : [],
   interactions: standardInteraktioner({ dragPan: false }).extend([new DragPan()]),
 });
-
-// Medan skarpa rutor laddas visar OpenLayers en grövre nivå förstorad, hur grov som helst. Grova
-// översikter täcker mycket mer yta (en cell har värde om någon undercell har det), så kartan sväller
-// och krymper. reserv=n begränsar ersättningen till n nivåer grövre; resten lämnas tomt tills det laddats.
-// findAltTiles_ är intern i OpenLayers, så finns den inte sätts ingen begränsning (och testet larmar).
-function begransaReserv(n: number): number | undefined {
-  const renderare = lager.getRenderer() as unknown as {
-    findAltTiles_?: (grid: unknown, koord: number[], altZ: number, uppslag: unknown) => boolean;
-  };
-  const original = renderare.findAltTiles_;
-  if (typeof original !== 'function') return undefined;
-  renderare.findAltTiles_ = (grid, koord, altZ, uppslag) =>
-    altZ < koord[0] - n ? false : original.call(renderare, grid, koord, altZ, uppslag);
-  return n;
-}
 
 window.__perf = {
   rendercomplete: 0,
@@ -111,7 +82,7 @@ window.__perf = {
 };
 // Kartan säger rendercomplete även innan COG-filens huvud är läst (inga rutor väntar ännu).
 // Räkna bara när källan är klar, så att mätningen tar med hämtningen av kartdata.
-if (q.has('reserv')) window.__perf.reserv = begransaReserv(Number(q.get('reserv')));
+window.__perf.reserv = reservFor(lager);
 
 karta.on('rendercomplete', () => {
   if (lager.getSource()?.getState() !== 'ready') return;
