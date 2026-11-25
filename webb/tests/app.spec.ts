@@ -115,6 +115,10 @@ async function cartoTom(page: import('@playwright/test').Page): Promise<string[]
   });
   return rutor;
 }
+async function oppnaLagerval(page: import('@playwright/test').Page, namn = 'Lagerval') {
+  const knapp = page.getByRole('button', { name: namn });
+  if ((await knapp.getAttribute('aria-expanded')) !== 'true') await knapp.click();
+}
 async function vantaKarta(page: import('@playwright/test').Page, minst = 1) {
   await page.waitForFunction((n) => ((window as any).__karta?.rendercomplete ?? 0) >= n, minst, { timeout: 30_000 });
 }
@@ -142,6 +146,7 @@ test.describe('kartvyn', () => {
     expect(rutor.length).toBeGreaterThan(0);
     await hovra(page, 613287.5, 6636712.5, 3006);
     await expect(page.getByTestId('varde')).toHaveText(/^(≈ )?Mycket viktigt$/);
+    await oppnaLagerval(page);
     await page.getByRole('radio', { name: 'Kontinuerlig' }).check();
     await vantaKarta(page, 2);
     await hovra(page, 613287.5, 6636712.5, 3006);
@@ -155,7 +160,10 @@ test.describe('kartvyn', () => {
     page.on('request', (r) => new URL(r.url()).pathname.endsWith('.tif') && tif.push(r.url()));
     await page.goto(KARTA('pbs-test'));
     await vantaKarta(page);
+    await oppnaLagerval(page);
+    await expect(page.getByRole('radio', { name: 'Klassad' })).toHaveCount(0);
     await expect(page.getByRole('radio', { name: 'Kontinuerlig' })).toHaveCount(0);
+    await expect(page.getByRole('radio', { name: 'CARTO' })).toBeVisible();
     await hovra(page, 1801000, 8003000, 3857);
     await expect(page.getByTestId('varde')).toHaveText(/^(≈ )?Ej viktigt område$/);
     await hovra(page, 1803000, 8001000, 3857);
@@ -173,6 +181,7 @@ test.describe('kartvyn', () => {
     await page.mouse.move(5, 5);
     // Kartytans egen bakgrund (#eef2f3) syns rakt igenom datalagret.
     expect(await fargVid(page, px, py)).toEqual([238, 242, 243]);
+    await oppnaLagerval(page);
     await expect(page.getByLabel('Opacitet')).toHaveValue('0');
   });
 
@@ -181,6 +190,7 @@ test.describe('kartvyn', () => {
     await page.goto(KARTA('torsk-test', 'bakgrund=ingen'));
     await vantaKarta(page);
     expect(rutor).toHaveLength(0);
+    await oppnaLagerval(page);
     await page.getByRole('radio', { name: 'CARTO' }).check();
     await expect.poll(() => rutor.length).toBeGreaterThan(0);
   });
@@ -398,6 +408,7 @@ test.describe('permanenta länkar och specialfall', () => {
     const efter = await ny.evaluate(() => (window as any).__karta.pixelFor(613287.5, 6636712.5, 3006));
     expect(Math.abs(efter[0] - fore[0])).toBeLessThanOrEqual(2);
     expect(Math.abs(efter[1] - fore[1])).toBeLessThanOrEqual(2);
+    await oppnaLagerval(ny, 'Layers');
     await expect(ny.getByRole('radio', { name: 'Continuous' })).toBeChecked();
     await expect(ny.getByRole('radio', { name: 'None' })).toBeChecked();
     await expect(ny.getByLabel('Opacity')).toHaveValue('0.5');
@@ -587,6 +598,7 @@ test.describe('mindre fynd', () => {
     await cartoTom(page);
     await page.goto(KARTA('pbs-test', 'v=1'));
     await vantaKarta(page);
+    await oppnaLagerval(page);
     await page.getByRole('radio', { name: 'Ingen' }).check();
     await page.getByRole('link', { name: 'Visa version 2' }).click();
     const hash = new URL(page.url()).hash;
@@ -681,5 +693,86 @@ test.describe('sidhuvud, sidfot och titlar', () => {
     await page.keyboard.press('Enter');
     await expect(page.getByRole('main')).toBeFocused();
     await expect(page.getByRole('main')).toHaveAttribute('tabindex', '-1');
+  });
+});
+
+test.describe('Lagerval och teckenförklaring i kartan', () => {
+  test('Lagerval: stängd från början, Escape stänger och fokus går tillbaka', async ({ page }) => {
+    await cartoTom(page);
+    await page.goto(KARTA('torsk-test'));
+    const knapp = page.getByRole('button', { name: 'Lagerval' });
+    await expect(knapp).toHaveAttribute('aria-expanded', 'false');
+    await expect(page.getByRole('radio', { name: 'Klassad' })).toBeHidden();
+    await knapp.click();
+    await expect(knapp).toHaveAttribute('aria-expanded', 'true');
+    await expect(page.getByRole('radio', { name: 'Klassad' })).toBeVisible();
+    await page.getByRole('radio', { name: 'Klassad' }).focus();
+    await page.keyboard.press('Escape');
+    await expect(knapp).toHaveAttribute('aria-expanded', 'false');
+    await expect(knapp).toBeFocused();
+  });
+
+  test('teckenförklaringen ligger i kartan och panelen har inga kartval', async ({ page }) => {
+    await cartoTom(page);
+    await page.goto(KARTA('torsk-test'));
+    await expect(page.locator('.kartyta [data-testid=legend]')).toBeVisible();
+    await expect(page.getByRole('region', { name: 'Teckenförklaring' }).getByRole('listitem')).toHaveText(['Viktigt', 'Mycket viktigt']);
+    await expect(page.locator('.panel [data-testid=legend]')).toHaveCount(0);
+    await expect(page.locator('.panel input[type=radio]')).toHaveCount(0);
+    expect(await page.locator('h1, h2').first().evaluate((e) => e.tagName)).toBe('H1');
+  });
+
+  test('klick utanför stänger Lagerval', async ({ page }) => {
+    await cartoTom(page);
+    await page.goto(KARTA('torsk-test'));
+    const knapp = page.getByRole('button', { name: 'Lagerval' });
+    await knapp.click();
+    await expect(knapp).toHaveAttribute('aria-expanded', 'true');
+    await page.locator('.panel h1').click();
+    await expect(knapp).toHaveAttribute('aria-expanded', 'false');
+  });
+
+  test('Lagerval ligger över teckenförklaringen', async ({ page }) => {
+    await cartoTom(page);
+    await page.setViewportSize({ width: 390, height: 500 });
+    await page.goto(KARTA('torsk-test'));
+    await oppnaLagerval(page);
+    const etikett = page.locator('label', { has: page.getByRole('radio', { name: 'CARTO' }) });
+    const ruta = (await etikett.boundingBox())!;
+    const inuti = await page.evaluate(
+      ([x, y]) => !!document.elementFromPoint(x, y)?.closest('.lagerval'),
+      [ruta.x + ruta.width / 2, ruta.y + ruta.height / 2] as const,
+    );
+    expect(inuti).toBe(true);
+  });
+
+  test('byte av karta med Lagerval öppen', async ({ page }) => {
+    await cartoTom(page);
+    await page.goto(KARTA('torsk-test'));
+    await vantaKarta(page);
+    await oppnaLagerval(page);
+    await expect(page.getByRole('radio', { name: 'Kontinuerlig' })).toBeVisible();
+    await page.locator('.lista').getByRole('link', { name: 'Perch spawning, Baltic Sea (test)' }).click();
+    await expect(page).toHaveURL(/#\/karta\/pbs-test/);
+    await expect(page.getByRole('radio', { name: 'Kontinuerlig' })).toHaveCount(0);
+    await expect(page.getByRole('region', { name: 'Teckenförklaring' }).getByRole('listitem')).toHaveText(['Viktigt', 'Mycket viktigt']);
+  });
+
+  test('smal dator: kontrollerna överlappar inte', async ({ page }) => {
+    await cartoTom(page);
+    await page.setViewportSize({ width: 960, height: 700 });
+    await page.goto(KARTA('torsk-test'));
+    await vantaKarta(page);
+    await hovra(page, 613287.5, 6636712.5, 3006);
+    await expect(page.getByTestId('varde')).toBeVisible();
+    const delar = ['.ol-zoom', '.lagerval > button', '.kartyta [data-testid=legend]', '.pekare', '.ol-scale-line', '.ol-attribution'];
+    const rutor = [];
+    for (const d of delar) rutor.push({ d, r: (await page.locator(d).first().boundingBox())! });
+    for (let i = 0; i < rutor.length; i++)
+      for (let j = i + 1; j < rutor.length; j++) {
+        const a = rutor[i].r, b = rutor[j].r;
+        const skar = a.x < b.x + b.width && b.x < a.x + a.width && a.y < b.y + b.height && b.y < a.y + a.height;
+        expect(skar, `${rutor[i].d} och ${rutor[j].d}`).toBe(false);
+      }
   });
 });

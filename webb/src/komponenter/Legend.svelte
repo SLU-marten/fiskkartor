@@ -10,8 +10,10 @@
   );
 </script>
 
-<section data-testid="legend">
-  <h2>{t('legend', lang)}</h2>
+<!-- Teckenförklaringen ligger i kartan, före panelens h1 i dokumentordningen. Därför ingen rubrik,
+     utan en etikett som namnger regionen. -->
+<section class="legend" data-testid="legend" aria-labelledby="legend-rubrik">
+  <p class="rubrik" id="legend-rubrik">{t('legend', lang)}</p>
   {#if roll === 'klassad'}
     <ul>
       {#each legendfarger(version.klassad.klasser) as { klass, rgb } (klass.varde)}
@@ -26,8 +28,22 @@
 </section>
 
 <style>
-  h2 {
-    font-size: 1.05rem;
+  .legend {
+    position: absolute;
+    right: 0.75rem;
+    bottom: 2.25rem;
+    z-index: 3;
+    min-width: 9rem;
+    padding: 0.55rem 0.8rem 0.4rem;
+    background: var(--yta);
+    border: 1px solid var(--linje);
+    border-radius: 6px;
+    font-size: 0.95rem;
+  }
+  .rubrik {
+    margin: 0 0 0.3rem;
+    font-size: 0.9rem;
+    color: var(--dampad);
   }
   ul {
     list-style: none;

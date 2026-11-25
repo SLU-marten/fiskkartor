@@ -64,6 +64,54 @@ b {
   font-weight: 300;
   line-height: 1.6;
 }
+/* OpenLayers egna kontroller i profilens stil. */
+.ol-control.ol-zoom {
+  top: 0.75rem;
+  left: 0.75rem;
+  padding: 0;
+  background: none;
+}
+.ol-zoom .ol-zoom-in,
+.ol-zoom .ol-zoom-out {
+  width: 40px;
+  height: 40px;
+  margin: 0 0 4px;
+  border: 1px solid var(--linje);
+  border-radius: 4px;
+  background: var(--yta);
+  color: var(--gron);
+  font-size: 1.4rem;
+  line-height: 1;
+}
+.ol-zoom .ol-zoom-in:hover,
+.ol-zoom .ol-zoom-out:hover {
+  background: var(--mjuk);
+  color: var(--gron-mork);
+}
+.ol-scale-line {
+  background: rgb(255 255 255 / 90%);
+  border-radius: 2px;
+}
+.ol-scale-line-inner {
+  border-color: var(--dampad);
+  color: var(--dampad);
+  font: inherit;
+  font-size: 0.75rem;
+}
+.ol-attribution {
+  background: rgb(255 255 255 / 90%);
+  color: var(--dampad);
+}
+.ol-attribution a {
+  color: var(--gron);
+}
+@media (max-width: 60rem) {
+  .ol-zoom .ol-zoom-in,
+  .ol-zoom .ol-zoom-out {
+    width: 44px;
+    height: 44px;
+  }
+}
 /* hidden ska alltid dölja, även när en komponent sätter display. */
 [hidden] {
   display: none !important;

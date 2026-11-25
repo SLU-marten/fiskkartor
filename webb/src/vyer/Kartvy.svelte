@@ -1,6 +1,8 @@
 <script lang="ts">
   import Karta from '../komponenter/Karta.svelte';
   import Panel from '../komponenter/Panel.svelte';
+  import Lagerval from '../komponenter/Lagerval.svelte';
+  import Legend from '../komponenter/Legend.svelte';
   import Traffar from '../komponenter/Traffar.svelte';
   import type { Bakgrund, Kartan } from '../karta/karta';
   import { aktuellVersion, FALTNAMN, kartfil, synliga, type Karta as KartaTyp, type Roll } from '../lib/katalog';
@@ -89,9 +91,11 @@
         onklar={(k) => (kartan = k)}
       />
       {/key}
+      <Lagerval {version} {roll} {opacitet} {bakgrund} {lang} {satt} />
+      <Legend {version} {roll} {lang} />
     </div>
     <aside class="panel">
-      <Panel {karta} {version} {roll} {opacitet} {bakgrund} {dataUrl} {lang} {satt} {kartan} {rutt} />
+      <Panel {karta} {version} {roll} {dataUrl} {lang} {kartan} {rutt} />
     </aside>
   </div>
 {/if}
@@ -117,6 +121,7 @@
     color: var(--dampad);
   }
   .kartyta {
+    position: relative;
     min-height: 24rem;
   }
   .panel {
