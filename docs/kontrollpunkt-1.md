@@ -9,7 +9,11 @@ gränserna och Mårtens egen bedömning på sin dator är godkända. Därefter s
   med 67 kontinuerliga råfiler. De 16 kartorna från 2025 utan original ligger dolda i katalogen.
   Katalogen följer schemat och en omkörning ändrar ingenting (74 oförändrade + 1 rättad).
 - **Prestandagränserna klaras** för 25 m-filerna, även med strypt nät och rendering på CPU (tabeller nedan).
-- **Att avgöra vid kontrollen:** hur översikterna (MODE) ser ut utzoomat, och om det känns smidigt på din dator.
+- **Din första bedömning (2026-11-25):** zoomen hackar ibland och blinkar mellan upplösningar.
+  Mätningen nedan visar att orsaken främst är omprojiceringen från SWEREF 99 TM till Web Mercator
+  i webbläsaren. Utan den blir zoomen jämn. Kontrollpunkten avgörs när du har jämfört varianterna.
+- **Att avgöra vid kontrollen:** vilken zoomvariant som känns bäst, hur översikterna (MODE) ser ut
+  utzoomat, och −9990 i flundrakartan.
 
 **Prova själv:**
 <https://slu-marten.github.io/fiskkartor/perf.html?cog=data/test/abborre_klassad.tif&roll=klassad&epsg=3006&res=25>
@@ -39,6 +43,31 @@ Range-server. Byggmiljön når inte `*.github.io`. Att Pages svarar rätt kontro
 `Range: bytes=0-15` gav `206` med `Content-Range`, och prestandasidan hämtade COG-filen med 206-svar.
 BLOCKSIZE=256 behövde inte provas, eftersom alla gränser klarades med 512.
 
+## Zoomen: jämförelse av varianter
+
+Mätt med `webb/scripts/zoom-mat.mts`: 12 hjulsteg (cirka fyra zoomnivåer) vid två kustpunkter,
+strypt nät, rendering på CPU. "Längsta paus" är den längsta tiden mellan två bildrutor (60 bilder
+per sekund = 17 ms; över 100 ms märks som hack).
+
+| Variant | Längsta paus | 95:e percentilen | Klar efter zoom | Prova |
+|---|---:|---:|---:|---|
+| A. Nu: 3006-fil i Web Mercator-vy (omprojiceras) | 250–317 ms | 50–167 ms | 3,6–5,0 s | [länk](https://slu-marten.github.io/fiskkartor/perf.html?cog=data/test/abborre_klassad.tif&roll=klassad&epsg=3006&res=25) |
+| C. 3006-fil i SWEREF 99 TM-vy | 67–150 ms | 50–67 ms | 3,0–3,4 s | [länk](https://slu-marten.github.io/fiskkartor/perf.html?cog=data/test/abborre_klassad.tif&roll=klassad&epsg=3006&res=25&vy=3006) |
+| D. Som C, utan intoning och med grövre rutor kvar | 83–167 ms | 67 ms | 3,3–3,5 s | [länk](https://slu-marten.github.io/fiskkartor/perf.html?cog=data/test/abborre_klassad.tif&roll=klassad&epsg=3006&res=25&vy=3006&transition=0&preload=3) |
+| E. Fil publicerad i Web Mercator, Web Mercator-vy | 67 ms | 50 ms | 3,0–3,4 s | [länk](https://slu-marten.github.io/fiskkartor/perf.html?cog=data/test/abborre_klassad_3857.tif&roll=klassad&epsg=3857&res=25) |
+
+C och E är lika jämna, båda för att webbläsaren inte omprojicerar. De skiljer sig i vad de innebär för plan 2:
+
+- **C, vy i SWEREF 99 TM:** kartfilerna publiceras som i dag. Men bakgrundskartan måste då finnas i
+  3006 eller vara en rasterkarta som kan omprojiceras. OpenFreeMap (vektor) fungerar inte, och
+  Lantmäteriets karta i 3006 kräver nyckel (se bakgrundskartor nedan).
+- **E, visningsfil i Web Mercator:** R gör en extra visningsfil i EPSG:3857 (cellerna 40 m i
+  Web Mercator, ungefär 20 m på marken). Den visas utan omprojicering, och OpenFreeMap fungerar.
+  Nedladdningsfilerna ligger kvar i originalets koordinatsystem. Kostnad: cirka 10 minuter extra
+  per 25 m-karta vid publicering och 5,6 MB i stället för 3,4 MB för den klassade visningsfilen.
+- Intoning och förladdning (D) gav ingen mätbar vinst på CPU, men kan minska blinkandet på ett
+  riktigt grafikkort. Det är billigt att slå på i plan 2 om du tycker att D känns bättre.
+
 ## Översikterna (MODE) när man zoomar ut
 
 GDAL kan inte bygga COG-översikter med MAX, så de klassade filerna använder MODE (vanligaste klassen).
@@ -60,8 +89,8 @@ steg (R aggregerar, GDAL skriver översikterna) i plan 2.
 |---|---:|---:|---|
 | Klassade kartor (visning.tif) | 75 | 3,0 MB | – |
 | Kontinuerliga råfiler (radata.tif) | 67 | 12,1 MB | storspigg-uppvaxt-ostkusten-2021, 0,52 MB |
-| 25 m-testfiler (test/) | 2 | 62,3 MB | abborre_kontinuerlig.tif, 58,9 MB |
-| Hela dataträdet | 221 | 77,7 MB | |
+| 25 m-testfiler (test/) | 3 | 67,9 MB | abborre_kontinuerlig.tif, 58,9 MB |
+| Hela dataträdet | 222 | 83,3 MB | |
 
 Konverteringstid för 25 m-filerna i byggmiljön (2 kärnor): kontinuerlig 164 s, klassad 63 s.
 
@@ -113,9 +142,36 @@ behövs av den lagring SLU tillhandahåller:
 - Ingen inloggning för att läsa. Gärna kort cachetid för katalog.json och lång för kartfilerna,
   eftersom de aldrig skrivs över.
 
+## Granskning av koden
+
+En fristående granskare gick igenom hela grenen. Allvarliga fynd som är rättade, med test som först fallerade:
+
+- En dator som inte kört `hamta_data()` kunde skriva över redan publicerade kartfiler. Det gick också
+  om två personer publicerade samtidigt. `skicka_data()` jämför nu innehållet i alla publicerade
+  versionsmappar och pushar med `--force-with-lease`. `publicera()` skriver aldrig om en
+  versionsmapp som metadata.json pekar på.
+- `skala_kalla = 1000` på data i 0–1 hade avrundat kartan till 0 och 1. Nu stoppar det med ett
+  meddelande.
+- Filnamn som ligger i NFD-form på disken (vanligt för filer från macOS) hittas nu.
+- Ändrade klassvärden kontrolleras mot rastret innan de publiceras.
+- R-testerna körs nu också på Windows i GitHub Actions.
+
+Mindre förslag som inte är åtgärdade (för plan 2):
+- Hårda mellanslag och citattecken i Excel-celler städas inte bort.
+- En felaktig cell stoppar hela `publicera_alla()`.
+- En tom `visas`-cell betyder dold, utan varning.
+- Rader som tagits bort ur Excel ligger kvar i katalog.json.
+- `katalog.csv` som är öppen i Excel stoppar publiceringen.
+- `DESCRIPTION` saknar kravet R ≥ 4.2.
+- Upplösningen för EPSG:3857 anges i Web Mercator-meter i stället för markmeter.
+- Ingen rimlighetskontroll av koordinater mot koordinatsystem.
+- Heltalsfiler med max ≤ 1 tolkas automatiskt som 0–1.
+
 ## Vad som återstår för att godkänna kontrollpunkten
 
-1. Öppna prova-länken ovan på din dator. Zooma in längs kusten, panorera och håll muspekaren över kartan.
-   Känns det smidigt?
-2. Ta ställning till MODE-översikterna och till −9990 i flundrakartan.
-3. Skicka kraven ovan till SLU IT.
+1. Jämför zoomvarianterna A, C, D och E ovan på din dator. Zooma med hjulet längs kusten och panorera.
+   Vilken känns bäst, och är den tillräckligt smidig?
+2. Välj inriktning för plan 2: vy i SWEREF 99 TM (C) eller visningsfil i Web Mercator (E).
+   Valet styr också bakgrundskartan.
+3. Ta ställning till MODE-översikterna och till −9990 i flundrakartan.
+4. Skicka kraven ovan till SLU IT.
