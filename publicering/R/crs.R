@@ -95,8 +95,14 @@ kalla_skala <- function(min, max, skala_kalla = NA_integer_) {
 #' filens sökväg, eller `character(0)`. Läser värden blockvis (global, unique), aldrig hela rastret.
 validera_raster <- function(sokvag, roll = c("klassad", "kontinuerlig"), klasser = NULL,
                             skala_kalla = NA_integer_) {
-  roll <- match.arg(roll)
-  med_namn <- function(fel) if (length(fel)) paste0(sokvag, ": ", fel) else character(0)
+  .kontrollera_raster(sokvag, match.arg(roll), klasser, skala_kalla)$fel
+}
+
+# Gör kontrollerna och returnerar även min och max, så att skriv_cog() slipper läsa rastret en gång till.
+.kontrollera_raster <- function(sokvag, roll, klasser, skala_kalla) {
+  med_namn <- function(fel, min = NA_real_, max = NA_real_) {
+    list(fel = if (length(fel)) paste0(sokvag, ": ", fel) else character(0), min = min, max = max)
+  }
   if (!file.exists(sokvag)) return(med_namn("hittar inte filen"))
   r <- tryCatch(terra::rast(sokvag), error = function(e) NULL)
   if (is.null(r)) return(med_namn("filen går inte att läsa som raster"))
@@ -130,5 +136,5 @@ validera_raster <- function(sokvag, roll = c("klassad", "kontinuerlig"), klasser
     skala <- tryCatch(kalla_skala(mm$min, mm$max, skala_kalla), error = function(e) conditionMessage(e))
     if (is.character(skala)) fel <- c(fel, skala)
   }
-  med_namn(fel)
+  med_namn(fel, mm$min, mm$max)
 }
