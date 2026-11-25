@@ -206,3 +206,34 @@ test_that("en NFD-källfil publiceras", {
   andra_rad(m, "a-1", fil_klassad = "källor/Torsk lek_klassad_ä.tif")
   expect_identical(pub(m)$status, "publicerad")
 })
+
+test_that("oförändrad källa men gammalt format ger ny version", {
+  m <- publiceringsmiljo()
+  withr::with_options(list(fiskkartor.cog_format = 1L), pub(m))
+  v1 <- kartmapp(m, "v1", "visning.tif")
+  sha1 <- digest::digest(file = v1, algo = "sha256")
+  expect_identical(post(m)[[1]]$versioner[[1]]$format, 1L)
+
+  res <- pub(m)
+  expect_identical(res$status, "publicerad")
+  expect_identical(res$version, 2L)
+  expect_identical(digest::digest(file = v1, algo = "sha256"), sha1)
+  v <- post(m)[[1]]$versioner
+  expect_identical(v[[1]]$format, 1L)
+  expect_identical(v[[2]]$format, 2L)
+  expect_identical(pub(m)$status, "oförändrad")
+  expect_true(schema_giltig(i_mal(m, "katalog", "katalog.json")))
+})
+
+test_that("en version utan format (från fas 1) räknas som format 1 och ger ny version", {
+  m <- publiceringsmiljo()
+  pub(m)
+  f <- i_mal(m, "katalog", "katalog.json")
+  j <- jsonlite::read_json(f, simplifyVector = FALSE)
+  j$kartor[[1]]$versioner[[1]]$format <- NULL
+  jsonlite::write_json(j, f, auto_unbox = TRUE, pretty = TRUE, null = "null", digits = NA)
+
+  res <- pub(m)
+  expect_identical(res$status, "publicerad")
+  expect_identical(res$version, 2L)
+})

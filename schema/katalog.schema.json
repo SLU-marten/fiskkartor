@@ -59,6 +59,7 @@
       "properties": {
         "version": { "type": "integer", "minimum": 1 },
         "publicerad": { "type": "string", "format": "date" },
+        "format": { "type": "integer", "minimum": 1 },
         "klassad": { "$ref": "#/$defs/klassad" },
         "kontinuerlig": { "oneOf": [{ "type": "null" }, { "$ref": "#/$defs/kontinuerlig" }] }
       }

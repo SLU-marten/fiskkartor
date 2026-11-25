@@ -96,7 +96,7 @@ mal_lokal <- function(mapp) list(typ = "lokal", mapp = mapp)
                            p2 = st$p2, p98 = st$p98))
   }
   klar <- TRUE
-  list(version = n, publicerad = format(idag, "%Y-%m-%d"),
+  list(version = n, publicerad = format(idag, "%Y-%m-%d"), format = .cog_format(),
        klassad = c(.fil_post(paste(rel, "visning.tif", sep = "/"), k),
                    list(klasser = .klasser_json(klasser))),
        kontinuerlig = kontinuerlig)
@@ -143,7 +143,8 @@ mal_lokal <- function(mapp) list(typ = "lokal", mapp = mapp)
     akt <- versioner[[i]]
     akt_sha <- c(akt$klassad$kallaSha256,
                  if (is.null(akt$kontinuerlig)) NA_character_ else akt$kontinuerlig$kallaSha256)
-    if (identical(unname(sha), akt_sha)) {
+    # Ett äldre filformat ger en ny version även om källan är oförändrad (publicerade filer skrivs aldrig om).
+    if (identical(unname(sha), akt_sha) && .version_format(akt) >= .cog_format()) {
       ny_version <- FALSE
       # Klassnamn och enhet är text: de följer katalogen utan ny version. Ändrade klassvärden eller
       # färgval styr vad som ritas och kontrolleras därför mot rastret först.

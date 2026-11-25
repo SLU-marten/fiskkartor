@@ -5,6 +5,6 @@ Authors@R: person("SLU Aqua", email = "SLU-Aqua-fiskkartor@slu.se", role = c("au
 Description: Kontrollerar, konverterar och publicerar kartor till fiskkartor-portalen.
 License: CC BY 4.0
 Encoding: UTF-8
-Imports: terra, readxl, writexl, jsonlite, digest, stringi
+Imports: terra, sf, readxl, writexl, jsonlite, digest, stringi
 Suggests: testthat (>= 3.0.0), withr
 Config/testthat/edition: 3

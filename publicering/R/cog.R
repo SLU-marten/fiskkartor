@@ -1,9 +1,3 @@
-.COG_KLASSAD <- c("COMPRESS=DEFLATE", "BLOCKSIZE=512", "OVERVIEW_RESAMPLING=MODE", "BIGTIFF=IF_SAFER")
-# PREDICTOR=2 är samma som STANDARD (horisontell differens). terra skickar flaggorna även till en
-# mellanfil i GTiff när rastret är stort, och GTiff-drivrutinen tar bara emot siffran.
-.COG_KONTINUERLIG <- c("COMPRESS=DEFLATE", "PREDICTOR=2", "BLOCKSIZE=512",
-                       "OVERVIEW_RESAMPLING=AVERAGE", "BIGTIFF=IF_SAFER")
-
 # Cellstorlek i meter. Grader räknas om geodetiskt vid rastrets mittlatitud; den grövsta axeln gäller.
 .upplosning_meter <- function(r, epsg) {
   upp <- terra::res(r)
@@ -19,8 +13,8 @@
 
 #' Skriver en källfil som Cloud-Optimized GeoTIFF enligt portalens format.
 #' Klassad: uint8, nodata 255. Kontinuerlig: uint16 med värde × 1000, nodata 65535.
-#' Filen skrivs först till en tillfällig fil i samma mapp och byter namn sist,
-#' så ett avbrott lämnar aldrig en halvskriven fil.
+#' Klassade filer får MAX-översikter (se .skriv_klassad_cog). Filen skrivs först till en tillfällig
+#' fil i samma mapp och byter namn sist, så ett avbrott lämnar aldrig en halvskriven fil.
 skriv_cog <- function(kalla, mal, roll = c("klassad", "kontinuerlig"), skala_kalla = NA_integer_,
                       klasser = NULL) {
   roll <- match.arg(roll)
@@ -30,11 +24,7 @@ skriv_cog <- function(kalla, mal, roll = c("klassad", "kontinuerlig"), skala_kal
   r <- normalisera_crs(terra::rast(kalla))
   epsg <- epsg_kod(r)
   skala <- NA_integer_
-  if (roll == "klassad") {
-    datatyp <- "INT1U"
-    nodata <- 255
-    gdal <- .COG_KLASSAD
-  } else {
+  if (roll == "kontinuerlig") {
     # Ett enda varv genom rastret: klampa 0–1-värden till högst 1, skala och avrunda.
     if (kalla_skala(kontroll$min, kontroll$max, skala_kalla) == 1L) {
       r <- terra::app(r, function(v) round(pmin(v, 1) * 1000))
@@ -42,17 +32,8 @@ skriv_cog <- function(kalla, mal, roll = c("klassad", "kontinuerlig"), skala_kal
       r <- round(r)
     }
     skala <- 1000L
-    datatyp <- "INT2U"
-    nodata <- 65535
-    gdal <- .COG_KONTINUERLIG
   }
-
-  dir.create(dirname(mal), recursive = TRUE, showWarnings = FALSE)
-  tmp <- file.path(dirname(mal), paste0(".", basename(mal), ".", Sys.getpid(), ".tmp.tif"))
-  on.exit(unlink(c(tmp, paste0(tmp, ".aux.xml"))), add = TRUE)
-  terra::writeRaster(r, tmp, filetype = "COG", datatype = datatyp, NAflag = nodata, gdal = gdal,
-                     overwrite = TRUE)
-  if (!file.rename(tmp, mal)) stop(sprintf("Kunde inte flytta den skrivna filen till %s", mal), call. = FALSE)
+  .skriv_portal_cog(r, mal, roll)
 
   list(
     epsg = epsg,

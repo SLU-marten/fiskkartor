@@ -45,3 +45,12 @@ test('farg krävs', () => {
   const k = kopia(); delete k.kartor[0].farg;
   assert.equal(validera(k), false);
 });
+
+test('format på en version är ett heltal från 1', () => {
+  const k = kopia(); k.kartor[0].versioner[0].format = 2;
+  assert.equal(validera(k), true, JSON.stringify(validera.errors));
+  k.kartor[0].versioner[0].format = 0;
+  assert.equal(validera(k), false);
+  k.kartor[0].versioner[0].format = 1.5;
+  assert.equal(validera(k), false);
+});
