@@ -72,6 +72,25 @@ test('EPSG:3035 visas på rätt plats', async ({ page }) => {
   await expect(page.locator('#varde')).toHaveText('Viktigt');
 });
 
+test('vy=3006 visar kartan i SWEREF 99 TM på rätt plats', async ({ page }) => {
+  await page.goto(sida({ cog: fixtur('test_klassad.tif'), roll: 'klassad', epsg: 3006, res: 25, vy: 3006, transition: 0, preload: 2 }));
+  await vantaRender(page);
+  expect(await page.evaluate(() => (window as any).__perf.vyProjektion)).toBe('EPSG:3006');
+  await hovra(page, 603762.5, 6597487.5, 3006);
+  await expect(page.locator('#varde')).toHaveText('Mycket viktigt');
+  await hovra(page, 601237.5, 6597487.5, 3006);
+  await expect(page.locator('#varde')).toHaveText('Viktigt');
+  await hovra(page, 600250, 6599750, 3006);
+  await expect(page.locator('#varde')).toHaveText('—');
+});
+
+test('vy=3006 med startpunkt i lon/lat/z', async ({ page }) => {
+  await page.goto(sida({ cog: fixtur('test_klassad.tif'), roll: 'klassad', epsg: 3006, res: 25, vy: 3006, lon: 16.8107, lat: 59.5034, z: 13 }));
+  await vantaRender(page);
+  await hovra(page, 603762.5, 6597487.5, 3006);
+  await expect(page.locator('#varde')).toHaveText('Mycket viktigt');
+});
+
 test('rendercomplete räknas först när kartdata finns, även med startvy och långsamt nät', async ({ page }) => {
   const cdp = await page.context().newCDPSession(page);
   await cdp.send('Network.enable');

@@ -7,14 +7,21 @@ import GeoTIFF from 'ol/source/GeoTIFF.js';
  * Värdena lämnas orörda (normalize: false) och ritas utan utjämning (interpolate: false),
  * så att stilen får de lagrade talen och cellgränserna syns skarpt.
  */
-export function skapaCogLager(url: string, epsg: number, nodata: number, stil: Style): WebGLTileLayer {
+export function skapaCogLager(
+  url: string,
+  epsg: number,
+  nodata: number,
+  stil: Style,
+  val: { transition?: number; preload?: number } = {},
+): WebGLTileLayer {
   const source = new GeoTIFF({
     sources: [{ url, nodata }],
     normalize: false,
     interpolate: false,
     projection: `EPSG:${epsg}`,
+    transition: val.transition,
   });
-  return new WebGLTileLayer({ source, style: stil });
+  return new WebGLTileLayer({ source, style: stil, preload: val.preload ?? 0 });
 }
 
 /** Markupplösning i meter för en Web Mercator-vy vid en viss latitud. */

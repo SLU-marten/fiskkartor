@@ -1,5 +1,8 @@
 // Prestandasida: visar en COG utan bakgrundskarta och mäter rendering.
 // perf.html?cog=<url>&roll=klassad|kontinuerlig&epsg=<n>&res=<m>[&lon=&lat=&z=]
+//   [&vy=3857|3006]  vyns projektion (3006 = SWEREF 99 TM, ingen omprojicering av 3006-kartor)
+//   [&transition=ms] intoning av nya rutor (OpenLayers standard 250)
+//   [&preload=n]     håll n grövre nivåer laddade, så att något alltid syns medan skarpa rutor laddas
 import Map from 'ol/Map.js';
 import DragPan from 'ol/interaction/DragPan.js';
 import { defaults as standardInteraktioner } from 'ol/interaction/defaults.js';
@@ -18,6 +21,7 @@ declare global {
       senast: number;
       /** performance.now() när musknappen senast släpptes */
       slapp: number;
+      vyProjektion: string;
       pixelFor(x: number, y: number, epsg: number): [number, number];
     };
   }
@@ -37,14 +41,17 @@ const klassad = (q.get('roll') ?? 'klassad') === 'klassad';
 const epsg = Number(q.get('epsg') ?? 3006);
 const res = Number(q.get('res') ?? 25);
 const nodata = klassad ? 255 : 65535;
+const vyProjektion = q.get('vy') === '3006' ? 'EPSG:3006' : 'EPSG:3857';
+const tal = (namn: string) => (q.has(namn) ? Number(q.get(namn)) : undefined);
 
 const lager = skapaCogLager(
   new URL(cog, location.href).href,
   epsg,
   nodata,
   klassad ? klassadStil(STANDARDKLASSER) : kontinuerligStil(SKALA, 0, 1, nodata),
+  { transition: tal('transition'), preload: tal('preload') },
 );
-const vy = new View({ projection: 'EPSG:3857' });
+const vy = new View({ projection: vyProjektion });
 // Panorering utan glid (kinetic), så att tiden efter en dragning bara mäter hämtning och rendering.
 const karta = new Map({
   target: 'karta',
@@ -58,8 +65,9 @@ window.__perf = {
   rendercomplete: 0,
   senast: 0,
   slapp: 0,
+  vyProjektion,
   pixelFor(x, y, e) {
-    return karta.getPixelFromCoordinate(transform([x, y], `EPSG:${e}`, 'EPSG:3857')) as [number, number];
+    return karta.getPixelFromCoordinate(transform([x, y], `EPSG:${e}`, vyProjektion)) as [number, number];
   },
 };
 // Kartan säger rendercomplete även innan COG-filens huvud är läst (inga rutor väntar ännu).
@@ -71,14 +79,20 @@ karta.on('rendercomplete', () => {
 });
 document.addEventListener('pointerup', () => (window.__perf.slapp = performance.now()), true);
 
+// Markupplösning i meter: Web Mercator krymper med latituden, SWEREF 99 TM är redan i meter.
+const markres = (lat: number) => (vyProjektion === 'EPSG:3857' ? markUpplosning(vy, lat) : (vy.getResolution() ?? NaN));
+
 if (q.has('lon') && q.has('lat') && q.has('z')) {
-  vy.setCenter(fromLonLat([Number(q.get('lon')), Number(q.get('lat'))]));
-  vy.setZoom(Number(q.get('z')));
+  const lat = Number(q.get('lat'));
+  vy.setCenter(fromLonLat([Number(q.get('lon')), lat], vyProjektion));
+  if (vyProjektion === 'EPSG:3857') vy.setZoom(Number(q.get('z')));
+  // Samma markupplösning som Web Mercator-zoomen z vid den latituden.
+  else vy.setResolution((156543.03392804097 / 2 ** Number(q.get('z'))) * Math.cos((lat * Math.PI) / 180));
 } else {
   lager
     .getSource()!
     .getView()
-    .then((v) => vy.fit(transformExtent(v.extent!, v.projection!, 'EPSG:3857'), { padding: [16, 16, 16, 16] }));
+    .then((v) => vy.fit(transformExtent(v.extent!, v.projection!, vyProjektion), { padding: [16, 16, 16, 16] }));
 }
 
 const varde = document.getElementById('varde')!;
@@ -89,8 +103,8 @@ function text(data: ArrayLike<number> | null, koordinat: Coordinate): string {
   const alfa = data.length > 1 ? data[data.length - 1] : 1;
   if (alfa === 0 || v === nodata) return '—';
   if (klassad) return STANDARDKLASSER.find((k) => k.varde === v)?.namn ?? '—';
-  const lat = toLonLat(koordinat, 'EPSG:3857')[1];
-  const ungefar = markUpplosning(vy, lat) > 1.5 * res ? '≈' : '';
+  const lat = toLonLat(koordinat, vyProjektion)[1];
+  const ungefar = markres(lat) > 1.5 * res ? '≈' : '';
   return ungefar + (v / SKALA).toFixed(2);
 }
 
