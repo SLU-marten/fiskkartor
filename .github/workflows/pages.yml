@@ -1,0 +1,64 @@
+name: pages
+# Bygger webbplatsen från main och lägger datagrenen under /data/.
+# En push till datagrenen startar inget flöde (grenen saknar arbetsflödesfiler),
+# så skicka_data() startar det här flödet med workflow_dispatch.
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  bygg:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22, cache: npm, cache-dependency-path: webb/package-lock.json }
+      - name: Bygg webbplatsen
+        working-directory: webb
+        run: npm ci && npm run build
+      - name: Finns datagrenen?
+        id: data
+        run: |
+          if git ls-remote --exit-code --heads origin data > /dev/null; then
+            echo "finns=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "finns=false" >> "$GITHUB_OUTPUT"
+            echo "::notice::Grenen data finns inte ännu. Webbplatsen byggs utan data."
+          fi
+      - name: Hämta datagrenen
+        if: steps.data.outputs.finns == 'true'
+        uses: actions/checkout@v4
+        with: { ref: data, path: webb/dist/data, fetch-depth: 1 }
+      # Git-mappen skulle annars ungefär dubbla storleken som mäts och laddas upp.
+      - run: rm -rf webb/dist/data/.git && mkdir -p webb/dist/data
+      - name: Kontrollera storleken (GitHub Pages tillåter 1 GB)
+        run: |
+          storlek=$(du -sb webb/dist | cut -f1)
+          echo "Webbplatsen är $storlek byte."
+          if [ "$storlek" -gt 1000000000 ]; then
+            echo "::error::Webbplatsen är $storlek byte, mer än 1 GB."
+            exit 1
+          fi
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with: { path: webb/dist }
+
+  publicera:
+    needs: bygg
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - id: deploy
+        uses: actions/deploy-pages@v4
