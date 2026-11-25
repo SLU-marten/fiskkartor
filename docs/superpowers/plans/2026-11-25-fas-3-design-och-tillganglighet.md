@@ -98,7 +98,7 @@ Situationer som specen inte nämner:
 
 ---
 
-### Uppgift 1: Färger, typsnitt och kontrasttest
+### Task 1: Färger, typsnitt och kontrasttest
 
 **Filer:**
 - Skapa: `webb/src/lib/kontrast.ts`, `webb/tests/farger.test.ts`
@@ -188,7 +188,7 @@ Situationer som specen inte nämner:
 
 - [ ] **Steg 9: Commit.** `git commit -m "feat(webb): SLU:s färger och typsnitt"`
 
-### Uppgift 2: Sidhuvud med logotyp, meny på mobil, sidfot, sidtitlar och redogörelsens sida
+### Task 2: Sidhuvud med logotyp, meny på mobil, sidfot, sidtitlar och redogörelsens sida
 
 **Filer:**
 - Skapa:
@@ -326,7 +326,7 @@ Situationer som specen inte nämner:
 
 - [ ] **Steg 8: Commit.** `git commit -m "feat(webb): sidhuvud med logotyp, meny på mobil, sidfot, sidtitlar och tillgänglighetsredogörelse"`
 
-### Uppgift 3: Lagerval och teckenförklaring i kartan
+### Task 3: Lagerval och teckenförklaring i kartan
 
 **Filer:**
 - Skapa:
@@ -429,7 +429,7 @@ Situationer som specen inte nämner:
 
 - [ ] **Steg 8: Commit.** `git commit -m "feat(webb): Lagerval och teckenförklaring i kartan"`
 
-### Uppgift 4: Mobil: länk till träffarna, kartan utan sidskroll, fliken och värdet vid tryck
+### Task 4: Mobil: länk till träffarna, kartan utan sidskroll, fliken och värdet vid tryck
 
 **Filer:**
 - Skapa: `webb/src/lib/flik.ts`, `webb/tests/flik.test.ts`, `webb/src/komponenter/Grepp.svelte`
@@ -546,7 +546,7 @@ Situationer som specen inte nämner:
 
 - [ ] **Steg 9: Commit.** `git commit -m "feat(webb): mobil med flik, länk till träffarna och värde vid tryck"`
 
-### Uppgift 5: Startsidan, listorna och Om-sidan i profilen
+### Task 5: Startsidan, listorna och Om-sidan i profilen
 
 **Filer:**
 - Ändra:
@@ -592,7 +592,7 @@ Situationer som specen inte nämner:
 
 - [ ] **Steg 6: Commit.** `git commit -m "feat(webb): startsidan, listorna och Om-sidan i SLU:s profil"`
 
-### Uppgift 6: Automatisk granskning med axe
+### Task 6: Automatisk granskning med axe
 
 **Filer:**
 - Skapa: `webb/tests/hjalp.ts`, `webb/tests/tillganglighet.spec.ts`
@@ -643,7 +643,7 @@ Situationer som specen inte nämner:
 
 - [ ] **Steg 6: Commit.** `git commit -m "test(webb): automatisk WCAG-granskning med axe, och rättelser"`
 
-### Uppgift 7: Manuell granskning, rättelser och redogörelsens brister
+### Task 7: Manuell granskning, rättelser och redogörelsens brister
 
 **Filer:**
 - Skapa: `docs/wcag-granskning.md`
