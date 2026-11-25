@@ -133,3 +133,16 @@ test_that("en samtidig publicering skrivs inte över", {
   expect_match(fel, "samtidigt")
   expect_identical(git("-C", bar, "log", "-1", "--format=%s", "data"), "annan")
 })
+
+test_that("visningskopior (*_3006.tif) får bytas, originalen skyddas som förut", {
+  bar <- bar_repo()
+  skicka_data(datatrad(list("katalog/katalog.json" = "{}", "kartor/p/a/v1/visning.tif" = "tif A",
+                            "kartor/p/a/v1/visning_3006.tif" = "kopia A")), bar)
+  expect_no_error(skicka_data(datatrad(list("katalog/katalog.json" = "{}", "kartor/p/a/v1/visning.tif" = "tif A",
+                                            "kartor/p/a/v1/visning_3006.tif" = "kopia B")), bar))
+  expect_identical(git("-C", bar, "show", "data:kartor/p/a/v1/visning_3006.tif"), "kopia B")
+  fel <- tryCatch(skicka_data(datatrad(list("katalog/katalog.json" = "{}", "kartor/p/a/v1/visning.tif" = "tif B",
+                                            "kartor/p/a/v1/visning_3006.tif" = "kopia B")), bar),
+                  error = conditionMessage)
+  expect_match(fel, "kartor/p/a/v1/visning.tif", fixed = TRUE)
+})

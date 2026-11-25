@@ -312,3 +312,19 @@ test_that("publicera_alla varnar för kartor som finns i katalog.json men inte i
   expect_identical(attr(ut, "saknas_i_excel"), "a-1")
   expect_length(post(m), 1)
 })
+
+test_that("skriv_om_visningskopior byter kopiorna och uppdaterar hash och storlek, originalen orörda", {
+  m <- publiceringsmiljo(crs = "EPSG:3857")
+  pub(m)
+  original <- digest::digest(file = kartmapp(m, "v1", "visning.tif"), algo = "sha256")
+  writeBin(as.raw(1:10), kartmapp(m, "v1", "visning_3006.tif"))
+  expect_identical(skriv_om_visningskopior(m$mal), 2L)
+  vy <- kartmapp(m, "v1", "visning_3006.tif")
+  v <- post(m)[[1]]$versioner[[1]]
+  expect_identical(v$klassad$vy3006$sha256, digest::digest(file = vy, algo = "sha256"))
+  expect_equal(v$klassad$vy3006$bytes, file.size(vy))
+  expect_identical(jsonlite::read_json(kartmapp(m, "metadata.json"))$versioner[[1]]$klassad$vy3006$sha256,
+                   v$klassad$vy3006$sha256)
+  expect_identical(digest::digest(file = kartmapp(m, "v1", "visning.tif"), algo = "sha256"), original)
+  expect_true(schema_giltig(i_mal(m, "katalog", "katalog.json")))
+})

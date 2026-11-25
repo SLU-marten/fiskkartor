@@ -97,8 +97,10 @@ hamta_data <- function(remote, mapp, gren = "data") {
   invisible(ok)
 }
 
-# Filer i publicerade versionsmappar skrivs aldrig om och tas aldrig bort.
+# Filer i publicerade versionsmappar skrivs aldrig om och tas aldrig bort. Undantag: visningskopiorna
+# (*_3006.tif). De laddas aldrig ned eller citeras och får göras om (skriv_om_visningskopior()).
 .VERSIONSFIL <- "^kartor/.+/v[0-9]+/[^/]+$"
+.VISNINGSKOPIA <- "_3006\\.tif$"
 
 # Sökväg -> blob-id för filer i ett träd (FETCH_HEAD) eller i indexet.
 .blobbar_trad <- function(arbets, ref) {
@@ -138,6 +140,7 @@ skicka_data <- function(mapp, remote, gren = "data",
     pa_grenen <- .blobbar_trad(arbets, "FETCH_HEAD")
     lokalt <- .blobbar_index(arbets, trad)
     publicerade <- grep(.VERSIONSFIL, names(pa_grenen), value = TRUE)
+    publicerade <- publicerade[!grepl(.VISNINGSKOPIA, publicerade)]
     saknas <- setdiff(publicerade, names(lokalt))
     finns <- intersect(publicerade, names(lokalt))
     andrade <- finns[pa_grenen[finns] != lokalt[finns]]

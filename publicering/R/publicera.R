@@ -248,3 +248,30 @@ publicera_alla <- function(katalog = "katalog/katalog.xlsx", filrot = ".", mal, 
   }
   ut
 }
+
+#' Skriver om visningskopiorna (*_3006.tif) för alla versioner som har en, från originalfilerna i
+#' dataträdet, och uppdaterar hash och storlek i metadata.json och katalog.json. Originalen rörs inte.
+#' Används när regeln för kopiorna ändras. Ger antalet omskrivna kopior.
+skriv_om_visningskopior <- function(mal) {
+  kartor <- .las_kartor(mal)
+  antal <- 0L
+  for (id in names(kartor)) {
+    k <- kartor[[id]]
+    for (i in seq_along(k$versioner)) {
+      for (roll in c("klassad", "kontinuerlig")) {
+        f <- k$versioner[[i]][[roll]]
+        if (is.null(f) || is.null(f$vy3006)) next
+        original <- file.path(mal$mapp, f$fil)
+        upp <- .upplosning_vy3006(terra::rast(original), as.integer(f$epsg))
+        vy <- .skriv_vy3006(original, file.path(mal$mapp, f$vy3006$fil), roll, upp)
+        k$versioner[[i]][[roll]]$vy3006$sha256 <- vy$sha256
+        k$versioner[[i]][[roll]]$vy3006$bytes <- vy$bytes
+        antal <- antal + 1L
+      }
+    }
+    kartor[[id]] <- k
+    .skriv_json(k, file.path(mal$mapp, k$metadata))
+  }
+  .skriv_katalog_json(kartor, mal)
+  antal
+}
