@@ -11,8 +11,11 @@ const varianter: Record<string, Record<string, string | number>> = {
   'B 3857 transition=0 preload=99': { vy: 3857, transition: 0, preload: 99 },
   'C 3006 standard': { vy: 3006 },
   'D 3006 transition=0 preload=99': { vy: 3006, transition: 0, preload: 99 },
+  'E fil i 3857, 3857-vy': { vy: 3857, epsg: 3857, fil: 'abborre_klassad_3857.tif' },
 };
-for (const [namn, extra] of Object.entries(varianter)) {
+const valda = process.env.VARIANTER?.split(',');
+for (const [namn, { fil = 'abborre_klassad.tif', ...extra }] of Object.entries(varianter)) {
+  if (valda && !valda.some((v) => namn.startsWith(v))) continue;
   const resultat: any[] = [];
   for (const [lat, lon] of [[59.33, 18.9], [56.9, 16.5]]) {
     const ctx = await browser.newContext({ viewport: { width: 1280, height: 720 } });
@@ -20,7 +23,7 @@ for (const [namn, extra] of Object.entries(varianter)) {
     const cdp = await ctx.newCDPSession(page);
     await cdp.send('Network.enable');
     await cdp.send('Network.emulateNetworkConditions', { offline: false, latency: 40, downloadThroughput: 1.25e6, uploadThroughput: 5e5 });
-    const q = new URLSearchParams(Object.entries({ cog: `${data.url}/abborre_klassad.tif`, roll: 'klassad', epsg: 3006, res: 25, lon, lat, z: 9, ...extra }).map(([k, v]) => [k, String(v)]));
+    const q = new URLSearchParams(Object.entries({ cog: `${data.url}/${fil}`, roll: 'klassad', epsg: 3006, res: 25, lon, lat, z: 9, ...extra }).map(([k, v]) => [k, String(v)]));
     await page.goto(`${webb.url}/dist/perf.html?${q}`);
     await page.waitForFunction(() => (window as any).__perf.rendercomplete >= 1, null, { timeout: 60000 });
     // Starta en rAF-logg och zooma in 12 hjulsteg (≈4 nivåer) mitt i kartan, 120 ms mellan stegen.
