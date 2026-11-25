@@ -45,12 +45,15 @@ och `@axe-core/playwright`.
 
   Kartornas YlGnBu-färger ändras inte.
 - **Typsnitt:** Roboto Condensed i vikterna 400 och 500 för gränssnittet, Merriweather i vikterna
-  300 och 400 för löpande text. Inga tyngre vikter, och bara den latinska delen. Reservtypsnitten
-  är Arial och Times New Roman, profilens bastypsnitt.
+  300 och 400 för löpande text. Inga tyngre vikter. Delmängderna är `latin` och `latin-ext`;
+  webbläsaren hämtar `latin-ext` bara när ett tecken kräver det. Reservtypsnitten är Arial och
+  Times New Roman, profilens bastypsnitt.
 - **Inga tredje parter:** inga nätverksanrop för typsnitt eller ikoner.
 - **Brytpunkter:** 60rem för mobil, 40rem för menyknappen och 22.5rem (360 px) för raden med
   institutionen.
-- **Fokus:** `outline: 3px solid var(--gron); outline-offset: 2px`.
+- **Fokus:** `outline: 3px solid var(--gron); outline-offset: 2px`. Kontroller i `.kartyta` får
+  dessutom `box-shadow: 0 0 0 7px var(--yta)`. Den gröna ramen ligger då mellan två vita ringar
+  och syns även mot mörka kartfärger.
 - **Testerna:** befintliga `data-testid` behålls, och `base: './'` i Vite ändras inte.
 - **Text och namn:** text som syns lägger man i `src/lib/text.ts` på svenska och engelska.
   Identifierare skrivs på svenska.
@@ -69,6 +72,15 @@ Dessa beslut går lite längre än specen, utan att ändra dess avsikt.
 - **På mobil krymper kartan när fliken dras upp,** i stället för att fliken läggs över kartan.
   Kontrollerna i kartan behöver då inga förskjutningar, och OpenLayers storleksanpassar kartan
   själv.
+- **Fliken byter läge direkt, utan animering.** Specen beskriver en kort övergång. Men om
+  panelhöjden animeras ritar OpenLayers om WebGL-ytan för varje bildruta, och det kan blinka på
+  mobilernas grafikprocessorer.
+- **Tre tillägg efter den externa granskningen av planen:**
+  - en länk "Hoppa till innehållet", som stöd för WCAG 2.4.1;
+  - ett klick utanför Lagerval eller mobilmenyn stänger dem, och ett klick på en länk i menyn
+    stänger menyn;
+  - teckenförklaringen har ingen `h2`, eftersom den ligger före panelens `h1` i
+    dokumentordningen.
 
 ## Att granska särskilt
 
@@ -76,9 +88,10 @@ Situationer som specen inte nämner:
 
 1. **Lång titel på engelska i fliken på mobil:** inget flödar över i sidled, och titeln syns hela.
    Det testas i uppgift 4.
-2. **Liggande telefon, 844 × 390:** kartan är minst 100 px hög, och greppet går att nå. Uppgift 4.
-3. **Smal dator, 960 × 700:** zoomknapparna, Lagerval, teckenförklaringen, skalstocken och
-   tillskrivningen överlappar inte varandra. Uppgift 3.
+2. **Liggande telefon, 844 × 390:** kartan är minst 100 px hög, greppet går att nå, och
+   zoomknapparna, Lagerval och teckenförklaringen överlappar inte. Uppgift 4.
+3. **Smal dator, 960 × 700:** zoomknapparna, Lagerval, teckenförklaringen, värdet under pekaren,
+   skalstocken och tillskrivningen överlappar inte varandra. Uppgift 3.
 4. **Byte av karta i listan medan Lagerval är öppen:** valen följer den nya kartan, och PanBalticScope
    saknar Visa. Uppgift 3.
 5. **En dold karta på mobil:** notisen syns i fliken även när fliken är nere. Uppgift 4.
@@ -121,6 +134,7 @@ Situationer som specen inte nämner:
     ['text', 'yta', 4.5], ['text', 'mjuk', 4.5], ['text', 'markering', 4.5], ['text', 'notis', 4.5],
     ['dampad', 'yta', 4.5], ['dampad', 'mjuk', 4.5], ['gron', 'yta', 4.5], ['gron', 'markering', 4.5],
     ['gron-mork', 'yta', 4.5], ['yta', 'gron', 4.5], ['fel', 'fel-yta', 4.5], ['kant', 'yta', 3],
+    ['dampad', 'markering', 4.5],
   ])('%s mot %s klarar %s:1', (a, b, krav) => {
     expect(v[a], a).toBeDefined();
     expect(v[b], b).toBeDefined();
@@ -133,12 +147,14 @@ Situationer som specen inte nämner:
   - Väntat: FAIL. `kontrast` finns inte, och variablerna saknas.
 
 - [ ] **Steg 3: Skriv `kontrast` i `src/lib/kontrast.ts`.** Använd WCAG:s relativa luminans med
-  sRGB-linjärisering, gränsen 0,03928.
+  sRGB-linjärisering, gränsen 0,04045. För 8-bitarsvärden ger den samma resultat som den äldre
+  gränsen 0,03928.
 
 - [ ] **Steg 4: Byt variablerna i `:root` i `stil.css`** mot de globala villkorens.
   - Byt `var(--accent)` mot `var(--gron)`, `--accent-ljus` mot `--markering`, `--black` mot
     `--text` och `--papper` mot `--mjuk` i alla komponenter.
   - Sidans bakgrund blir `var(--yta)`.
+  - Lägg till fokusringen för `.kartyta :focus-visible` enligt de globala villkoren.
   - Lägg till `strong, b { font-weight: 500 }`, `h1, h2, h3 { font-weight: 500 }` och klassen
     `.lopande { font-family: Merriweather, 'Times New Roman', serif; font-weight: 300; line-height: 1.6 }`.
   - Sätt `font-family: 'Roboto Condensed', Arial, sans-serif` på `:root`.
@@ -147,8 +163,11 @@ Situationer som specen inte nämner:
 - [ ] **Steg 5: Byt typsnitten.**
   - Kör `npm rm @fontsource/atkinson-hyperlegible-next` och
     `npm i @fontsource/roboto-condensed @fontsource/merriweather`.
-  - `main.ts` importerar `@fontsource/roboto-condensed/latin-400.css`, `…/latin-500.css`,
-    `@fontsource/merriweather/latin-300.css` och `…/latin-400.css`.
+  - `main.ts` importerar för varje vikt både `latin` och `latin-ext`, till exempel
+    `@fontsource/roboto-condensed/latin-400.css` och `…/latin-ext-400.css`. Det gäller Roboto
+    Condensed 400 och 500 och Merriweather 300 och 400.
+  - Kontrollera i paketets `unicode-range` om tecknet ≈ (U+2248) finns. Finns det inte ritas
+    tecknet med Arial, och det godtas. Skriv vad som gäller i en kommentar i `main.ts`.
 
 - [ ] **Steg 6: Ändra `Pekarvarde.svelte`.** Rutan blir vit (`var(--yta)`) med en kant i
   `var(--linje)` och text i `var(--text)`, och koordinaterna i `var(--dampad)`, som i skissen.
@@ -156,8 +175,9 @@ Situationer som specen inte nämner:
 - [ ] **Steg 7: Ändra `bild.ts`.**
   - `TYPSNITT` blir `"'Roboto Condensed', Arial, sans-serif"`, `BLACK` blir `'#222222'`,
     legendramen blir `'#d9d9d9'` och vikten `700` blir `500`.
-  - `sparaSomBild` väntar på `document.fonts.load("500 13px 'Roboto Condensed'")` innan
-    `karta.once('rendercomplete', …)` och `renderSync()`.
+  - `sparaSomBild` väntar på
+    `Promise.all([document.fonts.load("400 13px 'Roboto Condensed'"), document.fonts.load("500 13px 'Roboto Condensed'")])`
+    innan `karta.once('rendercomplete', …)` och `renderSync()`.
   - Vänta bara när `document.fonts` finns, och fånga ett fel med `.catch`. Tidsgränsen börjar som
     i dag.
 
@@ -196,6 +216,7 @@ Situationer som specen inte nämner:
   | `till_traffarna` | Till träffarna | Back to results |
   | `visa_mer` | Visa mer om kartan | Show more about the map |
   | `visa_mindre` | Visa mindre | Show less |
+  | `hoppa` | Hoppa till innehållet | Skip to content |
 
 - Ger: komponenten `Logotyp`, inbyggd i `Sidhuvud`, som importerar en enda fil:
   `import logotyp from '../assets/slu-logotyp.svg'`. När Mårten lämnar PNG-filen byts bara
@@ -225,6 +246,17 @@ Situationer som specen inte nämner:
       `aria-expanded="false"`, och länken `Om portalen` syns inte. Ett klick ger
       `aria-expanded="true"` och en synlig länk. Escape stänger menyn, och fokus går tillbaka till
       knappen.
+    - **'mobil: menyn stängs av en länk och av ett klick utanför':**
+      - Öppna menyn och klicka på `Om portalen`. Då öppnas `#/om`, och knappen har
+        `aria-expanded="false"`.
+      - Öppna menyn igen och klicka i `main`. Då har knappen `aria-expanded="false"`.
+    - **'hopplänken går förbi sidhuvudet':**
+      - Första Tab på startsidan fokuserar länken `Hoppa till innehållet`, som då syns.
+      - Enter flyttar fokus till `main`, som har `tabindex="-1"`.
+    - **`test.fixme` 'logotypen är SLU:s riktiga, inte platshållaren':** bilden
+      `SLU, Sveriges lantbruksuniversitet` har en `src` som slutar på `.png`. Testet syns som
+      överhoppat i varje körning tills Mårtens fil finns på plats. Då tas `fixme` bort. Det är
+      spärren mot att platshållaren följer med till lanseringen i fas 4.
 
 - [ ] **Steg 2: Kör testerna och se dem fallera.**
   - Kör: `npx vitest run tests/rutt.test.ts tests/text.test.ts` och
@@ -246,7 +278,13 @@ Situationer som specen inte nämner:
   - **Menyn:** Kartor, Om portalen och In English, med `data-testid="sprak"` kvar.
   - **Under 40rem** visas en knapp, `Meny`, med `aria-expanded` och `aria-controls`. Den öppnar
     navigeringen som en lista under sidhuvudet, ovanpå innehållet, så att sidhuvudets höjd inte
-    ändras. Escape stänger listan.
+    ändras.
+  - **Listan stängs** med Escape, när man klickar på en länk i den och när man klickar utanför
+    den. Klicket utanför fångas med en `pointerdown`-lyssnare på `document` som bara finns medan
+    listan är öppen.
+  - **Hopplänken:** först i sidhuvudet ligger en länk, `t('hoppa')`, som är dold tills den får
+    fokus. Den pekar på `#innehall`. `App.svelte` ger `<main>` `id="innehall"` och
+    `tabindex="-1"`, och länkens klickhanterare flyttar fokus dit utan att ändra hash-rutten.
   - **Under 22.5rem** döljs institutionen.
 
 - [ ] **Steg 5: `Sidfot.svelte`.**
@@ -270,9 +308,12 @@ Situationer som specen inte nämner:
     - Hur vi testat webbplatsen
   - **Länken till DIGG:s anmälningsformulär** (`https://www.digg.se/tdosanmalan`) kontrolleras.
   - **Kontakten** är `SLU-Aqua-fiskkartor@slu.se`.
-  - **Undantaget för kartbilderna:** beskriv det med paragrafen ur lag (2018:1937), kontrollerad i
-    lagtexten, och säg hur innehållet nås på annat sätt: filerna, metadatan som text och värdet
-    under pekaren.
+  - **Ansvar och nivå:** sidan säger ordagrant att Sveriges lantbruksuniversitet (SLU) står bakom
+    webbplatsen, och att den är "delvis förenlig" med lagen om tillgänglighet till digital
+    offentlig service.
+  - **Undantaget för kartbilderna:** beskriv det med paragrafen ur lag (2018:1937). Enligt den
+    externa granskaren är det 9 § punkt 4; kontrollera det i lagtexten. Säg också hur innehållet
+    nås på annat sätt: filerna, metadatan som text och värdet under pekaren.
   - **Två avsnitt fylls i uppgift 7:** "Innehåll som inte är tillgängligt" och "Hur vi testat
     webbplatsen", med datum. Lägg där bara de brister som redan är kända:
     - värdet under pekaren kräver mus eller tryck;
@@ -316,14 +357,22 @@ Situationer som specen inte nämner:
       - Efter ett klick är `aria-expanded="true"`, och `Klassad` syns.
       - `Escape` ger `aria-expanded="false"`, och `Lagerval` har fokus.
     - **'teckenförklaringen ligger i kartan och panelen har inga kartval':**
-      - `.kartyta [data-testid=legend]` syns, och listan innehåller `['Viktigt', 'Mycket viktigt']`.
+      - `.kartyta [data-testid=legend]` syns. `getByRole('region', { name: 'Teckenförklaring' })`
+        innehåller listan `['Viktigt', 'Mycket viktigt']`.
       - `.panel [data-testid=legend]` och `.panel input[type=radio]` finns inte (antal 0).
+      - Den första rubriken i dokumentordningen, `page.locator('h1, h2').first()`, är en `h1`.
+    - **'klick utanför stänger Lagerval':** öppna Lagerval och klicka i panelens rubrik. Då har
+      knappen `aria-expanded="false"`.
+    - **'Lagerval ligger över teckenförklaringen':** vid 390 × 500 öppnas Lagerval.
+      `document.elementFromPoint` mitt i radioknappen `CARTO`s etikett ger ett element inuti
+      Lagerval.
     - **'byte av karta med Lagerval öppen'** (punkt 4 under Att granska särskilt):
       - Öppna `torsk-test` och Lagerval, och klicka på länken till `pbs-test` i listan.
       - Då finns ingen radioknapp `Kontinuerlig`.
       - Legenden visar `pbs-test`s klasser.
     - **'smal dator: kontrollerna överlappar inte'** (punkt 3):
-      - Vid 960 × 700 mäts `boundingBox()` för `.ol-zoom`, knappen `Lagerval`, legenden,
+      - Vid 960 × 700 hovras först `torsk-test`s fläck A, så att värdet under pekaren syns.
+      - Sedan mäts `boundingBox()` för `.ol-zoom`, knappen `Lagerval`, legenden, `.pekare`,
         `.ol-scale-line` och `.ol-attribution`.
       - Inga två rutor får skära varandra.
 
@@ -351,15 +400,21 @@ Situationer som specen inte nämner:
     `:has(input:focus-visible)`, som ger fokusringen.
   - **Anrop till `satt`** som i dagens `Panel`: `lager`, `opacitet` (`null` vid 1) och `bakgrund`
     (`null` för carto).
+  - **Fokusringen på radioknapparna** ritas med `outline` på etiketten, inte med `box-shadow`,
+    så att tangentbordstestet i uppgift 7 kan läsa den.
   - **Escape:** en `onkeydown` på komponentens rot stänger rutan och flyttar fokus till knappen.
-    Ingen global lyssnare.
+    Ingen global lyssnare för tangenter.
+  - **Klick utanför:** en `pointerdown`-lyssnare på `document`, som bara finns medan rutan är
+    öppen, stänger rutan när klicket landar utanför komponentens rot. Fokus flyttas inte då.
 
 - [ ] **Steg 5: Placera kontrollerna i `Kartvy.svelte`.**
-  - `.kartyta` får `position: relative`. `<Lagerval>` ligger överst till höger och `<Legend>`
-    nere till höger, med `bottom: 2.25rem` ovanför tillskrivningen. Båda har `z-index: 3`,
-    utanför `{#key karta.id}`.
-  - `Legend` blir en vit ruta med kanten `var(--linje)` och rubriken som `h2` i 0.9rem
-    `var(--dampad)`. `data-testid="legend"` behålls.
+  - `.kartyta` får `position: relative`. `<Lagerval>` ligger överst till höger med `z-index: 5`.
+    `<Legend>` ligger nere till höger, med `bottom: 2.25rem` ovanför tillskrivningen och
+    `z-index: 3`. Båda ligger utanför `{#key karta.id}`.
+  - `Legend` blir en vit ruta med kanten `var(--linje)`. Den är en
+    `<section class="legend" aria-labelledby="legend-rubrik">` med rubriken som
+    `<p id="legend-rubrik">` i 0.9rem `var(--dampad)`, alltså ingen `h2`.
+    `data-testid="legend"` behålls.
   - Ta bort Visa, Legend, Opacitet och Bakgrundskarta ur `Panel.svelte`, och dess props
     `opacitet` och `bakgrund`. `roll` behålls för Spara som bild.
 
@@ -413,7 +468,8 @@ Situationer som specen inte nämner:
       - Knappen `Visa mer om kartan` har `aria-expanded="false"`, `h1` syns och `#nedladdning`
         syns inte.
       - Efter ett klick har knappen `Visa mindre` `aria-expanded="true"`, och `#nedladdning` syns.
-      - Ett klick till döljer `#nedladdning` igen.
+        Teckenförklaringen syns inte, eftersom kartan bara är cirka 100 px hög.
+      - Ett klick till döljer `#nedladdning` igen, och teckenförklaringen syns.
     - **'mobil: svep på greppet':** `page.mouse` drar 100 px uppåt från greppets mitt, och
       fliken är då uppe. 100 px nedåt ger nere.
     - **'mobil: Ladda ned i fliken drar upp fliken och visar nedladdningen':** knappen `Ladda ned`
@@ -428,7 +484,8 @@ Situationer som specen inte nämner:
       - Panelen har `scrollWidth <= clientWidth`.
       - `h1`s ruta ligger helt inom panelens ruta.
     - **'mobil liggande: kartan syns och greppet går att nå'** (punkt 2): vid 844 × 390 är
-      `.kartyta` minst 100 px hög, och greppet är `toBeInViewport()`.
+      `.kartyta` minst 100 px hög, och greppet är `toBeInViewport()`. Rutorna för `.ol-zoom`,
+      knappen `Lagerval` och legenden skär inte varandra.
     - **'mobil: en dold karta visar notisen i fliken'** (punkt 5): `KARTA('dold-test')` med
       fliken nere, och notisen med `inte_aktuell`-texten syns.
 
@@ -441,7 +498,10 @@ Situationer som specen inte nämner:
 - [ ] **Steg 4: `Grepp.svelte`.**
   - Greppet är en `<button>` som är 44 px hög och hela bred, med ett streck på 40 × 4 px i
     #8c8c8c, `aria-expanded={uppe}` och `aria-label` satt till `visa_mindre` eller `visa_mer`.
+  - Greppet har `touch-action: none`. Annars tar webbläsaren över vertikala svep för sidskroll
+    eller dra-för-att-uppdatera, och skickar `pointercancel` i stället för `pointerup`.
   - `onpointerdown` sparar `clientY` och sätter `setPointerCapture`.
+  - `onpointercancel` nollställer utan att växla.
   - `onpointerup` frågar `greppBeslut`. Är svaret inte `null` anropas `onvaxla(svar)`, och nästa
     `click` ignoreras.
   - `onclick` anropar `onvaxla(!uppe)`.
@@ -469,9 +529,15 @@ Situationer som specen inte nämner:
   - `let uppe = $state(false)` sätts till `false` när `karta.id` ändras.
   - `onladdaned` sätter `uppe = true`, väntar på `tick()` och anropar
     `document.getElementById('nedladdning')?.scrollIntoView({ block: 'start' })`.
-  - Panelens topp får `border-radius: 12px 12px 0 0` och en skugga uppåt.
-  - Övergången är högst 150 ms och stängs av av den befintliga regeln för
-    `prefers-reduced-motion`.
+  - Panelens topp får `border-radius: 12px 12px 0 0` och en skugga uppåt. Bytet mellan lägena
+    sker direkt, utan övergång.
+  - När `uppe` är sann får `.kartvy` klassen `uppe`. Under 60rem döljer
+    `.kartvy.uppe .legend, .kartvy.uppe .pekare { display: none }` teckenförklaringen och värdet
+    under pekaren.
+  - Är kartytan för låg för att zoomknapparna, Lagerval och teckenförklaringen ska få plats, i
+    liggande läge med fliken nere, visas teckenförklaringen kompakt. Använd en container query på
+    `.kartyta`, till exempel `max-height: 16rem`. Rubriken blir då `.visuellt-dold`, och raderna
+    och rutorna blir tätare. Testet för liggande läge avgör om det räcker.
 
 - [ ] **Steg 7: Värdet vid tryck.** I `Pekarvarde.svelte`: `k.on('singleclick', rorelse)` bredvid
   `pointermove`. Ta bort lyssnaren där de andra tas bort.
@@ -591,10 +657,14 @@ Situationer som specen inte nämner:
     - Tab till sökfältet, skriv `torsk`, ArrowDown och Enter.
     - Tab till första träffen och Enter.
     - Kartvyn öppnas, och titeln innehåller `Torsk`.
-    - Tab till `Lagerval`, Enter, och ArrowRight till `Kontinuerlig`. Adressen får då
-      `lager=kontinuerlig`.
+    - Tab till `Lagerval` och Enter. Fokus ligger kvar på knappen.
+    - Tab in i radiogruppen, till den valda `Klassad`, och ArrowRight till `Kontinuerlig`.
+      Adressen får då `lager=kontinuerlig`.
     - Escape, och Tab till länken `Klassad karta` i panelen.
-    - Fokus syns hela vägen: varje fokuserat element har en `outline-style` som inte är `none`.
+    - **Fokus syns hela vägen.** Efter varje tangent kontrolleras det element som visar fokus:
+      `document.activeElement.closest('label') ?? document.activeElement`, så att etiketten
+      kontrolleras när en visuellt dold radioknapp har fokus. Dess `outline-style` får inte vara
+      `none`.
   - **'omflödning vid 320 px'** (1.4.10): vid 320 × 640, för start, `#/om`, `#/tillganglighet`
     och `torsk-test`, gäller `document.documentElement.scrollWidth <= 320`.
   - **'zoom 200 %'** (1.4.4): vid 640 × 360 är knappen `Lagerval` och greppet `toBeInViewport()`
@@ -613,8 +683,8 @@ Situationer som specen inte nämner:
   - Det som inte kan testas automatiskt antecknas.
 
 - [ ] **Steg 4: Kontrollera det som inte kan automatiseras.**
-  - Gå igenom landmärken, rubrikordning och namn i `page.accessibility`-trädet för start och
-    kartvy.
+  - Gå igenom landmärken, rubrikordning och namn med `page.locator('body').ariaSnapshot()` för
+    start och kartvy. `page.accessibility` är utfasat.
   - Kontrollera statusmeddelandena: Kopierad, Laddar kartan och felen.
   - Kontrollera `lang`.
   - Skriv `docs/wcag-granskning.md` som en tabell med kriterium, vad som kontrollerades, hur,
