@@ -140,8 +140,7 @@ Sidorna går att läsa utan inloggning. Utgångspunkter:
 - **Licens:** CC BY 4.0 är preliminär.
 - **Långsiktig plats:** aqua.slu.se. Peter Ljungberg har sagt att en plats där är gratis. Frågor om
   utrymme och uppladdning med skript är skickade.
-- **Lantmäteriets bakgrundskarta via proxy på slu.se:** beslutades vid kontrollpunkt 1 som en senare
-  förbättring men är inte ställd ännu. Den skulle ersätta CARTO, som är bundet till icke-kommersiella
-  villkor och en nyckel som syns i webbläsaren. Frågan passar att skicka med nu när kontakten med
-  Peter och SLU IT är igång.
+- **Bakgrundskartan:** vi fortsätter med CARTO tills vidare (beslut 25 november). Nyckeln syns i
+  webbläsaren, så den ska vara begränsad till portalens adresser hos CARTO, och aqua.slu.se läggs
+  till vid flytten. Lantmäteriets karta via en proxy på slu.se är en möjlig senare förbättring.
 - **De 16 dolda kartorna från 2025:** originalfilerna saknas.
