@@ -53,7 +53,7 @@ per sekund = 17 ms; över 100 ms märks som hack).
 |---|---:|---:|---:|---|
 | A. Nu: 3006-fil i Web Mercator-vy (omprojiceras) | 250–317 ms | 50–167 ms | 3,6–5,0 s | [länk](https://slu-marten.github.io/fiskkartor/perf.html?cog=data/test/abborre_klassad.tif&roll=klassad&epsg=3006&res=25) |
 | C. 3006-fil i SWEREF 99 TM-vy | 67–150 ms | 50–67 ms | 3,0–3,4 s | [länk](https://slu-marten.github.io/fiskkartor/perf.html?cog=data/test/abborre_klassad.tif&roll=klassad&epsg=3006&res=25&vy=3006) |
-| D. Som C, utan intoning och med grövre rutor kvar | 83–167 ms | 67 ms | 3,3–3,5 s | [länk](https://slu-marten.github.io/fiskkartor/perf.html?cog=data/test/abborre_klassad.tif&roll=klassad&epsg=3006&res=25&vy=3006&transition=0&preload=3) |
+| D. Som C, utan intoning och med grövre rutor kvar | 83–167 ms | 67 ms | 3,3–3,5 s | [länk](https://slu-marten.github.io/fiskkartor/perf.html?cog=data/test/abborre_klassad.tif&roll=klassad&epsg=3006&res=25&vy=3006&transition=0&preload=99) |
 | E. Fil publicerad i Web Mercator, Web Mercator-vy | 67 ms | 50 ms | 3,0–3,4 s | [länk](https://slu-marten.github.io/fiskkartor/perf.html?cog=data/test/abborre_klassad_3857.tif&roll=klassad&epsg=3857&res=25) |
 
 C och E är lika jämna, båda för att webbläsaren inte omprojicerar. De skiljer sig i vad de innebär för plan 2:
