@@ -255,3 +255,77 @@ test.describe('värde under pekaren', () => {
     expect(tif.length).toBe(antal);
   });
 });
+
+test.describe('panelen', () => {
+  test('legenden visar bara färgade klasser, och 0–1 för den kontinuerliga', async ({ page }) => {
+    await cartoTom(page);
+    await page.goto(KARTA('pbs-test'));
+    const legend = page.getByTestId('legend');
+    await expect(legend.getByRole('listitem')).toHaveText(['Viktigt', 'Mycket viktigt']);
+    await page.goto(KARTA('torsk-test', 'lager=kontinuerlig'));
+    await expect(page.getByTestId('legend')).toContainText('0');
+    await expect(page.getByTestId('legend')).toContainText('1');
+    await expect(page.getByTestId('legend')).toContainText('Sannolikhet');
+  });
+
+  test('metadata: kvalitet, källa, citering, kontakt, licens och ifyllda fält', async ({ page }) => {
+    await cartoTom(page);
+    await page.goto(KARTA('torsk-test'));
+    const m = page.getByTestId('metadata');
+    await expect(m).toContainText('Testdata med kända värden.');
+    await expect(m).toContainText('Nationell marin kartering (Ryssja)');
+    await expect(m).toContainText('Testsson m fl 2021');
+    await expect(m).toContainText('CC BY 4.0');
+    await expect(m).toContainText('Starkt hotad (EN)');
+    await expect(m).toContainText('Mjukbotten');
+    await expect(m).not.toContainText('Fiskbarometern');
+    await expect(m.getByRole('link', { name: 'SLU-Aqua-fiskkartor@slu.se' })).toHaveAttribute(
+      'href',
+      'mailto:SLU-Aqua-fiskkartor@slu.se',
+    );
+  });
+
+  test('nedladdning: originalfilerna med beskrivande namn, metadata som JSON och text', async ({ page }) => {
+    await cartoTom(page);
+    await page.goto(KARTA('pbs-test'));
+    const n = page.getByTestId('nedladdning');
+    const klassad = n.getByRole('link', { name: /Klassad karta/ });
+    await expect(klassad).toHaveAttribute('href', /\/tests\/fixtures\/data\/kartor\/panbalticscope\/pbs-test\/v2\/visning\.tif$/);
+    await expect(klassad).toHaveAttribute('download', 'pbs-test_v2_klassad.tif');
+    await expect(n.getByRole('link', { name: /Metadata \(JSON\)/ })).toHaveAttribute('download', 'pbs-test_v2_metadata.json');
+    const [hamtning] = await Promise.all([page.waitForEvent('download'), n.getByRole('link', { name: /Metadata \(text\)/ }).click()]);
+    expect(hamtning.suggestedFilename()).toBe('pbs-test_v2_metadata.txt');
+    const text = readFileSync((await hamtning.path())!, 'utf8');
+    expect(text).toContain('Perch spawning, Baltic Sea (test)');
+
+    await page.goto(KARTA('torsk-test'));
+    await expect(page.getByTestId('nedladdning').getByRole('link', { name: /Kontinuerlig karta/ })).toHaveAttribute(
+      'download',
+      'torsk-test_v1_kontinuerlig.tif',
+    );
+  });
+
+  test('Kopiera citering lägger texten i urklipp', async ({ page, context }) => {
+    await context.grantPermissions(['clipboard-read', 'clipboard-write']);
+    await cartoTom(page);
+    await page.goto(KARTA('torsk-test'));
+    await page.getByRole('button', { name: 'Kopiera citering' }).click();
+    const text = await page.evaluate(() => navigator.clipboard.readText());
+    expect(text).toMatch(
+      /^Testsson m fl 2021\. Torsk större än 20 cm, uppväxt, västkusten \(test\) \(2021\), version 1\. SLU Aqua\. http\S+#\/karta\/torsk-test\?v=1 \(hämtad \d{4}-\d{2}-\d{2}\)\.$/,
+    );
+    await expect(page.getByRole('status').filter({ hasText: 'Kopierad' })).toBeVisible();
+  });
+
+  test('en karta med två versioner listar båda med datum', async ({ page }) => {
+    await cartoTom(page);
+    await page.goto(KARTA('pbs-test'));
+    const v = page.getByTestId('versioner').getByRole('listitem');
+    await expect(v).toHaveCount(2);
+    await expect(v.nth(0)).toContainText('Version 2');
+    await expect(v.nth(0)).toContainText('2026-11-25');
+    await expect(v.nth(1)).toContainText('Version 1');
+    await expect(v.nth(1)).toContainText('2026-11-01');
+    await expect(v.nth(1).getByRole('link')).toHaveAttribute('href', /#\/karta\/pbs-test\?v=1$/);
+  });
+});

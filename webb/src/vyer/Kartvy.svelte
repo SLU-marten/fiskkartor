@@ -1,5 +1,6 @@
 <script lang="ts">
   import Karta from '../komponenter/Karta.svelte';
+  import Panel from '../komponenter/Panel.svelte';
   import Traffar from '../komponenter/Traffar.svelte';
   import type { Bakgrund } from '../karta/karta';
   import { aktuellVersion, kartfil, synliga, type Karta as KartaTyp, type Roll } from '../lib/katalog';
@@ -64,34 +65,7 @@
       />
     </div>
     <aside class="panel">
-      <h1>{karta.titel}</h1>
-      {#if version.kontinuerlig}
-        <fieldset>
-          <legend>{t('visa_lager', lang)}</legend>
-          {#each ['klassad', 'kontinuerlig'] as const as r (r)}
-            <label>
-              <input type="radio" name="lager" value={r} checked={roll === r}
-                onchange={() => satt({ lager: r === 'klassad' ? null : r })} />
-              {t(r === 'klassad' ? 'lager_klassad' : 'lager_kontinuerlig', lang)}
-            </label>
-          {/each}
-        </fieldset>
-      {/if}
-      <label class="reglage">
-        {t('opacitet', lang)}
-        <input type="range" min="0" max="1" step="0.05" value={opacitet}
-          oninput={(e) => satt({ opacitet: e.currentTarget.value === '1' ? null : e.currentTarget.value })} />
-      </label>
-      <fieldset>
-        <legend>{t('bakgrundskarta', lang)}</legend>
-        {#each ['carto', 'ingen'] as const as b (b)}
-          <label>
-            <input type="radio" name="bakgrund" value={b} checked={bakgrund === b}
-              onchange={() => satt({ bakgrund: b === 'carto' ? null : b })} />
-            {t(b === 'carto' ? 'bakgrund_carto' : 'bakgrund_ingen', lang)}
-          </label>
-        {/each}
-      </fieldset>
+      <Panel {karta} {version} {roll} {opacitet} {bakgrund} {dataUrl} {lang} {satt} />
     </aside>
   </div>
 {/if}
@@ -124,32 +98,6 @@
     padding: 1rem 1.25rem;
     border-left: 1px solid var(--linje);
     background: var(--yta);
-  }
-  .panel h1 {
-    font-size: 1.35rem;
-  }
-  fieldset {
-    border: 0;
-    margin: 0 0 1rem;
-    padding: 0;
-  }
-  legend {
-    font-weight: 700;
-    padding: 0;
-    margin-bottom: 0.25rem;
-  }
-  fieldset label {
-    display: inline-flex;
-    gap: 0.35rem;
-    margin-right: 1rem;
-  }
-  .reglage {
-    display: grid;
-    font-weight: 700;
-    margin-bottom: 1rem;
-  }
-  .reglage input {
-    width: 100%;
   }
   .tom {
     max-width: 40rem;

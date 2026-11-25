@@ -43,3 +43,15 @@ export function kontinuerligStil(skala: number, min: number, max: number, nodata
   steg.forEach((f, i) => skalan.push(min + ((hog - min) * i) / (steg.length - 1), f));
   return { color: ['case', ['==', ['band', 1], nodata], GENOMSKINLIG, skalan] as Style['color'] };
 }
+
+/** Färgerna i legenden: de färgade klasserna i värdeordning med samma färg som i kartan. */
+export function legendfarger(klasser: Klass[]): { klass: Klass; rgb: string }[] {
+  const fargade = klasser.filter((k) => k.farg).sort((a, b) => a.varde - b.varde);
+  return fargade.map((klass, i) => {
+    const [r, g, b] = klassfarg(i, fargade.length);
+    return { klass, rgb: `rgb(${r} ${g} ${b})` };
+  });
+}
+
+/** Den kontinuerliga skalans fem steg som CSS-färger, från 0 till 1. */
+export const KONTINUERLIGA_STEG = [0, 2, 4, 6, 8].map((i) => `rgb(${YLGNBU[i].join(' ')})`);

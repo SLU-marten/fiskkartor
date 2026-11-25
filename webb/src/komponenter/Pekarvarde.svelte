@@ -119,6 +119,9 @@
     border-radius: 4px;
     pointer-events: none;
   }
+  .pekare[hidden] {
+    display: none;
+  }
   output {
     font-weight: 700;
     font-size: 1.05rem;
