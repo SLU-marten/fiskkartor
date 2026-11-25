@@ -45,11 +45,22 @@
     font-size: 0.9rem;
     color: var(--dampad);
   }
-  /* En låg karta (mobil i liggande läge): teckenförklaringen blir en rad, och etiketten finns
-     bara för skärmläsare, så att den inte krockar med zoomknapparna och Lagerval. */
+  /* En smal karta (smal dator, mobil på höjden): teckenförklaringen flyttas upp under Lagerval, så
+     att den inte täcker värdet under pekaren nere till vänster. */
+  @container kartyta (max-width: 30rem) {
+    .legend {
+      top: calc(0.75rem + 50px);
+      bottom: auto;
+    }
+  }
+  /* En låg karta (mobil i liggande läge): teckenförklaringen blir en rad överst, mellan
+     zoomknapparna och Lagerval, och etiketten finns bara för skärmläsare. */
   @container kartyta (max-height: 16rem) {
     .legend {
-      bottom: 1.4rem;
+      top: 0.75rem;
+      left: 4.5rem;
+      right: auto;
+      bottom: auto;
       padding: 0.25rem 0.6rem;
     }
     .rubrik {

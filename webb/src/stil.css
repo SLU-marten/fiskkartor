@@ -88,6 +88,20 @@ b {
   background: var(--mjuk);
   color: var(--gron-mork);
 }
+/* OpenLayers ger knapparna fetstil och en grå ram på 1 px vid hovring och fokus. Profilen har
+   ingen fetstil, och fokus ska se ut som överallt annars. */
+.ol-control.ol-zoom button {
+  font-weight: 500;
+}
+.ol-control.ol-zoom button:hover,
+.ol-control.ol-zoom button:focus {
+  outline: none;
+}
+.ol-control.ol-zoom button:focus-visible {
+  outline: 3px solid var(--gron);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 7px var(--yta);
+}
 .ol-scale-line {
   background: rgb(255 255 255 / 90%);
   border-radius: 2px;
@@ -104,6 +118,12 @@ b {
 }
 .ol-attribution a {
   color: var(--gron);
+}
+/* En låg karta (liggande telefon): skalstocken döljs, så att den inte krockar med zoomknapparna. */
+@container kartyta (max-height: 16rem) {
+  .ol-scale-line {
+    display: none;
+  }
 }
 @media (max-width: 60rem) {
   .ol-zoom .ol-zoom-in,

@@ -167,7 +167,9 @@
   @media (max-width: 60rem) {
     .kartvy {
       grid-template-columns: 1fr;
-      grid-template-rows: auto minmax(0, 1fr) auto;
+      /* Kartan får alltid minst min(8rem, 35dvh); en lång titel eller en notis gör att fliken
+         skrollar i stället för att trycka ihop kartan. */
+      grid-template-rows: auto minmax(min(8rem, 35dvh), 1fr) minmax(0, auto);
       height: calc(100dvh - 3.5rem);
     }
     .lista {
@@ -192,9 +194,8 @@
       border-radius: 12px 12px 0 0;
       box-shadow: 0 -2px 8px rgb(0 0 0 / 15%);
     }
-    .kartvy.uppe .panel {
-      height: calc(100dvh - 12.5rem);
-      box-sizing: border-box;
+    .kartvy.uppe {
+      grid-template-rows: auto 6.25rem minmax(0, 1fr);
     }
     @media (max-height: 30rem) {
       .tillbaka {

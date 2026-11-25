@@ -9,7 +9,10 @@
   let { uppe, lang, onvaxla }: { uppe: boolean; lang: Sprak; onvaxla: (uppe: boolean) => void } = $props();
 
   let startY: number | null = null;
-  let ignoreraKlick = false;
+  // När pekaren redan har växlat läget ignoreras click som följer. En pekskärm ger ibland ingen
+  // click alls efter ett tryck (greppet har pekarfångst), så tryck och svep hanteras i pointerup.
+  // Tangentbord och skärmläsare ger bara click, utan pekarhändelser före.
+  let pekareVaxlade = -Infinity;
 
   function ned(e: PointerEvent) {
     startY = e.clientY;
@@ -17,18 +20,13 @@
   }
   function upp(e: PointerEvent) {
     if (startY === null) return;
-    const svar = greppBeslut(uppe, e.clientY - startY);
+    const svar = greppBeslut(uppe, e.clientY - startY) ?? !uppe;
     startY = null;
-    if (svar !== null) {
-      ignoreraKlick = true;
-      onvaxla(svar);
-    }
+    pekareVaxlade = performance.now();
+    onvaxla(svar);
   }
   function klick() {
-    if (ignoreraKlick) {
-      ignoreraKlick = false;
-      return;
-    }
+    if (performance.now() - pekareVaxlade < 500) return;
     onvaxla(!uppe);
   }
 </script>

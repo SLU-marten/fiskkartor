@@ -165,7 +165,11 @@
     flex-wrap: wrap;
     gap: 0.5rem;
   }
+  /* Statusraden tar ingen höjd när den är tom: tomma flexelement har ingen höjd. */
   .status {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
     min-height: 1.5em;
     margin: 0.25rem 0 0;
   }
@@ -233,7 +237,6 @@
     opacity: 0.6;
   }
   [role='status'] {
-    margin-left: 0.5rem;
     font-size: 0.9rem;
   }
   ul {

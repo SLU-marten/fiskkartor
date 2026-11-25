@@ -44,15 +44,20 @@
       those of the European standard EN 301 549, which refers to WCAG 2.1 level AA.
     </p>
     <h3>Content that is not accessible</h3>
+    <h4>Non-compliance with the accessibility requirements</h4>
     <ul class="lopande">
       <li>
-        The map images cannot be read with a screen reader. Maps that are not intended for navigation are exempt from
-        the Act (section 9, point 2). The content of each map is available in other ways: the map files can be
-        downloaded, and the metadata can be read on the map's page and downloaded as text.
+        The value under the pointer needs a mouse or a tap on the map (WCAG 2.1, criterion 2.1.1 Keyboard). The map
+        can be moved and zoomed with the keyboard, but the value is not shown then. The same values are in the
+        downloadable map files.
       </li>
+    </ul>
+    <h4>Content that is not within the scope of the Act</h4>
+    <ul class="lopande">
       <li>
-        The value under the pointer needs a mouse or a tap on the map. The map can be moved and zoomed with the
-        keyboard, but the value is not shown then. The same values are in the downloadable map files.
+        The map images. Maps that are not intended for navigation are exempt from the Act (section 9, point 2). The
+        content of each map is available in other ways: the map files can be downloaded, and the metadata can be
+        read on the map's page and downloaded as text.
       </li>
     </ul>
     <h2>How we tested the website</h2>
@@ -95,15 +100,20 @@
       som beskrivs nedan. Kraven är den europeiska standarden EN 301 549, som hänvisar till WCAG 2.1 på nivå AA.
     </p>
     <h3>Innehåll som inte är tillgängligt</h3>
+    <h4>Bristande förenlighet med lagkraven</h4>
     <ul class="lopande">
       <li>
-        Kartbilderna kan inte läsas med skärmläsare. Kartor som inte är avsedda för navigering omfattas inte av lagen
-        (9 § 2 p. lagen 2018:1937). Varje kartas innehåll går att nå på andra sätt: kartfilerna kan laddas ned, och
-        metadatan kan läsas på kartans sida och laddas ned som text.
+        Värdet under pekaren kräver mus eller ett tryck på kartan (WCAG 2.1, kriterium 2.1.1 Tangentbord). Kartan kan
+        flyttas och zoomas med tangentbordet, men då visas inget värde. Samma värden finns i kartfilerna som kan laddas
+        ned.
       </li>
+    </ul>
+    <h4>Innehåll som inte omfattas av lagkraven</h4>
+    <ul class="lopande">
       <li>
-        Värdet under pekaren kräver mus eller ett tryck på kartan. Kartan kan flyttas och zoomas med tangentbordet,
-        men då visas inget värde. Samma värden finns i kartfilerna som kan laddas ned.
+        Kartbilderna. Kartor som inte är avsedda för navigering omfattas inte av lagen (9 § 2 p. lagen 2018:1937).
+        Varje kartas innehåll går att nå på andra sätt: kartfilerna kan laddas ned, och metadatan kan läsas på kartans
+        sida och laddas ned som text.
       </li>
     </ul>
     <h2>Hur vi testat webbplatsen</h2>
@@ -132,5 +142,9 @@
   h3 {
     font-size: 1.1rem;
     margin-top: 1.25rem;
+  }
+  h4 {
+    font-size: 1rem;
+    margin: 1rem 0 0.25rem;
   }
 </style>

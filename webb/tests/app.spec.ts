@@ -716,6 +716,8 @@ test.describe('Lagerval och teckenförklaring i kartan', () => {
     await page.goto(KARTA('torsk-test'));
     await oppnaLagerval(page);
     const etikett = page.locator('label', { has: page.getByRole('radio', { name: 'CARTO' }) });
+    // I en låg karta skrollar rutan inuti sig själv; visa raden först.
+    await etikett.scrollIntoViewIfNeeded();
     const ruta = (await etikett.boundingBox())!;
     const inuti = await page.evaluate(
       ([x, y]) => !!document.elementFromPoint(x, y)?.closest('.lagerval'),
@@ -736,23 +738,26 @@ test.describe('Lagerval och teckenförklaring i kartan', () => {
     await expect(page.getByRole('region', { name: 'Teckenförklaring' }).getByRole('listitem')).toHaveText(['Viktigt', 'Mycket viktigt']);
   });
 
-  test('smal dator: kontrollerna överlappar inte', async ({ page }) => {
-    await cartoTom(page);
-    await page.setViewportSize({ width: 960, height: 700 });
-    await page.goto(KARTA('torsk-test'));
-    await vantaKarta(page);
-    await hovra(page, 613287.5, 6636712.5, 3006);
-    await expect(page.getByTestId('varde')).toBeVisible();
-    const delar = ['.ol-zoom', '.lagerval > button', '.kartyta [data-testid=legend]', '.pekare', '.ol-scale-line', '.ol-attribution'];
-    const rutor = [];
-    for (const d of delar) rutor.push({ d, r: (await page.locator(d).first().boundingBox())! });
-    for (let i = 0; i < rutor.length; i++)
-      for (let j = i + 1; j < rutor.length; j++) {
-        const a = rutor[i].r, b = rutor[j].r;
-        const skar = a.x < b.x + b.width && b.x < a.x + a.width && a.y < b.y + b.height && b.y < a.y + a.height;
-        expect(skar, `${rutor[i].d} och ${rutor[j].d}`).toBe(false);
-      }
-  });
+  for (const bredd of [961, 1024]) {
+    test(`smal dator ${bredd} px: kontrollerna överlappar inte`, async ({ page }) => {
+      await cartoTom(page);
+      await page.setViewportSize({ width: bredd, height: 700 });
+      await page.goto(KARTA('torsk-test'));
+      await vantaKarta(page);
+      await expect(page.locator('.grepp')).toBeHidden();
+      await hovra(page, 613287.5, 6636712.5, 3006);
+      await expect(page.getByTestId('varde')).toBeVisible();
+      const delar = ['.ol-zoom', '.lagerval > button', '.kartyta [data-testid=legend]', '.pekare', '.ol-scale-line', '.ol-attribution'];
+      const rutor = [];
+      for (const d of delar) rutor.push({ d, r: (await page.locator(d).first().boundingBox())! });
+      for (let i = 0; i < rutor.length; i++)
+        for (let j = i + 1; j < rutor.length; j++) {
+          const a = rutor[i].r, b = rutor[j].r;
+          const skar = a.x < b.x + b.width && b.x < a.x + a.width && a.y < b.y + b.height && b.y < a.y + a.height;
+          expect(skar, `${rutor[i].d} och ${rutor[j].d}`).toBe(false);
+        }
+    });
+  }
 });
 
 test.describe('mobil', () => {
@@ -818,8 +823,36 @@ test.describe('mobil', () => {
     await expect(page.locator('#nedladdning')).toBeInViewport();
   });
 
+  test('mobil: greppet fungerar med tangentbordet', async ({ page }) => {
+    await cartoTom(page);
+    await page.goto(KARTA('torsk-test'));
+    await vantaKarta(page);
+    await greppet(page).focus();
+    await page.keyboard.press('Enter');
+    await expect(greppet(page)).toHaveAttribute('aria-expanded', 'true');
+    await page.keyboard.press('Space');
+    await expect(greppet(page)).toHaveAttribute('aria-expanded', 'false');
+  });
+
   test.describe('pekskärm', () => {
     test.use({ hasTouch: true });
+    test('mobil: ett svep med fingret och sedan ett tryck på greppet', async ({ page }) => {
+      await cartoTom(page);
+      await page.goto(KARTA('torsk-test'));
+      await vantaKarta(page);
+      const cdp = await page.context().newCDPSession(page);
+      const r = (await greppet(page).boundingBox())!;
+      const x = r.x + r.width / 2, y = r.y + r.height / 2;
+      const beroring = async (type: 'touchStart' | 'touchMove' | 'touchEnd', py?: number) =>
+        cdp.send('Input.dispatchTouchEvent', { type, touchPoints: py === undefined ? [] : [{ x, y: py }] });
+      await beroring('touchStart', y);
+      for (const dy of [-30, -60, -100]) await beroring('touchMove', y + dy);
+      await beroring('touchEnd');
+      await expect(greppet(page)).toHaveAttribute('aria-expanded', 'true');
+      const r2 = (await greppet(page).boundingBox())!;
+      await page.touchscreen.tap(r2.x + r2.width / 2, r2.y + r2.height / 2);
+      await expect(greppet(page)).toHaveAttribute('aria-expanded', 'false');
+    });
     test('mobil: ett tryck på kartan visar värdet', async ({ page }) => {
       await page.goto(KARTA('torsk-test', 'bakgrund=ingen'));
       await vantaKarta(page);
@@ -843,23 +876,39 @@ test.describe('mobil', () => {
     expect(h.y + h.height).toBeLessThanOrEqual(p.y + p.height + 0.5);
   });
 
-  test('mobil liggande: kartan syns och greppet går att nå', async ({ page }) => {
-    await cartoTom(page);
-    await page.setViewportSize({ width: 844, height: 390 });
-    await page.goto(KARTA('torsk-test'));
-    await vantaKarta(page);
-    expect((await page.locator('.kartyta').boundingBox())!.height).toBeGreaterThanOrEqual(100);
-    await expect(greppet(page)).toBeInViewport();
-    const delar = ['.ol-zoom', '.lagerval > button', '.kartyta [data-testid=legend]'];
-    const rutor = [];
-    for (const d of delar) rutor.push({ d, r: (await page.locator(d).first().boundingBox())! });
-    for (let i = 0; i < rutor.length; i++)
-      for (let j = i + 1; j < rutor.length; j++) {
-        const a = rutor[i].r, b = rutor[j].r;
-        const skar = a.x < b.x + b.width && b.x < a.x + a.width && a.y < b.y + b.height && b.y < a.y + a.height;
-        expect(skar, `${rutor[i].d} och ${rutor[j].d}`).toBe(false);
+  for (const [bredd, hojd, id, q] of [
+    [844, 390, 'torsk-test', ''], [844, 390, 'dold-test', ''], [844, 340, 'torsk-test', ''],
+    [667, 375, 'dold-test', ''], [568, 320, 'dold-test', 'lang=en'], [640, 360, 'torsk-test', ''],
+  ] as const) {
+    test(`mobil liggande ${bredd} × ${hojd}, ${id}: kartan syns och kontrollerna krockar inte`, async ({ page }) => {
+      await cartoTom(page);
+      await page.setViewportSize({ width: bredd, height: hojd });
+      await page.goto(KARTA(id, q));
+      await vantaKarta(page);
+      expect((await page.locator('.kartyta').boundingBox())!.height).toBeGreaterThanOrEqual(100);
+      await expect(greppet(page)).toBeInViewport();
+      expect(await page.evaluate(() => document.documentElement.scrollHeight <= innerHeight)).toBe(true);
+      const delar = ['.ol-zoom', '.lagerval > button', '.kartyta [data-testid=legend]', '.ol-scale-line', '.grepp', '.sidhuvud'];
+      const rutor = [];
+      for (const d of delar) {
+        const r = await page.locator(d).first().boundingBox();
+        if (r && (await page.locator(d).first().isVisible())) rutor.push({ d, r });
       }
-  });
+      for (let i = 0; i < rutor.length; i++)
+        for (let j = i + 1; j < rutor.length; j++) {
+          const a = rutor[i].r, b = rutor[j].r;
+          const skar = a.x < b.x + b.width && b.x < a.x + a.width && a.y < b.y + b.height && b.y < a.y + a.height;
+          expect(skar, `${rutor[i].d} och ${rutor[j].d}`).toBe(false);
+        }
+      // Lagerval-rutan ryms i fönstret, eller skrollar inuti sig själv.
+      await page.getByRole('button', { name: /Lagerval|Layers/ }).click();
+      const ruta = page.locator('#lagerval-ruta');
+      const r = (await ruta.boundingBox())!;
+      expect(r.y + r.height).toBeLessThanOrEqual(hojd);
+      await page.getByRole('radio', { name: /CARTO/ }).scrollIntoViewIfNeeded();
+      await expect(page.getByRole('radio', { name: /CARTO/ })).toBeInViewport();
+    });
+  }
 
   test('mobil: en dold karta visar notisen i fliken', async ({ page }) => {
     await cartoTom(page);
@@ -896,5 +945,63 @@ test.describe('profil', () => {
     const m = page.getByTestId('metadata');
     const varde = m.locator('dt', { hasText: 'Vetenskapligt namn' }).locator('xpath=following-sibling::dd[1]');
     await expect(varde).toHaveAttribute('lang', 'la');
+  });
+});
+
+test.describe('efter slutgranskningen', () => {
+  test('fokus som lämnar Lagerval stänger rutan', async ({ page }) => {
+    await cartoTom(page);
+    await page.goto(KARTA('torsk-test'));
+    await vantaKarta(page);
+    await oppnaLagerval(page);
+    await page.getByRole('radio', { name: 'CARTO' }).focus();
+    await page.keyboard.press('Tab');
+    await expect(page.getByRole('button', { name: 'Lagerval' })).toHaveAttribute('aria-expanded', 'false');
+  });
+
+  test('fokus som lämnar mobilmenyn stänger den', async ({ page }) => {
+    await page.setViewportSize({ width: 375, height: 812 });
+    await page.goto(START());
+    const meny = page.getByRole('button', { name: 'Meny' });
+    await meny.click();
+    await page.getByRole('banner').getByRole('link', { name: 'In English' }).focus();
+    await page.keyboard.press('Tab');
+    await expect(meny).toHaveAttribute('aria-expanded', 'false');
+  });
+
+  test('zoomknapparna har profilens fokusram', async ({ page }) => {
+    await cartoTom(page);
+    await page.goto(KARTA('torsk-test'));
+    await vantaKarta(page);
+    await page.getByRole('application').focus();
+    await page.keyboard.press('Tab');
+    const knapp = page.getByRole('button', { name: 'Zooma in' });
+    await expect(knapp).toBeFocused();
+    await expect(knapp).toHaveCSS('outline-width', '3px');
+    await expect(knapp).toHaveCSS('outline-color', 'rgb(0, 102, 79)');
+    expect(Number(await knapp.evaluate((e) => getComputedStyle(e).fontWeight))).toBeLessThanOrEqual(500);
+  });
+
+  test('tvingade färger: det valda alternativet i Lagerval syns', async ({ page }) => {
+    await cartoTom(page);
+    await page.emulateMedia({ forcedColors: 'active' });
+    await page.goto(KARTA('torsk-test'));
+    await vantaKarta(page);
+    await oppnaLagerval(page);
+    const etikett = (namn: string) => page.locator('label', { has: page.getByRole('radio', { name: namn, exact: true }) });
+    const vald = await etikett('Klassad').evaluate((e) => getComputedStyle(e).backgroundColor);
+    const ovald = await etikett('Kontinuerlig').evaluate((e) => getComputedStyle(e).backgroundColor);
+    expect(vald).not.toBe(ovald);
+  });
+
+  test('redogörelsen skiljer brister från innehåll som inte omfattas', async ({ page }) => {
+    await page.goto(`${server.url}/dist/index.html?data=/tests/fixtures/data/#/tillganglighet`);
+    const omfattas = page.getByRole('heading', { name: 'Innehåll som inte omfattas av lagkraven' });
+    await expect(omfattas).toBeVisible();
+    await expect(omfattas.locator('xpath=following-sibling::*[1]')).toContainText('navigering');
+    const brister = page.getByRole('heading', { name: 'Bristande förenlighet med lagkraven' });
+    await expect(brister).toBeVisible();
+    await expect(brister.locator('xpath=following-sibling::*[1]')).toContainText('2.1.1');
+    await expect(brister.locator('xpath=following-sibling::*[1]')).not.toContainText('navigering');
   });
 });

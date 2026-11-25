@@ -164,6 +164,13 @@
     border-radius: 6px;
     pointer-events: none;
   }
+  /* En låg karta: rutan flyttas till höger om zoomknapparna. */
+  @container kartyta (max-height: 16rem) {
+    .pekare {
+      left: 4.5rem;
+      bottom: 0.5rem;
+    }
+  }
   .pekare[hidden] {
     display: none;
   }

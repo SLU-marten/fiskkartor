@@ -27,11 +27,18 @@
     const tangent = (e: KeyboardEvent) => {
       if (e.key === 'Escape') stang(true);
     };
+    // Fokus som lämnar sidhuvudet stänger menyn, så att fokus inte hamnar under den.
+    const lamnar = (e: FocusEvent) => {
+      const nasta = e.relatedTarget as Node | null;
+      if (nasta && !rot.contains(nasta)) stang(false);
+    };
     document.addEventListener('pointerdown', utanfor);
     rot.addEventListener('keydown', tangent);
+    rot.addEventListener('focusout', lamnar);
     return () => {
       document.removeEventListener('pointerdown', utanfor);
       rot.removeEventListener('keydown', tangent);
+      rot.removeEventListener('focusout', lamnar);
     };
   });
 

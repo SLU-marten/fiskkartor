@@ -32,11 +32,19 @@
       oppen = false;
       knapp.focus();
     };
+    // Fokus som lämnar komponenten (Tab förbi sista valet) stänger rutan, så att fokus aldrig
+    // hamnar på något som rutan täcker.
+    const lamnar = (e: FocusEvent) => {
+      const nasta = e.relatedTarget as Node | null;
+      if (nasta && !rot.contains(nasta)) oppen = false;
+    };
     document.addEventListener('pointerdown', utanfor);
     rot.addEventListener('keydown', tangent);
+    rot.addEventListener('focusout', lamnar);
     return () => {
       document.removeEventListener('pointerdown', utanfor);
       rot.removeEventListener('keydown', tangent);
+      rot.removeEventListener('focusout', lamnar);
     };
   });
 
@@ -112,7 +120,10 @@
   .knapp:hover {
     background: var(--gron-mork);
   }
+  /* Rutan ryms i kartytan (en storlekscontainer) och skrollar inuti när kartan är låg. */
   .ruta {
+    max-height: calc(100cqh - 4.5rem);
+    overflow-y: auto;
     width: 15.5rem;
     box-sizing: border-box;
     display: flex;
@@ -179,6 +190,15 @@
     outline: 3px solid var(--gron);
     outline-offset: 2px;
     box-shadow: 0 0 0 7px var(--yta);
+  }
+  /* Tvingade färger (t.ex. Windows hög kontrast) tar bort bakgrundsfärgen, så det valda
+     alternativet markeras med systemets markeringsfärger. */
+  @media (forced-colors: active) {
+    .delad label:has(input:checked) {
+      forced-color-adjust: none;
+      background: Highlight;
+      color: HighlightText;
+    }
   }
   .rad {
     display: flex;
