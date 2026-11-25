@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "genererad": "2026-11-25T12:00:00Z",
+  "kartor": [{
+    "id": "berggylta-uppvaxt-vastkusten-2021",
+    "titel": "Berggylta uppväxt västkusten", "projekt": "NMK",
+    "kalla": "Nationell marin kartering (Ryssja)", "citering": "Fredriksson m fl 2021",
+    "ar": 2021, "kvalitet": "Provtagning inte designad för rumsliga analyser.", "licens": "CC BY 4.0",
+    "kontakt": "SLU-Aqua-fiskkartor@slu.se", "sprak": "sv", "doi": null, "farg": "YlGnBu", "visas": true,
+    "metadata": "kartor/nmk/berggylta-uppvaxt-vastkusten-2021/metadata.json",
+    "falt": { "art": "Berggylta", "vetenskapligt_namn": "Labrus bergylta", "livsstadium": "Uppväxt",
+              "havsomrade": "Västerhavet", "omrade": "Västkusten, djup 0-30m.", "rodlista": "LC",
+              "fiskbarometern": null, "simblasa": "Ja", "livsmiljo": "Demersal (kustnära)" },
+    "aktuellVersion": 1,
+    "versioner": [{
+      "version": 1, "publicerad": "2026-11-25",
+      "klassad": { "fil": "kartor/nmk/berggylta-uppvaxt-vastkusten-2021/v1/visning.tif",
+                   "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", "kallaSha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb", "bytes": 25941, "epsg": 25833, "upplosning": 250,
+                   "klasser": [{"varde": 5, "namn": "Viktigt", "farg": true}, {"varde": 10, "namn": "Mycket viktigt", "farg": true}] },
+      "kontinuerlig": { "fil": "kartor/nmk/berggylta-uppvaxt-vastkusten-2021/v1/radata.tif",
+                        "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", "kallaSha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb", "bytes": 3409817, "epsg": 25833, "upplosning": 250,
+                        "skala": 1000, "enhet": "sannolikhet", "min": 0.087, "max": 0.841, "p2": 0.1, "p98": 0.8 }
+    }]
+  }]
+}

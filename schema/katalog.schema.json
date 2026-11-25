@@ -1,0 +1,89 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://slu-marten.github.io/fiskkartor/schema/katalog.schema.json",
+  "title": "Fiskkartor – katalog",
+  "type": "object",
+  "required": ["schemaVersion", "genererad", "kartor"],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "genererad": { "type": "string", "format": "date-time" },
+    "kartor": { "type": "array", "items": { "$ref": "#/$defs/karta" } }
+  },
+  "$defs": {
+    "sha": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "textEllerNull": { "type": ["string", "null"] },
+    "fil": {
+      "type": "object",
+      "required": ["fil", "sha256", "kallaSha256", "bytes", "epsg", "upplosning"],
+      "properties": {
+        "fil": { "type": "string", "minLength": 1 },
+        "sha256": { "$ref": "#/$defs/sha" },
+        "kallaSha256": { "$ref": "#/$defs/sha" },
+        "bytes": { "type": "integer", "minimum": 0 },
+        "epsg": { "enum": [3006, 3035, 25833, 4326, 3857] },
+        "upplosning": { "type": "number", "exclusiveMinimum": 0 }
+      }
+    },
+    "klassad": {
+      "allOf": [{ "$ref": "#/$defs/fil" }],
+      "required": ["klasser"],
+      "properties": {
+        "klasser": {
+          "type": "array", "minItems": 1,
+          "items": {
+            "type": "object", "required": ["varde", "namn", "farg"],
+            "properties": {
+              "varde": { "type": "integer", "minimum": 0, "maximum": 254 },
+              "namn": { "type": "string", "minLength": 1 },
+              "farg": { "type": "boolean" }
+            }
+          }
+        }
+      }
+    },
+    "kontinuerlig": {
+      "allOf": [{ "$ref": "#/$defs/fil" }],
+      "required": ["skala", "enhet", "min", "max", "p2", "p98"],
+      "properties": {
+        "skala": { "const": 1000 },
+        "enhet": { "type": "string" },
+        "min": { "type": "number" }, "max": { "type": "number" },
+        "p2": { "type": "number" }, "p98": { "type": "number" }
+      }
+    },
+    "version": {
+      "type": "object",
+      "required": ["version", "publicerad", "klassad", "kontinuerlig"],
+      "properties": {
+        "version": { "type": "integer", "minimum": 1 },
+        "publicerad": { "type": "string", "format": "date" },
+        "klassad": { "$ref": "#/$defs/klassad" },
+        "kontinuerlig": { "oneOf": [{ "type": "null" }, { "$ref": "#/$defs/kontinuerlig" }] }
+      }
+    },
+    "karta": {
+      "type": "object",
+      "required": ["id", "titel", "projekt", "kalla", "citering", "ar", "licens", "kontakt",
+                   "sprak", "farg", "visas", "metadata", "falt", "aktuellVersion", "versioner"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$" },
+        "titel": { "type": "string", "minLength": 1 },
+        "projekt": { "type": "string", "minLength": 1 },
+        "kalla": { "type": "string", "minLength": 1 },
+        "citering": { "type": "string", "minLength": 1 },
+        "ar": { "type": "integer", "minimum": 1900, "maximum": 2100 },
+        "kvalitet": { "$ref": "#/$defs/textEllerNull" },
+        "licens": { "type": "string", "minLength": 1 },
+        "kontakt": { "type": "string", "minLength": 1 },
+        "sprak": { "enum": ["sv", "en"] },
+        "doi": { "$ref": "#/$defs/textEllerNull" },
+        "farg": { "type": "string", "minLength": 1 },
+        "visas": { "type": "boolean" },
+        "metadata": { "type": "string", "minLength": 1 },
+        "falt": { "type": "object", "additionalProperties": { "$ref": "#/$defs/textEllerNull" } },
+        "aktuellVersion": { "type": "integer", "minimum": 1 },
+        "versioner": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/version" } }
+      }
+    }
+  }
+}
