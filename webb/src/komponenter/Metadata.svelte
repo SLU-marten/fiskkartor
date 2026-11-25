@@ -24,7 +24,7 @@
   <dl>
     {#each rader as [nyckel, varde] (nyckel)}
       <dt>{faltetikett(nyckel, lang) ?? nyckel}</dt>
-      <dd lang={karta.sprak}>{varde}</dd>
+      <dd lang={nyckel === 'vetenskapligt_namn' ? 'la' : karta.sprak} class:lopande={nyckel === 'kvalitet'}>{varde}</dd>
     {/each}
     {#if karta.doi}
       <dt>{faltetikett('doi', lang)}</dt>

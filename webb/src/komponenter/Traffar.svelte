@@ -34,6 +34,10 @@
   }
   a[aria-current='page'] {
     color: var(--text);
+    background: var(--markering);
+    margin: 0 -0.5rem;
+    padding: 0.15rem 0.5rem;
+    border-radius: 4px;
   }
   .kalla {
     display: block;

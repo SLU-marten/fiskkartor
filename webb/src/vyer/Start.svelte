@@ -128,7 +128,7 @@
   }
   h1 {
     font-size: clamp(1.75rem, 4vw, 2.5rem);
-    letter-spacing: -0.01em;
+    font-weight: 400;
   }
   .projekt {
     display: flex;
@@ -145,10 +145,12 @@
     text-align: left;
     padding: 0.7rem 0.9rem;
     border: 1px solid var(--linje);
-    border-left: 4px solid var(--gron);
-    border-radius: 4px;
-    background: var(--mjuk);
+    border-radius: 6px;
+    background: var(--yta);
     cursor: pointer;
+  }
+  .projekt button:hover {
+    border-color: var(--gron);
   }
   .projekt button[aria-pressed='true'] {
     background: var(--markering);
@@ -180,11 +182,12 @@
     gap: 1rem;
   }
   .rensa {
-    border: 0;
-    background: none;
-    padding: 0;
+    min-height: 36px;
+    padding: 0 0.75rem;
+    border: 1px solid var(--gron);
+    border-radius: 4px;
+    background: var(--yta);
     color: var(--gron);
-    text-decoration: underline;
     cursor: pointer;
   }
   @media (max-width: 52rem) {

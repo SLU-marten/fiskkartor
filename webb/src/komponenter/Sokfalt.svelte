@@ -92,10 +92,11 @@
     box-sizing: border-box;
     width: 100%;
     font: inherit;
-    font-size: 1.3rem;
-    padding: 0.6rem 0.8rem;
-    border: 2px solid var(--text);
-    border-radius: 6px;
+    font-size: 1.15rem;
+    height: 48px;
+    padding: 0 0.9rem;
+    border: 1px solid var(--kant);
+    border-radius: 4px;
     background: var(--yta);
     color: inherit;
   }

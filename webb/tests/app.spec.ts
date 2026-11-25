@@ -880,3 +880,33 @@ test.describe('mobil', () => {
     await expect(page.locator('.panel .notis').first()).toBeVisible();
   });
 });
+
+test.describe('profil', () => {
+  test('typsnitt: Roboto Condensed i gränssnittet och Merriweather i löpande text', async ({ page }) => {
+    await page.goto(START());
+    expect(await page.locator('h1').first().evaluate((e) => getComputedStyle(e).fontFamily)).toContain('Roboto Condensed');
+    await page.goto(`${server.url}/dist/index.html?data=/tests/fixtures/data/#/om`);
+    expect(await page.locator('main p').first().evaluate((e) => getComputedStyle(e).fontFamily)).toContain('Merriweather');
+  });
+
+  test('valt projektkort markeras', async ({ page }) => {
+    await page.goto(START());
+    await page.getByTestId('projekt-NMK').click();
+    await expect(page.getByTestId('projekt-NMK')).toHaveAttribute('aria-pressed', 'true');
+    await expect(page.getByTestId('projekt-NMK')).toHaveCSS('background-color', 'rgb(238, 246, 214)');
+  });
+
+  test('Om-sidan länkar till tillgänglighetsredogörelsen', async ({ page }) => {
+    await page.goto(`${server.url}/dist/index.html?data=/tests/fixtures/data/#/om?lang=en`);
+    const lank = page.getByRole('main').getByRole('link', { name: 'Accessibility' });
+    await expect(lank).toHaveAttribute('href', '#/tillganglighet?lang=en');
+  });
+
+  test('vetenskapliga namn är märkta som latin', async ({ page }) => {
+    await cartoTom(page);
+    await page.goto(KARTA('torsk-test'));
+    const m = page.getByTestId('metadata');
+    const varde = m.locator('dt', { hasText: 'Vetenskapligt namn' }).locator('xpath=following-sibling::dd[1]');
+    await expect(varde).toHaveAttribute('lang', 'la');
+  });
+});

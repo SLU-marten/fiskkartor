@@ -61,7 +61,8 @@
     border: 1px solid var(--linje);
     background: var(--yta);
     border-radius: 999px;
-    padding: 0.2rem 0.7rem;
+    min-height: 32px;
+    padding: 0.2rem 0.75rem;
     cursor: pointer;
     font-size: 0.95rem;
   }
