@@ -104,7 +104,7 @@
 - [ ] **Step 2–4:** Run (FAIL), implement, run (pass). Start page: project cards (name, number of maps, short text from `t()`), search field with suggestions, filter chips for projekt, art, livsstadium, havsområde, källa, år, rödlista, Fiskbarometern, livsmiljö and simblåsa, result list linking to `#/karta/<id>`.
 - [ ] **Step 5: Commit** `feat(webb): startsida med sök, förslag och filter`.
 
-Test data for E2E (Step 1 of this task): `publicering/inst/skript/skapa_testdata.R` publishes into `webb/tests/fixtures/data/` with `publicera_alla()`: `torsk-test` (3006, classified + continuous, 200 × 200), `pbs-test` (3857, classes 0/5/10, 0 uncoloured, no continuous → gets `vy3006`), `trål-test` (4326, one class only, all optional fields empty), `dold-test` (published, then `visas = nej`). Playwright serves `webb/` and opens `dist/index.html?data=/tests/fixtures/data/#/…`.
+Test data for E2E (Step 1 of this task): `publicering/inst/skript/skapa_testdata.R` publishes into `webb/tests/fixtures/data/` with `publicera_alla()`: `torsk-test` (3006, classified + continuous, 200 × 200), `pbs-test` (3857, classes 0/5/10, 0 uncoloured, no continuous → gets `vy3006`), `tral-test` (4326, one class only, all optional fields empty), `dold-test` (published, then `visas = nej`). Playwright serves `webb/` and opens `dist/index.html?data=/tests/fixtures/data/#/…`.
 
 ### Task 6: Map view – map, layers, toggle, opacity, background
 
@@ -112,7 +112,7 @@ Test data for E2E (Step 1 of this task): `publicering/inst/skript/skapa_testdata
 
 **Interfaces:** `skapaKarta(mal: HTMLElement, opt: {bakgrund: 'carto' | 'ingen'; cartoNyckel: string}): { karta: Map; visa(fil: string, epsg: number, roll: Roll, klasser: Klass[]): WebGLTileLayer; setOpacitet(o: number): void; setBakgrund(b): void }`.
 
-- [ ] **Step 1: Failing E2E tests** (CARTO routed to a blank PNG as in `perf.spec.ts`): opening `#/karta/torsk-test` fits the map to the layer and reaches `rendercomplete`; hovering the known cell shows "Mycket viktigt"; the classified/continuous switch shows "0.75"; the switch is absent for `pbs-test`; opacity 0 gives alpha 0 at a data pixel; `bakgrund=ingen` makes no CARTO request; `pbs-test` and `trål-test` load their `vy3006` file (network log), and no console errors occur for any of the four maps.
+- [ ] **Step 1: Failing E2E tests** (CARTO routed to a blank PNG as in `perf.spec.ts`): opening `#/karta/torsk-test` fits the map to the layer and reaches `rendercomplete`; hovering the known cell shows "Mycket viktigt"; the classified/continuous switch shows "0.75"; the switch is absent for `pbs-test`; opacity 0 gives alpha 0 at a data pixel; `bakgrund=ingen` makes no CARTO request; `pbs-test` and `tral-test` load their `vy3006` file (network log), and no console errors occur for any of the four maps.
 - [ ] **Step 2–4:** Run (FAIL), implement, run (pass). Layout: result list left (collapsed on narrow screens), map centre, panel right (Task 8). Loading indicator until the first `rendercomplete`; "Kartfilen kunde inte hämtas" when the source errors.
 - [ ] **Step 5: Commit** `feat(webb): kartvy med lager, växling, opacitet och bakgrund`.
 
