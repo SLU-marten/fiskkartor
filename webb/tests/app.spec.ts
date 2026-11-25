@@ -464,3 +464,15 @@ test.describe('spara som bild', () => {
     expect(r.px[0].slice(0, 3)).toEqual([37, 52, 148]);
   });
 });
+
+test.describe('om-sidan', () => {
+  test('finns på svenska och engelska med kontakt och licens', async ({ page }) => {
+    await page.goto(`${server.url}/dist/index.html?data=/tests/fixtures/data/#/om`);
+    await expect(page.getByRole('heading', { level: 1 })).toHaveText('Om Fiskkartor');
+    await expect(page.getByRole('link', { name: 'SLU-Aqua-fiskkartor@slu.se' })).toHaveAttribute('href', 'mailto:SLU-Aqua-fiskkartor@slu.se');
+    await expect(page.getByText('CC BY 4.0').first()).toBeVisible();
+    await page.getByTestId('sprak').click();
+    await expect(page.getByRole('heading', { level: 1 })).toHaveText('About Fish maps');
+    await expect(page.getByRole('heading', { name: 'How to cite' })).toBeVisible();
+  });
+});

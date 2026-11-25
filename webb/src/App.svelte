@@ -3,6 +3,7 @@
   import { lasKatalog, synliga, type Karta } from './lib/katalog';
   import Start from './vyer/Start.svelte';
   import Kartvy from './vyer/Kartvy.svelte';
+  import Om from './vyer/Om.svelte';
   import { byggRutt, medParametrar, RUTT_ANDRAD, sprak, tolkaRutt, type Rutt, type Vy } from './lib/rutt';
   import { t } from './lib/text';
 
@@ -56,7 +57,9 @@
 </header>
 
 <main>
-  {#if fel}
+  {#if rutt.vy === 'om'}
+    <Om {lang} />
+  {:else if fel}
     <p class="sida" role="alert">{t('katalog_fel', lang)} ({fel})</p>
     <button onclick={hamtaKatalog}>{t('forsok_igen', lang)}</button>
   {:else if kartor === null}
@@ -65,8 +68,6 @@
     <Start kartor={synliga(kartor)} {rutt} {lang} />
   {:else if rutt.vy === 'karta'}
     <Kartvy {kartor} {rutt} {lang} {dataUrl} {cartoNyckel} />
-  {:else}
-    <div class="sida"><h1>{t('meny_om', lang)}</h1></div>
   {/if}
 </main>
 
