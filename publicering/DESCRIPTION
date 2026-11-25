@@ -1,0 +1,10 @@
+Package: fiskkartor
+Title: Publicering av fiskkartor som Cloud-Optimized GeoTIFF
+Version: 0.1.0
+Authors@R: person("SLU Aqua", email = "SLU-Aqua-fiskkartor@slu.se", role = c("aut", "cre"))
+Description: Kontrollerar, konverterar och publicerar kartor till fiskkartor-portalen.
+License: CC BY 4.0
+Encoding: UTF-8
+Imports: terra, readxl, writexl, jsonlite, digest, stringi
+Suggests: testthat (>= 3.0.0), withr
+Config/testthat/edition: 3
