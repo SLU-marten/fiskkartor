@@ -51,14 +51,15 @@
         downloaded, and the metadata can be read on the map's page and downloaded as text.
       </li>
       <li>
-        The value under the pointer needs a mouse or a tap on the map. It cannot be reached with the keyboard. The same
-        values are in the downloadable map files.
+        The value under the pointer needs a mouse or a tap on the map. The map can be moved and zoomed with the
+        keyboard, but the value is not shown then. The same values are in the downloadable map files.
       </li>
     </ul>
     <h2>How we tested the website</h2>
     <p class="lopande">
-      We have reviewed the website ourselves, with automated tests and a manual review against WCAG 2.1 AA. The latest
-      assessment was made on {BEDOMD}.
+      We have reviewed the website ourselves against WCAG 2.1 AA: automated tests with axe for every view on computer
+      and mobile, and a manual review of keyboard use, zoom to 200 %, a width of 320 pixels, text spacing, page titles,
+      language, status messages, landmarks and headings. The latest assessment was made on {BEDOMD}.
     </p>
     <p class="lopande">This statement was last updated on {UPPDATERAD}.</p>
   {:else}
@@ -101,14 +102,16 @@
         metadatan kan läsas på kartans sida och laddas ned som text.
       </li>
       <li>
-        Värdet under pekaren kräver mus eller ett tryck på kartan. Det går inte att nå med tangentbordet. Samma värden
-        finns i kartfilerna som kan laddas ned.
+        Värdet under pekaren kräver mus eller ett tryck på kartan. Kartan kan flyttas och zoomas med tangentbordet,
+        men då visas inget värde. Samma värden finns i kartfilerna som kan laddas ned.
       </li>
     </ul>
     <h2>Hur vi testat webbplatsen</h2>
     <p class="lopande">
-      Vi har gjort en egen granskning av webbplatsen, med automatiska tester och en manuell granskning mot WCAG 2.1
-      AA. Den senaste bedömningen gjordes den {BEDOMD}.
+      Vi har gjort en egen granskning av webbplatsen mot WCAG 2.1 AA: automatiska tester med axe för alla vyer på dator
+      och mobil, och en manuell granskning av tangentbordsanvändning, zoom till 200 %, en bredd på 320 pixlar,
+      textavstånd, sidtitlar, språk, statusmeddelanden, landmärken och rubriker. Den senaste bedömningen gjordes den
+      {BEDOMD}.
     </p>
     <p class="lopande">Redogörelsen uppdaterades senast den {UPPDATERAD}.</p>
   {/if}

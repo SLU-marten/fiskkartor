@@ -117,10 +117,10 @@
       <Lagerval {version} {roll} {opacitet} {bakgrund} {lang} {satt} />
       <Legend {version} {roll} {lang} />
     </div>
-    <aside class="panel">
+    <section class="panel" aria-labelledby="kartans-namn">
       <Grepp {uppe} {lang} onvaxla={(v) => (uppe = v)} />
       <Panel {karta} {version} {roll} {dataUrl} {lang} {kartan} {rutt} {uppe} onladdaned={visaNedladdning} />
-    </aside>
+    </section>
   </div>
 {/if}
 

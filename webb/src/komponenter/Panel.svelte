@@ -90,7 +90,7 @@
   }
 </script>
 
-<h1>{karta.titel}</h1>
+<h1 id="kartans-namn">{karta.titel}</h1>
 <p class="kalla" class:uppe>{karta.kalla}, {karta.ar}</p>
 
 {#if !karta.visas}

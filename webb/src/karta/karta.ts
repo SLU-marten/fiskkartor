@@ -37,7 +37,11 @@ declare global {
   }
 }
 
-export function skapaKarta(mal: HTMLElement, opt: { bakgrund: Bakgrund; cartoNyckel: string; dataUrl: string }): Kartan {
+/** tangentbord: elementet som tar emot tangenterna för att flytta och zooma (det ska ha tabindex). */
+export function skapaKarta(
+  mal: HTMLElement,
+  opt: { bakgrund: Bakgrund; cartoNyckel: string; dataUrl: string; tangentbord?: HTMLElement },
+): Kartan {
   registreraProjektioner();
   const vy = new View({ projection: VY });
   const carto = skapaCarto(opt.cartoNyckel);
@@ -47,6 +51,7 @@ export function skapaKarta(mal: HTMLElement, opt: { bakgrund: Bakgrund; cartoNyc
     layers: [carto],
     view: vy,
     controls: [new Zoom(), new ScaleLine(), new Attribution({ collapsible: false })],
+    keyboardEventTarget: opt.tangentbord,
   });
   let lager: WebGLTileLayer | null = null;
   let opacitet = 1;

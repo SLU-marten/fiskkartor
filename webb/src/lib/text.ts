@@ -13,6 +13,13 @@ export const TEXT = {
   meny_om: { sv: 'Om portalen', en: 'About' },
   meny_tillganglighet: { sv: 'Tillgänglighet', en: 'Accessibility' },
   meny: { sv: 'Meny', en: 'Menu' },
+  huvudmeny: { sv: 'Huvudmeny', en: 'Main menu' },
+  zooma_in: { sv: 'Zooma in', en: 'Zoom in' },
+  zooma_ut: { sv: 'Zooma ut', en: 'Zoom out' },
+  kartbild: {
+    sv: 'Karta. Flytta den med piltangenterna och zooma med plus och minus.',
+    en: 'Map. Move it with the arrow keys and zoom with plus and minus.',
+  },
   hoppa: { sv: 'Hoppa till innehållet', en: 'Skip to content' },
   institution: { sv: 'Institutionen för akvatiska resurser', en: 'Department of Aquatic Resources' },
   slu_alt: { sv: 'SLU, Sveriges lantbruksuniversitet', en: 'SLU, Swedish University of Agricultural Sciences' },

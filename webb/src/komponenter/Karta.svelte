@@ -27,13 +27,14 @@
   let { kf, roll, klasser, upplosning, opacitet, bakgrund, cartoNyckel, dataUrl, lang, start, onflytt, onklar }: Props = $props();
 
   let mal: HTMLDivElement;
+  let ram: HTMLDivElement;
   let kartan = $state<Kartan | null>(null);
   let laddar = $state(true);
   let fel = $state(false);
   let visad = '';
 
   onMount(() => {
-    kartan = skapaKarta(mal, { bakgrund, cartoNyckel, dataUrl });
+    kartan = skapaKarta(mal, { bakgrund, cartoNyckel, dataUrl, tangentbord: ram });
     onklar?.(kartan);
     kartan.karta.on('moveend', () => {
       if (kartan) onflytt?.(kartlage(kartan.karta));
@@ -67,10 +68,26 @@
       kartan.passa().catch(() => (fel = true));
     }
   });
+  // OpenLayers zoomknappar heter "+" och "–". De får namn och verktygstips på valt språk.
+  $effect(() => {
+    if (!kartan) return;
+    for (const [klass, nyckel] of [['.ol-zoom-in', 'zooma_in'], ['.ol-zoom-out', 'zooma_ut']] as const) {
+      const knapp = mal.querySelector(klass);
+      knapp?.setAttribute('aria-label', t(nyckel, lang));
+      knapp?.setAttribute('title', t(nyckel, lang));
+    }
+  });
   $effect(() => kartan?.setOpacitet(opacitet));
   $effect(() => kartan?.setBakgrund(bakgrund));
 </script>
 
+<!-- Ramen tar emot tangentbordet: OpenLayers lyssnar på piltangenter (flytta) och plus och minus
+     (zooma) när den har fokus. role="application" låter skärmläsare skicka tangenterna vidare.
+     Svelte räknar application som icke-interaktiv; här hanterar OpenLayers tangenterna.
+     tabindex ligger på ramen och inte på kartans eget element: med tabindex där slutar OpenLayers
+     att panorera med musen. -->
+<!-- svelte-ignore a11y_no_noninteractive_tabindex -->
+<div class="ram" bind:this={ram} tabindex="0" role="application" aria-label={t('kartbild', lang)}>
 <div class="karta" bind:this={mal}>
   {#if fel}
     <p class="status" role="alert">{t('kartfil_fel', lang)}</p>
@@ -81,8 +98,13 @@
     <Pekarvarde {kartan} {kf} {roll} {klasser} {upplosning} {dataUrl} {lang} />
   {/if}
 </div>
+</div>
 
 <style>
+  .ram {
+    width: 100%;
+    height: 100%;
+  }
   .karta {
     position: relative;
     width: 100%;

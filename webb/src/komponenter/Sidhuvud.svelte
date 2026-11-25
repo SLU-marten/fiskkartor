@@ -57,7 +57,7 @@
     bind:this={knapp}
     onclick={() => (oppen = !oppen)}>{t('meny', lang)}</button
   >
-  <nav id="huvudmeny" class:oppen>
+  <nav id="huvudmeny" class:oppen aria-label={t('huvudmeny', lang)}>
     <a href={lank('start')} aria-current={vy === 'start' ? 'page' : undefined} onclick={() => stang(false)}>{t('meny_start', lang)}</a>
     <a href={lank('om')} aria-current={vy === 'om' ? 'page' : undefined} onclick={() => stang(false)}>{t('meny_om', lang)}</a>
     <a href={spraklank} hreflang={lang === 'sv' ? 'en' : 'sv'} data-testid="sprak" onclick={() => stang(false)}>{t('byt_sprak', lang)}</a>
