@@ -1,0 +1,96 @@
+{
+  "id": "sill-lek-vast-ostkusten-2021",
+  "titel": "Sill lek väst-/ostkusten",
+  "projekt": "PanBalticScope",
+  "kalla": "PanBalticScope",
+  "citering": "Bergström m fl 2021",
+  "ar": 2021,
+  "kvalitet": "The data layer is mainly developed based on main habitat associations as identified from scientific literature, not actual data on herring spawning. Layer overestimate spawning areas in deeper areas. Skagerak is not included.",
+  "licens": "CC BY 4.0",
+  "kontakt": "SLU-Aqua-fiskkartor@slu.se",
+  "sprak": "en",
+  "doi": null,
+  "farg": "YlGnBu",
+  "visas": true,
+  "metadata": "kartor/panbalticscope/sill-lek-vast-ostkusten-2021/metadata.json",
+  "falt": {
+    "art": "Sill",
+    "vetenskapligt_namn": "Clupea harengus",
+    "livsstadium": "Lek",
+    "havsomrade": "Östersjön +Kattegatt",
+    "omrade": "Bottniska viken och Östersjön, inklusive Öresund och Kattegatt",
+    "rodlista": "LC",
+    "fiskbarometern": "Ices bedömer att beståndet av Strömming i centrala Östersjön har ett fisketryck som ligger under referensfärdet för fiskeridödlighet som ger ett hållbart fiske över tid men att både beståndets storlek och lekbeståndets storlek ligger under de gränsvärden som inte bör understigas. I Bottniska viken bedöms fissketrycket ligga under referensvärdet för fiskerifödlighet osm ger ett hållbart fiske över tid men beståndets storlek lika under bränsvärdet som inte bör underskridas. Lekbeståndets stårlek bedöms till skillnad från centrala Östersjön ligga över gränsvärdet.",
+    "simblasa": "Ja",
+    "livsmiljo": "Pelagisk (frivattenlevande)"
+  },
+  "aktuellVersion": 2,
+  "versioner": [
+    {
+      "version": 1,
+      "publicerad": "2026-11-25",
+      "klassad": {
+        "fil": "kartor/panbalticscope/sill-lek-vast-ostkusten-2021/v1/visning.tif",
+        "sha256": "9bdb8f333679573122b505fd06c5ccb38d3d85b0360e6c2777b81ce914ed4792",
+        "kallaSha256": "bf7ef5312c9cf15422bb78b2b08806f28af1eec15bf487fa154ddad9b5a88ffa",
+        "bytes": 190118,
+        "epsg": 3857,
+        "upplosning": 1000,
+        "klasser": [
+          {
+            "varde": 0,
+            "namn": "Ej viktigt område",
+            "farg": false
+          },
+          {
+            "varde": 5,
+            "namn": "Viktigt",
+            "farg": true
+          },
+          {
+            "varde": 10,
+            "namn": "Mycket viktigt",
+            "farg": true
+          }
+        ]
+      },
+      "kontinuerlig": null
+    },
+    {
+      "version": 2,
+      "publicerad": "2026-11-25",
+      "format": 2,
+      "klassad": {
+        "fil": "kartor/panbalticscope/sill-lek-vast-ostkusten-2021/v2/visning.tif",
+        "sha256": "58122ba1791a1c2ee0d62943ce759a21162a5a6ba21e5aad119add7d55e32eb5",
+        "kallaSha256": "bf7ef5312c9cf15422bb78b2b08806f28af1eec15bf487fa154ddad9b5a88ffa",
+        "bytes": 192189,
+        "epsg": 3857,
+        "upplosning": 497.1,
+        "vy3006": {
+          "fil": "kartor/panbalticscope/sill-lek-vast-ostkusten-2021/v2/visning_3006.tif",
+          "sha256": "8ac3e71cdc89fef641a59895674919e1ee420f5c74b8f4ef8d5188e97dd24435",
+          "bytes": 664501
+        },
+        "klasser": [
+          {
+            "varde": 0,
+            "namn": "Ej viktigt område",
+            "farg": false
+          },
+          {
+            "varde": 5,
+            "namn": "Viktigt",
+            "farg": true
+          },
+          {
+            "varde": 10,
+            "namn": "Mycket viktigt",
+            "farg": true
+          }
+        ]
+      },
+      "kontinuerlig": null
+    }
+  ]
+}

@@ -1,0 +1,117 @@
+{
+  "id": "grassnultra-uppvaxt-vastkusten-2021",
+  "titel": "Grässnultra uppväxt västkusten",
+  "projekt": "NMK",
+  "kalla": "Nationell marin kartering (Ryssja)",
+  "citering": "Fredriksson m fl 2021",
+  "ar": 2021,
+  "kvalitet": "Provtagning inte designad för rumsliga analyser, där tillgänglig data mellan geografiska områden kan variera mellan år. Provtagninsdata från flera olika år ingår dock i modelleringen.",
+  "licens": "CC BY 4.0",
+  "kontakt": "SLU-Aqua-fiskkartor@slu.se",
+  "sprak": "sv",
+  "doi": null,
+  "farg": "YlGnBu",
+  "visas": true,
+  "metadata": "kartor/nmk/grassnultra-uppvaxt-vastkusten-2021/metadata.json",
+  "falt": {
+    "art": "Grässnultra",
+    "vetenskapligt_namn": "Centrolabrus exoletus",
+    "livsstadium": "Uppväxt",
+    "havsomrade": "Västerhavet",
+    "omrade": "Västkusten, djup 0-30m.",
+    "rodlista": "LC",
+    "fiskbarometern": null,
+    "simblasa": "Ja",
+    "livsmiljo": "Demersal (Bottennära)"
+  },
+  "aktuellVersion": 2,
+  "versioner": [
+    {
+      "version": 1,
+      "publicerad": "2026-11-25",
+      "klassad": {
+        "fil": "kartor/nmk/grassnultra-uppvaxt-vastkusten-2021/v1/visning.tif",
+        "sha256": "834fc9957d259809bb8350ae6e55d14ff80854af7f24f2aa8d7b830a16a02bd2",
+        "kallaSha256": "4a9ecd59defb11a148aaaf63843ebdc88e5126a51bbd00b87dacdef8a761f7be",
+        "bytes": 26671,
+        "epsg": 25833,
+        "upplosning": 250,
+        "klasser": [
+          {
+            "varde": 5,
+            "namn": "Viktigt",
+            "farg": true
+          },
+          {
+            "varde": 10,
+            "namn": "Mycket viktigt",
+            "farg": true
+          }
+        ]
+      },
+      "kontinuerlig": {
+        "fil": "kartor/nmk/grassnultra-uppvaxt-vastkusten-2021/v1/radata.tif",
+        "sha256": "944681cb20735ade4ea2a310d79a48c19e702a972aa51bce543d442afba30b4b",
+        "kallaSha256": "4f7e17b40160fcf963819a597cea0f4c2cc4dcc37796ce112e38fbafc2b8a425",
+        "bytes": 183871,
+        "epsg": 25833,
+        "upplosning": 250,
+        "skala": 1000,
+        "enhet": "sannolikhet",
+        "min": 0.007,
+        "max": 0.984,
+        "p2": 0.007,
+        "p98": 0.573
+      }
+    },
+    {
+      "version": 2,
+      "publicerad": "2026-11-25",
+      "format": 2,
+      "klassad": {
+        "fil": "kartor/nmk/grassnultra-uppvaxt-vastkusten-2021/v2/visning.tif",
+        "sha256": "edb0411bcb033c21e8797f63ee6420820bb6585a8ef5d00d049668861076d3f0",
+        "kallaSha256": "4a9ecd59defb11a148aaaf63843ebdc88e5126a51bbd00b87dacdef8a761f7be",
+        "bytes": 26263,
+        "epsg": 25833,
+        "upplosning": 250,
+        "vy3006": {
+          "fil": "kartor/nmk/grassnultra-uppvaxt-vastkusten-2021/v2/visning_3006.tif",
+          "sha256": "4443d79bc5b589b38d77918484dc5955e445fdf7626dbf4fac1c7b4e33f97846",
+          "bytes": 51205
+        },
+        "klasser": [
+          {
+            "varde": 5,
+            "namn": "Viktigt",
+            "farg": true
+          },
+          {
+            "varde": 10,
+            "namn": "Mycket viktigt",
+            "farg": true
+          }
+        ]
+      },
+      "kontinuerlig": {
+        "fil": "kartor/nmk/grassnultra-uppvaxt-vastkusten-2021/v2/radata.tif",
+        "sha256": "944681cb20735ade4ea2a310d79a48c19e702a972aa51bce543d442afba30b4b",
+        "kallaSha256": "4f7e17b40160fcf963819a597cea0f4c2cc4dcc37796ce112e38fbafc2b8a425",
+        "bytes": 183871,
+        "epsg": 25833,
+        "upplosning": 250,
+        "vy3006": {
+          "fil": "kartor/nmk/grassnultra-uppvaxt-vastkusten-2021/v2/radata_3006.tif",
+          "sha256": "05c5fbefe121ce775c7773ceb1e26a86f48c24e3dba129eb4e128e1a9eda5187",
+          "bytes": 350919
+        },
+        "skala": 1000,
+        "enhet": "sannolikhet",
+        "min": 0.007,
+        "max": 0.984,
+        "p2": 0.007,
+        "p98": 0.573
+      }
+    }
+  ]
+}

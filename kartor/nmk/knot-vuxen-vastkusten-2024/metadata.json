@@ -1,0 +1,117 @@
+{
+  "id": "knot-vuxen-vastkusten-2024",
+  "titel": "Knot vuxen västkusten",
+  "projekt": "NMK",
+  "kalla": "Nationell marin kartering (Trål)",
+  "citering": "Erlandsson m fl (opubl)",
+  "ar": 2024,
+  "kvalitet": "Grov upplösning då tråldragen är långa. Provtagning inte designad för rumsliga analyser, där tillgänglig data mellan geografiska områden kan variera mellan år. Data från många år ingår dock i modelleringen.",
+  "licens": "CC BY 4.0",
+  "kontakt": "SLU-Aqua-fiskkartor@slu.se",
+  "sprak": "sv",
+  "doi": null,
+  "farg": "YlGnBu",
+  "visas": true,
+  "metadata": "kartor/nmk/knot-vuxen-vastkusten-2024/metadata.json",
+  "falt": {
+    "art": "Knot",
+    "vetenskapligt_namn": "Eutrigla gurnardus",
+    "livsstadium": "Vuxen",
+    "havsomrade": "Västerhavet",
+    "omrade": "Västkusten >30 m",
+    "rodlista": "LC",
+    "fiskbarometern": "Ices bedömer att beståndets lekbiomassa ligger över tröskelvärdet om biomassan skulle ligga under tröskelvärdet skulle beståndets tillstånd försämras.",
+    "simblasa": "Ja",
+    "livsmiljo": "Bentopelagisk"
+  },
+  "aktuellVersion": 2,
+  "versioner": [
+    {
+      "version": 1,
+      "publicerad": "2026-11-25",
+      "klassad": {
+        "fil": "kartor/nmk/knot-vuxen-vastkusten-2024/v1/visning.tif",
+        "sha256": "3b6f8da9bfab3dcb5e5c3673c369eb2f26c87caf218f281ccc855d3faffdce55",
+        "kallaSha256": "27ece6f77294050886db298a968724eeface2f8bc2c61c019d76a9bcc1242530",
+        "bytes": 2123,
+        "epsg": 4326,
+        "upplosning": 3712,
+        "klasser": [
+          {
+            "varde": 5,
+            "namn": "Viktigt",
+            "farg": true
+          },
+          {
+            "varde": 10,
+            "namn": "Mycket viktigt",
+            "farg": true
+          }
+        ]
+      },
+      "kontinuerlig": {
+        "fil": "kartor/nmk/knot-vuxen-vastkusten-2024/v1/radata.tif",
+        "sha256": "8eea8daff260637c2aeb16e1380ae7cbdb6f56c28be8fca1cfc219ac0f739341",
+        "kallaSha256": "5a758bb8d13da23e284a5c95c9bce9edd2ea1b14d0ff9cbc4ca5514248d825e6",
+        "bytes": 9048,
+        "epsg": 4326,
+        "upplosning": 3712,
+        "skala": 1000,
+        "enhet": "sannolikhet",
+        "min": 0.037,
+        "max": 0.857,
+        "p2": 0.042,
+        "p98": 0.815
+      }
+    },
+    {
+      "version": 2,
+      "publicerad": "2026-11-25",
+      "format": 2,
+      "klassad": {
+        "fil": "kartor/nmk/knot-vuxen-vastkusten-2024/v2/visning.tif",
+        "sha256": "22ab9b3cfd3093084b7ce65f0e8d4e0a8ac9de25b5401a832ec150a471e774be",
+        "kallaSha256": "27ece6f77294050886db298a968724eeface2f8bc2c61c019d76a9bcc1242530",
+        "bytes": 1743,
+        "epsg": 4326,
+        "upplosning": 3712,
+        "vy3006": {
+          "fil": "kartor/nmk/knot-vuxen-vastkusten-2024/v2/visning_3006.tif",
+          "sha256": "a41a38bc47283e5944581a68d0fe95fed3ab49846d064a358228f3704b57f7fe",
+          "bytes": 2933
+        },
+        "klasser": [
+          {
+            "varde": 5,
+            "namn": "Viktigt",
+            "farg": true
+          },
+          {
+            "varde": 10,
+            "namn": "Mycket viktigt",
+            "farg": true
+          }
+        ]
+      },
+      "kontinuerlig": {
+        "fil": "kartor/nmk/knot-vuxen-vastkusten-2024/v2/radata.tif",
+        "sha256": "8eea8daff260637c2aeb16e1380ae7cbdb6f56c28be8fca1cfc219ac0f739341",
+        "kallaSha256": "5a758bb8d13da23e284a5c95c9bce9edd2ea1b14d0ff9cbc4ca5514248d825e6",
+        "bytes": 9048,
+        "epsg": 4326,
+        "upplosning": 3712,
+        "vy3006": {
+          "fil": "kartor/nmk/knot-vuxen-vastkusten-2024/v2/radata_3006.tif",
+          "sha256": "69be5e2ab9ce39485e1d4ebb73cca0cd469e7004e0d0cbf477407f503a0061b3",
+          "bytes": 15427
+        },
+        "skala": 1000,
+        "enhet": "sannolikhet",
+        "min": 0.037,
+        "max": 0.857,
+        "p2": 0.042,
+        "p98": 0.815
+      }
+    }
+  ]
+}

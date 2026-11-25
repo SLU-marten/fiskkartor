@@ -1,0 +1,117 @@
+{
+  "id": "bergskadda-vuxen-vastkusten-2024",
+  "titel": "Bergskädda vuxen västkusten",
+  "projekt": "NMK",
+  "kalla": "Nationell marin kartering (Trål)",
+  "citering": "Erlandsson m fl (opubl)",
+  "ar": 2024,
+  "kvalitet": "Grov upplösning då tråldragen är långa. Provtagning inte designad för rumsliga analyser, där tillgänglig data mellan geografiska områden kan variera mellan år. Data från många år ingår dock i modelleringen.",
+  "licens": "CC BY 4.0",
+  "kontakt": "SLU-Aqua-fiskkartor@slu.se",
+  "sprak": "sv",
+  "doi": null,
+  "farg": "YlGnBu",
+  "visas": true,
+  "metadata": "kartor/nmk/bergskadda-vuxen-vastkusten-2024/metadata.json",
+  "falt": {
+    "art": "Bergskädda",
+    "vetenskapligt_namn": "Microstomus kitt",
+    "livsstadium": "Vuxen",
+    "havsomrade": "Västerhavet",
+    "omrade": "Västkusten >30 m",
+    "rodlista": "LC",
+    "fiskbarometern": "Följer internationella havsforskningsrådet (Ices) fångstråd. Arter bedöms tillhöra kategorin \"bestånd med begränsad tillgänlig information\"",
+    "simblasa": "Nej",
+    "livsmiljo": "Bentisk (bottenlevande)"
+  },
+  "aktuellVersion": 2,
+  "versioner": [
+    {
+      "version": 1,
+      "publicerad": "2026-11-25",
+      "klassad": {
+        "fil": "kartor/nmk/bergskadda-vuxen-vastkusten-2024/v1/visning.tif",
+        "sha256": "8739bf3cf216d7f3d74f3fb21f2e11814ba86665800140e6ef10571ddf4a9b8b",
+        "kallaSha256": "bacfde29a0331e1162b9f2d20ad1420e2772348080a4394d55c543589b14c98b",
+        "bytes": 2229,
+        "epsg": 4326,
+        "upplosning": 3712,
+        "klasser": [
+          {
+            "varde": 5,
+            "namn": "Viktigt",
+            "farg": true
+          },
+          {
+            "varde": 10,
+            "namn": "Mycket viktigt",
+            "farg": true
+          }
+        ]
+      },
+      "kontinuerlig": {
+        "fil": "kartor/nmk/bergskadda-vuxen-vastkusten-2024/v1/radata.tif",
+        "sha256": "2c82a2b73fa7d0a79ba337582a64c4eacfd08799299b9509c7ae5dabd516ad74",
+        "kallaSha256": "f57d037b96ce60461e9bb4c4cc5c8434e06f95894c1b1934fe52567886481f81",
+        "bytes": 9005,
+        "epsg": 4326,
+        "upplosning": 3712,
+        "skala": 1000,
+        "enhet": "sannolikhet",
+        "min": 0.027,
+        "max": 0.791,
+        "p2": 0.033,
+        "p98": 0.712
+      }
+    },
+    {
+      "version": 2,
+      "publicerad": "2026-11-25",
+      "format": 2,
+      "klassad": {
+        "fil": "kartor/nmk/bergskadda-vuxen-vastkusten-2024/v2/visning.tif",
+        "sha256": "4c2974cb3d493e931eee4b2a548638b82fd56636a839eb8461690714e347fa52",
+        "kallaSha256": "bacfde29a0331e1162b9f2d20ad1420e2772348080a4394d55c543589b14c98b",
+        "bytes": 1843,
+        "epsg": 4326,
+        "upplosning": 3712,
+        "vy3006": {
+          "fil": "kartor/nmk/bergskadda-vuxen-vastkusten-2024/v2/visning_3006.tif",
+          "sha256": "51a2f25ec8d5c32530b284e791c48a689079756918bc683e0ef4c42f1a24209d",
+          "bytes": 3279
+        },
+        "klasser": [
+          {
+            "varde": 5,
+            "namn": "Viktigt",
+            "farg": true
+          },
+          {
+            "varde": 10,
+            "namn": "Mycket viktigt",
+            "farg": true
+          }
+        ]
+      },
+      "kontinuerlig": {
+        "fil": "kartor/nmk/bergskadda-vuxen-vastkusten-2024/v2/radata.tif",
+        "sha256": "2c82a2b73fa7d0a79ba337582a64c4eacfd08799299b9509c7ae5dabd516ad74",
+        "kallaSha256": "f57d037b96ce60461e9bb4c4cc5c8434e06f95894c1b1934fe52567886481f81",
+        "bytes": 9005,
+        "epsg": 4326,
+        "upplosning": 3712,
+        "vy3006": {
+          "fil": "kartor/nmk/bergskadda-vuxen-vastkusten-2024/v2/radata_3006.tif",
+          "sha256": "de6ac02ece962022883f206647f6f8da5c8d12a1d13cabaee454f8665a65d9ea",
+          "bytes": 15234
+        },
+        "skala": 1000,
+        "enhet": "sannolikhet",
+        "min": 0.027,
+        "max": 0.791,
+        "p2": 0.033,
+        "p98": 0.712
+      }
+    }
+  ]
+}

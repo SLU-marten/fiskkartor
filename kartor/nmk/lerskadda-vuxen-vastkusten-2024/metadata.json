@@ -1,0 +1,117 @@
+{
+  "id": "lerskadda-vuxen-vastkusten-2024",
+  "titel": "Lerskädda vuxen västkusten",
+  "projekt": "NMK",
+  "kalla": "Nationell marin kartering (Trål)",
+  "citering": "Erlandsson m fl (opubl)",
+  "ar": 2024,
+  "kvalitet": "Grov upplösning då tråldragen är långa. Provtagning inte designad för rumsliga analyser, där tillgänglig data mellan geografiska områden kan variera mellan år. Data från många år ingår dock i modelleringen.",
+  "licens": "CC BY 4.0",
+  "kontakt": "SLU-Aqua-fiskkartor@slu.se",
+  "sprak": "sv",
+  "doi": null,
+  "farg": "YlGnBu",
+  "visas": true,
+  "metadata": "kartor/nmk/lerskadda-vuxen-vastkusten-2024/metadata.json",
+  "falt": {
+    "art": "Lerskädda",
+    "vetenskapligt_namn": "Hippoglossoides platessoides",
+    "livsstadium": "Vuxen",
+    "havsomrade": "Västerhavet",
+    "omrade": "Västkusten >30 m",
+    "rodlista": "LC",
+    "fiskbarometern": null,
+    "simblasa": "Nej",
+    "livsmiljo": "Bentisk (bottenlevande)"
+  },
+  "aktuellVersion": 2,
+  "versioner": [
+    {
+      "version": 1,
+      "publicerad": "2026-11-25",
+      "klassad": {
+        "fil": "kartor/nmk/lerskadda-vuxen-vastkusten-2024/v1/visning.tif",
+        "sha256": "487bb2241bfe55cdb0a6b2e939cd3e0d6bfdbaafcaa4dcfc8b654ff1c49d16ae",
+        "kallaSha256": "e275b234963658cdcea8961f1d670d9d9c7911c471c9208b39624166a2becd59",
+        "bytes": 2344,
+        "epsg": 4326,
+        "upplosning": 3712,
+        "klasser": [
+          {
+            "varde": 5,
+            "namn": "Viktigt",
+            "farg": true
+          },
+          {
+            "varde": 10,
+            "namn": "Mycket viktigt",
+            "farg": true
+          }
+        ]
+      },
+      "kontinuerlig": {
+        "fil": "kartor/nmk/lerskadda-vuxen-vastkusten-2024/v1/radata.tif",
+        "sha256": "42a701939c5c98d0ffa25193a93a7ee194bfa902cbe9cafecf03ea7f62e84458",
+        "kallaSha256": "96c03e40eea4688e9bfb55a7992ab6ff750a77f894e5fd882c790e83ccad6e22",
+        "bytes": 9107,
+        "epsg": 4326,
+        "upplosning": 3712,
+        "skala": 1000,
+        "enhet": "sannolikhet",
+        "min": 0.064,
+        "max": 0.879,
+        "p2": 0.075,
+        "p98": 0.798
+      }
+    },
+    {
+      "version": 2,
+      "publicerad": "2026-11-25",
+      "format": 2,
+      "klassad": {
+        "fil": "kartor/nmk/lerskadda-vuxen-vastkusten-2024/v2/visning.tif",
+        "sha256": "3124da76987b448a26368949b94b0a31aa0aa2e1115dca412118416ce3d5267c",
+        "kallaSha256": "e275b234963658cdcea8961f1d670d9d9c7911c471c9208b39624166a2becd59",
+        "bytes": 1960,
+        "epsg": 4326,
+        "upplosning": 3712,
+        "vy3006": {
+          "fil": "kartor/nmk/lerskadda-vuxen-vastkusten-2024/v2/visning_3006.tif",
+          "sha256": "b8e7286f0b862af8e427920bb43400b7c07ab738a3a8250872d1cd57a17595ea",
+          "bytes": 3400
+        },
+        "klasser": [
+          {
+            "varde": 5,
+            "namn": "Viktigt",
+            "farg": true
+          },
+          {
+            "varde": 10,
+            "namn": "Mycket viktigt",
+            "farg": true
+          }
+        ]
+      },
+      "kontinuerlig": {
+        "fil": "kartor/nmk/lerskadda-vuxen-vastkusten-2024/v2/radata.tif",
+        "sha256": "42a701939c5c98d0ffa25193a93a7ee194bfa902cbe9cafecf03ea7f62e84458",
+        "kallaSha256": "96c03e40eea4688e9bfb55a7992ab6ff750a77f894e5fd882c790e83ccad6e22",
+        "bytes": 9107,
+        "epsg": 4326,
+        "upplosning": 3712,
+        "vy3006": {
+          "fil": "kartor/nmk/lerskadda-vuxen-vastkusten-2024/v2/radata_3006.tif",
+          "sha256": "d4a139fd944596c40783e122117c62dc828421039abbc643b8e743703d9c0b35",
+          "bytes": 15659
+        },
+        "skala": 1000,
+        "enhet": "sannolikhet",
+        "min": 0.064,
+        "max": 0.879,
+        "p2": 0.075,
+        "p98": 0.798
+      }
+    }
+  ]
+}

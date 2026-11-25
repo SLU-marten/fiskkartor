@@ -1,0 +1,117 @@
+{
+  "id": "gadda-uppvaxt-ostkusten-2021",
+  "titel": "Gädda uppväxt ostkusten",
+  "projekt": "NMK",
+  "kalla": "Nationell marin kartering (Yngel)",
+  "citering": "Erlandsson m fl 2021",
+  "ar": 2021,
+  "kvalitet": "Omfattar inte Öland, Gotland och Skåne pga databrist. Prediktion ner till 6m djup.",
+  "licens": "CC BY 4.0",
+  "kontakt": "SLU-Aqua-fiskkartor@slu.se",
+  "sprak": "sv",
+  "doi": null,
+  "farg": "YlGnBu",
+  "visas": true,
+  "metadata": "kartor/nmk/gadda-uppvaxt-ostkusten-2021/metadata.json",
+  "falt": {
+    "art": "Gädda",
+    "vetenskapligt_namn": "Esox lucius",
+    "livsstadium": "Uppväxt",
+    "havsomrade": "Östersjön",
+    "omrade": "Östersjön och Bottniska viken, djup 0-6 m. Omfattar ej Gotland, Öland eller stora delar av Skåne län.",
+    "rodlista": "LC",
+    "fiskbarometern": "Beståndet av gädda i Egentliga Östersjön är mycket sannolikt inte inom biologiskt säkra gränser. I Bottniska viken kan beståndet ej bedömas på grund av otillräcklig data.",
+    "simblasa": "Ja",
+    "livsmiljo": "Demersal (kustnära)"
+  },
+  "aktuellVersion": 2,
+  "versioner": [
+    {
+      "version": 1,
+      "publicerad": "2026-11-25",
+      "klassad": {
+        "fil": "kartor/nmk/gadda-uppvaxt-ostkusten-2021/v1/visning.tif",
+        "sha256": "9d4652876a2753f0f2249837b52b410e5719d3a6c2f8a3c6ba2be80f05ef8b6a",
+        "kallaSha256": "d2a8a24c1a0d588b69923baffba8444a0e23d4f481b12f2e229b7264d98d05a6",
+        "bytes": 58685,
+        "epsg": 3035,
+        "upplosning": 250,
+        "klasser": [
+          {
+            "varde": 5,
+            "namn": "Viktigt",
+            "farg": true
+          },
+          {
+            "varde": 10,
+            "namn": "Mycket viktigt",
+            "farg": true
+          }
+        ]
+      },
+      "kontinuerlig": {
+        "fil": "kartor/nmk/gadda-uppvaxt-ostkusten-2021/v1/radata.tif",
+        "sha256": "937673f4a6ae9e5a2331db1c33d272bb21ac165b7bf723ebbb432678bd348c81",
+        "kallaSha256": "840428572e1726062e682fb68d97d038fe8f5302a81da3d85af867a147d1ab80",
+        "bytes": 476895,
+        "epsg": 3035,
+        "upplosning": 250,
+        "skala": 1000,
+        "enhet": "sannolikhet",
+        "min": 0.021,
+        "max": 0.94,
+        "p2": 0.022,
+        "p98": 0.527
+      }
+    },
+    {
+      "version": 2,
+      "publicerad": "2026-11-25",
+      "format": 2,
+      "klassad": {
+        "fil": "kartor/nmk/gadda-uppvaxt-ostkusten-2021/v2/visning.tif",
+        "sha256": "09cdefe6fd33f031fe33a5fcc1be56b040c8f70611fd10f901e4cec1e5e03d52",
+        "kallaSha256": "d2a8a24c1a0d588b69923baffba8444a0e23d4f481b12f2e229b7264d98d05a6",
+        "bytes": 57781,
+        "epsg": 3035,
+        "upplosning": 250,
+        "vy3006": {
+          "fil": "kartor/nmk/gadda-uppvaxt-ostkusten-2021/v2/visning_3006.tif",
+          "sha256": "7401bf1060b8b0772ee671bd93f9ac806588196fdb5478fd0d95575c23ad04d8",
+          "bytes": 171149
+        },
+        "klasser": [
+          {
+            "varde": 5,
+            "namn": "Viktigt",
+            "farg": true
+          },
+          {
+            "varde": 10,
+            "namn": "Mycket viktigt",
+            "farg": true
+          }
+        ]
+      },
+      "kontinuerlig": {
+        "fil": "kartor/nmk/gadda-uppvaxt-ostkusten-2021/v2/radata.tif",
+        "sha256": "937673f4a6ae9e5a2331db1c33d272bb21ac165b7bf723ebbb432678bd348c81",
+        "kallaSha256": "840428572e1726062e682fb68d97d038fe8f5302a81da3d85af867a147d1ab80",
+        "bytes": 476895,
+        "epsg": 3035,
+        "upplosning": 250,
+        "vy3006": {
+          "fil": "kartor/nmk/gadda-uppvaxt-ostkusten-2021/v2/radata_3006.tif",
+          "sha256": "7610aaf7487298b249b045163aad0303eacd23812622da34910c3e57e4f705fa",
+          "bytes": 1218367
+        },
+        "skala": 1000,
+        "enhet": "sannolikhet",
+        "min": 0.021,
+        "max": 0.94,
+        "p2": 0.022,
+        "p98": 0.527
+      }
+    }
+  ]
+}

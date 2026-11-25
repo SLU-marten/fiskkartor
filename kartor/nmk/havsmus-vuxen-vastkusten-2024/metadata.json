@@ -1,0 +1,117 @@
+{
+  "id": "havsmus-vuxen-vastkusten-2024",
+  "titel": "Havsmus vuxen västkusten",
+  "projekt": "NMK",
+  "kalla": "Nationell marin kartering (Trål)",
+  "citering": "Erlandsson m fl (opubl)",
+  "ar": 2024,
+  "kvalitet": "Grov upplösning då tråldragen är långa. Provtagning inte designad för rumsliga analyser, där tillgänglig data mellan geografiska områden kan variera mellan år. Data från många år ingår dock i modelleringen.",
+  "licens": "CC BY 4.0",
+  "kontakt": "SLU-Aqua-fiskkartor@slu.se",
+  "sprak": "sv",
+  "doi": null,
+  "farg": "YlGnBu",
+  "visas": true,
+  "metadata": "kartor/nmk/havsmus-vuxen-vastkusten-2024/metadata.json",
+  "falt": {
+    "art": "Havsmus",
+    "vetenskapligt_namn": "Chimaera monstrosa",
+    "livsstadium": "Vuxen",
+    "havsomrade": "Västerhavet",
+    "omrade": "Västkusten >30 m",
+    "rodlista": "VU",
+    "fiskbarometern": null,
+    "simblasa": "Nej",
+    "livsmiljo": "Demersal (Bottennära)"
+  },
+  "aktuellVersion": 2,
+  "versioner": [
+    {
+      "version": 1,
+      "publicerad": "2026-11-25",
+      "klassad": {
+        "fil": "kartor/nmk/havsmus-vuxen-vastkusten-2024/v1/visning.tif",
+        "sha256": "4a31b08f22be8d8eb737939f640aa2dbf4e60d449b94b3a7de52022c48d54f0c",
+        "kallaSha256": "7e0b0e024fd796ed791f957f11ce9439ab96b54a813b4dc830a6bd6363f07110",
+        "bytes": 1757,
+        "epsg": 4326,
+        "upplosning": 3712,
+        "klasser": [
+          {
+            "varde": 5,
+            "namn": "Viktigt",
+            "farg": true
+          },
+          {
+            "varde": 10,
+            "namn": "Mycket viktigt",
+            "farg": true
+          }
+        ]
+      },
+      "kontinuerlig": {
+        "fil": "kartor/nmk/havsmus-vuxen-vastkusten-2024/v1/radata.tif",
+        "sha256": "435805507d2f47466b4567811978dff0a23efa291167838b7f489667de13f9df",
+        "kallaSha256": "8ac91f457d935bd8c575a8fc48c02d8df3d3b3e645048b7fa56659e7a4a0e982",
+        "bytes": 4532,
+        "epsg": 4326,
+        "upplosning": 3712,
+        "skala": 1000,
+        "enhet": "sannolikhet",
+        "min": 0.015,
+        "max": 0.89,
+        "p2": 0.015,
+        "p98": 0.723
+      }
+    },
+    {
+      "version": 2,
+      "publicerad": "2026-11-25",
+      "format": 2,
+      "klassad": {
+        "fil": "kartor/nmk/havsmus-vuxen-vastkusten-2024/v2/visning.tif",
+        "sha256": "6f83a4b39581d115fedec52912195f2121a29204c3d85c2388ed35b404c69887",
+        "kallaSha256": "7e0b0e024fd796ed791f957f11ce9439ab96b54a813b4dc830a6bd6363f07110",
+        "bytes": 1375,
+        "epsg": 4326,
+        "upplosning": 3712,
+        "vy3006": {
+          "fil": "kartor/nmk/havsmus-vuxen-vastkusten-2024/v2/visning_3006.tif",
+          "sha256": "bb0f852db5f35fee6dc3b78dfee7cd6a927a2fe6c09164c084c2381eb5b9913b",
+          "bytes": 2294
+        },
+        "klasser": [
+          {
+            "varde": 5,
+            "namn": "Viktigt",
+            "farg": true
+          },
+          {
+            "varde": 10,
+            "namn": "Mycket viktigt",
+            "farg": true
+          }
+        ]
+      },
+      "kontinuerlig": {
+        "fil": "kartor/nmk/havsmus-vuxen-vastkusten-2024/v2/radata.tif",
+        "sha256": "435805507d2f47466b4567811978dff0a23efa291167838b7f489667de13f9df",
+        "kallaSha256": "8ac91f457d935bd8c575a8fc48c02d8df3d3b3e645048b7fa56659e7a4a0e982",
+        "bytes": 4532,
+        "epsg": 4326,
+        "upplosning": 3712,
+        "vy3006": {
+          "fil": "kartor/nmk/havsmus-vuxen-vastkusten-2024/v2/radata_3006.tif",
+          "sha256": "575db51d7e1d2d7a75973b5c95c42b8d404a3d71d6b21e557eee7f293766360a",
+          "bytes": 7657
+        },
+        "skala": 1000,
+        "enhet": "sannolikhet",
+        "min": 0.015,
+        "max": 0.89,
+        "p2": 0.015,
+        "p98": 0.723
+      }
+    }
+  ]
+}

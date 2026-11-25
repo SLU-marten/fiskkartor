@@ -1,0 +1,117 @@
+{
+  "id": "smaspigg-uppvaxt-ostkusten-2021",
+  "titel": "Småspigg uppväxt ostkusten",
+  "projekt": "NMK",
+  "kalla": "Nationell marin kartering (Yngel)",
+  "citering": "Erlandsson m fl 2021",
+  "ar": 2021,
+  "kvalitet": "Omfattar inte Öland, Gotland och Skåne pga databrist. Prediktion ner till 6m djup.",
+  "licens": "CC BY 4.0",
+  "kontakt": "SLU-Aqua-fiskkartor@slu.se",
+  "sprak": "sv",
+  "doi": null,
+  "farg": "YlGnBu",
+  "visas": true,
+  "metadata": "kartor/nmk/smaspigg-uppvaxt-ostkusten-2021/metadata.json",
+  "falt": {
+    "art": "Småspigg",
+    "vetenskapligt_namn": "Pungitius pungitius",
+    "livsstadium": "Uppväxt",
+    "havsomrade": "Östersjön",
+    "omrade": "Östersjön och Bottniska viken, djup 0-6 m. Omfattar ej Gotland, Öland eller stora delar av Skåne län.",
+    "rodlista": "LC",
+    "fiskbarometern": null,
+    "simblasa": "Ja",
+    "livsmiljo": "Demersal (kustnära)"
+  },
+  "aktuellVersion": 2,
+  "versioner": [
+    {
+      "version": 1,
+      "publicerad": "2026-11-25",
+      "klassad": {
+        "fil": "kartor/nmk/smaspigg-uppvaxt-ostkusten-2021/v1/visning.tif",
+        "sha256": "61df60385cc5e50aeb4237c4fa17d0fe880d4b0b0f021320732e703631439f50",
+        "kallaSha256": "afb6d04faa0b881933b277cba60581909352e458ec3b1ee393d577295ae84e06",
+        "bytes": 78622,
+        "epsg": 3035,
+        "upplosning": 250,
+        "klasser": [
+          {
+            "varde": 5,
+            "namn": "Viktigt",
+            "farg": true
+          },
+          {
+            "varde": 10,
+            "namn": "Mycket viktigt",
+            "farg": true
+          }
+        ]
+      },
+      "kontinuerlig": {
+        "fil": "kartor/nmk/smaspigg-uppvaxt-ostkusten-2021/v1/radata.tif",
+        "sha256": "d498fb2bfb96c7fc0935cca15ad1a3136a0b3957c06b9bdcfec90f2fa2b4e3e2",
+        "kallaSha256": "6f97f30dd2072ef75ae2d62df04263dbc6a05baf5c41ff033a5d80f78b18a95b",
+        "bytes": 446465,
+        "epsg": 3035,
+        "upplosning": 250,
+        "skala": 1000,
+        "enhet": "sannolikhet",
+        "min": 0.016,
+        "max": 0.888,
+        "p2": 0.017,
+        "p98": 0.413
+      }
+    },
+    {
+      "version": 2,
+      "publicerad": "2026-11-25",
+      "format": 2,
+      "klassad": {
+        "fil": "kartor/nmk/smaspigg-uppvaxt-ostkusten-2021/v2/visning.tif",
+        "sha256": "75cee2a086f2a1eae19936ae46905c79bce65d461633c8d4afa586d3c49c0597",
+        "kallaSha256": "afb6d04faa0b881933b277cba60581909352e458ec3b1ee393d577295ae84e06",
+        "bytes": 77318,
+        "epsg": 3035,
+        "upplosning": 250,
+        "vy3006": {
+          "fil": "kartor/nmk/smaspigg-uppvaxt-ostkusten-2021/v2/visning_3006.tif",
+          "sha256": "acd9cedbbe3604ba13e609f3c275bad1738b778c424ceb62073af2e73a36b905",
+          "bytes": 213401
+        },
+        "klasser": [
+          {
+            "varde": 5,
+            "namn": "Viktigt",
+            "farg": true
+          },
+          {
+            "varde": 10,
+            "namn": "Mycket viktigt",
+            "farg": true
+          }
+        ]
+      },
+      "kontinuerlig": {
+        "fil": "kartor/nmk/smaspigg-uppvaxt-ostkusten-2021/v2/radata.tif",
+        "sha256": "d498fb2bfb96c7fc0935cca15ad1a3136a0b3957c06b9bdcfec90f2fa2b4e3e2",
+        "kallaSha256": "6f97f30dd2072ef75ae2d62df04263dbc6a05baf5c41ff033a5d80f78b18a95b",
+        "bytes": 446465,
+        "epsg": 3035,
+        "upplosning": 250,
+        "vy3006": {
+          "fil": "kartor/nmk/smaspigg-uppvaxt-ostkusten-2021/v2/radata_3006.tif",
+          "sha256": "e3208f19a0693a3c60c9fa67f460fce3ca17beb858b69abef4e604c0cbfb9a2b",
+          "bytes": 1158470
+        },
+        "skala": 1000,
+        "enhet": "sannolikhet",
+        "min": 0.016,
+        "max": 0.888,
+        "p2": 0.017,
+        "p98": 0.413
+      }
+    }
+  ]
+}

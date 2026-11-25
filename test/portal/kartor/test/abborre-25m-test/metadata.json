@@ -1,0 +1,69 @@
+{
+  "id": "abborre-25m-test",
+  "titel": "Abborre, 25 m-test (hela kusten)",
+  "projekt": "Test",
+  "kalla": "Test (25 m)",
+  "citering": "Test 2026",
+  "ar": 2026,
+  "kvalitet": null,
+  "licens": "CC BY 4.0",
+  "kontakt": "SLU-Aqua-fiskkartor@slu.se",
+  "sprak": "sv",
+  "doi": null,
+  "farg": "YlGnBu",
+  "visas": true,
+  "metadata": "kartor/test/abborre-25m-test/metadata.json",
+  "falt": {
+    "art": "Abborre",
+    "vetenskapligt_namn": null,
+    "livsstadium": "lek",
+    "havsomrade": "Östersjön",
+    "omrade": null,
+    "rodlista": null,
+    "fiskbarometern": null,
+    "simblasa": null,
+    "livsmiljo": null
+  },
+  "aktuellVersion": 1,
+  "versioner": [
+    {
+      "version": 1,
+      "publicerad": "2026-11-25",
+      "format": 2,
+      "klassad": {
+        "fil": "kartor/test/abborre-25m-test/v1/visning.tif",
+        "sha256": "d8c3bc135621c7358e0cb0d8bc7baf5ded4ec69a4bc38c0528f7a05e1bbe5080",
+        "kallaSha256": "a4678f0fab29c5a54e62d091e9d3623b9cd94f31bc558dfbb0f69566caf3b423",
+        "bytes": 3416007,
+        "epsg": 3006,
+        "upplosning": 25,
+        "klasser": [
+          {
+            "varde": 5,
+            "namn": "Viktigt",
+            "farg": true
+          },
+          {
+            "varde": 10,
+            "namn": "Mycket viktigt",
+            "farg": true
+          }
+        ]
+      },
+      "kontinuerlig": {
+        "fil": "kartor/test/abborre-25m-test/v1/radata.tif",
+        "sha256": "f7ec6291babb11391d5f8c11d1e3992519347bd362e8255488b45e748aef4cd4",
+        "kallaSha256": "f7ec6291babb11391d5f8c11d1e3992519347bd362e8255488b45e748aef4cd4",
+        "bytes": 58896272,
+        "epsg": 3006,
+        "upplosning": 25,
+        "skala": 1000,
+        "enhet": "sannolikhet",
+        "min": 0.006,
+        "max": 0.967,
+        "p2": 0.028,
+        "p98": 0.518
+      }
+    }
+  ]
+}

@@ -1,0 +1,117 @@
+{
+  "id": "ruda-uppvaxt-ostkusten-2021",
+  "titel": "Ruda uppväxt ostkusten",
+  "projekt": "NMK",
+  "kalla": "Nationell marin kartering (Yngel)",
+  "citering": "Erlandsson m fl 2021",
+  "ar": 2021,
+  "kvalitet": "Omfattar inte Öland, Gotland och Skåne pga databrist. Prediktion ner till 6m djup.",
+  "licens": "CC BY 4.0",
+  "kontakt": "SLU-Aqua-fiskkartor@slu.se",
+  "sprak": "sv",
+  "doi": null,
+  "farg": "YlGnBu",
+  "visas": true,
+  "metadata": "kartor/nmk/ruda-uppvaxt-ostkusten-2021/metadata.json",
+  "falt": {
+    "art": "Ruda",
+    "vetenskapligt_namn": "Carassius carassius",
+    "livsstadium": "Uppväxt",
+    "havsomrade": "Östersjön",
+    "omrade": "Östersjön och Bottniska viken, djup 0-6 m. Omfattar ej Gotland, Öland eller stora delar av Skåne län.",
+    "rodlista": "LC",
+    "fiskbarometern": null,
+    "simblasa": "Ja",
+    "livsmiljo": "Demersal (kustnära)"
+  },
+  "aktuellVersion": 2,
+  "versioner": [
+    {
+      "version": 1,
+      "publicerad": "2026-11-25",
+      "klassad": {
+        "fil": "kartor/nmk/ruda-uppvaxt-ostkusten-2021/v1/visning.tif",
+        "sha256": "6380a3d63fba19de7f35d62e7e317443835aee23abe4a8bc8cf2e2dad61ec044",
+        "kallaSha256": "2c6ad6de36a3c92b511d61bbdbe1abe73fd382280e66efb6c560391066cdaaf4",
+        "bytes": 74112,
+        "epsg": 3035,
+        "upplosning": 250,
+        "klasser": [
+          {
+            "varde": 5,
+            "namn": "Viktigt",
+            "farg": true
+          },
+          {
+            "varde": 10,
+            "namn": "Mycket viktigt",
+            "farg": true
+          }
+        ]
+      },
+      "kontinuerlig": {
+        "fil": "kartor/nmk/ruda-uppvaxt-ostkusten-2021/v1/radata.tif",
+        "sha256": "ace07ecf339750750a709de72114827e7cc8d8c3fedec65d467b7875183ebc7e",
+        "kallaSha256": "a458485c143ce65164a792e59632f8e24ffedbf48acd060f941607a256c2ac41",
+        "bytes": 267833,
+        "epsg": 3035,
+        "upplosning": 250,
+        "skala": 1000,
+        "enhet": "sannolikhet",
+        "min": 0.002,
+        "max": 0.584,
+        "p2": 0.002,
+        "p98": 0.042
+      }
+    },
+    {
+      "version": 2,
+      "publicerad": "2026-11-25",
+      "format": 2,
+      "klassad": {
+        "fil": "kartor/nmk/ruda-uppvaxt-ostkusten-2021/v2/visning.tif",
+        "sha256": "9dc4f04de220928edca417495124a9969fde45304ae204144d539f13a33cf86c",
+        "kallaSha256": "2c6ad6de36a3c92b511d61bbdbe1abe73fd382280e66efb6c560391066cdaaf4",
+        "bytes": 73346,
+        "epsg": 3035,
+        "upplosning": 250,
+        "vy3006": {
+          "fil": "kartor/nmk/ruda-uppvaxt-ostkusten-2021/v2/visning_3006.tif",
+          "sha256": "5e95e55a957147e7179683039c616b0cbf8b814275033bcb49f0d0c37b0aada3",
+          "bytes": 203476
+        },
+        "klasser": [
+          {
+            "varde": 5,
+            "namn": "Viktigt",
+            "farg": true
+          },
+          {
+            "varde": 10,
+            "namn": "Mycket viktigt",
+            "farg": true
+          }
+        ]
+      },
+      "kontinuerlig": {
+        "fil": "kartor/nmk/ruda-uppvaxt-ostkusten-2021/v2/radata.tif",
+        "sha256": "ace07ecf339750750a709de72114827e7cc8d8c3fedec65d467b7875183ebc7e",
+        "kallaSha256": "a458485c143ce65164a792e59632f8e24ffedbf48acd060f941607a256c2ac41",
+        "bytes": 267833,
+        "epsg": 3035,
+        "upplosning": 250,
+        "vy3006": {
+          "fil": "kartor/nmk/ruda-uppvaxt-ostkusten-2021/v2/radata_3006.tif",
+          "sha256": "50d121d4959f5bf8371dd40ec4c9361f77043f82d243dd0783bda8024829816a",
+          "bytes": 792773
+        },
+        "skala": 1000,
+        "enhet": "sannolikhet",
+        "min": 0.002,
+        "max": 0.584,
+        "p2": 0.002,
+        "p98": 0.042
+      }
+    }
+  ]
+}

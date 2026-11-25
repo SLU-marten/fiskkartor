@@ -1,0 +1,117 @@
+{
+  "id": "kolmule-vuxen-vastkusten-2024",
+  "titel": "Kolmule vuxen västkusten",
+  "projekt": "NMK",
+  "kalla": "Nationell marin kartering (Trål)",
+  "citering": "Erlandsson m fl (opubl)",
+  "ar": 2024,
+  "kvalitet": "Grov upplösning då tråldragen är långa. Provtagning inte designad för rumsliga analyser, där tillgänglig data mellan geografiska områden kan variera mellan år. Data från många år ingår dock i modelleringen.",
+  "licens": "CC BY 4.0",
+  "kontakt": "SLU-Aqua-fiskkartor@slu.se",
+  "sprak": "sv",
+  "doi": null,
+  "farg": "YlGnBu",
+  "visas": true,
+  "metadata": "kartor/nmk/kolmule-vuxen-vastkusten-2024/metadata.json",
+  "falt": {
+    "art": "Kolmule",
+    "vetenskapligt_namn": "Micromesistius poutassou",
+    "livsstadium": "Vuxen",
+    "havsomrade": "Västerhavet",
+    "omrade": "Västkusten >30 m",
+    "rodlista": null,
+    "fiskbarometern": "Ices bedömer att beståndets fiskeridödlighet ligger över det referensvärde som ger ett hållbart fiske över tid men att beståndets lekbiomassa ligger över det gränsvärde som inte bör underskridas.",
+    "simblasa": "Ja",
+    "livsmiljo": "Bentopelagisk"
+  },
+  "aktuellVersion": 2,
+  "versioner": [
+    {
+      "version": 1,
+      "publicerad": "2026-11-25",
+      "klassad": {
+        "fil": "kartor/nmk/kolmule-vuxen-vastkusten-2024/v1/visning.tif",
+        "sha256": "5b33d5fc6d80a6d4a92ef59dd9454dfe27676af80ed0e72a5117b963817af954",
+        "kallaSha256": "943c28a0ec08e75da71284a31c5cc4b4d6c91323d46fc8bff3d5534c2d3f505f",
+        "bytes": 1780,
+        "epsg": 4326,
+        "upplosning": 3712,
+        "klasser": [
+          {
+            "varde": 5,
+            "namn": "Viktigt",
+            "farg": true
+          },
+          {
+            "varde": 10,
+            "namn": "Mycket viktigt",
+            "farg": true
+          }
+        ]
+      },
+      "kontinuerlig": {
+        "fil": "kartor/nmk/kolmule-vuxen-vastkusten-2024/v1/radata.tif",
+        "sha256": "a21cc2a5c557c9c49f58e528196654dd30cc8229a3acb983d85b23d1e0fd278a",
+        "kallaSha256": "ebc25de5a228f4e8393bdc35d2958b8bc59a574ab88596a6f61649710e0322e9",
+        "bytes": 5524,
+        "epsg": 4326,
+        "upplosning": 3712,
+        "skala": 1000,
+        "enhet": "sannolikhet",
+        "min": 0.012,
+        "max": 0.968,
+        "p2": 0.012,
+        "p98": 0.931
+      }
+    },
+    {
+      "version": 2,
+      "publicerad": "2026-11-25",
+      "format": 2,
+      "klassad": {
+        "fil": "kartor/nmk/kolmule-vuxen-vastkusten-2024/v2/visning.tif",
+        "sha256": "ffc957bb06ee21faad870638d763ae471d6ec07840588aa2c571df8b7f0916fa",
+        "kallaSha256": "943c28a0ec08e75da71284a31c5cc4b4d6c91323d46fc8bff3d5534c2d3f505f",
+        "bytes": 1398,
+        "epsg": 4326,
+        "upplosning": 3712,
+        "vy3006": {
+          "fil": "kartor/nmk/kolmule-vuxen-vastkusten-2024/v2/visning_3006.tif",
+          "sha256": "57f3e8e581f6ead696e6ac85412decf46340512bce3ad9cf742af6f8126326cf",
+          "bytes": 2351
+        },
+        "klasser": [
+          {
+            "varde": 5,
+            "namn": "Viktigt",
+            "farg": true
+          },
+          {
+            "varde": 10,
+            "namn": "Mycket viktigt",
+            "farg": true
+          }
+        ]
+      },
+      "kontinuerlig": {
+        "fil": "kartor/nmk/kolmule-vuxen-vastkusten-2024/v2/radata.tif",
+        "sha256": "a21cc2a5c557c9c49f58e528196654dd30cc8229a3acb983d85b23d1e0fd278a",
+        "kallaSha256": "ebc25de5a228f4e8393bdc35d2958b8bc59a574ab88596a6f61649710e0322e9",
+        "bytes": 5524,
+        "epsg": 4326,
+        "upplosning": 3712,
+        "vy3006": {
+          "fil": "kartor/nmk/kolmule-vuxen-vastkusten-2024/v2/radata_3006.tif",
+          "sha256": "08fcd887d5a437425039b52e1979875ed2e8376177b96e777816c960fa73a34a",
+          "bytes": 9340
+        },
+        "skala": 1000,
+        "enhet": "sannolikhet",
+        "min": 0.012,
+        "max": 0.968,
+        "p2": 0.012,
+        "p98": 0.931
+      }
+    }
+  ]
+}

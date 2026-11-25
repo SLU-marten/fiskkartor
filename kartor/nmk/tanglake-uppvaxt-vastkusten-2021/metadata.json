@@ -1,0 +1,117 @@
+{
+  "id": "tanglake-uppvaxt-vastkusten-2021",
+  "titel": "Tånglake uppväxt västkusten",
+  "projekt": "NMK",
+  "kalla": "Nationell marin kartering (Ryssja)",
+  "citering": "Fredriksson m fl 2021",
+  "ar": 2021,
+  "kvalitet": "Provtagning inte designad för rumsliga analyser, där tillgänglig data mellan geografiska områden kan variera mellan år. Provtagninsdata från flera olika år ingår dock i modelleringen.",
+  "licens": "CC BY 4.0",
+  "kontakt": "SLU-Aqua-fiskkartor@slu.se",
+  "sprak": "sv",
+  "doi": null,
+  "farg": "YlGnBu",
+  "visas": true,
+  "metadata": "kartor/nmk/tanglake-uppvaxt-vastkusten-2021/metadata.json",
+  "falt": {
+    "art": "Tånglake",
+    "vetenskapligt_namn": "Zoarces viviparus",
+    "livsstadium": "Uppväxt",
+    "havsomrade": "Västerhavet",
+    "omrade": "Västkusten, djup 0-30m.",
+    "rodlista": "LC",
+    "fiskbarometern": null,
+    "simblasa": "Nej",
+    "livsmiljo": "Demersal (Bottennära)"
+  },
+  "aktuellVersion": 2,
+  "versioner": [
+    {
+      "version": 1,
+      "publicerad": "2026-11-25",
+      "klassad": {
+        "fil": "kartor/nmk/tanglake-uppvaxt-vastkusten-2021/v1/visning.tif",
+        "sha256": "49142f0d5326aac42f66a7672ebb37989c9cf4cd6ac093501482a84e9c29b8bf",
+        "kallaSha256": "75050cfcad62d68ddde1cc89876ac09f76ff36fd438f57737b54fcd0f38cbb32",
+        "bytes": 18132,
+        "epsg": 25833,
+        "upplosning": 250,
+        "klasser": [
+          {
+            "varde": 5,
+            "namn": "Viktigt",
+            "farg": true
+          },
+          {
+            "varde": 10,
+            "namn": "Mycket viktigt",
+            "farg": true
+          }
+        ]
+      },
+      "kontinuerlig": {
+        "fil": "kartor/nmk/tanglake-uppvaxt-vastkusten-2021/v1/radata.tif",
+        "sha256": "6a7289b995b86f23b9f3944c0081ff7e81f721a9a62fe42c5a4c3020c2ecc455",
+        "kallaSha256": "f8268bc2d68a32daf04650bf5d678860b177863f962fab70ff1cc638ff1fe2ed",
+        "bytes": 197423,
+        "epsg": 25833,
+        "upplosning": 250,
+        "skala": 1000,
+        "enhet": "sannolikhet",
+        "min": 0.055,
+        "max": 0.928,
+        "p2": 0.055,
+        "p98": 0.884
+      }
+    },
+    {
+      "version": 2,
+      "publicerad": "2026-11-25",
+      "format": 2,
+      "klassad": {
+        "fil": "kartor/nmk/tanglake-uppvaxt-vastkusten-2021/v2/visning.tif",
+        "sha256": "f61b626b776fac2f50a01232b9eae355298f595139d5d74b6376269c6b9c0e0c",
+        "kallaSha256": "75050cfcad62d68ddde1cc89876ac09f76ff36fd438f57737b54fcd0f38cbb32",
+        "bytes": 17877,
+        "epsg": 25833,
+        "upplosning": 250,
+        "vy3006": {
+          "fil": "kartor/nmk/tanglake-uppvaxt-vastkusten-2021/v2/visning_3006.tif",
+          "sha256": "1c8684ba52d8b5ffb60c7142b72ab15aad7d1766c3008b1bd7859c18835be59e",
+          "bytes": 34539
+        },
+        "klasser": [
+          {
+            "varde": 5,
+            "namn": "Viktigt",
+            "farg": true
+          },
+          {
+            "varde": 10,
+            "namn": "Mycket viktigt",
+            "farg": true
+          }
+        ]
+      },
+      "kontinuerlig": {
+        "fil": "kartor/nmk/tanglake-uppvaxt-vastkusten-2021/v2/radata.tif",
+        "sha256": "6a7289b995b86f23b9f3944c0081ff7e81f721a9a62fe42c5a4c3020c2ecc455",
+        "kallaSha256": "f8268bc2d68a32daf04650bf5d678860b177863f962fab70ff1cc638ff1fe2ed",
+        "bytes": 197423,
+        "epsg": 25833,
+        "upplosning": 250,
+        "vy3006": {
+          "fil": "kartor/nmk/tanglake-uppvaxt-vastkusten-2021/v2/radata_3006.tif",
+          "sha256": "a6b79ce9c3f4e76a055f034dd36a41821c6eb8148c496bfa53dc573a1c905d5b",
+          "bytes": 374077
+        },
+        "skala": 1000,
+        "enhet": "sannolikhet",
+        "min": 0.055,
+        "max": 0.928,
+        "p2": 0.055,
+        "p98": 0.884
+      }
+    }
+  ]
+}

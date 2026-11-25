@@ -1,0 +1,117 @@
+{
+  "id": "elritsa-uppvaxt-ostkusten-2021",
+  "titel": "Elritsa uppväxt ostkusten",
+  "projekt": "NMK",
+  "kalla": "Nationell marin kartering (Yngel)",
+  "citering": "Erlandsson m fl 2021",
+  "ar": 2021,
+  "kvalitet": "Omfattar inte Öland, Gotland och Skåne pga databrist. Prediktion ner till 6m djup.",
+  "licens": "CC BY 4.0",
+  "kontakt": "SLU-Aqua-fiskkartor@slu.se",
+  "sprak": "sv",
+  "doi": null,
+  "farg": "YlGnBu",
+  "visas": true,
+  "metadata": "kartor/nmk/elritsa-uppvaxt-ostkusten-2021/metadata.json",
+  "falt": {
+    "art": "Elritsa",
+    "vetenskapligt_namn": "Phoxinus phoxinus",
+    "livsstadium": "Uppväxt",
+    "havsomrade": "Östersjön",
+    "omrade": "Östersjön och Bottniska viken, djup 0-6 m. Omfattar ej Gotland, Öland eller stora delar av Skåne län.",
+    "rodlista": "LC",
+    "fiskbarometern": null,
+    "simblasa": "Ja",
+    "livsmiljo": "Demersal (kustnära)"
+  },
+  "aktuellVersion": 2,
+  "versioner": [
+    {
+      "version": 1,
+      "publicerad": "2026-11-25",
+      "klassad": {
+        "fil": "kartor/nmk/elritsa-uppvaxt-ostkusten-2021/v1/visning.tif",
+        "sha256": "b5f122cb9cad3644c17c51ce312d9701f6f0c3644f60747ae50cdd53d58d3da2",
+        "kallaSha256": "1e83cb208ddb0cb2d8b055ea460bbc471f5ba6fc76da7b352f5d54c0b57c3bac",
+        "bytes": 92837,
+        "epsg": 3035,
+        "upplosning": 250,
+        "klasser": [
+          {
+            "varde": 5,
+            "namn": "Viktigt",
+            "farg": true
+          },
+          {
+            "varde": 10,
+            "namn": "Mycket viktigt",
+            "farg": true
+          }
+        ]
+      },
+      "kontinuerlig": {
+        "fil": "kartor/nmk/elritsa-uppvaxt-ostkusten-2021/v1/radata.tif",
+        "sha256": "edaf77830aec5be60f122996ed38592e6635dc2b887114a37eb8950c9a6c7a6d",
+        "kallaSha256": "c421a2702f93ed7eea963a7e41c9f6344f77e66b7b7b565f602929aaf9f8ae04",
+        "bytes": 449719,
+        "epsg": 3035,
+        "upplosning": 250,
+        "skala": 1000,
+        "enhet": "sannolikhet",
+        "min": 0.005,
+        "max": 0.939,
+        "p2": 0.005,
+        "p98": 0.494
+      }
+    },
+    {
+      "version": 2,
+      "publicerad": "2026-11-25",
+      "format": 2,
+      "klassad": {
+        "fil": "kartor/nmk/elritsa-uppvaxt-ostkusten-2021/v2/visning.tif",
+        "sha256": "e59bc5bb02051876e802ee3728cc373b4a9a30c4daaa84e0a9cff88c2e53ffae",
+        "kallaSha256": "1e83cb208ddb0cb2d8b055ea460bbc471f5ba6fc76da7b352f5d54c0b57c3bac",
+        "bytes": 91087,
+        "epsg": 3035,
+        "upplosning": 250,
+        "vy3006": {
+          "fil": "kartor/nmk/elritsa-uppvaxt-ostkusten-2021/v2/visning_3006.tif",
+          "sha256": "32567fb58fa9926d66dacb14fb194b3ad04504e203a44a0fcf2e878ebec51539",
+          "bytes": 242653
+        },
+        "klasser": [
+          {
+            "varde": 5,
+            "namn": "Viktigt",
+            "farg": true
+          },
+          {
+            "varde": 10,
+            "namn": "Mycket viktigt",
+            "farg": true
+          }
+        ]
+      },
+      "kontinuerlig": {
+        "fil": "kartor/nmk/elritsa-uppvaxt-ostkusten-2021/v2/radata.tif",
+        "sha256": "edaf77830aec5be60f122996ed38592e6635dc2b887114a37eb8950c9a6c7a6d",
+        "kallaSha256": "c421a2702f93ed7eea963a7e41c9f6344f77e66b7b7b565f602929aaf9f8ae04",
+        "bytes": 449719,
+        "epsg": 3035,
+        "upplosning": 250,
+        "vy3006": {
+          "fil": "kartor/nmk/elritsa-uppvaxt-ostkusten-2021/v2/radata_3006.tif",
+          "sha256": "6204732c885572180abe48c19ba61a1fe768ddfcd524ed0a64b35b142628a9cd",
+          "bytes": 1163435
+        },
+        "skala": 1000,
+        "enhet": "sannolikhet",
+        "min": 0.005,
+        "max": 0.939,
+        "p2": 0.005,
+        "p98": 0.494
+      }
+    }
+  ]
+}

@@ -1,0 +1,117 @@
+{
+  "id": "berggylta-uppvaxt-vastkusten-2021",
+  "titel": "Berggylta uppväxt västkusten",
+  "projekt": "NMK",
+  "kalla": "Nationell marin kartering (Ryssja)",
+  "citering": "Fredriksson m fl 2021",
+  "ar": 2021,
+  "kvalitet": "Provtagning inte designad för rumsliga analyser, där tillgänglig data mellan geografiska områden kan variera mellan år. Provtagninsdata från flera olika år ingår dock i modelleringen.",
+  "licens": "CC BY 4.0",
+  "kontakt": "SLU-Aqua-fiskkartor@slu.se",
+  "sprak": "sv",
+  "doi": null,
+  "farg": "YlGnBu",
+  "visas": true,
+  "metadata": "kartor/nmk/berggylta-uppvaxt-vastkusten-2021/metadata.json",
+  "falt": {
+    "art": "Berggylta",
+    "vetenskapligt_namn": "Labrus bergylta",
+    "livsstadium": "Uppväxt",
+    "havsomrade": "Västerhavet",
+    "omrade": "Västkusten, djup 0-30m.",
+    "rodlista": "LC",
+    "fiskbarometern": null,
+    "simblasa": "Ja",
+    "livsmiljo": "Demersal (bottennära)"
+  },
+  "aktuellVersion": 2,
+  "versioner": [
+    {
+      "version": 1,
+      "publicerad": "2026-11-25",
+      "klassad": {
+        "fil": "kartor/nmk/berggylta-uppvaxt-vastkusten-2021/v1/visning.tif",
+        "sha256": "470166cdf1d7b86a0eee07f77005bd0d3065f8b7e7374c208cf19abf15fa4e2f",
+        "kallaSha256": "ecb7c6ea3667265d5151097febaa9d9153bbbc9ea0c3419b92c3310cfd2f6ad2",
+        "bytes": 23034,
+        "epsg": 25833,
+        "upplosning": 250,
+        "klasser": [
+          {
+            "varde": 5,
+            "namn": "Viktigt",
+            "farg": true
+          },
+          {
+            "varde": 10,
+            "namn": "Mycket viktigt",
+            "farg": true
+          }
+        ]
+      },
+      "kontinuerlig": {
+        "fil": "kartor/nmk/berggylta-uppvaxt-vastkusten-2021/v1/radata.tif",
+        "sha256": "a6adb1229ae799d974fdd192a8b365094f9c8012bb4a9c1cbd9c38c1aacf8a90",
+        "kallaSha256": "8f4f136a19b14396df037454f8acdd7b8ac376bc459c067ef021f43ac9db231c",
+        "bytes": 161424,
+        "epsg": 25833,
+        "upplosning": 250,
+        "skala": 1000,
+        "enhet": "sannolikhet",
+        "min": 0.01,
+        "max": 0.654,
+        "p2": 0.01,
+        "p98": 0.249
+      }
+    },
+    {
+      "version": 2,
+      "publicerad": "2026-11-25",
+      "format": 2,
+      "klassad": {
+        "fil": "kartor/nmk/berggylta-uppvaxt-vastkusten-2021/v2/visning.tif",
+        "sha256": "16703d426bd5f83d338c1f3ffb3461e599c6b83a1447b96bcda870b9276887c6",
+        "kallaSha256": "ecb7c6ea3667265d5151097febaa9d9153bbbc9ea0c3419b92c3310cfd2f6ad2",
+        "bytes": 22667,
+        "epsg": 25833,
+        "upplosning": 250,
+        "vy3006": {
+          "fil": "kartor/nmk/berggylta-uppvaxt-vastkusten-2021/v2/visning_3006.tif",
+          "sha256": "1fcc0e8f3c634507e09df8bd88d84452418a4d9309f72851c3ed78774de06eb6",
+          "bytes": 44606
+        },
+        "klasser": [
+          {
+            "varde": 5,
+            "namn": "Viktigt",
+            "farg": true
+          },
+          {
+            "varde": 10,
+            "namn": "Mycket viktigt",
+            "farg": true
+          }
+        ]
+      },
+      "kontinuerlig": {
+        "fil": "kartor/nmk/berggylta-uppvaxt-vastkusten-2021/v2/radata.tif",
+        "sha256": "a6adb1229ae799d974fdd192a8b365094f9c8012bb4a9c1cbd9c38c1aacf8a90",
+        "kallaSha256": "8f4f136a19b14396df037454f8acdd7b8ac376bc459c067ef021f43ac9db231c",
+        "bytes": 161424,
+        "epsg": 25833,
+        "upplosning": 250,
+        "vy3006": {
+          "fil": "kartor/nmk/berggylta-uppvaxt-vastkusten-2021/v2/radata_3006.tif",
+          "sha256": "c9445655daebff6a8f28917a13a116086b6c31a6bd2dcc1ef7049d00d2fcebf7",
+          "bytes": 305115
+        },
+        "skala": 1000,
+        "enhet": "sannolikhet",
+        "min": 0.01,
+        "max": 0.654,
+        "p2": 0.01,
+        "p98": 0.249
+      }
+    }
+  ]
+}

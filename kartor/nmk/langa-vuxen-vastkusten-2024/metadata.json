@@ -1,0 +1,117 @@
+{
+  "id": "langa-vuxen-vastkusten-2024",
+  "titel": "Långa vuxen västkusten",
+  "projekt": "NMK",
+  "kalla": "Nationell marin kartering (Trål)",
+  "citering": "Erlandsson m fl (opubl)",
+  "ar": 2024,
+  "kvalitet": "Grov upplösning då tråldragen är långa. Provtagning inte designad för rumsliga analyser, där tillgänglig data mellan geografiska områden kan variera mellan år. Data från många år ingår dock i modelleringen.",
+  "licens": "CC BY 4.0",
+  "kontakt": "SLU-Aqua-fiskkartor@slu.se",
+  "sprak": "sv",
+  "doi": null,
+  "farg": "YlGnBu",
+  "visas": true,
+  "metadata": "kartor/nmk/langa-vuxen-vastkusten-2024/metadata.json",
+  "falt": {
+    "art": "Långa",
+    "vetenskapligt_namn": "Molva molva",
+    "livsstadium": "Vuxen",
+    "havsomrade": "Västerhavet",
+    "omrade": "Västkusten >30 m",
+    "rodlista": "EN",
+    "fiskbarometern": "Ices bedömer att fisketrycket på beståndet ligger över referensfärdet för fiskeridödlighet som ger ett hållbart fiske över tid.",
+    "simblasa": "Ja",
+    "livsmiljo": "Demersal (bottennära)"
+  },
+  "aktuellVersion": 2,
+  "versioner": [
+    {
+      "version": 1,
+      "publicerad": "2026-11-25",
+      "klassad": {
+        "fil": "kartor/nmk/langa-vuxen-vastkusten-2024/v1/visning.tif",
+        "sha256": "261e2dbcd5864a2b1f1236489fbd3153fd9b006e08c35f8c0786e0926204dac2",
+        "kallaSha256": "b39081f5ec6843b119d6052c3fa6fe368b59bdb9e07d62215cabded39d57a1de",
+        "bytes": 1978,
+        "epsg": 4326,
+        "upplosning": 3712,
+        "klasser": [
+          {
+            "varde": 5,
+            "namn": "Viktigt",
+            "farg": true
+          },
+          {
+            "varde": 10,
+            "namn": "Mycket viktigt",
+            "farg": true
+          }
+        ]
+      },
+      "kontinuerlig": {
+        "fil": "kartor/nmk/langa-vuxen-vastkusten-2024/v1/radata.tif",
+        "sha256": "bf4eba0b9b264a0e59d1fd2e49115f534c838c4ede74613c9a1ef9b31d3a9311",
+        "kallaSha256": "dff4852dc866b836f7cfbc8b43e17de203dd7bcab5b3e4e84078f8c1a276c414",
+        "bytes": 8593,
+        "epsg": 4326,
+        "upplosning": 3712,
+        "skala": 1000,
+        "enhet": "sannolikhet",
+        "min": 0.019,
+        "max": 0.848,
+        "p2": 0.02,
+        "p98": 0.77
+      }
+    },
+    {
+      "version": 2,
+      "publicerad": "2026-11-25",
+      "format": 2,
+      "klassad": {
+        "fil": "kartor/nmk/langa-vuxen-vastkusten-2024/v2/visning.tif",
+        "sha256": "cf0b19a6b1c734f0616fe275409592c91aeb3760fd0063462761cfd4e4d04c36",
+        "kallaSha256": "b39081f5ec6843b119d6052c3fa6fe368b59bdb9e07d62215cabded39d57a1de",
+        "bytes": 1598,
+        "epsg": 4326,
+        "upplosning": 3712,
+        "vy3006": {
+          "fil": "kartor/nmk/langa-vuxen-vastkusten-2024/v2/visning_3006.tif",
+          "sha256": "f3c4ba6cbbc6e4e8a368547d0ddc1151c50158b9ebd79c0debaf4775c3206ca7",
+          "bytes": 2782
+        },
+        "klasser": [
+          {
+            "varde": 5,
+            "namn": "Viktigt",
+            "farg": true
+          },
+          {
+            "varde": 10,
+            "namn": "Mycket viktigt",
+            "farg": true
+          }
+        ]
+      },
+      "kontinuerlig": {
+        "fil": "kartor/nmk/langa-vuxen-vastkusten-2024/v2/radata.tif",
+        "sha256": "bf4eba0b9b264a0e59d1fd2e49115f534c838c4ede74613c9a1ef9b31d3a9311",
+        "kallaSha256": "dff4852dc866b836f7cfbc8b43e17de203dd7bcab5b3e4e84078f8c1a276c414",
+        "bytes": 8593,
+        "epsg": 4326,
+        "upplosning": 3712,
+        "vy3006": {
+          "fil": "kartor/nmk/langa-vuxen-vastkusten-2024/v2/radata_3006.tif",
+          "sha256": "8d3c2502ed824946328a55984940b5f1e8475ca468af2305ead0d4a93b08d75e",
+          "bytes": 14599
+        },
+        "skala": 1000,
+        "enhet": "sannolikhet",
+        "min": 0.019,
+        "max": 0.848,
+        "p2": 0.02,
+        "p98": 0.77
+      }
+    }
+  ]
+}

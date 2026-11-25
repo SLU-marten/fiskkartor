@@ -1,0 +1,117 @@
+{
+  "id": "lyrtorsk-uppvaxt-vastkusten-2021",
+  "titel": "Lyrtorsk uppväxt västkusten",
+  "projekt": "NMK",
+  "kalla": "Nationell marin kartering (Ryssja)",
+  "citering": "Fredriksson m fl 2021",
+  "ar": 2021,
+  "kvalitet": "Provtagning inte designad för rumsliga analyser, där tillgänglig data mellan geografiska områden kan variera mellan år. Provtagninsdata från flera olika år ingår dock i modelleringen.",
+  "licens": "CC BY 4.0",
+  "kontakt": "SLU-Aqua-fiskkartor@slu.se",
+  "sprak": "sv",
+  "doi": null,
+  "farg": "YlGnBu",
+  "visas": true,
+  "metadata": "kartor/nmk/lyrtorsk-uppvaxt-vastkusten-2021/metadata.json",
+  "falt": {
+    "art": "Lyrtorsk",
+    "vetenskapligt_namn": "Pollachius pollachius",
+    "livsstadium": "Uppväxt",
+    "havsomrade": "Västerhavet",
+    "omrade": "Västkusten, djup 0-30m.",
+    "rodlista": "CR",
+    "fiskbarometern": "Beståndet av lyrtorsk klassas av Ices som ett \"bestånd för vilka endast landningsdata finns tillgängliga\" och då det saknas information om storlek och exploatering är rådet avv fångsterna bör minska, enligt försiktighetsprincipen.",
+    "simblasa": "Ja",
+    "livsmiljo": "Pelagisk (Frivattenlevande)"
+  },
+  "aktuellVersion": 2,
+  "versioner": [
+    {
+      "version": 1,
+      "publicerad": "2026-11-25",
+      "klassad": {
+        "fil": "kartor/nmk/lyrtorsk-uppvaxt-vastkusten-2021/v1/visning.tif",
+        "sha256": "8ad4c7fd37f9f4dee50cf9c92e3c87d45184fdb54796aa4e82b9c36c4c525f85",
+        "kallaSha256": "7a0f4e2b5c8cb05840199fd23356029dffd4c4498cddb6c1b1a24965bf0a764d",
+        "bytes": 31730,
+        "epsg": 25833,
+        "upplosning": 250,
+        "klasser": [
+          {
+            "varde": 5,
+            "namn": "Viktigt",
+            "farg": true
+          },
+          {
+            "varde": 10,
+            "namn": "Mycket viktigt",
+            "farg": true
+          }
+        ]
+      },
+      "kontinuerlig": {
+        "fil": "kartor/nmk/lyrtorsk-uppvaxt-vastkusten-2021/v1/radata.tif",
+        "sha256": "0aeaba83df1502ed8c99488df72c6f90f73c13e297f3bbc055a5336720fd0bee",
+        "kallaSha256": "8767c0420bd36ae4ef905eb945b6b8893d7143cda9e726c190f3dbc226c523ac",
+        "bytes": 185081,
+        "epsg": 25833,
+        "upplosning": 250,
+        "skala": 1000,
+        "enhet": "sannolikhet",
+        "min": 0.008,
+        "max": 0.667,
+        "p2": 0.008,
+        "p98": 0.349
+      }
+    },
+    {
+      "version": 2,
+      "publicerad": "2026-11-25",
+      "format": 2,
+      "klassad": {
+        "fil": "kartor/nmk/lyrtorsk-uppvaxt-vastkusten-2021/v2/visning.tif",
+        "sha256": "d3abcdbac82c0361cd8822a35ee54ae0f8e7e65d6f60dec60fc157d845697108",
+        "kallaSha256": "7a0f4e2b5c8cb05840199fd23356029dffd4c4498cddb6c1b1a24965bf0a764d",
+        "bytes": 31678,
+        "epsg": 25833,
+        "upplosning": 250,
+        "vy3006": {
+          "fil": "kartor/nmk/lyrtorsk-uppvaxt-vastkusten-2021/v2/visning_3006.tif",
+          "sha256": "15ccd25d259a57bc2a3cd6311fd26bcdca095c80f38e63d411cb14fa4bb5af36",
+          "bytes": 62435
+        },
+        "klasser": [
+          {
+            "varde": 5,
+            "namn": "Viktigt",
+            "farg": true
+          },
+          {
+            "varde": 10,
+            "namn": "Mycket viktigt",
+            "farg": true
+          }
+        ]
+      },
+      "kontinuerlig": {
+        "fil": "kartor/nmk/lyrtorsk-uppvaxt-vastkusten-2021/v2/radata.tif",
+        "sha256": "0aeaba83df1502ed8c99488df72c6f90f73c13e297f3bbc055a5336720fd0bee",
+        "kallaSha256": "8767c0420bd36ae4ef905eb945b6b8893d7143cda9e726c190f3dbc226c523ac",
+        "bytes": 185081,
+        "epsg": 25833,
+        "upplosning": 250,
+        "vy3006": {
+          "fil": "kartor/nmk/lyrtorsk-uppvaxt-vastkusten-2021/v2/radata_3006.tif",
+          "sha256": "144e2a2492044b9aafd4800e9f9176b4ec5060dffd2302d34e5bca98baefe4a0",
+          "bytes": 347943
+        },
+        "skala": 1000,
+        "enhet": "sannolikhet",
+        "min": 0.008,
+        "max": 0.667,
+        "p2": 0.008,
+        "p98": 0.349
+      }
+    }
+  ]
+}

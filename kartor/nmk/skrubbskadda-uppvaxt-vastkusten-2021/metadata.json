@@ -1,0 +1,117 @@
+{
+  "id": "skrubbskadda-uppvaxt-vastkusten-2021",
+  "titel": "Skrubbskädda uppväxt västkusten",
+  "projekt": "NMK",
+  "kalla": "Nationell marin kartering (Ryssja)",
+  "citering": "Fredriksson m fl 2021",
+  "ar": 2021,
+  "kvalitet": "Provtagning inte designad för rumsliga analyser, där tillgänglig data mellan geografiska områden kan variera mellan år. Provtagninsdata från flera olika år ingår dock i modelleringen.",
+  "licens": "CC BY 4.0",
+  "kontakt": "SLU-Aqua-fiskkartor@slu.se",
+  "sprak": "sv",
+  "doi": null,
+  "farg": "YlGnBu",
+  "visas": true,
+  "metadata": "kartor/nmk/skrubbskadda-uppvaxt-vastkusten-2021/metadata.json",
+  "falt": {
+    "art": "Skrubbskädda",
+    "vetenskapligt_namn": "Platichthys flesus",
+    "livsstadium": "Uppväxt",
+    "havsomrade": "Västerhavet",
+    "omrade": "Västkusten, djup 0-30m.",
+    "rodlista": "LC",
+    "fiskbarometern": "Ices bedömning för beståndet av skrubbskädda i Skagerrak och Kattegatt är att fisketrycket på beståndet ligger under referensvärdet för fiskeridödlighet som ger ett hållbart fiske över tid och att beståndets storlek ligger under tröskelvärdet som inte bör underskridas. För beståndet av skrubbskädda i Öresund har Ices ingen officiell rådgivning men preliminära uppgifter från WGBFAS 2023 tyder bå att biomassa ökar och att fisketrycket på beståndet ligger under referensvärdet för fiskeridödlighet som ger ett hållbart fiske över tid.",
+    "simblasa": "Nej",
+    "livsmiljo": "Bentisk (bottenlevande)"
+  },
+  "aktuellVersion": 2,
+  "versioner": [
+    {
+      "version": 1,
+      "publicerad": "2026-11-25",
+      "klassad": {
+        "fil": "kartor/nmk/skrubbskadda-uppvaxt-vastkusten-2021/v1/visning.tif",
+        "sha256": "e1b7028fa346c9380207fab12002b3f19218d56336fdce4617f52fa26d75548b",
+        "kallaSha256": "89e1a8c60ff533e1979eef586aa5050d3fca958aadb9425b86f0a4b032f1f200",
+        "bytes": 23429,
+        "epsg": 25833,
+        "upplosning": 250,
+        "klasser": [
+          {
+            "varde": 5,
+            "namn": "Viktigt",
+            "farg": true
+          },
+          {
+            "varde": 10,
+            "namn": "Mycket viktigt",
+            "farg": true
+          }
+        ]
+      },
+      "kontinuerlig": {
+        "fil": "kartor/nmk/skrubbskadda-uppvaxt-vastkusten-2021/v1/radata.tif",
+        "sha256": "3cebc12c4524ff09cbf8a8259b45c0f3421b1ec2940509994b57562180e3b3cb",
+        "kallaSha256": "39263c3e526f16f2677d6720428320de937ebaaa77096b765b33430321a905e7",
+        "bytes": 177655,
+        "epsg": 25833,
+        "upplosning": 250,
+        "skala": 1000,
+        "enhet": "sannolikhet",
+        "min": 0.056,
+        "max": 0.884,
+        "p2": 0.057,
+        "p98": 0.738
+      }
+    },
+    {
+      "version": 2,
+      "publicerad": "2026-11-25",
+      "format": 2,
+      "klassad": {
+        "fil": "kartor/nmk/skrubbskadda-uppvaxt-vastkusten-2021/v2/visning.tif",
+        "sha256": "02e041a8aa938400657790d470c4eab11eb179c204f7adaa820ce8b63d21a47d",
+        "kallaSha256": "89e1a8c60ff533e1979eef586aa5050d3fca958aadb9425b86f0a4b032f1f200",
+        "bytes": 23025,
+        "epsg": 25833,
+        "upplosning": 250,
+        "vy3006": {
+          "fil": "kartor/nmk/skrubbskadda-uppvaxt-vastkusten-2021/v2/visning_3006.tif",
+          "sha256": "894c0a6934173a9e1e53ee1e7ac3265aa6dd6135b5dbf43017e607f8217121ef",
+          "bytes": 44125
+        },
+        "klasser": [
+          {
+            "varde": 5,
+            "namn": "Viktigt",
+            "farg": true
+          },
+          {
+            "varde": 10,
+            "namn": "Mycket viktigt",
+            "farg": true
+          }
+        ]
+      },
+      "kontinuerlig": {
+        "fil": "kartor/nmk/skrubbskadda-uppvaxt-vastkusten-2021/v2/radata.tif",
+        "sha256": "3cebc12c4524ff09cbf8a8259b45c0f3421b1ec2940509994b57562180e3b3cb",
+        "kallaSha256": "39263c3e526f16f2677d6720428320de937ebaaa77096b765b33430321a905e7",
+        "bytes": 177655,
+        "epsg": 25833,
+        "upplosning": 250,
+        "vy3006": {
+          "fil": "kartor/nmk/skrubbskadda-uppvaxt-vastkusten-2021/v2/radata_3006.tif",
+          "sha256": "0677fe6e815bd530c6de2cea28e9d6c762339cb9d99dd31d5bae7b87cddc0534",
+          "bytes": 338907
+        },
+        "skala": 1000,
+        "enhet": "sannolikhet",
+        "min": 0.056,
+        "max": 0.884,
+        "p2": 0.057,
+        "p98": 0.738
+      }
+    }
+  ]
+}

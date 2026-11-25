@@ -1,0 +1,117 @@
+{
+  "id": "torsk-over-20-cm-vastkusten-2021",
+  "titel": "Torsk >20 cm västkusten",
+  "projekt": "NMK",
+  "kalla": "Nationell marin kartering (Ryssja)",
+  "citering": "Fredriksson m fl 2021",
+  "ar": 2021,
+  "kvalitet": "Provtagning inte designad för rumsliga analyser, där tillgänglig data mellan geografiska områden kan variera mellan år. Provtagninsdata från flera olika år ingår dock i modelleringen.",
+  "licens": "CC BY 4.0",
+  "kontakt": "SLU-Aqua-fiskkartor@slu.se",
+  "sprak": "sv",
+  "doi": null,
+  "farg": "YlGnBu",
+  "visas": true,
+  "metadata": "kartor/nmk/torsk-over-20-cm-vastkusten-2021/metadata.json",
+  "falt": {
+    "art": "Torsk",
+    "vetenskapligt_namn": "Gadus morhua",
+    "livsstadium": "Uppväxt",
+    "havsomrade": "Västerhavet",
+    "omrade": "Västkusten, djup 0-30m.",
+    "rodlista": "VU",
+    "fiskbarometern": "Ices bedöming för nordsjölekande torsk i Skagerrak anger att fiskedödligheten ligger över referensvärdet för fiskeridödlighet som ger ett hållbart fiske över tid. För torsk som leker i Kattegatt kan Ices inte bedöma beståndsstatus eller fiskedödliget eftersom data saknas. Lekbiomassan i Kattegatt bedöms vara under samliga referenspunkter ohc Kattegattorskens har minskat kraftigt sedan 2015.",
+    "simblasa": "Ja",
+    "livsmiljo": "Demersal (bottennära)"
+  },
+  "aktuellVersion": 2,
+  "versioner": [
+    {
+      "version": 1,
+      "publicerad": "2026-11-25",
+      "klassad": {
+        "fil": "kartor/nmk/torsk-over-20-cm-vastkusten-2021/v1/visning.tif",
+        "sha256": "9bf95e05592c3bcd473a4f1c5ac450d8270f612b6d78e686640183137b5e7947",
+        "kallaSha256": "86d6d20f9717c0b33b84c376593ef83b4e2575ff17b59a1f8b1f957afa943b76",
+        "bytes": 24763,
+        "epsg": 25833,
+        "upplosning": 250,
+        "klasser": [
+          {
+            "varde": 5,
+            "namn": "Viktigt",
+            "farg": true
+          },
+          {
+            "varde": 10,
+            "namn": "Mycket viktigt",
+            "farg": true
+          }
+        ]
+      },
+      "kontinuerlig": {
+        "fil": "kartor/nmk/torsk-over-20-cm-vastkusten-2021/v1/radata.tif",
+        "sha256": "89670cb9f9fd3af6c1608722b9670831186fd31f9b66f932878085494b48f11c",
+        "kallaSha256": "80a8f78885fcd3a3dc8c5189dd7aebdffcb1d8fc1d25896861064cad2447548c",
+        "bytes": 227242,
+        "epsg": 25833,
+        "upplosning": 250,
+        "skala": 1000,
+        "enhet": "sannolikhet",
+        "min": 0.087,
+        "max": 0.841,
+        "p2": 0.127,
+        "p98": 0.745
+      }
+    },
+    {
+      "version": 2,
+      "publicerad": "2026-11-25",
+      "format": 2,
+      "klassad": {
+        "fil": "kartor/nmk/torsk-over-20-cm-vastkusten-2021/v2/visning.tif",
+        "sha256": "83c9bbe8351321bf744ac911c4277acf716ba2bf6c216bdbddcd89e2072272d8",
+        "kallaSha256": "86d6d20f9717c0b33b84c376593ef83b4e2575ff17b59a1f8b1f957afa943b76",
+        "bytes": 24526,
+        "epsg": 25833,
+        "upplosning": 250,
+        "vy3006": {
+          "fil": "kartor/nmk/torsk-over-20-cm-vastkusten-2021/v2/visning_3006.tif",
+          "sha256": "59cee6fc3cb5493ac1e2634c4f55fb5c4d248e4ea3f8998a2f9a113245e564d6",
+          "bytes": 47271
+        },
+        "klasser": [
+          {
+            "varde": 5,
+            "namn": "Viktigt",
+            "farg": true
+          },
+          {
+            "varde": 10,
+            "namn": "Mycket viktigt",
+            "farg": true
+          }
+        ]
+      },
+      "kontinuerlig": {
+        "fil": "kartor/nmk/torsk-over-20-cm-vastkusten-2021/v2/radata.tif",
+        "sha256": "89670cb9f9fd3af6c1608722b9670831186fd31f9b66f932878085494b48f11c",
+        "kallaSha256": "80a8f78885fcd3a3dc8c5189dd7aebdffcb1d8fc1d25896861064cad2447548c",
+        "bytes": 227242,
+        "epsg": 25833,
+        "upplosning": 250,
+        "vy3006": {
+          "fil": "kartor/nmk/torsk-over-20-cm-vastkusten-2021/v2/radata_3006.tif",
+          "sha256": "1f2cac779fde9e20e261f5e8d2c035b50bbadd8a7591ac6926791788d2fe8d06",
+          "bytes": 430342
+        },
+        "skala": 1000,
+        "enhet": "sannolikhet",
+        "min": 0.087,
+        "max": 0.841,
+        "p2": 0.127,
+        "p98": 0.745
+      }
+    }
+  ]
+}

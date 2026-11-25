@@ -1,0 +1,117 @@
+{
+  "id": "hummer-uppvaxt-vastkusten-2021",
+  "titel": "Hummer uppväxt västkusten",
+  "projekt": "NMK",
+  "kalla": "Nationell marin kartering (Ryssja)",
+  "citering": "Fredriksson m fl 2021",
+  "ar": 2021,
+  "kvalitet": "Provtagning inte designad för rumsliga analyser, där tillgänglig data mellan geografiska områden kan variera mellan år. Provtagninsdata från flera olika år ingår dock i modelleringen.",
+  "licens": "CC BY 4.0",
+  "kontakt": "SLU-Aqua-fiskkartor@slu.se",
+  "sprak": "sv",
+  "doi": null,
+  "farg": "YlGnBu",
+  "visas": true,
+  "metadata": "kartor/nmk/hummer-uppvaxt-vastkusten-2021/metadata.json",
+  "falt": {
+    "art": "Hummer",
+    "vetenskapligt_namn": "Homarus gammarus",
+    "livsstadium": "Uppväxt",
+    "havsomrade": "Västerhavet",
+    "omrade": "Västkusten, djup 0-30m.",
+    "rodlista": "LC",
+    "fiskbarometern": "Beståndet av europeisk hummer är mycket sannolikt inte inom biologiskt säkra gränser i Skagerrak och Kattegatt.",
+    "simblasa": null,
+    "livsmiljo": null
+  },
+  "aktuellVersion": 2,
+  "versioner": [
+    {
+      "version": 1,
+      "publicerad": "2026-11-25",
+      "klassad": {
+        "fil": "kartor/nmk/hummer-uppvaxt-vastkusten-2021/v1/visning.tif",
+        "sha256": "e9e62502200cb585adf9546d3896c6c302d3726ead2bc533f9d304e1a5d1e441",
+        "kallaSha256": "5809bb2649b36bcfc62d0cef893aea76a292c8618727f63f162aaf56f6ebb779",
+        "bytes": 24437,
+        "epsg": 25833,
+        "upplosning": 250,
+        "klasser": [
+          {
+            "varde": 5,
+            "namn": "Viktigt",
+            "farg": true
+          },
+          {
+            "varde": 10,
+            "namn": "Mycket viktigt",
+            "farg": true
+          }
+        ]
+      },
+      "kontinuerlig": {
+        "fil": "kartor/nmk/hummer-uppvaxt-vastkusten-2021/v1/radata.tif",
+        "sha256": "1dc63d44a78788b912d5243ad77e3e6e58354654f53a76e7f3e94b44fcf2f8f7",
+        "kallaSha256": "dabc8a6ff85f6d3adc93a7775cec61dfc6edec55ebe8f78070c4f59efded0db0",
+        "bytes": 179344,
+        "epsg": 25833,
+        "upplosning": 250,
+        "skala": 1000,
+        "enhet": "sannolikhet",
+        "min": 0.004,
+        "max": 0.803,
+        "p2": 0.004,
+        "p98": 0.369
+      }
+    },
+    {
+      "version": 2,
+      "publicerad": "2026-11-25",
+      "format": 2,
+      "klassad": {
+        "fil": "kartor/nmk/hummer-uppvaxt-vastkusten-2021/v2/visning.tif",
+        "sha256": "d26e815531e8389b62ff0b01046dc6c1ac9170caf410a5959fbadb294d9f23d6",
+        "kallaSha256": "5809bb2649b36bcfc62d0cef893aea76a292c8618727f63f162aaf56f6ebb779",
+        "bytes": 24055,
+        "epsg": 25833,
+        "upplosning": 250,
+        "vy3006": {
+          "fil": "kartor/nmk/hummer-uppvaxt-vastkusten-2021/v2/visning_3006.tif",
+          "sha256": "06015448211048656428b09e8b514a2b6bdc30abffb4a632af2970374aef92a0",
+          "bytes": 47411
+        },
+        "klasser": [
+          {
+            "varde": 5,
+            "namn": "Viktigt",
+            "farg": true
+          },
+          {
+            "varde": 10,
+            "namn": "Mycket viktigt",
+            "farg": true
+          }
+        ]
+      },
+      "kontinuerlig": {
+        "fil": "kartor/nmk/hummer-uppvaxt-vastkusten-2021/v2/radata.tif",
+        "sha256": "1dc63d44a78788b912d5243ad77e3e6e58354654f53a76e7f3e94b44fcf2f8f7",
+        "kallaSha256": "dabc8a6ff85f6d3adc93a7775cec61dfc6edec55ebe8f78070c4f59efded0db0",
+        "bytes": 179344,
+        "epsg": 25833,
+        "upplosning": 250,
+        "vy3006": {
+          "fil": "kartor/nmk/hummer-uppvaxt-vastkusten-2021/v2/radata_3006.tif",
+          "sha256": "462fa115e164080d7008ae1442f3c6d934baadb0f4df10d010816a193f1ba17c",
+          "bytes": 337241
+        },
+        "skala": 1000,
+        "enhet": "sannolikhet",
+        "min": 0.004,
+        "max": 0.803,
+        "p2": 0.004,
+        "p98": 0.369
+      }
+    }
+  ]
+}

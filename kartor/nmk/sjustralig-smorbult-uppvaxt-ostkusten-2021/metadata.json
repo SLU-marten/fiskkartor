@@ -1,0 +1,117 @@
+{
+  "id": "sjustralig-smorbult-uppvaxt-ostkusten-2021",
+  "titel": "Sjustrålig smörbult uppväxt ostkusten",
+  "projekt": "NMK",
+  "kalla": "Nationell marin kartering (Yngel)",
+  "citering": "Erlandsson m fl 2021",
+  "ar": 2021,
+  "kvalitet": "Omfattar inte Öland, Gotland och Skåne pga databrist. Prediktion ner till 6m djup.",
+  "licens": "CC BY 4.0",
+  "kontakt": "SLU-Aqua-fiskkartor@slu.se",
+  "sprak": "sv",
+  "doi": null,
+  "farg": "YlGnBu",
+  "visas": true,
+  "metadata": "kartor/nmk/sjustralig-smorbult-uppvaxt-ostkusten-2021/metadata.json",
+  "falt": {
+    "art": "Sjustrålig smörbult",
+    "vetenskapligt_namn": "Gobiusculus flavescens",
+    "livsstadium": "Uppväxt",
+    "havsomrade": "Östersjön",
+    "omrade": "Östersjön och Bottniska viken, djup 0-6 m. Omfattar ej Gotland, Öland eller stora delar av Skåne län.",
+    "rodlista": "LC",
+    "fiskbarometern": null,
+    "simblasa": "Ja?",
+    "livsmiljo": "Demersal (bottennära)"
+  },
+  "aktuellVersion": 2,
+  "versioner": [
+    {
+      "version": 1,
+      "publicerad": "2026-11-25",
+      "klassad": {
+        "fil": "kartor/nmk/sjustralig-smorbult-uppvaxt-ostkusten-2021/v1/visning.tif",
+        "sha256": "ec2d85f762465e60b8492d49bd7c38214b321b891d946100b37ec1aa367da7fd",
+        "kallaSha256": "5eb4824b40ddeb1627aabd3762a600967186759ef041157a562c9103dc621538",
+        "bytes": 78168,
+        "epsg": 3035,
+        "upplosning": 250,
+        "klasser": [
+          {
+            "varde": 5,
+            "namn": "Viktigt",
+            "farg": true
+          },
+          {
+            "varde": 10,
+            "namn": "Mycket viktigt",
+            "farg": true
+          }
+        ]
+      },
+      "kontinuerlig": {
+        "fil": "kartor/nmk/sjustralig-smorbult-uppvaxt-ostkusten-2021/v1/radata.tif",
+        "sha256": "21b8740de78013624634e4ff74fbe9c92637ab6b8a33ee2755569739f86c75ff",
+        "kallaSha256": "b6fde93c2ae065d5a2700eb566e0c65a4800ebf47eeaa39a5d1136ad7e31a885",
+        "bytes": 390875,
+        "epsg": 3035,
+        "upplosning": 250,
+        "skala": 1000,
+        "enhet": "sannolikhet",
+        "min": 0.004,
+        "max": 0.994,
+        "p2": 0.004,
+        "p98": 0.525
+      }
+    },
+    {
+      "version": 2,
+      "publicerad": "2026-11-25",
+      "format": 2,
+      "klassad": {
+        "fil": "kartor/nmk/sjustralig-smorbult-uppvaxt-ostkusten-2021/v2/visning.tif",
+        "sha256": "384a2a494beb5e60c3e52db1d6321ca1f706868b1b17ec63b6f92f9628835b06",
+        "kallaSha256": "5eb4824b40ddeb1627aabd3762a600967186759ef041157a562c9103dc621538",
+        "bytes": 77765,
+        "epsg": 3035,
+        "upplosning": 250,
+        "vy3006": {
+          "fil": "kartor/nmk/sjustralig-smorbult-uppvaxt-ostkusten-2021/v2/visning_3006.tif",
+          "sha256": "43f496edf0044b5e7b099d5d888d07b1624e24b89c5c3aadef0f0fa0c3f216fe",
+          "bytes": 216062
+        },
+        "klasser": [
+          {
+            "varde": 5,
+            "namn": "Viktigt",
+            "farg": true
+          },
+          {
+            "varde": 10,
+            "namn": "Mycket viktigt",
+            "farg": true
+          }
+        ]
+      },
+      "kontinuerlig": {
+        "fil": "kartor/nmk/sjustralig-smorbult-uppvaxt-ostkusten-2021/v2/radata.tif",
+        "sha256": "21b8740de78013624634e4ff74fbe9c92637ab6b8a33ee2755569739f86c75ff",
+        "kallaSha256": "b6fde93c2ae065d5a2700eb566e0c65a4800ebf47eeaa39a5d1136ad7e31a885",
+        "bytes": 390875,
+        "epsg": 3035,
+        "upplosning": 250,
+        "vy3006": {
+          "fil": "kartor/nmk/sjustralig-smorbult-uppvaxt-ostkusten-2021/v2/radata_3006.tif",
+          "sha256": "a39015884a0595b6c64dec77216a2f3cd5cb6c1abef69ac74b7752630ef06870",
+          "bytes": 1036406
+        },
+        "skala": 1000,
+        "enhet": "sannolikhet",
+        "min": 0.004,
+        "max": 0.994,
+        "p2": 0.004,
+        "p98": 0.525
+      }
+    }
+  ]
+}

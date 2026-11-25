@@ -1,0 +1,117 @@
+{
+  "id": "femtommad-skarlanga-uppvaxt-vastkust-2021",
+  "titel": "Femtömmad skärlånga uppväxt västkust",
+  "projekt": "NMK",
+  "kalla": "Nationell marin kartering (Ryssja)",
+  "citering": "Fredriksson m fl 2021",
+  "ar": 2021,
+  "kvalitet": "Provtagning inte designad för rumsliga analyser, där tillgänglig data mellan geografiska områden kan variera mellan år. Provtagninsdata från flera olika år ingår dock i modelleringen.",
+  "licens": "CC BY 4.0",
+  "kontakt": "SLU-Aqua-fiskkartor@slu.se",
+  "sprak": "sv",
+  "doi": null,
+  "farg": "YlGnBu",
+  "visas": true,
+  "metadata": "kartor/nmk/femtommad-skarlanga-uppvaxt-vastkust-2021/metadata.json",
+  "falt": {
+    "art": "Femtömmad skärlånga",
+    "vetenskapligt_namn": "Ciliata mustela",
+    "livsstadium": "Uppväxt",
+    "havsomrade": "Västerhavet",
+    "omrade": "Västkusten, djup 0-30m.",
+    "rodlista": "LC",
+    "fiskbarometern": null,
+    "simblasa": "Ja",
+    "livsmiljo": "Demersal (kustnära)"
+  },
+  "aktuellVersion": 2,
+  "versioner": [
+    {
+      "version": 1,
+      "publicerad": "2026-11-25",
+      "klassad": {
+        "fil": "kartor/nmk/femtommad-skarlanga-uppvaxt-vastkust-2021/v1/visning.tif",
+        "sha256": "13d992529746efa33fd201ee3529108cef7ea1e0835b7fce25a6a720b381cf58",
+        "kallaSha256": "bd7e5e44564f151c986e93e8398e99b1c4d800912ec1f83bbd5e2ea3cf57e82e",
+        "bytes": 23691,
+        "epsg": 25833,
+        "upplosning": 250,
+        "klasser": [
+          {
+            "varde": 5,
+            "namn": "Viktigt",
+            "farg": true
+          },
+          {
+            "varde": 10,
+            "namn": "Mycket viktigt",
+            "farg": true
+          }
+        ]
+      },
+      "kontinuerlig": {
+        "fil": "kartor/nmk/femtommad-skarlanga-uppvaxt-vastkust-2021/v1/radata.tif",
+        "sha256": "9214a09e793e7941ffd507b2b04aec1b9a66eaed966f643575a0788e8a01d7ca",
+        "kallaSha256": "c650deb36254fb381e4011298f29c99584185c669a540b6f954e714b7f9c46dc",
+        "bytes": 153947,
+        "epsg": 25833,
+        "upplosning": 250,
+        "skala": 1000,
+        "enhet": "sannolikhet",
+        "min": 0.016,
+        "max": 0.793,
+        "p2": 0.016,
+        "p98": 0.31
+      }
+    },
+    {
+      "version": 2,
+      "publicerad": "2026-11-25",
+      "format": 2,
+      "klassad": {
+        "fil": "kartor/nmk/femtommad-skarlanga-uppvaxt-vastkust-2021/v2/visning.tif",
+        "sha256": "c464a2f93317457169e8b0f5ea07e8957a599df0c299518e46b5acf4e4c4279a",
+        "kallaSha256": "bd7e5e44564f151c986e93e8398e99b1c4d800912ec1f83bbd5e2ea3cf57e82e",
+        "bytes": 23149,
+        "epsg": 25833,
+        "upplosning": 250,
+        "vy3006": {
+          "fil": "kartor/nmk/femtommad-skarlanga-uppvaxt-vastkust-2021/v2/visning_3006.tif",
+          "sha256": "30e730f59343d0e7c46aedaa091ea929663801144228855a77be6682facba0d6",
+          "bytes": 45583
+        },
+        "klasser": [
+          {
+            "varde": 5,
+            "namn": "Viktigt",
+            "farg": true
+          },
+          {
+            "varde": 10,
+            "namn": "Mycket viktigt",
+            "farg": true
+          }
+        ]
+      },
+      "kontinuerlig": {
+        "fil": "kartor/nmk/femtommad-skarlanga-uppvaxt-vastkust-2021/v2/radata.tif",
+        "sha256": "9214a09e793e7941ffd507b2b04aec1b9a66eaed966f643575a0788e8a01d7ca",
+        "kallaSha256": "c650deb36254fb381e4011298f29c99584185c669a540b6f954e714b7f9c46dc",
+        "bytes": 153947,
+        "epsg": 25833,
+        "upplosning": 250,
+        "vy3006": {
+          "fil": "kartor/nmk/femtommad-skarlanga-uppvaxt-vastkust-2021/v2/radata_3006.tif",
+          "sha256": "b297afcb11af9bb191f5d7f4ae95230b6d3987872160351bb43554d8eddde871",
+          "bytes": 293572
+        },
+        "skala": 1000,
+        "enhet": "sannolikhet",
+        "min": 0.016,
+        "max": 0.793,
+        "p2": 0.016,
+        "p98": 0.31
+      }
+    }
+  ]
+}

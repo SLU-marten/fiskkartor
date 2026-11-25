@@ -1,0 +1,117 @@
+{
+  "id": "slatvar-uppvaxt-vastkusten-2021",
+  "titel": "Slätvar uppväxt västkusten",
+  "projekt": "NMK",
+  "kalla": "Nationell marin kartering (Ryssja)",
+  "citering": "Fredriksson m fl 2021",
+  "ar": 2021,
+  "kvalitet": "Provtagning inte designad för rumsliga analyser, där tillgänglig data mellan geografiska områden kan variera mellan år. Provtagninsdata från flera olika år ingår dock i modelleringen.",
+  "licens": "CC BY 4.0",
+  "kontakt": "SLU-Aqua-fiskkartor@slu.se",
+  "sprak": "sv",
+  "doi": null,
+  "farg": "YlGnBu",
+  "visas": true,
+  "metadata": "kartor/nmk/slatvar-uppvaxt-vastkusten-2021/metadata.json",
+  "falt": {
+    "art": "Slätvar",
+    "vetenskapligt_namn": "Scophthalmus rhombus",
+    "livsstadium": "Uppväxt",
+    "havsomrade": "Västerhavet",
+    "omrade": "Västkusten, djup 0-30m.",
+    "rodlista": "LC",
+    "fiskbarometern": "Ices bedömer att beståndet av slätvar i Skagerrak och Kattegatt har ett fisketryck som ligger under referensvärdet för fiskerifödlighet som ger ett hållbart fiske över tid och att biomassan ligger över gränsvärdet som inte bör understigas.",
+    "simblasa": "Nej",
+    "livsmiljo": "Bentisk (bottenlevande)"
+  },
+  "aktuellVersion": 2,
+  "versioner": [
+    {
+      "version": 1,
+      "publicerad": "2026-11-25",
+      "klassad": {
+        "fil": "kartor/nmk/slatvar-uppvaxt-vastkusten-2021/v1/visning.tif",
+        "sha256": "cd7b0295986927c7d27e262c6309544c65a502ae05509cee1ddc10ec7725d489",
+        "kallaSha256": "881d7bda6c32b97cd3526619266914fa9d61c7115f364a3b7b610e7c84d30863",
+        "bytes": 19030,
+        "epsg": 25833,
+        "upplosning": 250,
+        "klasser": [
+          {
+            "varde": 5,
+            "namn": "Viktigt",
+            "farg": true
+          },
+          {
+            "varde": 10,
+            "namn": "Mycket viktigt",
+            "farg": true
+          }
+        ]
+      },
+      "kontinuerlig": {
+        "fil": "kartor/nmk/slatvar-uppvaxt-vastkusten-2021/v1/radata.tif",
+        "sha256": "59e76b8bd658efb2d0f5a4a3700820ea7b26e6b954ee3caae8ffc5f7fbcb17be",
+        "kallaSha256": "4ff3c606cabbf6f749e2649b3236f43efc258a9cf3ed91003f037d9c7b020c2a",
+        "bytes": 179770,
+        "epsg": 25833,
+        "upplosning": 250,
+        "skala": 1000,
+        "enhet": "sannolikhet",
+        "min": 0.007,
+        "max": 0.723,
+        "p2": 0.008,
+        "p98": 0.234
+      }
+    },
+    {
+      "version": 2,
+      "publicerad": "2026-11-25",
+      "format": 2,
+      "klassad": {
+        "fil": "kartor/nmk/slatvar-uppvaxt-vastkusten-2021/v2/visning.tif",
+        "sha256": "1bfd0699d1c32e1b6f09b0910066a4118f8d97ad273b1f0440d27750d5122025",
+        "kallaSha256": "881d7bda6c32b97cd3526619266914fa9d61c7115f364a3b7b610e7c84d30863",
+        "bytes": 18637,
+        "epsg": 25833,
+        "upplosning": 250,
+        "vy3006": {
+          "fil": "kartor/nmk/slatvar-uppvaxt-vastkusten-2021/v2/visning_3006.tif",
+          "sha256": "c63b8196eee0904389cb658a0dd03b03667d1fcb24da7f1792125956f3a6ede1",
+          "bytes": 36403
+        },
+        "klasser": [
+          {
+            "varde": 5,
+            "namn": "Viktigt",
+            "farg": true
+          },
+          {
+            "varde": 10,
+            "namn": "Mycket viktigt",
+            "farg": true
+          }
+        ]
+      },
+      "kontinuerlig": {
+        "fil": "kartor/nmk/slatvar-uppvaxt-vastkusten-2021/v2/radata.tif",
+        "sha256": "59e76b8bd658efb2d0f5a4a3700820ea7b26e6b954ee3caae8ffc5f7fbcb17be",
+        "kallaSha256": "4ff3c606cabbf6f749e2649b3236f43efc258a9cf3ed91003f037d9c7b020c2a",
+        "bytes": 179770,
+        "epsg": 25833,
+        "upplosning": 250,
+        "vy3006": {
+          "fil": "kartor/nmk/slatvar-uppvaxt-vastkusten-2021/v2/radata_3006.tif",
+          "sha256": "9ba3175e800f8073d9fe113b6bd30c374592f7c2a97c3e77fc1cacbb8b7c0ddd",
+          "bytes": 336577
+        },
+        "skala": 1000,
+        "enhet": "sannolikhet",
+        "min": 0.007,
+        "max": 0.723,
+        "p2": 0.008,
+        "p98": 0.234
+      }
+    }
+  ]
+}

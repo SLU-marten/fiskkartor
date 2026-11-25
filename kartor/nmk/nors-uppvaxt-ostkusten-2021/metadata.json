@@ -1,0 +1,117 @@
+{
+  "id": "nors-uppvaxt-ostkusten-2021",
+  "titel": "Nors uppväxt ostkusten",
+  "projekt": "NMK",
+  "kalla": "Nationell marin kartering (Yngel)",
+  "citering": "Erlandsson m fl 2021",
+  "ar": 2021,
+  "kvalitet": "Omfattar inte Öland, Gotland och Skåne pga databrist. Prediktion ner till 6m djup.",
+  "licens": "CC BY 4.0",
+  "kontakt": "SLU-Aqua-fiskkartor@slu.se",
+  "sprak": "sv",
+  "doi": null,
+  "farg": "YlGnBu",
+  "visas": true,
+  "metadata": "kartor/nmk/nors-uppvaxt-ostkusten-2021/metadata.json",
+  "falt": {
+    "art": "Nors",
+    "vetenskapligt_namn": "Osmerus eperlanus",
+    "livsstadium": "Uppväxt",
+    "havsomrade": "Östersjön",
+    "omrade": "Östersjön och Bottniska viken, djup 0-6 m. Omfattar ej Gotland, Öland eller stora delar av Skåne län.",
+    "rodlista": "LC",
+    "fiskbarometern": null,
+    "simblasa": "Ja",
+    "livsmiljo": "Pelagisk (frivattenlevande)"
+  },
+  "aktuellVersion": 2,
+  "versioner": [
+    {
+      "version": 1,
+      "publicerad": "2026-11-25",
+      "klassad": {
+        "fil": "kartor/nmk/nors-uppvaxt-ostkusten-2021/v1/visning.tif",
+        "sha256": "728a52e8d576f89b18af28f3b69b711780c668379ac97a80cf6a5135b4ea30f9",
+        "kallaSha256": "9b0bdbcb99a2455e68f6b01e619c20876f026c26044b0ee5478755bf3a4aa8f1",
+        "bytes": 44070,
+        "epsg": 3035,
+        "upplosning": 250,
+        "klasser": [
+          {
+            "varde": 5,
+            "namn": "Viktigt",
+            "farg": true
+          },
+          {
+            "varde": 10,
+            "namn": "Mycket viktigt",
+            "farg": true
+          }
+        ]
+      },
+      "kontinuerlig": {
+        "fil": "kartor/nmk/nors-uppvaxt-ostkusten-2021/v1/radata.tif",
+        "sha256": "c57698edaed8b9a152cceef5943ea8c254e530aa4d6e530c975118e2dee2da60",
+        "kallaSha256": "fc713fb21e3dbf4489ebdb7c4ec68844f61e45bc52508d52ef945a378ee4a03a",
+        "bytes": 259755,
+        "epsg": 3035,
+        "upplosning": 250,
+        "skala": 1000,
+        "enhet": "sannolikhet",
+        "min": 0.001,
+        "max": 1,
+        "p2": 0.001,
+        "p98": 0.1
+      }
+    },
+    {
+      "version": 2,
+      "publicerad": "2026-11-25",
+      "format": 2,
+      "klassad": {
+        "fil": "kartor/nmk/nors-uppvaxt-ostkusten-2021/v2/visning.tif",
+        "sha256": "fcca04f180f7ce56bc4a4966c9b97c7583fdabb1f36c946503771d19754c36e6",
+        "kallaSha256": "9b0bdbcb99a2455e68f6b01e619c20876f026c26044b0ee5478755bf3a4aa8f1",
+        "bytes": 43608,
+        "epsg": 3035,
+        "upplosning": 250,
+        "vy3006": {
+          "fil": "kartor/nmk/nors-uppvaxt-ostkusten-2021/v2/visning_3006.tif",
+          "sha256": "f4abd152e4e4859b74a8e399f198b9a4bf811c8aa458b5dd8dac8e0cab62a018",
+          "bytes": 138677
+        },
+        "klasser": [
+          {
+            "varde": 5,
+            "namn": "Viktigt",
+            "farg": true
+          },
+          {
+            "varde": 10,
+            "namn": "Mycket viktigt",
+            "farg": true
+          }
+        ]
+      },
+      "kontinuerlig": {
+        "fil": "kartor/nmk/nors-uppvaxt-ostkusten-2021/v2/radata.tif",
+        "sha256": "c57698edaed8b9a152cceef5943ea8c254e530aa4d6e530c975118e2dee2da60",
+        "kallaSha256": "fc713fb21e3dbf4489ebdb7c4ec68844f61e45bc52508d52ef945a378ee4a03a",
+        "bytes": 259755,
+        "epsg": 3035,
+        "upplosning": 250,
+        "vy3006": {
+          "fil": "kartor/nmk/nors-uppvaxt-ostkusten-2021/v2/radata_3006.tif",
+          "sha256": "97273709137a0660a9668e81478d5454e4e6b8a926832f596216f482aefb33b5",
+          "bytes": 778491
+        },
+        "skala": 1000,
+        "enhet": "sannolikhet",
+        "min": 0.001,
+        "max": 1,
+        "p2": 0.001,
+        "p98": 0.1
+      }
+    }
+  ]
+}

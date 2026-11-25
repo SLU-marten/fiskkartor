@@ -1,0 +1,117 @@
+{
+  "id": "torsk-under-20-cm-vastkusten-2021",
+  "titel": "Torsk <20 cm västkusten",
+  "projekt": "NMK",
+  "kalla": "Nationell marin kartering (Ryssja)",
+  "citering": "Fredriksson m fl 2021",
+  "ar": 2021,
+  "kvalitet": "Provtagning inte designad för rumsliga analyser, där tillgänglig data mellan geografiska områden kan variera mellan år. Provtagninsdata från flera olika år ingår dock i modelleringen.",
+  "licens": "CC BY 4.0",
+  "kontakt": "SLU-Aqua-fiskkartor@slu.se",
+  "sprak": "sv",
+  "doi": null,
+  "farg": "YlGnBu",
+  "visas": true,
+  "metadata": "kartor/nmk/torsk-under-20-cm-vastkusten-2021/metadata.json",
+  "falt": {
+    "art": "Torsk",
+    "vetenskapligt_namn": "Gadus morhua",
+    "livsstadium": "Uppväxt",
+    "havsomrade": "Västerhavet",
+    "omrade": "Västkusten, djup 0-30m.",
+    "rodlista": "VU",
+    "fiskbarometern": "Ices bedöming för nordsjölekande torsk i Skagerrak anger att fiskedödligheten ligger över referensvärdet för fiskeridödlighet som ger ett hållbart fiske över tid. För torsk som leker i Kattegatt kan Ices inte bedöma beståndsstatus eller fiskedödliget eftersom data saknas. Lekbiomassan i Kattegatt bedöms vara under samliga referenspunkter ohc Kattegattorskens har minskat kraftigt sedan 2015.",
+    "simblasa": "Ja",
+    "livsmiljo": "Demersal (bottennära)"
+  },
+  "aktuellVersion": 2,
+  "versioner": [
+    {
+      "version": 1,
+      "publicerad": "2026-11-25",
+      "klassad": {
+        "fil": "kartor/nmk/torsk-under-20-cm-vastkusten-2021/v1/visning.tif",
+        "sha256": "fc9d6d6daf9c1b843294a409c445247a14bfbc7060e4599586a713d7150f4f8e",
+        "kallaSha256": "dee3bf4a21d0a1215cf4704bb1fb555935a99f52d302f0a5733525e5045adaec",
+        "bytes": 33576,
+        "epsg": 25833,
+        "upplosning": 250,
+        "klasser": [
+          {
+            "varde": 5,
+            "namn": "Viktigt",
+            "farg": true
+          },
+          {
+            "varde": 10,
+            "namn": "Mycket viktigt",
+            "farg": true
+          }
+        ]
+      },
+      "kontinuerlig": {
+        "fil": "kartor/nmk/torsk-under-20-cm-vastkusten-2021/v1/radata.tif",
+        "sha256": "01d12509c54a70bc7f0466f37cd8ff75f34dbc5a6f8373ae645195f10da3ea1b",
+        "kallaSha256": "12598549e68b790e2aaf1b97e843eec2c09fd65b165e0549a10e8896c8d13783",
+        "bytes": 221344,
+        "epsg": 25833,
+        "upplosning": 250,
+        "skala": 1000,
+        "enhet": "sannolikhet",
+        "min": 0.09,
+        "max": 0.891,
+        "p2": 0.121,
+        "p98": 0.654
+      }
+    },
+    {
+      "version": 2,
+      "publicerad": "2026-11-25",
+      "format": 2,
+      "klassad": {
+        "fil": "kartor/nmk/torsk-under-20-cm-vastkusten-2021/v2/visning.tif",
+        "sha256": "f944587b764f1db283691f0aa341eed4270434c01cd104a37f8db52fbc6d8844",
+        "kallaSha256": "dee3bf4a21d0a1215cf4704bb1fb555935a99f52d302f0a5733525e5045adaec",
+        "bytes": 33345,
+        "epsg": 25833,
+        "upplosning": 250,
+        "vy3006": {
+          "fil": "kartor/nmk/torsk-under-20-cm-vastkusten-2021/v2/visning_3006.tif",
+          "sha256": "87e931d5612ccb23f7d02544f72937a243bcdb4c4599647e6b6a0b33065eadff",
+          "bytes": 64874
+        },
+        "klasser": [
+          {
+            "varde": 5,
+            "namn": "Viktigt",
+            "farg": true
+          },
+          {
+            "varde": 10,
+            "namn": "Mycket viktigt",
+            "farg": true
+          }
+        ]
+      },
+      "kontinuerlig": {
+        "fil": "kartor/nmk/torsk-under-20-cm-vastkusten-2021/v2/radata.tif",
+        "sha256": "01d12509c54a70bc7f0466f37cd8ff75f34dbc5a6f8373ae645195f10da3ea1b",
+        "kallaSha256": "12598549e68b790e2aaf1b97e843eec2c09fd65b165e0549a10e8896c8d13783",
+        "bytes": 221344,
+        "epsg": 25833,
+        "upplosning": 250,
+        "vy3006": {
+          "fil": "kartor/nmk/torsk-under-20-cm-vastkusten-2021/v2/radata_3006.tif",
+          "sha256": "91dcc49fc32a6b538b03f854170b7fb62c3039bd5796158441525222b5028ddc",
+          "bytes": 419674
+        },
+        "skala": 1000,
+        "enhet": "sannolikhet",
+        "min": 0.09,
+        "max": 0.891,
+        "p2": 0.121,
+        "p98": 0.654
+      }
+    }
+  ]
+}

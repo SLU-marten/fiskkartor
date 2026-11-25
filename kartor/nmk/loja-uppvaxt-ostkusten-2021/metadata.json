@@ -1,0 +1,117 @@
+{
+  "id": "loja-uppvaxt-ostkusten-2021",
+  "titel": "Löja uppväxt ostkusten",
+  "projekt": "NMK",
+  "kalla": "Nationell marin kartering (Yngel)",
+  "citering": "Erlandsson m fl 2021",
+  "ar": 2021,
+  "kvalitet": "Omfattar inte Öland, Gotland och Skåne pga databrist. Prediktion ner till 6m djup.",
+  "licens": "CC BY 4.0",
+  "kontakt": "SLU-Aqua-fiskkartor@slu.se",
+  "sprak": "sv",
+  "doi": null,
+  "farg": "YlGnBu",
+  "visas": true,
+  "metadata": "kartor/nmk/loja-uppvaxt-ostkusten-2021/metadata.json",
+  "falt": {
+    "art": "Löja",
+    "vetenskapligt_namn": "Alburnus alburnus",
+    "livsstadium": "Uppväxt",
+    "havsomrade": "Östersjön",
+    "omrade": "Östersjön och Bottniska viken, djup 0-6 m. Omfattar ej Gotland, Öland eller stora delar av Skåne län.",
+    "rodlista": "LC",
+    "fiskbarometern": null,
+    "simblasa": "Ja",
+    "livsmiljo": "Demersal (kustnära)"
+  },
+  "aktuellVersion": 2,
+  "versioner": [
+    {
+      "version": 1,
+      "publicerad": "2026-11-25",
+      "klassad": {
+        "fil": "kartor/nmk/loja-uppvaxt-ostkusten-2021/v1/visning.tif",
+        "sha256": "4b35435266747c0b99d0fcaa10c2573c1b18eabf03180a0ab4aaf53d3891183f",
+        "kallaSha256": "7f63953d08c5d1dc1da61be62ca4a76d67fbfdcdb032f5aac9f49cb7026c8661",
+        "bytes": 55675,
+        "epsg": 3035,
+        "upplosning": 250,
+        "klasser": [
+          {
+            "varde": 5,
+            "namn": "Viktigt",
+            "farg": true
+          },
+          {
+            "varde": 10,
+            "namn": "Mycket viktigt",
+            "farg": true
+          }
+        ]
+      },
+      "kontinuerlig": {
+        "fil": "kartor/nmk/loja-uppvaxt-ostkusten-2021/v1/radata.tif",
+        "sha256": "28f30207d199d0a11099e7e485ac17ea21bcd934a50baa699a07f24b907f5649",
+        "kallaSha256": "441378874cb96f48fa57d7fd17cd9cade5854bf194cbc94f9e2008636caaf0ea",
+        "bytes": 454412,
+        "epsg": 3035,
+        "upplosning": 250,
+        "skala": 1000,
+        "enhet": "sannolikhet",
+        "min": 0.015,
+        "max": 0.994,
+        "p2": 0.016,
+        "p98": 0.474
+      }
+    },
+    {
+      "version": 2,
+      "publicerad": "2026-11-25",
+      "format": 2,
+      "klassad": {
+        "fil": "kartor/nmk/loja-uppvaxt-ostkusten-2021/v2/visning.tif",
+        "sha256": "5ffa58bf30a90141aeaa0d289fbc72021f65be94ee0877ca85eea995fdc4796d",
+        "kallaSha256": "7f63953d08c5d1dc1da61be62ca4a76d67fbfdcdb032f5aac9f49cb7026c8661",
+        "bytes": 55053,
+        "epsg": 3035,
+        "upplosning": 250,
+        "vy3006": {
+          "fil": "kartor/nmk/loja-uppvaxt-ostkusten-2021/v2/visning_3006.tif",
+          "sha256": "89c1db6770533d664b94a338b5ae3f2a11ef9c3b67adcc9378c857e335ca7899",
+          "bytes": 162819
+        },
+        "klasser": [
+          {
+            "varde": 5,
+            "namn": "Viktigt",
+            "farg": true
+          },
+          {
+            "varde": 10,
+            "namn": "Mycket viktigt",
+            "farg": true
+          }
+        ]
+      },
+      "kontinuerlig": {
+        "fil": "kartor/nmk/loja-uppvaxt-ostkusten-2021/v2/radata.tif",
+        "sha256": "28f30207d199d0a11099e7e485ac17ea21bcd934a50baa699a07f24b907f5649",
+        "kallaSha256": "441378874cb96f48fa57d7fd17cd9cade5854bf194cbc94f9e2008636caaf0ea",
+        "bytes": 454412,
+        "epsg": 3035,
+        "upplosning": 250,
+        "vy3006": {
+          "fil": "kartor/nmk/loja-uppvaxt-ostkusten-2021/v2/radata_3006.tif",
+          "sha256": "863e6394b57724b82476cf8b753498248d79f4af55a043dbc964cfa0b4537f48",
+          "bytes": 1161079
+        },
+        "skala": 1000,
+        "enhet": "sannolikhet",
+        "min": 0.015,
+        "max": 0.994,
+        "p2": 0.016,
+        "p98": 0.474
+      }
+    }
+  ]
+}

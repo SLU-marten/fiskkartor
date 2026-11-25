@@ -1,0 +1,117 @@
+{
+  "id": "sill-vuxen-vastkusten-2024",
+  "titel": "Sill vuxen västkusten",
+  "projekt": "NMK",
+  "kalla": "Nationell marin kartering (Trål)",
+  "citering": "Erlandsson m fl (opubl)",
+  "ar": 2024,
+  "kvalitet": "Grov upplösning då tråldragen är långa. Provtagning inte designad för rumsliga analyser, där tillgänglig data mellan geografiska områden kan variera mellan år. Data från många år ingår dock i modelleringen.",
+  "licens": "CC BY 4.0",
+  "kontakt": "SLU-Aqua-fiskkartor@slu.se",
+  "sprak": "sv",
+  "doi": null,
+  "farg": "YlGnBu",
+  "visas": true,
+  "metadata": "kartor/nmk/sill-vuxen-vastkusten-2024/metadata.json",
+  "falt": {
+    "art": "Sill",
+    "vetenskapligt_namn": "Clupea harengus",
+    "livsstadium": "Vuxen",
+    "havsomrade": "Västerhavet",
+    "omrade": "Västkusten >30 m",
+    "rodlista": "LC",
+    "fiskbarometern": "Ices bedömer att beståndet avvårlekande sill i Skagerrak, Kattegatt och sydvästra Östersjön har ett fisketryck som ligger under referensfärdet för fiskeridödlighet som ger ett hållbart fiske över tid men att både beståndets storlek och lekbeståndets storlek ligger under de gränsvärden som inte bör understigas. För höstlekande sill i Skagerrak och Kattegatt bedöms fisketrycket ligga under referensvärdet för fiskeridödlighet som ger ett hållvart fiske över tid och både beståndets storlek och lekbeståndets storlek ligga över de gränsvärden som inte bör understigas.",
+    "simblasa": "Ja",
+    "livsmiljo": "Pelagisk (Frivattenlevande)"
+  },
+  "aktuellVersion": 2,
+  "versioner": [
+    {
+      "version": 1,
+      "publicerad": "2026-11-25",
+      "klassad": {
+        "fil": "kartor/nmk/sill-vuxen-vastkusten-2024/v1/visning.tif",
+        "sha256": "095cdb87dc7cdbc115f80e0acffb8dcfdd7af1cedc4e504543e14c99e11f3363",
+        "kallaSha256": "d6b6c3f840cd3a5828470900804d4895ab95168ca44008fda63978d3fd4238a1",
+        "bytes": 2277,
+        "epsg": 4326,
+        "upplosning": 3712,
+        "klasser": [
+          {
+            "varde": 5,
+            "namn": "Viktigt",
+            "farg": true
+          },
+          {
+            "varde": 10,
+            "namn": "Mycket viktigt",
+            "farg": true
+          }
+        ]
+      },
+      "kontinuerlig": {
+        "fil": "kartor/nmk/sill-vuxen-vastkusten-2024/v1/radata.tif",
+        "sha256": "056a62309ae885f8b71906e21e8790ca0442056b331466851c7d7a11b912f556",
+        "kallaSha256": "842761010c01dae62939139be1c5d41bd4c1aa2372d59f93c737fdca231d7f5a",
+        "bytes": 9060,
+        "epsg": 4326,
+        "upplosning": 3712,
+        "skala": 1000,
+        "enhet": "sannolikhet",
+        "min": 0.049,
+        "max": 0.878,
+        "p2": 0.096,
+        "p98": 0.734
+      }
+    },
+    {
+      "version": 2,
+      "publicerad": "2026-11-25",
+      "format": 2,
+      "klassad": {
+        "fil": "kartor/nmk/sill-vuxen-vastkusten-2024/v2/visning.tif",
+        "sha256": "79d801b2c369047ff81837806fff1c18e58331f2b368fd14f79c08a8aef84034",
+        "kallaSha256": "d6b6c3f840cd3a5828470900804d4895ab95168ca44008fda63978d3fd4238a1",
+        "bytes": 1897,
+        "epsg": 4326,
+        "upplosning": 3712,
+        "vy3006": {
+          "fil": "kartor/nmk/sill-vuxen-vastkusten-2024/v2/visning_3006.tif",
+          "sha256": "c1ece64948b956f1ef8fd062f46778b45ecf5d9e995d755caf1b7760359941eb",
+          "bytes": 3439
+        },
+        "klasser": [
+          {
+            "varde": 5,
+            "namn": "Viktigt",
+            "farg": true
+          },
+          {
+            "varde": 10,
+            "namn": "Mycket viktigt",
+            "farg": true
+          }
+        ]
+      },
+      "kontinuerlig": {
+        "fil": "kartor/nmk/sill-vuxen-vastkusten-2024/v2/radata.tif",
+        "sha256": "056a62309ae885f8b71906e21e8790ca0442056b331466851c7d7a11b912f556",
+        "kallaSha256": "842761010c01dae62939139be1c5d41bd4c1aa2372d59f93c737fdca231d7f5a",
+        "bytes": 9060,
+        "epsg": 4326,
+        "upplosning": 3712,
+        "vy3006": {
+          "fil": "kartor/nmk/sill-vuxen-vastkusten-2024/v2/radata_3006.tif",
+          "sha256": "e84163412c1adab81d3b1df12b37895cc7db9ef5ee332a729a58ee7a515e8a57",
+          "bytes": 15584
+        },
+        "skala": 1000,
+        "enhet": "sannolikhet",
+        "min": 0.049,
+        "max": 0.878,
+        "p2": 0.096,
+        "p98": 0.734
+      }
+    }
+  ]
+}

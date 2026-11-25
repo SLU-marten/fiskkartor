@@ -1,0 +1,117 @@
+{
+  "id": "torsk-vuxen-vastkusten-2024",
+  "titel": "Torsk vuxen västkusten",
+  "projekt": "NMK",
+  "kalla": "Nationell marin kartering (Trål)",
+  "citering": "Erlandsson m fl (opubl)",
+  "ar": 2024,
+  "kvalitet": "Grov upplösning då tråldragen är långa. Provtagning inte designad för rumsliga analyser, där tillgänglig data mellan geografiska områden kan variera mellan år. Data från många år ingår dock i modelleringen.",
+  "licens": "CC BY 4.0",
+  "kontakt": "SLU-Aqua-fiskkartor@slu.se",
+  "sprak": "sv",
+  "doi": null,
+  "farg": "YlGnBu",
+  "visas": true,
+  "metadata": "kartor/nmk/torsk-vuxen-vastkusten-2024/metadata.json",
+  "falt": {
+    "art": "Torsk",
+    "vetenskapligt_namn": "Gadus morhua",
+    "livsstadium": "Vuxen",
+    "havsomrade": "Västerhavet",
+    "omrade": "Västkusten >30 m",
+    "rodlista": "VU",
+    "fiskbarometern": "Ices bedöming för nordsjölekande torsk i Skagerrak anger att fiskedödligheten ligger över referensvärdet för fiskeridödlighet som ger ett hållbart fiske över tid. För torsk som leker i Kattegatt kan Ices inte bedöma beståndsstatus eller fiskedödliget eftersom data saknas. Lekbiomassan i Kattegatt bedöms vara under samliga referenspunkter ohc Kattegattorskens har minskat kraftigt sedan 2015.",
+    "simblasa": "Ja",
+    "livsmiljo": "Demersal (bottennära)"
+  },
+  "aktuellVersion": 2,
+  "versioner": [
+    {
+      "version": 1,
+      "publicerad": "2026-11-25",
+      "klassad": {
+        "fil": "kartor/nmk/torsk-vuxen-vastkusten-2024/v1/visning.tif",
+        "sha256": "9bb7b5ccf7ffd5f1be1cc08a537b92495944149cae0a1c0ca64fd2ff744cec43",
+        "kallaSha256": "0ea704284bd01f0af292d2b9c5b5870e4a7e3f2b1696aeae64b08d14ba9ca7b7",
+        "bytes": 2277,
+        "epsg": 4326,
+        "upplosning": 3712,
+        "klasser": [
+          {
+            "varde": 5,
+            "namn": "Viktigt",
+            "farg": true
+          },
+          {
+            "varde": 10,
+            "namn": "Mycket viktigt",
+            "farg": true
+          }
+        ]
+      },
+      "kontinuerlig": {
+        "fil": "kartor/nmk/torsk-vuxen-vastkusten-2024/v1/radata.tif",
+        "sha256": "e2abdaeb2b74c55a1a0e2dcbc163c84f36e6e0819bbdf6c59fdf4a7c4fd9e300",
+        "kallaSha256": "1e294d15ef2cafb04dd58de6ed00ceea8d9ff2aa7cd473fdccf7337f63862bab",
+        "bytes": 9112,
+        "epsg": 4326,
+        "upplosning": 3712,
+        "skala": 1000,
+        "enhet": "sannolikhet",
+        "min": 0.071,
+        "max": 0.93,
+        "p2": 0.086,
+        "p98": 0.863
+      }
+    },
+    {
+      "version": 2,
+      "publicerad": "2026-11-25",
+      "format": 2,
+      "klassad": {
+        "fil": "kartor/nmk/torsk-vuxen-vastkusten-2024/v2/visning.tif",
+        "sha256": "11ba7e8c5111a885da0e5efd6a024cd4d0054582bdb2ae6fca2ab026128b98b1",
+        "kallaSha256": "0ea704284bd01f0af292d2b9c5b5870e4a7e3f2b1696aeae64b08d14ba9ca7b7",
+        "bytes": 1897,
+        "epsg": 4326,
+        "upplosning": 3712,
+        "vy3006": {
+          "fil": "kartor/nmk/torsk-vuxen-vastkusten-2024/v2/visning_3006.tif",
+          "sha256": "88b226ea3d984979fdfa60f40f9b5779080f5762e52c8e0660f0629bf4be30c2",
+          "bytes": 3378
+        },
+        "klasser": [
+          {
+            "varde": 5,
+            "namn": "Viktigt",
+            "farg": true
+          },
+          {
+            "varde": 10,
+            "namn": "Mycket viktigt",
+            "farg": true
+          }
+        ]
+      },
+      "kontinuerlig": {
+        "fil": "kartor/nmk/torsk-vuxen-vastkusten-2024/v2/radata.tif",
+        "sha256": "e2abdaeb2b74c55a1a0e2dcbc163c84f36e6e0819bbdf6c59fdf4a7c4fd9e300",
+        "kallaSha256": "1e294d15ef2cafb04dd58de6ed00ceea8d9ff2aa7cd473fdccf7337f63862bab",
+        "bytes": 9112,
+        "epsg": 4326,
+        "upplosning": 3712,
+        "vy3006": {
+          "fil": "kartor/nmk/torsk-vuxen-vastkusten-2024/v2/radata_3006.tif",
+          "sha256": "7987da367c4a0df5cd010c372ac247d989d40a9437bb90497e5cf989eb696f9b",
+          "bytes": 15583
+        },
+        "skala": 1000,
+        "enhet": "sannolikhet",
+        "min": 0.071,
+        "max": 0.93,
+        "p2": 0.086,
+        "p98": 0.863
+      }
+    }
+  ]
+}

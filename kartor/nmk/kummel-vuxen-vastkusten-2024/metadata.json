@@ -1,0 +1,117 @@
+{
+  "id": "kummel-vuxen-vastkusten-2024",
+  "titel": "Kummel vuxen västkusten",
+  "projekt": "NMK",
+  "kalla": "Nationell marin kartering (Trål)",
+  "citering": "Erlandsson m fl (opubl)",
+  "ar": 2024,
+  "kvalitet": "Grov upplösning då tråldragen är långa. Provtagning inte designad för rumsliga analyser, där tillgänglig data mellan geografiska områden kan variera mellan år. Data från många år ingår dock i modelleringen.",
+  "licens": "CC BY 4.0",
+  "kontakt": "SLU-Aqua-fiskkartor@slu.se",
+  "sprak": "sv",
+  "doi": null,
+  "farg": "YlGnBu",
+  "visas": true,
+  "metadata": "kartor/nmk/kummel-vuxen-vastkusten-2024/metadata.json",
+  "falt": {
+    "art": "Kummel",
+    "vetenskapligt_namn": "Merluccius merluccius",
+    "livsstadium": "Vuxen",
+    "havsomrade": "Västerhavet",
+    "omrade": "Västkusten >30 m",
+    "rodlista": "VU",
+    "fiskbarometern": "Ices bedömer att beståndets fiskeridödlighet ligger under referensvärdet för fiskeridödlighet som get ett hållvart fiske över tid och att beståndets likbiomassa ligger över gränsvärdet som inte bör underskridas.",
+    "simblasa": "Ja",
+    "livsmiljo": "Bentopelagisk"
+  },
+  "aktuellVersion": 2,
+  "versioner": [
+    {
+      "version": 1,
+      "publicerad": "2026-11-25",
+      "klassad": {
+        "fil": "kartor/nmk/kummel-vuxen-vastkusten-2024/v1/visning.tif",
+        "sha256": "eff3485c705c389491d4faff4006f72dd12fb5d6958f02a7c2d32bba5fd62b46",
+        "kallaSha256": "5ec873de6ec2e6ff654294ba4ba660ee97a191feb8f64499f50749a29f2d5a5f",
+        "bytes": 2178,
+        "epsg": 4326,
+        "upplosning": 3712,
+        "klasser": [
+          {
+            "varde": 5,
+            "namn": "Viktigt",
+            "farg": true
+          },
+          {
+            "varde": 10,
+            "namn": "Mycket viktigt",
+            "farg": true
+          }
+        ]
+      },
+      "kontinuerlig": {
+        "fil": "kartor/nmk/kummel-vuxen-vastkusten-2024/v1/radata.tif",
+        "sha256": "676ea2d9fc0158b43fc278ef8fe500217ed29f6416eaaee48132c12a738d802a",
+        "kallaSha256": "a5c0671659e10f1054a36ed267e7bc8a07ed581018c3ff79cbdba9627b4ce323",
+        "bytes": 8983,
+        "epsg": 4326,
+        "upplosning": 3712,
+        "skala": 1000,
+        "enhet": "sannolikhet",
+        "min": 0.055,
+        "max": 0.825,
+        "p2": 0.066,
+        "p98": 0.785
+      }
+    },
+    {
+      "version": 2,
+      "publicerad": "2026-11-25",
+      "format": 2,
+      "klassad": {
+        "fil": "kartor/nmk/kummel-vuxen-vastkusten-2024/v2/visning.tif",
+        "sha256": "bc62872b212693e86d982a330381a40ab4a8c1af6669a3905fa06c96e4d2882d",
+        "kallaSha256": "5ec873de6ec2e6ff654294ba4ba660ee97a191feb8f64499f50749a29f2d5a5f",
+        "bytes": 1796,
+        "epsg": 4326,
+        "upplosning": 3712,
+        "vy3006": {
+          "fil": "kartor/nmk/kummel-vuxen-vastkusten-2024/v2/visning_3006.tif",
+          "sha256": "1acc9cde8940f3bfc572c122f718c96d93d429bcb85aa22633db054b1e187f51",
+          "bytes": 3197
+        },
+        "klasser": [
+          {
+            "varde": 5,
+            "namn": "Viktigt",
+            "farg": true
+          },
+          {
+            "varde": 10,
+            "namn": "Mycket viktigt",
+            "farg": true
+          }
+        ]
+      },
+      "kontinuerlig": {
+        "fil": "kartor/nmk/kummel-vuxen-vastkusten-2024/v2/radata.tif",
+        "sha256": "676ea2d9fc0158b43fc278ef8fe500217ed29f6416eaaee48132c12a738d802a",
+        "kallaSha256": "a5c0671659e10f1054a36ed267e7bc8a07ed581018c3ff79cbdba9627b4ce323",
+        "bytes": 8983,
+        "epsg": 4326,
+        "upplosning": 3712,
+        "vy3006": {
+          "fil": "kartor/nmk/kummel-vuxen-vastkusten-2024/v2/radata_3006.tif",
+          "sha256": "35301eacbc0ebdd03208fb3f10e050a5636d9c8f1cef937d04bcb49908274241",
+          "bytes": 15130
+        },
+        "skala": 1000,
+        "enhet": "sannolikhet",
+        "min": 0.055,
+        "max": 0.825,
+        "p2": 0.066,
+        "p98": 0.785
+      }
+    }
+  ]
+}

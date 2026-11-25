@@ -1,0 +1,117 @@
+{
+  "id": "kolja-vuxen-vastkusten-2024",
+  "titel": "Kolja vuxen västkusten",
+  "projekt": "NMK",
+  "kalla": "Nationell marin kartering (Trål)",
+  "citering": "Erlandsson m fl (opubl)",
+  "ar": 2024,
+  "kvalitet": "Grov upplösning då tråldragen är långa. Provtagning inte designad för rumsliga analyser, där tillgänglig data mellan geografiska områden kan variera mellan år. Data från många år ingår dock i modelleringen.",
+  "licens": "CC BY 4.0",
+  "kontakt": "SLU-Aqua-fiskkartor@slu.se",
+  "sprak": "sv",
+  "doi": null,
+  "farg": "YlGnBu",
+  "visas": true,
+  "metadata": "kartor/nmk/kolja-vuxen-vastkusten-2024/metadata.json",
+  "falt": {
+    "art": "Kolja",
+    "vetenskapligt_namn": "Melanogrammus aeglefinus",
+    "livsstadium": "Vuxen",
+    "havsomrade": "Västerhavet",
+    "omrade": "Västkusten >30 m",
+    "rodlista": "VU",
+    "fiskbarometern": "Ices bedömer att fisketrycket på beståndet ligger under det referensvärde för fiskeridödlighet som ger ett hållbart fiske över tid och att lekbiomassan ligger över tröskelvärdet som inte bör underskridas. Förbättrad kunskap om lokala bestånd i Kattegatt och Skagerrak behövs för en lokal hållbar förvaltning.",
+    "simblasa": "Ja",
+    "livsmiljo": "Demersal (bottennära)"
+  },
+  "aktuellVersion": 2,
+  "versioner": [
+    {
+      "version": 1,
+      "publicerad": "2026-11-25",
+      "klassad": {
+        "fil": "kartor/nmk/kolja-vuxen-vastkusten-2024/v1/visning.tif",
+        "sha256": "2ccaee69cba782ed7079dfe39908f2274347bcb6068b8b733a22f2bee735beb5",
+        "kallaSha256": "ba22c25c59a7292620388d6c358ec2dbc9e3951eeb0dc102fb783e170b90af9d",
+        "bytes": 2131,
+        "epsg": 4326,
+        "upplosning": 3712,
+        "klasser": [
+          {
+            "varde": 5,
+            "namn": "Viktigt",
+            "farg": true
+          },
+          {
+            "varde": 10,
+            "namn": "Mycket viktigt",
+            "farg": true
+          }
+        ]
+      },
+      "kontinuerlig": {
+        "fil": "kartor/nmk/kolja-vuxen-vastkusten-2024/v1/radata.tif",
+        "sha256": "4457259c266075fb3f56b510d778b2377d61d93cbed2cbfa1ff14e61c6c2416d",
+        "kallaSha256": "5533c6008e30a9c74b8de93c5187ff36283285acc5b5c09747a32b88003672f8",
+        "bytes": 8908,
+        "epsg": 4326,
+        "upplosning": 3712,
+        "skala": 1000,
+        "enhet": "sannolikhet",
+        "min": 0.025,
+        "max": 0.934,
+        "p2": 0.029,
+        "p98": 0.838
+      }
+    },
+    {
+      "version": 2,
+      "publicerad": "2026-11-25",
+      "format": 2,
+      "klassad": {
+        "fil": "kartor/nmk/kolja-vuxen-vastkusten-2024/v2/visning.tif",
+        "sha256": "5125833e9a51a14a906b80b715c53c6245803fb908066c2297b7b9da9be51d5e",
+        "kallaSha256": "ba22c25c59a7292620388d6c358ec2dbc9e3951eeb0dc102fb783e170b90af9d",
+        "bytes": 1751,
+        "epsg": 4326,
+        "upplosning": 3712,
+        "vy3006": {
+          "fil": "kartor/nmk/kolja-vuxen-vastkusten-2024/v2/visning_3006.tif",
+          "sha256": "955416883d040dad02a5fe28afb8598dfd76d2e640c1bfb5cc041eb057aa53ba",
+          "bytes": 3043
+        },
+        "klasser": [
+          {
+            "varde": 5,
+            "namn": "Viktigt",
+            "farg": true
+          },
+          {
+            "varde": 10,
+            "namn": "Mycket viktigt",
+            "farg": true
+          }
+        ]
+      },
+      "kontinuerlig": {
+        "fil": "kartor/nmk/kolja-vuxen-vastkusten-2024/v2/radata.tif",
+        "sha256": "4457259c266075fb3f56b510d778b2377d61d93cbed2cbfa1ff14e61c6c2416d",
+        "kallaSha256": "5533c6008e30a9c74b8de93c5187ff36283285acc5b5c09747a32b88003672f8",
+        "bytes": 8908,
+        "epsg": 4326,
+        "upplosning": 3712,
+        "vy3006": {
+          "fil": "kartor/nmk/kolja-vuxen-vastkusten-2024/v2/radata_3006.tif",
+          "sha256": "d190fe3bdd6014776557c4835216d42c2ab756cbd4ae09b57f72c71db42571f5",
+          "bytes": 15181
+        },
+        "skala": 1000,
+        "enhet": "sannolikhet",
+        "min": 0.025,
+        "max": 0.934,
+        "p2": 0.029,
+        "p98": 0.838
+      }
+    }
+  ]
+}

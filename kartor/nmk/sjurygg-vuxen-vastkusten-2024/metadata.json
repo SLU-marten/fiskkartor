@@ -1,0 +1,117 @@
+{
+  "id": "sjurygg-vuxen-vastkusten-2024",
+  "titel": "Sjurygg vuxen västkusten",
+  "projekt": "NMK",
+  "kalla": "Nationell marin kartering (Trål)",
+  "citering": "Erlandsson m fl (opubl)",
+  "ar": 2024,
+  "kvalitet": "Grov upplösning då tråldragen är långa. Provtagning inte designad för rumsliga analyser, där tillgänglig data mellan geografiska områden kan variera mellan år. Data från många år ingår dock i modelleringen.",
+  "licens": "CC BY 4.0",
+  "kontakt": "SLU-Aqua-fiskkartor@slu.se",
+  "sprak": "sv",
+  "doi": null,
+  "farg": "YlGnBu",
+  "visas": true,
+  "metadata": "kartor/nmk/sjurygg-vuxen-vastkusten-2024/metadata.json",
+  "falt": {
+    "art": "Sjurygg",
+    "vetenskapligt_namn": "Cyclopterus lumpus",
+    "livsstadium": "Vuxen",
+    "havsomrade": "Västerhavet",
+    "omrade": "Västkusten >30 m",
+    "rodlista": "LC",
+    "fiskbarometern": "Beståndet av sjurygg är sannoligt inte inom biologiskt säkra gränser i Skagerrak, Kattegatt och Öresund.",
+    "simblasa": "Nej",
+    "livsmiljo": "Bentopelagisk"
+  },
+  "aktuellVersion": 2,
+  "versioner": [
+    {
+      "version": 1,
+      "publicerad": "2026-11-25",
+      "klassad": {
+        "fil": "kartor/nmk/sjurygg-vuxen-vastkusten-2024/v1/visning.tif",
+        "sha256": "851be9a30b2ecb4a385da67f58c5ac1f27f845fd469d2ab4dc4dc31af124822f",
+        "kallaSha256": "15c2ce87b549af189f1f1d08645f5c165352577ca2704699c524d88092ca3222",
+        "bytes": 2219,
+        "epsg": 4326,
+        "upplosning": 3712,
+        "klasser": [
+          {
+            "varde": 5,
+            "namn": "Viktigt",
+            "farg": true
+          },
+          {
+            "varde": 10,
+            "namn": "Mycket viktigt",
+            "farg": true
+          }
+        ]
+      },
+      "kontinuerlig": {
+        "fil": "kartor/nmk/sjurygg-vuxen-vastkusten-2024/v1/radata.tif",
+        "sha256": "20cb6c1ce200e7a5e12159d0ea049cc31cd2450e56e0d883ac46e883a1afbd17",
+        "kallaSha256": "c2d893563c52848c5d3d150e67a695871a1703ff397d076db8ba8406c94b4eb5",
+        "bytes": 9046,
+        "epsg": 4326,
+        "upplosning": 3712,
+        "skala": 1000,
+        "enhet": "sannolikhet",
+        "min": 0.114,
+        "max": 0.842,
+        "p2": 0.223,
+        "p98": 0.698
+      }
+    },
+    {
+      "version": 2,
+      "publicerad": "2026-11-25",
+      "format": 2,
+      "klassad": {
+        "fil": "kartor/nmk/sjurygg-vuxen-vastkusten-2024/v2/visning.tif",
+        "sha256": "aa5584ef2e80534562cc5174b3d89237ed23f6d1aa67219ead4c55bb0cc501bf",
+        "kallaSha256": "15c2ce87b549af189f1f1d08645f5c165352577ca2704699c524d88092ca3222",
+        "bytes": 1837,
+        "epsg": 4326,
+        "upplosning": 3712,
+        "vy3006": {
+          "fil": "kartor/nmk/sjurygg-vuxen-vastkusten-2024/v2/visning_3006.tif",
+          "sha256": "46f846f724636058ebdddb55ba5e29ec05b303aa8268791e522d007429a62a6b",
+          "bytes": 3241
+        },
+        "klasser": [
+          {
+            "varde": 5,
+            "namn": "Viktigt",
+            "farg": true
+          },
+          {
+            "varde": 10,
+            "namn": "Mycket viktigt",
+            "farg": true
+          }
+        ]
+      },
+      "kontinuerlig": {
+        "fil": "kartor/nmk/sjurygg-vuxen-vastkusten-2024/v2/radata.tif",
+        "sha256": "20cb6c1ce200e7a5e12159d0ea049cc31cd2450e56e0d883ac46e883a1afbd17",
+        "kallaSha256": "c2d893563c52848c5d3d150e67a695871a1703ff397d076db8ba8406c94b4eb5",
+        "bytes": 9046,
+        "epsg": 4326,
+        "upplosning": 3712,
+        "vy3006": {
+          "fil": "kartor/nmk/sjurygg-vuxen-vastkusten-2024/v2/radata_3006.tif",
+          "sha256": "153649d54b20ff624b2a5d19d3ea7c8257198bd04842180fa5b9439d7de916dd",
+          "bytes": 15301
+        },
+        "skala": 1000,
+        "enhet": "sannolikhet",
+        "min": 0.114,
+        "max": 0.842,
+        "p2": 0.223,
+        "p98": 0.698
+      }
+    }
+  ]
+}

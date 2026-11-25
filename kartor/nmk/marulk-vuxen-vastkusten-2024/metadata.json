@@ -1,0 +1,117 @@
+{
+  "id": "marulk-vuxen-vastkusten-2024",
+  "titel": "Marulk vuxen västkusten",
+  "projekt": "NMK",
+  "kalla": "Nationell marin kartering (Trål)",
+  "citering": "Erlandsson m fl (opubl)",
+  "ar": 2024,
+  "kvalitet": "Grov upplösning då tråldragen är långa. Provtagning inte designad för rumsliga analyser, där tillgänglig data mellan geografiska områden kan variera mellan år. Data från många år ingår dock i modelleringen.",
+  "licens": "CC BY 4.0",
+  "kontakt": "SLU-Aqua-fiskkartor@slu.se",
+  "sprak": "sv",
+  "doi": null,
+  "farg": "YlGnBu",
+  "visas": true,
+  "metadata": "kartor/nmk/marulk-vuxen-vastkusten-2024/metadata.json",
+  "falt": {
+    "art": "Marulk",
+    "vetenskapligt_namn": "Lophius piscatorius",
+    "livsstadium": "Vuxen",
+    "havsomrade": "Västerhavet",
+    "omrade": "Västkusten >30 m",
+    "rodlista": null,
+    "fiskbarometern": "Beståndet av marulk klassas som \"bestånd med begränsad tillgänglig information\" enligt Ices som bedömer att fisketrycket ligger över referensvärdet för fiskeridödliget som ger ett hållvart fiske över tid.",
+    "simblasa": "Nej",
+    "livsmiljo": "Bentisk (bottenlevande)"
+  },
+  "aktuellVersion": 2,
+  "versioner": [
+    {
+      "version": 1,
+      "publicerad": "2026-11-25",
+      "klassad": {
+        "fil": "kartor/nmk/marulk-vuxen-vastkusten-2024/v1/visning.tif",
+        "sha256": "ac05ce88bd62d4251ccf9b455b1db9d579ee42ba3af127fa6e9c101a076f93bb",
+        "kallaSha256": "5f5195324abdd2c61012477f86eb7c36bbdac4fa3c7915b36a8ce1b80cd92068",
+        "bytes": 1900,
+        "epsg": 4326,
+        "upplosning": 3712,
+        "klasser": [
+          {
+            "varde": 5,
+            "namn": "Viktigt",
+            "farg": true
+          },
+          {
+            "varde": 10,
+            "namn": "Mycket viktigt",
+            "farg": true
+          }
+        ]
+      },
+      "kontinuerlig": {
+        "fil": "kartor/nmk/marulk-vuxen-vastkusten-2024/v1/radata.tif",
+        "sha256": "c77526a07ebc531c93e2ef843b456880886e8f54d9fe46d909d2f578ed51d2f7",
+        "kallaSha256": "e9be875d18f4800641368bc2889fc6e93ed11e87e5efd689f6bca064f2f48daa",
+        "bytes": 7867,
+        "epsg": 4326,
+        "upplosning": 3712,
+        "skala": 1000,
+        "enhet": "sannolikhet",
+        "min": 0.021,
+        "max": 0.914,
+        "p2": 0.023,
+        "p98": 0.876
+      }
+    },
+    {
+      "version": 2,
+      "publicerad": "2026-11-25",
+      "format": 2,
+      "klassad": {
+        "fil": "kartor/nmk/marulk-vuxen-vastkusten-2024/v2/visning.tif",
+        "sha256": "dfcf2a4ca50608c23f14633dc650a47c6cfd6ad17259b2be1f8d601f28ba66c1",
+        "kallaSha256": "5f5195324abdd2c61012477f86eb7c36bbdac4fa3c7915b36a8ce1b80cd92068",
+        "bytes": 1518,
+        "epsg": 4326,
+        "upplosning": 3712,
+        "vy3006": {
+          "fil": "kartor/nmk/marulk-vuxen-vastkusten-2024/v2/visning_3006.tif",
+          "sha256": "799cb675f89be04a5f93329becc505ce5ca52dcc5c7723b9815bde859b762db7",
+          "bytes": 2635
+        },
+        "klasser": [
+          {
+            "varde": 5,
+            "namn": "Viktigt",
+            "farg": true
+          },
+          {
+            "varde": 10,
+            "namn": "Mycket viktigt",
+            "farg": true
+          }
+        ]
+      },
+      "kontinuerlig": {
+        "fil": "kartor/nmk/marulk-vuxen-vastkusten-2024/v2/radata.tif",
+        "sha256": "c77526a07ebc531c93e2ef843b456880886e8f54d9fe46d909d2f578ed51d2f7",
+        "kallaSha256": "e9be875d18f4800641368bc2889fc6e93ed11e87e5efd689f6bca064f2f48daa",
+        "bytes": 7867,
+        "epsg": 4326,
+        "upplosning": 3712,
+        "vy3006": {
+          "fil": "kartor/nmk/marulk-vuxen-vastkusten-2024/v2/radata_3006.tif",
+          "sha256": "94fe70e10dc77f7cbf1262796bd380def0a5fcec42539b1afd635c4446cd7b4b",
+          "bytes": 13339
+        },
+        "skala": 1000,
+        "enhet": "sannolikhet",
+        "min": 0.021,
+        "max": 0.914,
+        "p2": 0.023,
+        "p98": 0.876
+      }
+    }
+  ]
+}

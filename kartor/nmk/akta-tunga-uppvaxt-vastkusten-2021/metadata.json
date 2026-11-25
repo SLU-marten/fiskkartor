@@ -1,0 +1,117 @@
+{
+  "id": "akta-tunga-uppvaxt-vastkusten-2021",
+  "titel": "Äkta tunga uppväxt västkusten",
+  "projekt": "NMK",
+  "kalla": "Nationell marin kartering (Ryssja)",
+  "citering": "Fredriksson m fl 2021",
+  "ar": 2021,
+  "kvalitet": "Provtagning inte designad för rumsliga analyser, där tillgänglig data mellan geografiska områden kan variera mellan år. Provtagninsdata från flera olika år ingår dock i modelleringen.",
+  "licens": "CC BY 4.0",
+  "kontakt": "SLU-Aqua-fiskkartor@slu.se",
+  "sprak": "sv",
+  "doi": null,
+  "farg": "YlGnBu",
+  "visas": true,
+  "metadata": "kartor/nmk/akta-tunga-uppvaxt-vastkusten-2021/metadata.json",
+  "falt": {
+    "art": "Tunga",
+    "vetenskapligt_namn": "Solea solea",
+    "livsstadium": "Uppväxt",
+    "havsomrade": "Västerhavet",
+    "omrade": "Västkusten, djup 0-30m.",
+    "rodlista": "LC",
+    "fiskbarometern": "Ices bedömer att beståndet av tunga i Skagerrak, Kattegatt, Öresund och västra Östersjön har en fiskeridödlighet som ligger under referensvärdet för fiskeridödlighet som ger ett hållbart fiske över tid och att beståndets lekbiomassa ligger under gränsvärdet som inte bör underskridas med över gränsen för lekbeståndets storlek.",
+    "simblasa": "Nej",
+    "livsmiljo": "Demersal (bottennära)"
+  },
+  "aktuellVersion": 2,
+  "versioner": [
+    {
+      "version": 1,
+      "publicerad": "2026-11-25",
+      "klassad": {
+        "fil": "kartor/nmk/akta-tunga-uppvaxt-vastkusten-2021/v1/visning.tif",
+        "sha256": "266be5745f850bcd91efeabca388d48fd1eb483e80ec28c284e5f5f26d35cdbe",
+        "kallaSha256": "5b44484338c539882d2af25573af55ed9531fbdfed5648259e148f306b069f0c",
+        "bytes": 30719,
+        "epsg": 25833,
+        "upplosning": 250,
+        "klasser": [
+          {
+            "varde": 5,
+            "namn": "Viktigt",
+            "farg": true
+          },
+          {
+            "varde": 10,
+            "namn": "Mycket viktigt",
+            "farg": true
+          }
+        ]
+      },
+      "kontinuerlig": {
+        "fil": "kartor/nmk/akta-tunga-uppvaxt-vastkusten-2021/v1/radata.tif",
+        "sha256": "2bf1909bc9724c01d30d3a58265c463fdb0d21a0558f6817df6b582157c8fbd7",
+        "kallaSha256": "bc854140516900e6bd1a5b193bd35ed83df248dfe364ac35376f972699374587",
+        "bytes": 215390,
+        "epsg": 25833,
+        "upplosning": 250,
+        "skala": 1000,
+        "enhet": "sannolikhet",
+        "min": 0.03,
+        "max": 0.975,
+        "p2": 0.032,
+        "p98": 0.764
+      }
+    },
+    {
+      "version": 2,
+      "publicerad": "2026-11-25",
+      "format": 2,
+      "klassad": {
+        "fil": "kartor/nmk/akta-tunga-uppvaxt-vastkusten-2021/v2/visning.tif",
+        "sha256": "bfd341c0d617fc81539afbb1083d30e4629d07e20181f8c2b9b05ab56778c590",
+        "kallaSha256": "5b44484338c539882d2af25573af55ed9531fbdfed5648259e148f306b069f0c",
+        "bytes": 30341,
+        "epsg": 25833,
+        "upplosning": 250,
+        "vy3006": {
+          "fil": "kartor/nmk/akta-tunga-uppvaxt-vastkusten-2021/v2/visning_3006.tif",
+          "sha256": "ec18982cbdd29cd8c72093d2d88f22dfedd53441de706922dda85771d92bce55",
+          "bytes": 58615
+        },
+        "klasser": [
+          {
+            "varde": 5,
+            "namn": "Viktigt",
+            "farg": true
+          },
+          {
+            "varde": 10,
+            "namn": "Mycket viktigt",
+            "farg": true
+          }
+        ]
+      },
+      "kontinuerlig": {
+        "fil": "kartor/nmk/akta-tunga-uppvaxt-vastkusten-2021/v2/radata.tif",
+        "sha256": "2bf1909bc9724c01d30d3a58265c463fdb0d21a0558f6817df6b582157c8fbd7",
+        "kallaSha256": "bc854140516900e6bd1a5b193bd35ed83df248dfe364ac35376f972699374587",
+        "bytes": 215390,
+        "epsg": 25833,
+        "upplosning": 250,
+        "vy3006": {
+          "fil": "kartor/nmk/akta-tunga-uppvaxt-vastkusten-2021/v2/radata_3006.tif",
+          "sha256": "94ecef6ac07f9e8c13b5acd1381d94fb0e09fa52228bf0b71ba93a57811f496f",
+          "bytes": 403130
+        },
+        "skala": 1000,
+        "enhet": "sannolikhet",
+        "min": 0.03,
+        "max": 0.975,
+        "p2": 0.032,
+        "p98": 0.764
+      }
+    }
+  ]
+}

@@ -1,0 +1,96 @@
+{
+  "id": "ostersjoflundra-lek-ostkusten-2021",
+  "titel": "Östersjöflundra lek ostkusten",
+  "projekt": "PanBalticScope",
+  "kalla": "PanBalticScope",
+  "citering": "Bergström m fl 2021",
+  "ar": 2021,
+  "kvalitet": "The data layer is based on species distribution modelling focusing on mature flounder at the spawning stage and should be considered a rough estimation. The studies from which the thresholds values for environmental variables have been obtained are based on publications conducted before the separation of Baltic flounder from European flounder but have taken the specific characteristics of the separate spawning ecotypes into account.",
+  "licens": "CC BY 4.0",
+  "kontakt": "SLU-Aqua-fiskkartor@slu.se",
+  "sprak": "en",
+  "doi": null,
+  "farg": "YlGnBu",
+  "visas": true,
+  "metadata": "kartor/panbalticscope/ostersjoflundra-lek-ostkusten-2021/metadata.json",
+  "falt": {
+    "art": "Östersjöflundra",
+    "vetenskapligt_namn": "Platichthys solemdali",
+    "livsstadium": "Lek",
+    "havsomrade": "Östersjön",
+    "omrade": "Östersjön",
+    "rodlista": "LC",
+    "fiskbarometern": "Ices har ingen rödgivning för skrubbskädda i Östersjön. Enligt senaste bedömning av WGBFAS (Baltic Fisheries Assessment Working Group) 2023 fiskas beståndet i Södra och Östra Östersjön på ett hållbart vis. I norra Östersjön tyder data på ett överfiske de senaste fem åren. Beståndstatus för den mindre vanliga Östersjöskrubbskäddan i södra Östersjön är osäker.",
+    "simblasa": "Nej",
+    "livsmiljo": "Bentisk (Bottenlevande)"
+  },
+  "aktuellVersion": 2,
+  "versioner": [
+    {
+      "version": 1,
+      "publicerad": "2026-11-25",
+      "klassad": {
+        "fil": "kartor/panbalticscope/ostersjoflundra-lek-ostkusten-2021/v1/visning.tif",
+        "sha256": "1722a8ae02f10ec3db80e55889ec358e0940da834d060542a9d9d541d192f967",
+        "kallaSha256": "39197693729b0457758a0a7e7dba17dbc659ed990d2601ffd4e8defd1f73ae38",
+        "bytes": 126614,
+        "epsg": 3857,
+        "upplosning": 1000,
+        "klasser": [
+          {
+            "varde": 0,
+            "namn": "Ej viktigt område",
+            "farg": false
+          },
+          {
+            "varde": 5,
+            "namn": "Viktigt",
+            "farg": true
+          },
+          {
+            "varde": 10,
+            "namn": "Mycket viktigt",
+            "farg": true
+          }
+        ]
+      },
+      "kontinuerlig": null
+    },
+    {
+      "version": 2,
+      "publicerad": "2026-11-25",
+      "format": 2,
+      "klassad": {
+        "fil": "kartor/panbalticscope/ostersjoflundra-lek-ostkusten-2021/v2/visning.tif",
+        "sha256": "e5942342bab41747ad91c182eb27a9ae77e9ecbd52d69a51dbda649319c6df1b",
+        "kallaSha256": "39197693729b0457758a0a7e7dba17dbc659ed990d2601ffd4e8defd1f73ae38",
+        "bytes": 127774,
+        "epsg": 3857,
+        "upplosning": 497.1,
+        "vy3006": {
+          "fil": "kartor/panbalticscope/ostersjoflundra-lek-ostkusten-2021/v2/visning_3006.tif",
+          "sha256": "2071dd883bf6e920198da96dbf777f82b1f1d0fa2457309607b13473f8e26640",
+          "bytes": 476799
+        },
+        "klasser": [
+          {
+            "varde": 0,
+            "namn": "Ej viktigt område",
+            "farg": false
+          },
+          {
+            "varde": 5,
+            "namn": "Viktigt",
+            "farg": true
+          },
+          {
+            "varde": 10,
+            "namn": "Mycket viktigt",
+            "farg": true
+          }
+        ]
+      },
+      "kontinuerlig": null
+    }
+  ]
+}

@@ -1,0 +1,117 @@
+{
+  "id": "tunga-vuxen-vastkusten-2024",
+  "titel": "Tunga vuxen västkusten",
+  "projekt": "NMK",
+  "kalla": "Nationell marin kartering (Trål)",
+  "citering": "Erlandsson m fl (opubl)",
+  "ar": 2024,
+  "kvalitet": "Grov upplösning då tråldragen är långa. Provtagning inte designad för rumsliga analyser, där tillgänglig data mellan geografiska områden kan variera mellan år. Data från många år ingår dock i modelleringen.",
+  "licens": "CC BY 4.0",
+  "kontakt": "SLU-Aqua-fiskkartor@slu.se",
+  "sprak": "sv",
+  "doi": null,
+  "farg": "YlGnBu",
+  "visas": true,
+  "metadata": "kartor/nmk/tunga-vuxen-vastkusten-2024/metadata.json",
+  "falt": {
+    "art": "Tunga",
+    "vetenskapligt_namn": "Solea solea",
+    "livsstadium": "Vuxen",
+    "havsomrade": "Västerhavet",
+    "omrade": "Västkusten >30 m",
+    "rodlista": "LC",
+    "fiskbarometern": "Ices bedömer att beståndet av tunga i Skagerrak, Kattegatt, Öresund och västra Östersjön har en fiskeridödlighet som ligger under referensvärdet för fiskeridödlighet som ger ett hållbart fiske över tid och att beståndets lekbiomassa ligger under gränsvärdet som inte bör underskridas med över gränsen för lekbeståndets storlek.",
+    "simblasa": "Nej",
+    "livsmiljo": "Demersal (bottennära)"
+  },
+  "aktuellVersion": 2,
+  "versioner": [
+    {
+      "version": 1,
+      "publicerad": "2026-11-25",
+      "klassad": {
+        "fil": "kartor/nmk/tunga-vuxen-vastkusten-2024/v1/visning.tif",
+        "sha256": "1c975424b53c4281c3f7f6117b5139866a12555fd3fd67205d17cc3d4a295ce9",
+        "kallaSha256": "6f2b7050cdf21ee3a3a5234b3ce039a8957af30414f7c0449faa8a2e59b59a88",
+        "bytes": 2189,
+        "epsg": 4326,
+        "upplosning": 3712,
+        "klasser": [
+          {
+            "varde": 5,
+            "namn": "Viktigt",
+            "farg": true
+          },
+          {
+            "varde": 10,
+            "namn": "Mycket viktigt",
+            "farg": true
+          }
+        ]
+      },
+      "kontinuerlig": {
+        "fil": "kartor/nmk/tunga-vuxen-vastkusten-2024/v1/radata.tif",
+        "sha256": "dd21bf63e673e99386f4b9eab6b97b038bc2edcefb935ab1941947e1fdeae949",
+        "kallaSha256": "395cf7955856729b37c4447e4711bc1fbcd231b9efcef333d26c4aed128f395c",
+        "bytes": 8968,
+        "epsg": 4326,
+        "upplosning": 3712,
+        "skala": 1000,
+        "enhet": "sannolikhet",
+        "min": 0.034,
+        "max": 0.78,
+        "p2": 0.037,
+        "p98": 0.735
+      }
+    },
+    {
+      "version": 2,
+      "publicerad": "2026-11-25",
+      "format": 2,
+      "klassad": {
+        "fil": "kartor/nmk/tunga-vuxen-vastkusten-2024/v2/visning.tif",
+        "sha256": "cd5f3c0e59749d398adee75a6ea119e6d096c09773bbb82e145d7cfbc996dc2a",
+        "kallaSha256": "6f2b7050cdf21ee3a3a5234b3ce039a8957af30414f7c0449faa8a2e59b59a88",
+        "bytes": 1809,
+        "epsg": 4326,
+        "upplosning": 3712,
+        "vy3006": {
+          "fil": "kartor/nmk/tunga-vuxen-vastkusten-2024/v2/visning_3006.tif",
+          "sha256": "7480f3a2fd383765eaa574b55fc86292e127986a49dcfa05f065a4aa7f8640f7",
+          "bytes": 3050
+        },
+        "klasser": [
+          {
+            "varde": 5,
+            "namn": "Viktigt",
+            "farg": true
+          },
+          {
+            "varde": 10,
+            "namn": "Mycket viktigt",
+            "farg": true
+          }
+        ]
+      },
+      "kontinuerlig": {
+        "fil": "kartor/nmk/tunga-vuxen-vastkusten-2024/v2/radata.tif",
+        "sha256": "dd21bf63e673e99386f4b9eab6b97b038bc2edcefb935ab1941947e1fdeae949",
+        "kallaSha256": "395cf7955856729b37c4447e4711bc1fbcd231b9efcef333d26c4aed128f395c",
+        "bytes": 8968,
+        "epsg": 4326,
+        "upplosning": 3712,
+        "vy3006": {
+          "fil": "kartor/nmk/tunga-vuxen-vastkusten-2024/v2/radata_3006.tif",
+          "sha256": "b452192e167d91a2775071c3839b229160c4ac9f9f5d67f25e1a7ebfe436c07e",
+          "bytes": 15221
+        },
+        "skala": 1000,
+        "enhet": "sannolikhet",
+        "min": 0.034,
+        "max": 0.78,
+        "p2": 0.037,
+        "p98": 0.735
+      }
+    }
+  ]
+}

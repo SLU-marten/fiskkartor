@@ -1,0 +1,117 @@
+{
+  "id": "fjarsing-vuxen-vastkusten-2024",
+  "titel": "Fjärsing vuxen västkusten",
+  "projekt": "NMK",
+  "kalla": "Nationell marin kartering (Trål)",
+  "citering": "Erlandsson m fl (opubl)",
+  "ar": 2024,
+  "kvalitet": "Grov upplösning då tråldragen är långa. Provtagning inte designad för rumsliga analyser, där tillgänglig data mellan geografiska områden kan variera mellan år. Data från många år ingår dock i modelleringen.",
+  "licens": "CC BY 4.0",
+  "kontakt": "SLU-Aqua-fiskkartor@slu.se",
+  "sprak": "sv",
+  "doi": null,
+  "farg": "YlGnBu",
+  "visas": true,
+  "metadata": "kartor/nmk/fjarsing-vuxen-vastkusten-2024/metadata.json",
+  "falt": {
+    "art": "Fjärsing",
+    "vetenskapligt_namn": "Trachinus draco",
+    "livsstadium": "Vuxen",
+    "havsomrade": "Västerhavet",
+    "omrade": "Västkusten >30 m",
+    "rodlista": "LC",
+    "fiskbarometern": "Beståndet är sannolikt inom biologiskt säkra gränser i Skagerrak och Kattegatt.",
+    "simblasa": "Nej",
+    "livsmiljo": "Bentisk (bottenlevande)"
+  },
+  "aktuellVersion": 2,
+  "versioner": [
+    {
+      "version": 1,
+      "publicerad": "2026-11-25",
+      "klassad": {
+        "fil": "kartor/nmk/fjarsing-vuxen-vastkusten-2024/v1/visning.tif",
+        "sha256": "697698612957d90c9adac4688aa3b792822cc5ce8c292f411b8795a3a2218f26",
+        "kallaSha256": "ed0a8150b9e9c138ddef2972a6b6afe0e2ec62cf1ff692c61fbc8302c0f7362a",
+        "bytes": 2094,
+        "epsg": 4326,
+        "upplosning": 3712,
+        "klasser": [
+          {
+            "varde": 5,
+            "namn": "Viktigt",
+            "farg": true
+          },
+          {
+            "varde": 10,
+            "namn": "Mycket viktigt",
+            "farg": true
+          }
+        ]
+      },
+      "kontinuerlig": {
+        "fil": "kartor/nmk/fjarsing-vuxen-vastkusten-2024/v1/radata.tif",
+        "sha256": "49552413366d99a276447b8d87dfeb907e6f9a9279cf1af7ffb20c5df7c19d57",
+        "kallaSha256": "c2c4061130b5185ede2ffca6da66f233a4320520dea5826f4d4b3cd80b491d63",
+        "bytes": 8760,
+        "epsg": 4326,
+        "upplosning": 3712,
+        "skala": 1000,
+        "enhet": "sannolikhet",
+        "min": 0.02,
+        "max": 0.771,
+        "p2": 0.02,
+        "p98": 0.696
+      }
+    },
+    {
+      "version": 2,
+      "publicerad": "2026-11-25",
+      "format": 2,
+      "klassad": {
+        "fil": "kartor/nmk/fjarsing-vuxen-vastkusten-2024/v2/visning.tif",
+        "sha256": "b5d207ee3ea43050dba7b9c3664fd3362b66e8e69e325b0163f1062baaf53afa",
+        "kallaSha256": "ed0a8150b9e9c138ddef2972a6b6afe0e2ec62cf1ff692c61fbc8302c0f7362a",
+        "bytes": 1710,
+        "epsg": 4326,
+        "upplosning": 3712,
+        "vy3006": {
+          "fil": "kartor/nmk/fjarsing-vuxen-vastkusten-2024/v2/visning_3006.tif",
+          "sha256": "537ee33a791fd263c7717401749f02378422f7e55c755d13e770efdcdd2b265f",
+          "bytes": 2915
+        },
+        "klasser": [
+          {
+            "varde": 5,
+            "namn": "Viktigt",
+            "farg": true
+          },
+          {
+            "varde": 10,
+            "namn": "Mycket viktigt",
+            "farg": true
+          }
+        ]
+      },
+      "kontinuerlig": {
+        "fil": "kartor/nmk/fjarsing-vuxen-vastkusten-2024/v2/radata.tif",
+        "sha256": "49552413366d99a276447b8d87dfeb907e6f9a9279cf1af7ffb20c5df7c19d57",
+        "kallaSha256": "c2c4061130b5185ede2ffca6da66f233a4320520dea5826f4d4b3cd80b491d63",
+        "bytes": 8760,
+        "epsg": 4326,
+        "upplosning": 3712,
+        "vy3006": {
+          "fil": "kartor/nmk/fjarsing-vuxen-vastkusten-2024/v2/radata_3006.tif",
+          "sha256": "b7c78eb7ff620891dd69e4aba03364bd5718a3d16b91fb084890b70d9d314691",
+          "bytes": 15016
+        },
+        "skala": 1000,
+        "enhet": "sannolikhet",
+        "min": 0.02,
+        "max": 0.771,
+        "p2": 0.02,
+        "p98": 0.696
+      }
+    }
+  ]
+}

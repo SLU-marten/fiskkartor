@@ -1,0 +1,117 @@
+{
+  "id": "nordkalmar-vuxen-vastkusten-2024",
+  "titel": "Nordkalmar vuxen västkusten",
+  "projekt": "NMK",
+  "kalla": "Nationell marin kartering (Trål)",
+  "citering": "Erlandsson m fl (opubl)",
+  "ar": 2024,
+  "kvalitet": "Grov upplösning då tråldragen är långa. Provtagning inte designad för rumsliga analyser, där tillgänglig data mellan geografiska områden kan variera mellan år. Data från många år ingår dock i modelleringen.",
+  "licens": "CC BY 4.0",
+  "kontakt": "SLU-Aqua-fiskkartor@slu.se",
+  "sprak": "sv",
+  "doi": null,
+  "farg": "YlGnBu",
+  "visas": true,
+  "metadata": "kartor/nmk/nordkalmar-vuxen-vastkusten-2024/metadata.json",
+  "falt": {
+    "art": "Nordkalmar",
+    "vetenskapligt_namn": "Loligo forbesii",
+    "livsstadium": "Vuxen",
+    "havsomrade": "Västerhavet",
+    "omrade": "Västkusten >30 m",
+    "rodlista": "LC",
+    "fiskbarometern": null,
+    "simblasa": null,
+    "livsmiljo": null
+  },
+  "aktuellVersion": 2,
+  "versioner": [
+    {
+      "version": 1,
+      "publicerad": "2026-11-25",
+      "klassad": {
+        "fil": "kartor/nmk/nordkalmar-vuxen-vastkusten-2024/v1/visning.tif",
+        "sha256": "46a351ab2f8df81bb27476def234133582899f51279095287ef20779887b2dd8",
+        "kallaSha256": "03dccb40709b1d4ba87e7d556670a67cb44947b4393c51e4ba05234206c06779",
+        "bytes": 1952,
+        "epsg": 4326,
+        "upplosning": 3712,
+        "klasser": [
+          {
+            "varde": 5,
+            "namn": "Viktigt",
+            "farg": true
+          },
+          {
+            "varde": 10,
+            "namn": "Mycket viktigt",
+            "farg": true
+          }
+        ]
+      },
+      "kontinuerlig": {
+        "fil": "kartor/nmk/nordkalmar-vuxen-vastkusten-2024/v1/radata.tif",
+        "sha256": "61b6f99c89763cdafb5a6c817d5fe4ec25202fa1f292fb0e51d99182326a05ce",
+        "kallaSha256": "0941dc16fc3ec9b97c7a877b504ee2dee86d72df547e52c8bd23197ae4aa8bb6",
+        "bytes": 8136,
+        "epsg": 4326,
+        "upplosning": 3712,
+        "skala": 1000,
+        "enhet": "sannolikhet",
+        "min": 0.021,
+        "max": 0.784,
+        "p2": 0.023,
+        "p98": 0.707
+      }
+    },
+    {
+      "version": 2,
+      "publicerad": "2026-11-25",
+      "format": 2,
+      "klassad": {
+        "fil": "kartor/nmk/nordkalmar-vuxen-vastkusten-2024/v2/visning.tif",
+        "sha256": "d6b338ae686597499e4d8b87715e977f8e3fa3d7b7ea4d37e4bad045740b4dfa",
+        "kallaSha256": "03dccb40709b1d4ba87e7d556670a67cb44947b4393c51e4ba05234206c06779",
+        "bytes": 1566,
+        "epsg": 4326,
+        "upplosning": 3712,
+        "vy3006": {
+          "fil": "kartor/nmk/nordkalmar-vuxen-vastkusten-2024/v2/visning_3006.tif",
+          "sha256": "0b7cab7b7b4c6bf2a3d0127a389caab0320cc0905ad87762d1eccf845ac2ebd6",
+          "bytes": 2667
+        },
+        "klasser": [
+          {
+            "varde": 5,
+            "namn": "Viktigt",
+            "farg": true
+          },
+          {
+            "varde": 10,
+            "namn": "Mycket viktigt",
+            "farg": true
+          }
+        ]
+      },
+      "kontinuerlig": {
+        "fil": "kartor/nmk/nordkalmar-vuxen-vastkusten-2024/v2/radata.tif",
+        "sha256": "61b6f99c89763cdafb5a6c817d5fe4ec25202fa1f292fb0e51d99182326a05ce",
+        "kallaSha256": "0941dc16fc3ec9b97c7a877b504ee2dee86d72df547e52c8bd23197ae4aa8bb6",
+        "bytes": 8136,
+        "epsg": 4326,
+        "upplosning": 3712,
+        "vy3006": {
+          "fil": "kartor/nmk/nordkalmar-vuxen-vastkusten-2024/v2/radata_3006.tif",
+          "sha256": "488ccf71bd344f06c9ced3bd47bca50682a129691b223d237199ad708f594a09",
+          "bytes": 13886
+        },
+        "skala": 1000,
+        "enhet": "sannolikhet",
+        "min": 0.021,
+        "max": 0.784,
+        "p2": 0.023,
+        "p98": 0.707
+      }
+    }
+  ]
+}

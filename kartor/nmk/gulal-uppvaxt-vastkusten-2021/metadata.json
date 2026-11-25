@@ -1,0 +1,117 @@
+{
+  "id": "gulal-uppvaxt-vastkusten-2021",
+  "titel": "Gulål uppväxt västkusten",
+  "projekt": "NMK",
+  "kalla": "Nationell marin kartering (Ryssja)",
+  "citering": "Fredriksson m fl 2021",
+  "ar": 2021,
+  "kvalitet": "Provtagning inte designad för rumsliga analyser, där tillgänglig data mellan geografiska områden kan variera mellan år. Provtagninsdata från flera olika år ingår dock i modelleringen.",
+  "licens": "CC BY 4.0",
+  "kontakt": "SLU-Aqua-fiskkartor@slu.se",
+  "sprak": "sv",
+  "doi": null,
+  "farg": "YlGnBu",
+  "visas": true,
+  "metadata": "kartor/nmk/gulal-uppvaxt-vastkusten-2021/metadata.json",
+  "falt": {
+    "art": "Ål",
+    "vetenskapligt_namn": "Anguilla anguilla",
+    "livsstadium": "Uppväxt",
+    "havsomrade": "Västerhavet",
+    "omrade": "Västkusten, djup 0-30m.",
+    "rodlista": "CR",
+    "fiskbarometern": "Ices råd, enligt försiktighetsprincipen, är att inga fångster av ål ska ske i något habitat. Det inkluderar alla ålens livsstadier.",
+    "simblasa": "Ja",
+    "livsmiljo": "Demersal (kustnära)"
+  },
+  "aktuellVersion": 2,
+  "versioner": [
+    {
+      "version": 1,
+      "publicerad": "2026-11-25",
+      "klassad": {
+        "fil": "kartor/nmk/gulal-uppvaxt-vastkusten-2021/v1/visning.tif",
+        "sha256": "139cbcf71c5b3e2b47822a8a6d04b32d39ba1c674b528b0b98e8966c7522b916",
+        "kallaSha256": "26b370a9f58e59812d3f35391d68f8165cb3911d00eeedc5b9f1345a2b74e5db",
+        "bytes": 24609,
+        "epsg": 25833,
+        "upplosning": 250,
+        "klasser": [
+          {
+            "varde": 5,
+            "namn": "Viktigt",
+            "farg": true
+          },
+          {
+            "varde": 10,
+            "namn": "Mycket viktigt",
+            "farg": true
+          }
+        ]
+      },
+      "kontinuerlig": {
+        "fil": "kartor/nmk/gulal-uppvaxt-vastkusten-2021/v1/radata.tif",
+        "sha256": "c7f6a43a58dc57f81fee51274c9178fc604f10bacc521e8a3d7b75c009f6364d",
+        "kallaSha256": "7d77e455928018794171da13c923f5d8dd702a098eff7747273dee8c5b311779",
+        "bytes": 201009,
+        "epsg": 25833,
+        "upplosning": 250,
+        "skala": 1000,
+        "enhet": "sannolikhet",
+        "min": 0.053,
+        "max": 0.872,
+        "p2": 0.054,
+        "p98": 0.771
+      }
+    },
+    {
+      "version": 2,
+      "publicerad": "2026-11-25",
+      "format": 2,
+      "klassad": {
+        "fil": "kartor/nmk/gulal-uppvaxt-vastkusten-2021/v2/visning.tif",
+        "sha256": "841be85f73e9d433cc8b842ab86c1312777432bb38461f71c2b1060b39d8650e",
+        "kallaSha256": "26b370a9f58e59812d3f35391d68f8165cb3911d00eeedc5b9f1345a2b74e5db",
+        "bytes": 24140,
+        "epsg": 25833,
+        "upplosning": 250,
+        "vy3006": {
+          "fil": "kartor/nmk/gulal-uppvaxt-vastkusten-2021/v2/visning_3006.tif",
+          "sha256": "40742c5e85d1b398ac4a2be7e1bbf3e62960021f8f9cf9d6b91261f6fe8dad16",
+          "bytes": 46431
+        },
+        "klasser": [
+          {
+            "varde": 5,
+            "namn": "Viktigt",
+            "farg": true
+          },
+          {
+            "varde": 10,
+            "namn": "Mycket viktigt",
+            "farg": true
+          }
+        ]
+      },
+      "kontinuerlig": {
+        "fil": "kartor/nmk/gulal-uppvaxt-vastkusten-2021/v2/radata.tif",
+        "sha256": "c7f6a43a58dc57f81fee51274c9178fc604f10bacc521e8a3d7b75c009f6364d",
+        "kallaSha256": "7d77e455928018794171da13c923f5d8dd702a098eff7747273dee8c5b311779",
+        "bytes": 201009,
+        "epsg": 25833,
+        "upplosning": 250,
+        "vy3006": {
+          "fil": "kartor/nmk/gulal-uppvaxt-vastkusten-2021/v2/radata_3006.tif",
+          "sha256": "2f369cc1719d4dcf9f85e58b1187feef3d3b88cd7e6d0510b605419ff8557415",
+          "bytes": 383019
+        },
+        "skala": 1000,
+        "enhet": "sannolikhet",
+        "min": 0.053,
+        "max": 0.872,
+        "p2": 0.054,
+        "p98": 0.771
+      }
+    }
+  ]
+}

@@ -1,0 +1,117 @@
+{
+  "id": "rodtunga-vuxen-vastkusten-2024",
+  "titel": "Rödtunga vuxen västkusten",
+  "projekt": "NMK",
+  "kalla": "Nationell marin kartering (Trål)",
+  "citering": "Erlandsson m fl (opubl)",
+  "ar": 2024,
+  "kvalitet": "Grov upplösning då tråldragen är långa. Provtagning inte designad för rumsliga analyser, där tillgänglig data mellan geografiska områden kan variera mellan år. Data från många år ingår dock i modelleringen.",
+  "licens": "CC BY 4.0",
+  "kontakt": "SLU-Aqua-fiskkartor@slu.se",
+  "sprak": "sv",
+  "doi": null,
+  "farg": "YlGnBu",
+  "visas": true,
+  "metadata": "kartor/nmk/rodtunga-vuxen-vastkusten-2024/metadata.json",
+  "falt": {
+    "art": "Rödtunga",
+    "vetenskapligt_namn": "Glyptocephalus cynoglossus",
+    "livsstadium": "Vuxen",
+    "havsomrade": "Västerhavet",
+    "omrade": "Västkusten >30 m",
+    "rodlista": "LC",
+    "fiskbarometern": "Ices bedömer att beståndet av rödtunga i Skagerrak och Kattegatt har ett fisketryck som ligger över referensvärdet för fiskerifödlighet som ger ett hållbart fiske över tid och en likbiomassa som ligger under tröskelvärdet som inte bör underskridas men att lekbeståndets storlek ändå är över gränsen för när sannolikheten för produktion av ungfisk minskar.",
+    "simblasa": "Nej",
+    "livsmiljo": "Bentisk (bottenlevande)"
+  },
+  "aktuellVersion": 2,
+  "versioner": [
+    {
+      "version": 1,
+      "publicerad": "2026-11-25",
+      "klassad": {
+        "fil": "kartor/nmk/rodtunga-vuxen-vastkusten-2024/v1/visning.tif",
+        "sha256": "d8f8ee5114148f92b032de0b86d25bf0485b3e9598973f448e965fc8a1240bee",
+        "kallaSha256": "7fbce1ec7bb859a1fafd2e2ed282b1a9f178121e85a82fe5d83e2c6dbd362452",
+        "bytes": 1987,
+        "epsg": 4326,
+        "upplosning": 3712,
+        "klasser": [
+          {
+            "varde": 5,
+            "namn": "Viktigt",
+            "farg": true
+          },
+          {
+            "varde": 10,
+            "namn": "Mycket viktigt",
+            "farg": true
+          }
+        ]
+      },
+      "kontinuerlig": {
+        "fil": "kartor/nmk/rodtunga-vuxen-vastkusten-2024/v1/radata.tif",
+        "sha256": "f15853071a53db187467f7f8ed170867a8664f24b0042c65a3962b0d06631d62",
+        "kallaSha256": "fd709567758c665c20ad2d101a2ad9e3dd4e195b2af060d60a3e3adb22433569",
+        "bytes": 8658,
+        "epsg": 4326,
+        "upplosning": 3712,
+        "skala": 1000,
+        "enhet": "sannolikhet",
+        "min": 0.02,
+        "max": 0.962,
+        "p2": 0.022,
+        "p98": 0.958
+      }
+    },
+    {
+      "version": 2,
+      "publicerad": "2026-11-25",
+      "format": 2,
+      "klassad": {
+        "fil": "kartor/nmk/rodtunga-vuxen-vastkusten-2024/v2/visning.tif",
+        "sha256": "6831315d706d0fccf7c8ceb5eadcb8e0a5bd812802e5334f55c3c6bd90c82d10",
+        "kallaSha256": "7fbce1ec7bb859a1fafd2e2ed282b1a9f178121e85a82fe5d83e2c6dbd362452",
+        "bytes": 1603,
+        "epsg": 4326,
+        "upplosning": 3712,
+        "vy3006": {
+          "fil": "kartor/nmk/rodtunga-vuxen-vastkusten-2024/v2/visning_3006.tif",
+          "sha256": "0e5e7b3865355072881bc89cac92985ec2c5483c130e44a185c7bd76a3c87044",
+          "bytes": 2804
+        },
+        "klasser": [
+          {
+            "varde": 5,
+            "namn": "Viktigt",
+            "farg": true
+          },
+          {
+            "varde": 10,
+            "namn": "Mycket viktigt",
+            "farg": true
+          }
+        ]
+      },
+      "kontinuerlig": {
+        "fil": "kartor/nmk/rodtunga-vuxen-vastkusten-2024/v2/radata.tif",
+        "sha256": "f15853071a53db187467f7f8ed170867a8664f24b0042c65a3962b0d06631d62",
+        "kallaSha256": "fd709567758c665c20ad2d101a2ad9e3dd4e195b2af060d60a3e3adb22433569",
+        "bytes": 8658,
+        "epsg": 4326,
+        "upplosning": 3712,
+        "vy3006": {
+          "fil": "kartor/nmk/rodtunga-vuxen-vastkusten-2024/v2/radata_3006.tif",
+          "sha256": "0f6c83cebc43256691e736ec2be720649617f965cdaa5cd2f5a2b9a917ab8fbc",
+          "bytes": 14672
+        },
+        "skala": 1000,
+        "enhet": "sannolikhet",
+        "min": 0.02,
+        "max": 0.962,
+        "p2": 0.022,
+        "p98": 0.958
+      }
+    }
+  ]
+}

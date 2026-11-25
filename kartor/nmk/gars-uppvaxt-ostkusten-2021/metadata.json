@@ -1,0 +1,117 @@
+{
+  "id": "gars-uppvaxt-ostkusten-2021",
+  "titel": "Gärs uppväxt ostkusten",
+  "projekt": "NMK",
+  "kalla": "Nationell marin kartering (Yngel)",
+  "citering": "Erlandsson m fl 2021",
+  "ar": 2021,
+  "kvalitet": "Omfattar inte Öland, Gotland och Skåne pga databrist. Prediktion ner till 6m djup.",
+  "licens": "CC BY 4.0",
+  "kontakt": "SLU-Aqua-fiskkartor@slu.se",
+  "sprak": "sv",
+  "doi": null,
+  "farg": "YlGnBu",
+  "visas": true,
+  "metadata": "kartor/nmk/gars-uppvaxt-ostkusten-2021/metadata.json",
+  "falt": {
+    "art": "Gärs",
+    "vetenskapligt_namn": "Gymnocephalus cernua",
+    "livsstadium": "Uppväxt",
+    "havsomrade": "Östersjön",
+    "omrade": "Östersjön och Bottniska viken, djup 0-6 m. Omfattar ej Gotland, Öland eller stora delar av Skåne län.",
+    "rodlista": "LC",
+    "fiskbarometern": null,
+    "simblasa": "Ja",
+    "livsmiljo": "Demersal (kustnära)"
+  },
+  "aktuellVersion": 2,
+  "versioner": [
+    {
+      "version": 1,
+      "publicerad": "2026-11-25",
+      "klassad": {
+        "fil": "kartor/nmk/gars-uppvaxt-ostkusten-2021/v1/visning.tif",
+        "sha256": "430fc3fbe2cd6d5991b0f3d477f90b6a97dc63738bbdc13362903daa722db3e4",
+        "kallaSha256": "e2cc4f582f45de72f4c61bf0b1d7083afb65462ecf43559bb10896ba54a586a2",
+        "bytes": 51322,
+        "epsg": 3035,
+        "upplosning": 250,
+        "klasser": [
+          {
+            "varde": 5,
+            "namn": "Viktigt",
+            "farg": true
+          },
+          {
+            "varde": 10,
+            "namn": "Mycket viktigt",
+            "farg": true
+          }
+        ]
+      },
+      "kontinuerlig": {
+        "fil": "kartor/nmk/gars-uppvaxt-ostkusten-2021/v1/radata.tif",
+        "sha256": "34ca7b6e702cb214be5d58b057963cf5a8939d5aced568fb490dac05ac861937",
+        "kallaSha256": "2ef9762118ee8ba96b195e363a645331daa17d3ef69e768fd9f743b68464a70e",
+        "bytes": 407103,
+        "epsg": 3035,
+        "upplosning": 250,
+        "skala": 1000,
+        "enhet": "sannolikhet",
+        "min": 0.005,
+        "max": 0.995,
+        "p2": 0.005,
+        "p98": 0.262
+      }
+    },
+    {
+      "version": 2,
+      "publicerad": "2026-11-25",
+      "format": 2,
+      "klassad": {
+        "fil": "kartor/nmk/gars-uppvaxt-ostkusten-2021/v2/visning.tif",
+        "sha256": "308186843829ca6a44a5e72c7dc78ffc5f6e325382df53b69c5ff664fb75bf4d",
+        "kallaSha256": "e2cc4f582f45de72f4c61bf0b1d7083afb65462ecf43559bb10896ba54a586a2",
+        "bytes": 50677,
+        "epsg": 3035,
+        "upplosning": 250,
+        "vy3006": {
+          "fil": "kartor/nmk/gars-uppvaxt-ostkusten-2021/v2/visning_3006.tif",
+          "sha256": "e489f9bda16198e348bb21fb4ef5bd4e4cad7a7816714c9b60b3599fa92985c3",
+          "bytes": 152696
+        },
+        "klasser": [
+          {
+            "varde": 5,
+            "namn": "Viktigt",
+            "farg": true
+          },
+          {
+            "varde": 10,
+            "namn": "Mycket viktigt",
+            "farg": true
+          }
+        ]
+      },
+      "kontinuerlig": {
+        "fil": "kartor/nmk/gars-uppvaxt-ostkusten-2021/v2/radata.tif",
+        "sha256": "34ca7b6e702cb214be5d58b057963cf5a8939d5aced568fb490dac05ac861937",
+        "kallaSha256": "2ef9762118ee8ba96b195e363a645331daa17d3ef69e768fd9f743b68464a70e",
+        "bytes": 407103,
+        "epsg": 3035,
+        "upplosning": 250,
+        "vy3006": {
+          "fil": "kartor/nmk/gars-uppvaxt-ostkusten-2021/v2/radata_3006.tif",
+          "sha256": "4aa7ca27289f03652376ec82eab62c79b38be628bc7aabf358467119eb75e446",
+          "bytes": 1068677
+        },
+        "skala": 1000,
+        "enhet": "sannolikhet",
+        "min": 0.005,
+        "max": 0.995,
+        "p2": 0.005,
+        "p98": 0.262
+      }
+    }
+  ]
+}

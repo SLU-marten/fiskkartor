@@ -1,0 +1,96 @@
+{
+  "id": "gos-lek-ostkusten-2021",
+  "titel": "Gös lek ostkusten",
+  "projekt": "PanBalticScope",
+  "kalla": "PanBalticScope",
+  "citering": "Bergström m fl 2021",
+  "ar": 2021,
+  "kvalitet": "Recruitment area here refers to essential habitats for young of the year pikeperch (based on inventory data from spawning until the end of the first summer). The map is based on literature and environmental variables, derived from inventory data. The data layer may underestimate pikeperch in Finnish waters with respect to habitats for young of the year pikeperch, as it\r\nfocused on newly-hatched larvae when the dispersal is more limited compared to later in the season. Skagerak is not included",
+  "licens": "CC BY 4.0",
+  "kontakt": "SLU-Aqua-fiskkartor@slu.se",
+  "sprak": "en",
+  "doi": null,
+  "farg": "YlGnBu",
+  "visas": true,
+  "metadata": "kartor/panbalticscope/gos-lek-ostkusten-2021/metadata.json",
+  "falt": {
+    "art": "Gös",
+    "vetenskapligt_namn": "Sander lucioperca",
+    "livsstadium": "Lek",
+    "havsomrade": "Östersjön",
+    "omrade": "Bottniska viken och Östersjön, djup 0-5 m",
+    "rodlista": "LC",
+    "fiskbarometern": "Beståndet av gös i Egentliga Östersjön är mycket sannolikt inte inom biologiskt säkra gränser. I Bottniska viken kan beståndet ej bedömas på grund av databrist.",
+    "simblasa": "Ja",
+    "livsmiljo": "Demersal (kustnära)"
+  },
+  "aktuellVersion": 2,
+  "versioner": [
+    {
+      "version": 1,
+      "publicerad": "2026-11-25",
+      "klassad": {
+        "fil": "kartor/panbalticscope/gos-lek-ostkusten-2021/v1/visning.tif",
+        "sha256": "b4d975b15dc29b156da21350c3594b7e181c1c56e6d6acd18316ba124b752b50",
+        "kallaSha256": "56f745e77d14919df37795b6ff007507005fb8561aa70fdf308e671bc5ad7514",
+        "bytes": 94267,
+        "epsg": 3857,
+        "upplosning": 1000,
+        "klasser": [
+          {
+            "varde": 0,
+            "namn": "Ej viktigt område",
+            "farg": false
+          },
+          {
+            "varde": 5,
+            "namn": "Viktigt",
+            "farg": true
+          },
+          {
+            "varde": 10,
+            "namn": "Mycket viktigt",
+            "farg": true
+          }
+        ]
+      },
+      "kontinuerlig": null
+    },
+    {
+      "version": 2,
+      "publicerad": "2026-11-25",
+      "format": 2,
+      "klassad": {
+        "fil": "kartor/panbalticscope/gos-lek-ostkusten-2021/v2/visning.tif",
+        "sha256": "aa45c720ce79c863d47d008044c4c1a717518b4c73e7c090fbfbbc6b40b35239",
+        "kallaSha256": "56f745e77d14919df37795b6ff007507005fb8561aa70fdf308e671bc5ad7514",
+        "bytes": 95858,
+        "epsg": 3857,
+        "upplosning": 497.1,
+        "vy3006": {
+          "fil": "kartor/panbalticscope/gos-lek-ostkusten-2021/v2/visning_3006.tif",
+          "sha256": "c2bf2138df598227797511d5a693bfa1e6279d3752ef13b348649d2a9fc0f078",
+          "bytes": 369182
+        },
+        "klasser": [
+          {
+            "varde": 0,
+            "namn": "Ej viktigt område",
+            "farg": false
+          },
+          {
+            "varde": 5,
+            "namn": "Viktigt",
+            "farg": true
+          },
+          {
+            "varde": 10,
+            "namn": "Mycket viktigt",
+            "farg": true
+          }
+        ]
+      },
+      "kontinuerlig": null
+    }
+  ]
+}

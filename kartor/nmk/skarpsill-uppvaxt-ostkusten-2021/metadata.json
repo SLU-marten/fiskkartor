@@ -1,0 +1,117 @@
+{
+  "id": "skarpsill-uppvaxt-ostkusten-2021",
+  "titel": "Skarpsill uppväxt ostkusten",
+  "projekt": "NMK",
+  "kalla": "Nationell marin kartering (Yngel)",
+  "citering": "Erlandsson m fl 2021",
+  "ar": 2021,
+  "kvalitet": "Omfattar inte Öland, Gotland och Skåne pga databrist. Prediktion ner till 6m djup.",
+  "licens": "CC BY 4.0",
+  "kontakt": "SLU-Aqua-fiskkartor@slu.se",
+  "sprak": "sv",
+  "doi": null,
+  "farg": "YlGnBu",
+  "visas": true,
+  "metadata": "kartor/nmk/skarpsill-uppvaxt-ostkusten-2021/metadata.json",
+  "falt": {
+    "art": "Skarpsill",
+    "vetenskapligt_namn": "Sprattus sprattus",
+    "livsstadium": "Uppväxt",
+    "havsomrade": "Östersjön",
+    "omrade": "Östersjön och Bottniska viken, djup 0-6 m. Omfattar ej Gotland, Öland eller stora delar av Skåne län.",
+    "rodlista": "LC",
+    "fiskbarometern": "Ices bedömer att beståndet av skarpsill i Östersjön har en fiskeridödlighet som ligger under referensvärdet för fiskerifödlighet som ger ett hållbart fiske över tid och att beståndets och lekbeståndets storlek ligger över över de gränsvärden som inte bör underskridas.",
+    "simblasa": "Ja",
+    "livsmiljo": "Pelagisk (frivattenlevande)"
+  },
+  "aktuellVersion": 2,
+  "versioner": [
+    {
+      "version": 1,
+      "publicerad": "2026-11-25",
+      "klassad": {
+        "fil": "kartor/nmk/skarpsill-uppvaxt-ostkusten-2021/v1/visning.tif",
+        "sha256": "d10771832a1821e3fc58c7ffae1c3facca03581b4c36837d1bce9fe4b58e8c0c",
+        "kallaSha256": "864186b33a09513e36e0c0d58058559bc9ca9bfb04d4ed47c2e7a861255cc961",
+        "bytes": 86319,
+        "epsg": 3035,
+        "upplosning": 250,
+        "klasser": [
+          {
+            "varde": 5,
+            "namn": "Viktigt",
+            "farg": true
+          },
+          {
+            "varde": 10,
+            "namn": "Mycket viktigt",
+            "farg": true
+          }
+        ]
+      },
+      "kontinuerlig": {
+        "fil": "kartor/nmk/skarpsill-uppvaxt-ostkusten-2021/v1/radata.tif",
+        "sha256": "6972b8de102f7988e97d182ba69da63df370b9a2cd2eed0c9088d46ec3b601d4",
+        "kallaSha256": "7d1c168da6597fa11d8a1c0b8c01e4b2d131d094961273ec17879129aa837123",
+        "bytes": 460180,
+        "epsg": 3035,
+        "upplosning": 250,
+        "skala": 1000,
+        "enhet": "sannolikhet",
+        "min": 0.006,
+        "max": 0.88,
+        "p2": 0.007,
+        "p98": 0.366
+      }
+    },
+    {
+      "version": 2,
+      "publicerad": "2026-11-25",
+      "format": 2,
+      "klassad": {
+        "fil": "kartor/nmk/skarpsill-uppvaxt-ostkusten-2021/v2/visning.tif",
+        "sha256": "fa11ec0bbc1c5a067166efcba20bbea6b9b46d9caed345690090d1618def463d",
+        "kallaSha256": "864186b33a09513e36e0c0d58058559bc9ca9bfb04d4ed47c2e7a861255cc961",
+        "bytes": 85209,
+        "epsg": 3035,
+        "upplosning": 250,
+        "vy3006": {
+          "fil": "kartor/nmk/skarpsill-uppvaxt-ostkusten-2021/v2/visning_3006.tif",
+          "sha256": "4dd2c71b419a705952655c991946b7b8b97d5045e8dea8dfd58e377c265de418",
+          "bytes": 233492
+        },
+        "klasser": [
+          {
+            "varde": 5,
+            "namn": "Viktigt",
+            "farg": true
+          },
+          {
+            "varde": 10,
+            "namn": "Mycket viktigt",
+            "farg": true
+          }
+        ]
+      },
+      "kontinuerlig": {
+        "fil": "kartor/nmk/skarpsill-uppvaxt-ostkusten-2021/v2/radata.tif",
+        "sha256": "6972b8de102f7988e97d182ba69da63df370b9a2cd2eed0c9088d46ec3b601d4",
+        "kallaSha256": "7d1c168da6597fa11d8a1c0b8c01e4b2d131d094961273ec17879129aa837123",
+        "bytes": 460180,
+        "epsg": 3035,
+        "upplosning": 250,
+        "vy3006": {
+          "fil": "kartor/nmk/skarpsill-uppvaxt-ostkusten-2021/v2/radata_3006.tif",
+          "sha256": "90632e0157aaf9158873705121c12033af627d334fcc12b8d647dbd15a9e5792",
+          "bytes": 1179654
+        },
+        "skala": 1000,
+        "enhet": "sannolikhet",
+        "min": 0.006,
+        "max": 0.88,
+        "p2": 0.007,
+        "p98": 0.366
+      }
+    }
+  ]
+}

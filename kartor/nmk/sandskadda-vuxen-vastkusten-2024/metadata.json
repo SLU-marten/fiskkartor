@@ -1,0 +1,117 @@
+{
+  "id": "sandskadda-vuxen-vastkusten-2024",
+  "titel": "Sandskädda vuxen västkusten",
+  "projekt": "NMK",
+  "kalla": "Nationell marin kartering (Trål)",
+  "citering": "Erlandsson m fl (opubl)",
+  "ar": 2024,
+  "kvalitet": "Grov upplösning då tråldragen är långa. Provtagning inte designad för rumsliga analyser, där tillgänglig data mellan geografiska områden kan variera mellan år. Data från många år ingår dock i modelleringen.",
+  "licens": "CC BY 4.0",
+  "kontakt": "SLU-Aqua-fiskkartor@slu.se",
+  "sprak": "sv",
+  "doi": null,
+  "farg": "YlGnBu",
+  "visas": true,
+  "metadata": "kartor/nmk/sandskadda-vuxen-vastkusten-2024/metadata.json",
+  "falt": {
+    "art": "Sandskädda",
+    "vetenskapligt_namn": "Limanda limanda",
+    "livsstadium": "Vuxen",
+    "havsomrade": "Västerhavet",
+    "omrade": "Västkusten >30 m",
+    "rodlista": "LC",
+    "fiskbarometern": "Ices bedömer beståndet av sandskädda i Skagerrak, Kattegatt och Öresund har ett fisketryck som för närvarande innebär att fisket sker på en långsiktigt hållbar nivå.",
+    "simblasa": "Nej",
+    "livsmiljo": "Bentisk (bottenlevande)"
+  },
+  "aktuellVersion": 2,
+  "versioner": [
+    {
+      "version": 1,
+      "publicerad": "2026-11-25",
+      "klassad": {
+        "fil": "kartor/nmk/sandskadda-vuxen-vastkusten-2024/v1/visning.tif",
+        "sha256": "493def1568749e809e9f5f587a8f3caee67ceb672f5f8d0b349639033df3d1bf",
+        "kallaSha256": "32a0d1885b03e97d2323a96153653d477684baafdb86a4f55ede0fa0425d1b30",
+        "bytes": 2477,
+        "epsg": 4326,
+        "upplosning": 3712,
+        "klasser": [
+          {
+            "varde": 5,
+            "namn": "Viktigt",
+            "farg": true
+          },
+          {
+            "varde": 10,
+            "namn": "Mycket viktigt",
+            "farg": true
+          }
+        ]
+      },
+      "kontinuerlig": {
+        "fil": "kartor/nmk/sandskadda-vuxen-vastkusten-2024/v1/radata.tif",
+        "sha256": "594683cdf1ca27f165147f35a8cbda3b401e633d6fc787b0db2dc9712f8bcdbb",
+        "kallaSha256": "c65f701fb02780783579effed43646233de57b4f58e831f21e8025adca332ae3",
+        "bytes": 9093,
+        "epsg": 4326,
+        "upplosning": 3712,
+        "skala": 1000,
+        "enhet": "sannolikhet",
+        "min": 0.043,
+        "max": 0.927,
+        "p2": 0.047,
+        "p98": 0.908
+      }
+    },
+    {
+      "version": 2,
+      "publicerad": "2026-11-25",
+      "format": 2,
+      "klassad": {
+        "fil": "kartor/nmk/sandskadda-vuxen-vastkusten-2024/v2/visning.tif",
+        "sha256": "733e8b0bc65eaa26ed2b85c6db4b6f9a13f0f3c733103b4af4fc0b0e59700b37",
+        "kallaSha256": "32a0d1885b03e97d2323a96153653d477684baafdb86a4f55ede0fa0425d1b30",
+        "bytes": 2091,
+        "epsg": 4326,
+        "upplosning": 3712,
+        "vy3006": {
+          "fil": "kartor/nmk/sandskadda-vuxen-vastkusten-2024/v2/visning_3006.tif",
+          "sha256": "97546ae577cbf48da9adf4417a00421127f27845f8a3e60a1aef0961b8c6f30f",
+          "bytes": 3761
+        },
+        "klasser": [
+          {
+            "varde": 5,
+            "namn": "Viktigt",
+            "farg": true
+          },
+          {
+            "varde": 10,
+            "namn": "Mycket viktigt",
+            "farg": true
+          }
+        ]
+      },
+      "kontinuerlig": {
+        "fil": "kartor/nmk/sandskadda-vuxen-vastkusten-2024/v2/radata.tif",
+        "sha256": "594683cdf1ca27f165147f35a8cbda3b401e633d6fc787b0db2dc9712f8bcdbb",
+        "kallaSha256": "c65f701fb02780783579effed43646233de57b4f58e831f21e8025adca332ae3",
+        "bytes": 9093,
+        "epsg": 4326,
+        "upplosning": 3712,
+        "vy3006": {
+          "fil": "kartor/nmk/sandskadda-vuxen-vastkusten-2024/v2/radata_3006.tif",
+          "sha256": "fc3ebbe0d169b393023297b614091b79644692412bcd2a8be0f36ef88ca64d33",
+          "bytes": 15456
+        },
+        "skala": 1000,
+        "enhet": "sannolikhet",
+        "min": 0.043,
+        "max": 0.927,
+        "p2": 0.047,
+        "p98": 0.908
+      }
+    }
+  ]
+}

@@ -1,0 +1,96 @@
+{
+  "id": "flundra-uppvaxt-ostkusten-2021",
+  "titel": "Flundra uppväxt ostkusten",
+  "projekt": "PanBalticScope",
+  "kalla": "PanBalticScope",
+  "citering": "Bergström m fl 2021",
+  "ar": 2021,
+  "kvalitet": "Data on juvenile flounder abundances to support the spatial model is missing from Denmark, Germany, Poland and Russia. Predictions are uncertain in these areas, and especially along the south coast of the Baltic Sea. The map on flounder nursery areas does not make assumptions on species identity in any area.",
+  "licens": "CC BY 4.0",
+  "kontakt": "SLU-Aqua-fiskkartor@slu.se",
+  "sprak": "en",
+  "doi": null,
+  "farg": "YlGnBu",
+  "visas": true,
+  "metadata": "kartor/panbalticscope/flundra-uppvaxt-ostkusten-2021/metadata.json",
+  "falt": {
+    "art": "Skrubbskädda",
+    "vetenskapligt_namn": "Platichthys flesus",
+    "livsstadium": "Uppväxt",
+    "havsomrade": "Östersjön",
+    "omrade": "Östersjön",
+    "rodlista": "LC",
+    "fiskbarometern": "Ices har ingen rödgivning för skrubbskädda i Östersjön. Enligt senaste bedömning av WGBFAS (Baltic Fisheries Assessment Working Group) 2023 fiskas beståndet i Södra och Östra Östersjön på ett hållbart vis. I norra Östersjön tyder data på ett överfiske de senaste fem åren.",
+    "simblasa": "Nej",
+    "livsmiljo": "Bentisk (bottenlevande)"
+  },
+  "aktuellVersion": 2,
+  "versioner": [
+    {
+      "version": 1,
+      "publicerad": "2026-11-25",
+      "klassad": {
+        "fil": "kartor/panbalticscope/flundra-uppvaxt-ostkusten-2021/v1/visning.tif",
+        "sha256": "268479d0e6bdf37b005f4a94caaa3b0a45cc3c3d42ef443c8bf6354cf908879b",
+        "kallaSha256": "bd4c68345ed1f7c2240ef3779171fe4ec871aa7f9f9180eeb1ce08894f1926e1",
+        "bytes": 111511,
+        "epsg": 3857,
+        "upplosning": 1000,
+        "klasser": [
+          {
+            "varde": 0,
+            "namn": "Ej viktigt område",
+            "farg": false
+          },
+          {
+            "varde": 5,
+            "namn": "Viktigt",
+            "farg": true
+          },
+          {
+            "varde": 10,
+            "namn": "Mycket viktigt",
+            "farg": true
+          }
+        ]
+      },
+      "kontinuerlig": null
+    },
+    {
+      "version": 2,
+      "publicerad": "2026-11-25",
+      "format": 2,
+      "klassad": {
+        "fil": "kartor/panbalticscope/flundra-uppvaxt-ostkusten-2021/v2/visning.tif",
+        "sha256": "90a7535ab1b9655a6dc57b1488d573ab23d379fd3517af1b21df10e31c6ffa20",
+        "kallaSha256": "bd4c68345ed1f7c2240ef3779171fe4ec871aa7f9f9180eeb1ce08894f1926e1",
+        "bytes": 113105,
+        "epsg": 3857,
+        "upplosning": 497.1,
+        "vy3006": {
+          "fil": "kartor/panbalticscope/flundra-uppvaxt-ostkusten-2021/v2/visning_3006.tif",
+          "sha256": "ac683aab107a691c3a710abd2c661a8acc2a8ba58feba3aa4a01a3b67258a40b",
+          "bytes": 417361
+        },
+        "klasser": [
+          {
+            "varde": 0,
+            "namn": "Ej viktigt område",
+            "farg": false
+          },
+          {
+            "varde": 5,
+            "namn": "Viktigt",
+            "farg": true
+          },
+          {
+            "varde": 10,
+            "namn": "Mycket viktigt",
+            "farg": true
+          }
+        ]
+      },
+      "kontinuerlig": null
+    }
+  ]
+}

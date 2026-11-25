@@ -1,0 +1,117 @@
+{
+  "id": "stensnultra-uppvaxt-vastkusten-2021",
+  "titel": "Stensnultra uppväxt västkusten",
+  "projekt": "NMK",
+  "kalla": "Nationell marin kartering (Ryssja)",
+  "citering": "Fredriksson m fl 2021",
+  "ar": 2021,
+  "kvalitet": "Provtagning inte designad för rumsliga analyser, där tillgänglig data mellan geografiska områden kan variera mellan år. Provtagninsdata från flera olika år ingår dock i modelleringen.",
+  "licens": "CC BY 4.0",
+  "kontakt": "SLU-Aqua-fiskkartor@slu.se",
+  "sprak": "sv",
+  "doi": null,
+  "farg": "YlGnBu",
+  "visas": true,
+  "metadata": "kartor/nmk/stensnultra-uppvaxt-vastkusten-2021/metadata.json",
+  "falt": {
+    "art": "Stensnultra",
+    "vetenskapligt_namn": "Ctenolabrus rupestris",
+    "livsstadium": "Uppväxt",
+    "havsomrade": "Västerhavet",
+    "omrade": "Västkusten, djup 0-30m.",
+    "rodlista": "LC",
+    "fiskbarometern": null,
+    "simblasa": "Ja",
+    "livsmiljo": "Demersal (Bottennära)"
+  },
+  "aktuellVersion": 2,
+  "versioner": [
+    {
+      "version": 1,
+      "publicerad": "2026-11-25",
+      "klassad": {
+        "fil": "kartor/nmk/stensnultra-uppvaxt-vastkusten-2021/v1/visning.tif",
+        "sha256": "1d9d289b840520154156221c7fa430c746f3322abd335118fd020b4a47126393",
+        "kallaSha256": "245dae3bf84d689e5f7695f3b73b0e0df0e5345a7798fd0db5b543168cfd96ad",
+        "bytes": 26805,
+        "epsg": 25833,
+        "upplosning": 250,
+        "klasser": [
+          {
+            "varde": 5,
+            "namn": "Viktigt",
+            "farg": true
+          },
+          {
+            "varde": 10,
+            "namn": "Mycket viktigt",
+            "farg": true
+          }
+        ]
+      },
+      "kontinuerlig": {
+        "fil": "kartor/nmk/stensnultra-uppvaxt-vastkusten-2021/v1/radata.tif",
+        "sha256": "10769d0d3605ad3e35599045a5f95b67f6af27ff7a69583242e7856cdd7c08be",
+        "kallaSha256": "98dbb90f15f38c622bb4667508dd89e252695719ff61dd41205a98cbbb8f45be",
+        "bytes": 221741,
+        "epsg": 25833,
+        "upplosning": 250,
+        "skala": 1000,
+        "enhet": "sannolikhet",
+        "min": 0.05,
+        "max": 0.952,
+        "p2": 0.057,
+        "p98": 0.93
+      }
+    },
+    {
+      "version": 2,
+      "publicerad": "2026-11-25",
+      "format": 2,
+      "klassad": {
+        "fil": "kartor/nmk/stensnultra-uppvaxt-vastkusten-2021/v2/visning.tif",
+        "sha256": "c3b5fbaffa743b05686db16835b781718feb62af4c4061c49f44b8b170597d67",
+        "kallaSha256": "245dae3bf84d689e5f7695f3b73b0e0df0e5345a7798fd0db5b543168cfd96ad",
+        "bytes": 26483,
+        "epsg": 25833,
+        "upplosning": 250,
+        "vy3006": {
+          "fil": "kartor/nmk/stensnultra-uppvaxt-vastkusten-2021/v2/visning_3006.tif",
+          "sha256": "7f6766002b56e207bb94dba928aa36f358d6c7a6eedab7ab292c7cbaf4d2a876",
+          "bytes": 52130
+        },
+        "klasser": [
+          {
+            "varde": 5,
+            "namn": "Viktigt",
+            "farg": true
+          },
+          {
+            "varde": 10,
+            "namn": "Mycket viktigt",
+            "farg": true
+          }
+        ]
+      },
+      "kontinuerlig": {
+        "fil": "kartor/nmk/stensnultra-uppvaxt-vastkusten-2021/v2/radata.tif",
+        "sha256": "10769d0d3605ad3e35599045a5f95b67f6af27ff7a69583242e7856cdd7c08be",
+        "kallaSha256": "98dbb90f15f38c622bb4667508dd89e252695719ff61dd41205a98cbbb8f45be",
+        "bytes": 221741,
+        "epsg": 25833,
+        "upplosning": 250,
+        "vy3006": {
+          "fil": "kartor/nmk/stensnultra-uppvaxt-vastkusten-2021/v2/radata_3006.tif",
+          "sha256": "cd0fcb496683190aa83117c9a1e2183225f9d926849b534b660772aa27bd90f0",
+          "bytes": 427004
+        },
+        "skala": 1000,
+        "enhet": "sannolikhet",
+        "min": 0.05,
+        "max": 0.952,
+        "p2": 0.057,
+        "p98": 0.93
+      }
+    }
+  ]
+}

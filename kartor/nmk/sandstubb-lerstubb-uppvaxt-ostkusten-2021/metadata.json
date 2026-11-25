@@ -1,0 +1,117 @@
+{
+  "id": "sandstubb-lerstubb-uppvaxt-ostkusten-2021",
+  "titel": "Sandstubb/lerstubb uppväxt ostkusten",
+  "projekt": "NMK",
+  "kalla": "Nationell marin kartering (Yngel)",
+  "citering": "Erlandsson m fl 2021",
+  "ar": 2021,
+  "kvalitet": "Omfattar inte Öland, Gotland och Skåne pga databrist. Prediktion ner till 6m djup.",
+  "licens": "CC BY 4.0",
+  "kontakt": "SLU-Aqua-fiskkartor@slu.se",
+  "sprak": "sv",
+  "doi": null,
+  "farg": "YlGnBu",
+  "visas": true,
+  "metadata": "kartor/nmk/sandstubb-lerstubb-uppvaxt-ostkusten-2021/metadata.json",
+  "falt": {
+    "art": "Sandstubb/lerstubb",
+    "vetenskapligt_namn": "Pomatoschistus microps",
+    "livsstadium": "Uppväxt",
+    "havsomrade": "Östersjön",
+    "omrade": "Östersjön och Bottniska viken, djup 0-6 m. Omfattar ej Gotland, Öland eller stora delar av Skåne län.",
+    "rodlista": "LC",
+    "fiskbarometern": null,
+    "simblasa": "Ja",
+    "livsmiljo": "Demersal (kustnära)"
+  },
+  "aktuellVersion": 2,
+  "versioner": [
+    {
+      "version": 1,
+      "publicerad": "2026-11-25",
+      "klassad": {
+        "fil": "kartor/nmk/sandstubb-lerstubb-uppvaxt-ostkusten-2021/v1/visning.tif",
+        "sha256": "13cf0b858391034e3dc2968fe13dadc45145d825c052905024a7f826d8998369",
+        "kallaSha256": "288b031fe7a72bf4ca0bfba8ee6c11fd763168da5cd3fba49b99dd87c36b5cde",
+        "bytes": 134753,
+        "epsg": 3035,
+        "upplosning": 250,
+        "klasser": [
+          {
+            "varde": 5,
+            "namn": "Viktigt",
+            "farg": true
+          },
+          {
+            "varde": 10,
+            "namn": "Mycket viktigt",
+            "farg": true
+          }
+        ]
+      },
+      "kontinuerlig": {
+        "fil": "kartor/nmk/sandstubb-lerstubb-uppvaxt-ostkusten-2021/v1/radata.tif",
+        "sha256": "4f2f59e2f113f72ee01bde31e8f929ba0758d41e34a680cc9b7c19fe2d8a9762",
+        "kallaSha256": "826f49d9edadd8faab52c96918d3e4e5ec3a96ced27bf51d8a12080993ed7d29",
+        "bytes": 514918,
+        "epsg": 3035,
+        "upplosning": 250,
+        "skala": 1000,
+        "enhet": "sannolikhet",
+        "min": 0.031,
+        "max": 0.911,
+        "p2": 0.042,
+        "p98": 0.761
+      }
+    },
+    {
+      "version": 2,
+      "publicerad": "2026-11-25",
+      "format": 2,
+      "klassad": {
+        "fil": "kartor/nmk/sandstubb-lerstubb-uppvaxt-ostkusten-2021/v2/visning.tif",
+        "sha256": "fed410c3c77de985324e6e468bc99968e8b728038139adb53163984a0166e248",
+        "kallaSha256": "288b031fe7a72bf4ca0bfba8ee6c11fd763168da5cd3fba49b99dd87c36b5cde",
+        "bytes": 135019,
+        "epsg": 3035,
+        "upplosning": 250,
+        "vy3006": {
+          "fil": "kartor/nmk/sandstubb-lerstubb-uppvaxt-ostkusten-2021/v2/visning_3006.tif",
+          "sha256": "ece3a9b966b1d6f7556b26f8d0e6d9ffba78f9dce648fe377e50d58e1306309c",
+          "bytes": 354558
+        },
+        "klasser": [
+          {
+            "varde": 5,
+            "namn": "Viktigt",
+            "farg": true
+          },
+          {
+            "varde": 10,
+            "namn": "Mycket viktigt",
+            "farg": true
+          }
+        ]
+      },
+      "kontinuerlig": {
+        "fil": "kartor/nmk/sandstubb-lerstubb-uppvaxt-ostkusten-2021/v2/radata.tif",
+        "sha256": "4f2f59e2f113f72ee01bde31e8f929ba0758d41e34a680cc9b7c19fe2d8a9762",
+        "kallaSha256": "826f49d9edadd8faab52c96918d3e4e5ec3a96ced27bf51d8a12080993ed7d29",
+        "bytes": 514918,
+        "epsg": 3035,
+        "upplosning": 250,
+        "vy3006": {
+          "fil": "kartor/nmk/sandstubb-lerstubb-uppvaxt-ostkusten-2021/v2/radata_3006.tif",
+          "sha256": "40f2a11d52023f71e4f3257991f35f1800a72d615e6ca83997cb6d0950a12605",
+          "bytes": 1308967
+        },
+        "skala": 1000,
+        "enhet": "sannolikhet",
+        "min": 0.031,
+        "max": 0.911,
+        "p2": 0.042,
+        "p98": 0.761
+      }
+    }
+  ]
+}

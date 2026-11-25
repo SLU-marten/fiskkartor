@@ -1,0 +1,117 @@
+{
+  "id": "sarv-uppvaxt-ostkusten-2021",
+  "titel": "Sarv uppväxt ostkusten",
+  "projekt": "NMK",
+  "kalla": "Nationell marin kartering (Yngel)",
+  "citering": "Erlandsson m fl 2021",
+  "ar": 2021,
+  "kvalitet": "Omfattar inte Öland, Gotland och Skåne pga databrist. Prediktion ner till 6m djup.",
+  "licens": "CC BY 4.0",
+  "kontakt": "SLU-Aqua-fiskkartor@slu.se",
+  "sprak": "sv",
+  "doi": null,
+  "farg": "YlGnBu",
+  "visas": true,
+  "metadata": "kartor/nmk/sarv-uppvaxt-ostkusten-2021/metadata.json",
+  "falt": {
+    "art": "Sarv",
+    "vetenskapligt_namn": "Scardinius erythrophthalmus",
+    "livsstadium": "Uppväxt",
+    "havsomrade": "Östersjön",
+    "omrade": "Östersjön och Bottniska viken, djup 0-6 m. Omfattar ej Gotland, Öland eller stora delar av Skåne län.",
+    "rodlista": "LC",
+    "fiskbarometern": null,
+    "simblasa": "Ja",
+    "livsmiljo": "Demersal (kustnära)"
+  },
+  "aktuellVersion": 2,
+  "versioner": [
+    {
+      "version": 1,
+      "publicerad": "2026-11-25",
+      "klassad": {
+        "fil": "kartor/nmk/sarv-uppvaxt-ostkusten-2021/v1/visning.tif",
+        "sha256": "a251c3ce6edd0cbfebb7f678a1741f6b3488727bc022384261380536df42a54a",
+        "kallaSha256": "e08e1d2ec9de804b5c89cd1797a4d66b64e7f24be4d6cd8011877781d7f14e80",
+        "bytes": 40807,
+        "epsg": 3035,
+        "upplosning": 250,
+        "klasser": [
+          {
+            "varde": 5,
+            "namn": "Viktigt",
+            "farg": true
+          },
+          {
+            "varde": 10,
+            "namn": "Mycket viktigt",
+            "farg": true
+          }
+        ]
+      },
+      "kontinuerlig": {
+        "fil": "kartor/nmk/sarv-uppvaxt-ostkusten-2021/v1/radata.tif",
+        "sha256": "d75c66952fd87a44035df866333687592131ddce8114a8e6153da2fc5ae0695b",
+        "kallaSha256": "e06b7970cab6ae5f46bbc7f08cc37f884eb4e6781077f68a322c6c8ed91285b7",
+        "bytes": 350220,
+        "epsg": 3035,
+        "upplosning": 250,
+        "skala": 1000,
+        "enhet": "sannolikhet",
+        "min": 0.003,
+        "max": 0.173,
+        "p2": 0.003,
+        "p98": 0.062
+      }
+    },
+    {
+      "version": 2,
+      "publicerad": "2026-11-25",
+      "format": 2,
+      "klassad": {
+        "fil": "kartor/nmk/sarv-uppvaxt-ostkusten-2021/v2/visning.tif",
+        "sha256": "c0810d21907e2c6af325d9aaf80d4bde4ac44b9691da97b74303d2918e029203",
+        "kallaSha256": "e08e1d2ec9de804b5c89cd1797a4d66b64e7f24be4d6cd8011877781d7f14e80",
+        "bytes": 40401,
+        "epsg": 3035,
+        "upplosning": 250,
+        "vy3006": {
+          "fil": "kartor/nmk/sarv-uppvaxt-ostkusten-2021/v2/visning_3006.tif",
+          "sha256": "c28c5758b8caeb921bdbba18172e9fa66399a83b9e123510876f1bf80b38281d",
+          "bytes": 132647
+        },
+        "klasser": [
+          {
+            "varde": 5,
+            "namn": "Viktigt",
+            "farg": true
+          },
+          {
+            "varde": 10,
+            "namn": "Mycket viktigt",
+            "farg": true
+          }
+        ]
+      },
+      "kontinuerlig": {
+        "fil": "kartor/nmk/sarv-uppvaxt-ostkusten-2021/v2/radata.tif",
+        "sha256": "d75c66952fd87a44035df866333687592131ddce8114a8e6153da2fc5ae0695b",
+        "kallaSha256": "e06b7970cab6ae5f46bbc7f08cc37f884eb4e6781077f68a322c6c8ed91285b7",
+        "bytes": 350220,
+        "epsg": 3035,
+        "upplosning": 250,
+        "vy3006": {
+          "fil": "kartor/nmk/sarv-uppvaxt-ostkusten-2021/v2/radata_3006.tif",
+          "sha256": "2073c5e7dc4c330976e7549dee1ec430e923b1ccdeafeb7a7fa64bcdff593f53",
+          "bytes": 957668
+        },
+        "skala": 1000,
+        "enhet": "sannolikhet",
+        "min": 0.003,
+        "max": 0.173,
+        "p2": 0.003,
+        "p98": 0.062
+      }
+    }
+  ]
+}

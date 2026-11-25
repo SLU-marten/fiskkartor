@@ -1,0 +1,96 @@
+{
+  "id": "skarpsill-lek-vast-ostkusten-2021",
+  "titel": "Skarpsill lek väst-/ostkusten",
+  "projekt": "PanBalticScope",
+  "kalla": "PanBalticScope",
+  "citering": "Bergström m fl 2021",
+  "ar": 2021,
+  "kvalitet": "The map is based on literature and environmental variables, not actual data on sprat spawning. The map might overestimate the spawning area west and north of Gotland. Skagerak is not included",
+  "licens": "CC BY 4.0",
+  "kontakt": "SLU-Aqua-fiskkartor@slu.se",
+  "sprak": "en",
+  "doi": null,
+  "farg": "YlGnBu",
+  "visas": true,
+  "metadata": "kartor/panbalticscope/skarpsill-lek-vast-ostkusten-2021/metadata.json",
+  "falt": {
+    "art": "Skarpsill",
+    "vetenskapligt_namn": "Sprattus sprattus",
+    "livsstadium": "Lek",
+    "havsomrade": "Östersjön +Kattegatt",
+    "omrade": "Bottniska viken och Östersjön, inklusive Öresund och Kattegatt, djup>30m",
+    "rodlista": "LC",
+    "fiskbarometern": "Ices bedömer att beståndet av skarpsill i Östersjön har en fiskeridödlighet som ligger under referensvärdet för fiskerifödlighet som ger ett hållbart fiske över tid och att beståndets och lekbeståndets storlek ligger över över de gränsvärden som inte bör underskridas.",
+    "simblasa": "Ja",
+    "livsmiljo": "Pelagisk (frivattenlevande)"
+  },
+  "aktuellVersion": 2,
+  "versioner": [
+    {
+      "version": 1,
+      "publicerad": "2026-11-25",
+      "klassad": {
+        "fil": "kartor/panbalticscope/skarpsill-lek-vast-ostkusten-2021/v1/visning.tif",
+        "sha256": "693ede7f3dbd9c18693d19817c4ef9bd91011dfa143210884edd93bfc003ca28",
+        "kallaSha256": "51bbc164e9eb1713a9b13bd26fcd8745ddd3a97da66013d88407984ce22d1ce9",
+        "bytes": 123265,
+        "epsg": 3857,
+        "upplosning": 1000,
+        "klasser": [
+          {
+            "varde": 0,
+            "namn": "Ej viktigt område",
+            "farg": false
+          },
+          {
+            "varde": 5,
+            "namn": "Viktigt",
+            "farg": true
+          },
+          {
+            "varde": 10,
+            "namn": "Mycket viktigt",
+            "farg": true
+          }
+        ]
+      },
+      "kontinuerlig": null
+    },
+    {
+      "version": 2,
+      "publicerad": "2026-11-25",
+      "format": 2,
+      "klassad": {
+        "fil": "kartor/panbalticscope/skarpsill-lek-vast-ostkusten-2021/v2/visning.tif",
+        "sha256": "5679ac9372560072c94530f1132f5c07fbe60636fbde8379f695ca0c39c66aa8",
+        "kallaSha256": "51bbc164e9eb1713a9b13bd26fcd8745ddd3a97da66013d88407984ce22d1ce9",
+        "bytes": 125108,
+        "epsg": 3857,
+        "upplosning": 497.1,
+        "vy3006": {
+          "fil": "kartor/panbalticscope/skarpsill-lek-vast-ostkusten-2021/v2/visning_3006.tif",
+          "sha256": "65b7d98f11337a90b037b4da5d52f2589d1c6235a5011c572b2f7aef69ec3207",
+          "bytes": 467128
+        },
+        "klasser": [
+          {
+            "varde": 0,
+            "namn": "Ej viktigt område",
+            "farg": false
+          },
+          {
+            "varde": 5,
+            "namn": "Viktigt",
+            "farg": true
+          },
+          {
+            "varde": 10,
+            "namn": "Mycket viktigt",
+            "farg": true
+          }
+        ]
+      },
+      "kontinuerlig": null
+    }
+  ]
+}

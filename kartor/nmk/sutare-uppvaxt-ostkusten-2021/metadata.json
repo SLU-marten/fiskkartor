@@ -1,0 +1,117 @@
+{
+  "id": "sutare-uppvaxt-ostkusten-2021",
+  "titel": "Sutare uppväxt ostkusten",
+  "projekt": "NMK",
+  "kalla": "Nationell marin kartering (Yngel)",
+  "citering": "Erlandsson m fl 2021",
+  "ar": 2021,
+  "kvalitet": "Omfattar inte Öland, Gotland och Skåne pga databrist. Prediktion ner till 6m djup.",
+  "licens": "CC BY 4.0",
+  "kontakt": "SLU-Aqua-fiskkartor@slu.se",
+  "sprak": "sv",
+  "doi": null,
+  "farg": "YlGnBu",
+  "visas": true,
+  "metadata": "kartor/nmk/sutare-uppvaxt-ostkusten-2021/metadata.json",
+  "falt": {
+    "art": "Sutare",
+    "vetenskapligt_namn": "Tinca tinca",
+    "livsstadium": "Uppväxt",
+    "havsomrade": "Östersjön",
+    "omrade": "Östersjön och Bottniska viken, djup 0-6 m. Omfattar ej Gotland, Öland eller stora delar av Skåne län.",
+    "rodlista": "LC",
+    "fiskbarometern": null,
+    "simblasa": "Ja",
+    "livsmiljo": "Demersal (kustnära)"
+  },
+  "aktuellVersion": 2,
+  "versioner": [
+    {
+      "version": 1,
+      "publicerad": "2026-11-25",
+      "klassad": {
+        "fil": "kartor/nmk/sutare-uppvaxt-ostkusten-2021/v1/visning.tif",
+        "sha256": "75c92cf4d5b4619074032a666610a1f4b1788f36a6a0171f5dbd75d2aee5fc51",
+        "kallaSha256": "2509c30550021ac5f1b826145abea093f33a6e023eaa5908591c546b75dfc3ce",
+        "bytes": 40966,
+        "epsg": 3035,
+        "upplosning": 250,
+        "klasser": [
+          {
+            "varde": 5,
+            "namn": "Viktigt",
+            "farg": true
+          },
+          {
+            "varde": 10,
+            "namn": "Mycket viktigt",
+            "farg": true
+          }
+        ]
+      },
+      "kontinuerlig": {
+        "fil": "kartor/nmk/sutare-uppvaxt-ostkusten-2021/v1/radata.tif",
+        "sha256": "7fc19a33805b9e7504339e4cb717a7fb3abdfb1174e41bb9086576c6c636baf2",
+        "kallaSha256": "5247a2a8e6e9df59e1d3b349d0b13b89e768f1ab1ae5578c7ddd2c891ae41d97",
+        "bytes": 272302,
+        "epsg": 3035,
+        "upplosning": 250,
+        "skala": 1000,
+        "enhet": "sannolikhet",
+        "min": 0.004,
+        "max": 0.519,
+        "p2": 0.004,
+        "p98": 0.045
+      }
+    },
+    {
+      "version": 2,
+      "publicerad": "2026-11-25",
+      "format": 2,
+      "klassad": {
+        "fil": "kartor/nmk/sutare-uppvaxt-ostkusten-2021/v2/visning.tif",
+        "sha256": "449070146acf7dbf7af3c01d02bd8d829b6350f251a057eec7fec45ab9aa13a8",
+        "kallaSha256": "2509c30550021ac5f1b826145abea093f33a6e023eaa5908591c546b75dfc3ce",
+        "bytes": 40529,
+        "epsg": 3035,
+        "upplosning": 250,
+        "vy3006": {
+          "fil": "kartor/nmk/sutare-uppvaxt-ostkusten-2021/v2/visning_3006.tif",
+          "sha256": "1dc30df31d085c3dcebaaa9f3fdebe9d200b7a2fe41ab98b185a1869de42a02f",
+          "bytes": 132872
+        },
+        "klasser": [
+          {
+            "varde": 5,
+            "namn": "Viktigt",
+            "farg": true
+          },
+          {
+            "varde": 10,
+            "namn": "Mycket viktigt",
+            "farg": true
+          }
+        ]
+      },
+      "kontinuerlig": {
+        "fil": "kartor/nmk/sutare-uppvaxt-ostkusten-2021/v2/radata.tif",
+        "sha256": "7fc19a33805b9e7504339e4cb717a7fb3abdfb1174e41bb9086576c6c636baf2",
+        "kallaSha256": "5247a2a8e6e9df59e1d3b349d0b13b89e768f1ab1ae5578c7ddd2c891ae41d97",
+        "bytes": 272302,
+        "epsg": 3035,
+        "upplosning": 250,
+        "vy3006": {
+          "fil": "kartor/nmk/sutare-uppvaxt-ostkusten-2021/v2/radata_3006.tif",
+          "sha256": "904c6700c1f3d5ef2b2cae0c3d456a8ab35e8b1297d823c88c50234c35b77713",
+          "bytes": 799686
+        },
+        "skala": 1000,
+        "enhet": "sannolikhet",
+        "min": 0.004,
+        "max": 0.519,
+        "p2": 0.004,
+        "p98": 0.045
+      }
+    }
+  ]
+}

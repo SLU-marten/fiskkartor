@@ -1,0 +1,117 @@
+{
+  "id": "rodspatta-vuxen-vastkusten-2024",
+  "titel": "Rödspätta vuxen västkusten",
+  "projekt": "NMK",
+  "kalla": "Nationell marin kartering (Trål)",
+  "citering": "Erlandsson m fl (opubl)",
+  "ar": 2024,
+  "kvalitet": "Grov upplösning då tråldragen är långa. Provtagning inte designad för rumsliga analyser, där tillgänglig data mellan geografiska områden kan variera mellan år. Data från många år ingår dock i modelleringen.",
+  "licens": "CC BY 4.0",
+  "kontakt": "SLU-Aqua-fiskkartor@slu.se",
+  "sprak": "sv",
+  "doi": null,
+  "farg": "YlGnBu",
+  "visas": true,
+  "metadata": "kartor/nmk/rodspatta-vuxen-vastkusten-2024/metadata.json",
+  "falt": {
+    "art": "Rödspätta",
+    "vetenskapligt_namn": "Pleuronectes platessa",
+    "livsstadium": "Vuxen",
+    "havsomrade": "Västerhavet",
+    "omrade": "Västkusten >30 m",
+    "rodlista": "LC",
+    "fiskbarometern": "Ices bedömer att beståndet av rödspätta i  Skagerrak, Kattegatt och Öresund har en  fiskeridödlighet som ligger under referensfördet för fiskeridödlighet som ger ett hållbart fiske över tid och har en lekbiomassa som ligger över bränsvärdet som inte bör underskridas.",
+    "simblasa": "Nej",
+    "livsmiljo": "Bentisk (bottenlevande)"
+  },
+  "aktuellVersion": 2,
+  "versioner": [
+    {
+      "version": 1,
+      "publicerad": "2026-11-25",
+      "klassad": {
+        "fil": "kartor/nmk/rodspatta-vuxen-vastkusten-2024/v1/visning.tif",
+        "sha256": "84f45ab567a1ad95c64de3a38e2c02d1e40229cd2dbaf1e7ce3ab1616c336bbd",
+        "kallaSha256": "2500f601f2972aab407fcb5b156abd5ec58425f3d336eae2e673375568b448ae",
+        "bytes": 2274,
+        "epsg": 4326,
+        "upplosning": 3712,
+        "klasser": [
+          {
+            "varde": 5,
+            "namn": "Viktigt",
+            "farg": true
+          },
+          {
+            "varde": 10,
+            "namn": "Mycket viktigt",
+            "farg": true
+          }
+        ]
+      },
+      "kontinuerlig": {
+        "fil": "kartor/nmk/rodspatta-vuxen-vastkusten-2024/v1/radata.tif",
+        "sha256": "eb7cb3436f1080c19fc98c6e01aae511a7a9ecd866cff72e7c7311e46ffc1160",
+        "kallaSha256": "08df449f5caddb11312dc75db69677e06cc424445395cdcf2a7375f1e92bcf5d",
+        "bytes": 9166,
+        "epsg": 4326,
+        "upplosning": 3712,
+        "skala": 1000,
+        "enhet": "sannolikhet",
+        "min": 0.036,
+        "max": 0.904,
+        "p2": 0.045,
+        "p98": 0.875
+      }
+    },
+    {
+      "version": 2,
+      "publicerad": "2026-11-25",
+      "format": 2,
+      "klassad": {
+        "fil": "kartor/nmk/rodspatta-vuxen-vastkusten-2024/v2/visning.tif",
+        "sha256": "5d3f23af58276a31e8fe5a8c7b4361c76f26bcf2cc33ad8f1698b0084702f54f",
+        "kallaSha256": "2500f601f2972aab407fcb5b156abd5ec58425f3d336eae2e673375568b448ae",
+        "bytes": 1890,
+        "epsg": 4326,
+        "upplosning": 3712,
+        "vy3006": {
+          "fil": "kartor/nmk/rodspatta-vuxen-vastkusten-2024/v2/visning_3006.tif",
+          "sha256": "28ea3137ba0fc5eb7b6636db647d6b0a2bb85c342cf16f2b08c73fb2d9c07cb4",
+          "bytes": 3325
+        },
+        "klasser": [
+          {
+            "varde": 5,
+            "namn": "Viktigt",
+            "farg": true
+          },
+          {
+            "varde": 10,
+            "namn": "Mycket viktigt",
+            "farg": true
+          }
+        ]
+      },
+      "kontinuerlig": {
+        "fil": "kartor/nmk/rodspatta-vuxen-vastkusten-2024/v2/radata.tif",
+        "sha256": "eb7cb3436f1080c19fc98c6e01aae511a7a9ecd866cff72e7c7311e46ffc1160",
+        "kallaSha256": "08df449f5caddb11312dc75db69677e06cc424445395cdcf2a7375f1e92bcf5d",
+        "bytes": 9166,
+        "epsg": 4326,
+        "upplosning": 3712,
+        "vy3006": {
+          "fil": "kartor/nmk/rodspatta-vuxen-vastkusten-2024/v2/radata_3006.tif",
+          "sha256": "2bfb67911a892d44d6d8347dfc0dbf53dcdda60047c9d6f69a76fee8d52fdf82",
+          "bytes": 15665
+        },
+        "skala": 1000,
+        "enhet": "sannolikhet",
+        "min": 0.036,
+        "max": 0.904,
+        "p2": 0.045,
+        "p98": 0.875
+      }
+    }
+  ]
+}

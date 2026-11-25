@@ -1,0 +1,96 @@
+{
+  "id": "torsk-lek-vast-ostkusten-2021",
+  "titel": "Torsk lek väst-/ostkusten",
+  "projekt": "PanBalticScope",
+  "kalla": "PanBalticScope",
+  "citering": "Bergström m fl 2021",
+  "ar": 2021,
+  "kvalitet": "The adult and juvenile cod are distributed far outside of the spawning areas depicted in the map. Skagerak is not included",
+  "licens": "CC BY 4.0",
+  "kontakt": "SLU-Aqua-fiskkartor@slu.se",
+  "sprak": "en",
+  "doi": null,
+  "farg": "YlGnBu",
+  "visas": true,
+  "metadata": "kartor/panbalticscope/torsk-lek-vast-ostkusten-2021/metadata.json",
+  "falt": {
+    "art": "Torsk",
+    "vetenskapligt_namn": "Gadus morhua",
+    "livsstadium": "Lek",
+    "havsomrade": "Östersjön +Kattegatt",
+    "omrade": "Östersjön inklusive Öresund och Kattegatt, >20 m",
+    "rodlista": "VU",
+    "fiskbarometern": "Ices bedöming för nordsjölekande torsk i Skagerrak anger att fiskedödligheten ligger över referensvärdet för fiskeridödlighet som ger ett hållbart fiske över tid. För torsk som leker i Kattegatt kan Ices inte bedöma beståndsstatus eller fiskedödliget eftersom data saknas. Lekbiomassan i Kattegatt bedöms vara under samliga referenspunkter ohc Kattegattorskens har minskat kraftigt sedan 2015. För torsk i Östersjön, både östra och västra beståndet, bedöms både biomassa och lekbiomassa ligga under de gränsvärden som inte bör underskridas.",
+    "simblasa": "Ja",
+    "livsmiljo": "Demersal (Bottennära)"
+  },
+  "aktuellVersion": 2,
+  "versioner": [
+    {
+      "version": 1,
+      "publicerad": "2026-11-25",
+      "klassad": {
+        "fil": "kartor/panbalticscope/torsk-lek-vast-ostkusten-2021/v1/visning.tif",
+        "sha256": "4807cfda4cdf80e26a72c9df93c84e66e5d74bb75f04927516c02e1674b48fb7",
+        "kallaSha256": "86dd9221cd4cb9749b76790732b254b015d81f74afc19caaf26a6f9d096de622",
+        "bytes": 99348,
+        "epsg": 3857,
+        "upplosning": 1000,
+        "klasser": [
+          {
+            "varde": 0,
+            "namn": "Ej viktigt område",
+            "farg": false
+          },
+          {
+            "varde": 5,
+            "namn": "Viktigt",
+            "farg": true
+          },
+          {
+            "varde": 10,
+            "namn": "Mycket viktigt",
+            "farg": true
+          }
+        ]
+      },
+      "kontinuerlig": null
+    },
+    {
+      "version": 2,
+      "publicerad": "2026-11-25",
+      "format": 2,
+      "klassad": {
+        "fil": "kartor/panbalticscope/torsk-lek-vast-ostkusten-2021/v2/visning.tif",
+        "sha256": "1d5e6f0df06616b07f58461618a934a6fa74f0692901846f17dadd613d19745a",
+        "kallaSha256": "86dd9221cd4cb9749b76790732b254b015d81f74afc19caaf26a6f9d096de622",
+        "bytes": 100805,
+        "epsg": 3857,
+        "upplosning": 497.1,
+        "vy3006": {
+          "fil": "kartor/panbalticscope/torsk-lek-vast-ostkusten-2021/v2/visning_3006.tif",
+          "sha256": "16272e00218f92f10b405a97c7d1313eddbdb32c7508d4707e28f7bf57115f3b",
+          "bytes": 393123
+        },
+        "klasser": [
+          {
+            "varde": 0,
+            "namn": "Ej viktigt område",
+            "farg": false
+          },
+          {
+            "varde": 5,
+            "namn": "Viktigt",
+            "farg": true
+          },
+          {
+            "varde": 10,
+            "namn": "Mycket viktigt",
+            "farg": true
+          }
+        ]
+      },
+      "kontinuerlig": null
+    }
+  ]
+}

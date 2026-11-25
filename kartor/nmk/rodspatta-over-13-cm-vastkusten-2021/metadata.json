@@ -1,0 +1,117 @@
+{
+  "id": "rodspatta-over-13-cm-vastkusten-2021",
+  "titel": "Rödspätta >13 cm västkusten",
+  "projekt": "NMK",
+  "kalla": "Nationell marin kartering (Ryssja)",
+  "citering": "Fredriksson m fl 2021",
+  "ar": 2021,
+  "kvalitet": "Provtagning inte designad för rumsliga analyser, där tillgänglig data mellan geografiska områden kan variera mellan år. Provtagninsdata från flera olika år ingår dock i modelleringen.",
+  "licens": "CC BY 4.0",
+  "kontakt": "SLU-Aqua-fiskkartor@slu.se",
+  "sprak": "sv",
+  "doi": null,
+  "farg": "YlGnBu",
+  "visas": true,
+  "metadata": "kartor/nmk/rodspatta-over-13-cm-vastkusten-2021/metadata.json",
+  "falt": {
+    "art": "Rödspätta",
+    "vetenskapligt_namn": "Pleuronectes platessa",
+    "livsstadium": "Uppväxt",
+    "havsomrade": "Västerhavet",
+    "omrade": "Västkusten, djup 0-30m.",
+    "rodlista": "LC",
+    "fiskbarometern": "Ices bedömer att beståndet av rödspätta i  Skagerrak, Kattegatt och Öresund har en  fiskeridödlighet som ligger under referensfördet för fiskeridödlighet som ger ett hållbart fiske över tid och har en lekbiomassa som ligger över bränsvärdet som inte bör underskridas.",
+    "simblasa": "Nej",
+    "livsmiljo": "Bentisk (bottenlevande)"
+  },
+  "aktuellVersion": 2,
+  "versioner": [
+    {
+      "version": 1,
+      "publicerad": "2026-11-25",
+      "klassad": {
+        "fil": "kartor/nmk/rodspatta-over-13-cm-vastkusten-2021/v1/visning.tif",
+        "sha256": "9332ce22e135a201b8958a4f6afd9deb266cc5aeae443d53db102d9b1794ffc4",
+        "kallaSha256": "885a6ea8f13a29a3c726da5ece6935884913c2ab9f0dd531e0c0669a28e9ee58",
+        "bytes": 26936,
+        "epsg": 25833,
+        "upplosning": 250,
+        "klasser": [
+          {
+            "varde": 5,
+            "namn": "Viktigt",
+            "farg": true
+          },
+          {
+            "varde": 10,
+            "namn": "Mycket viktigt",
+            "farg": true
+          }
+        ]
+      },
+      "kontinuerlig": {
+        "fil": "kartor/nmk/rodspatta-over-13-cm-vastkusten-2021/v1/radata.tif",
+        "sha256": "f899862420b3ed7d1b1d85b63cde37250e769d8281d06547746fd595369128ee",
+        "kallaSha256": "ba1feb228a909917760c958fb5d7d41968529b762457c634eda71378861a458c",
+        "bytes": 155288,
+        "epsg": 25833,
+        "upplosning": 250,
+        "skala": 1000,
+        "enhet": "sannolikhet",
+        "min": 0.017,
+        "max": 0.942,
+        "p2": 0.018,
+        "p98": 0.331
+      }
+    },
+    {
+      "version": 2,
+      "publicerad": "2026-11-25",
+      "format": 2,
+      "klassad": {
+        "fil": "kartor/nmk/rodspatta-over-13-cm-vastkusten-2021/v2/visning.tif",
+        "sha256": "94cd4683027809f8072c65c58fce075532d304c8b89a30c0679c6ae6d6c34845",
+        "kallaSha256": "885a6ea8f13a29a3c726da5ece6935884913c2ab9f0dd531e0c0669a28e9ee58",
+        "bytes": 26572,
+        "epsg": 25833,
+        "upplosning": 250,
+        "vy3006": {
+          "fil": "kartor/nmk/rodspatta-over-13-cm-vastkusten-2021/v2/visning_3006.tif",
+          "sha256": "1210a84e4a70374e6a449f41cd44bdcbeca6323b975cc1ab010e436e7d207dfe",
+          "bytes": 51187
+        },
+        "klasser": [
+          {
+            "varde": 5,
+            "namn": "Viktigt",
+            "farg": true
+          },
+          {
+            "varde": 10,
+            "namn": "Mycket viktigt",
+            "farg": true
+          }
+        ]
+      },
+      "kontinuerlig": {
+        "fil": "kartor/nmk/rodspatta-over-13-cm-vastkusten-2021/v2/radata.tif",
+        "sha256": "f899862420b3ed7d1b1d85b63cde37250e769d8281d06547746fd595369128ee",
+        "kallaSha256": "ba1feb228a909917760c958fb5d7d41968529b762457c634eda71378861a458c",
+        "bytes": 155288,
+        "epsg": 25833,
+        "upplosning": 250,
+        "vy3006": {
+          "fil": "kartor/nmk/rodspatta-over-13-cm-vastkusten-2021/v2/radata_3006.tif",
+          "sha256": "073cbb3a58e45c583977c7c12d9b213ad0a2dcb28656e35eb4122c4c7bf7420d",
+          "bytes": 294009
+        },
+        "skala": 1000,
+        "enhet": "sannolikhet",
+        "min": 0.017,
+        "max": 0.942,
+        "p2": 0.018,
+        "p98": 0.331
+      }
+    }
+  ]
+}

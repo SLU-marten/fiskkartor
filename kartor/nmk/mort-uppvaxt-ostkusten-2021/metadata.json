@@ -1,0 +1,117 @@
+{
+  "id": "mort-uppvaxt-ostkusten-2021",
+  "titel": "Mört uppväxt ostkusten",
+  "projekt": "NMK",
+  "kalla": "Nationell marin kartering (Yngel)",
+  "citering": "Erlandsson m fl 2021",
+  "ar": 2021,
+  "kvalitet": "Omfattar inte Öland, Gotland och Skåne pga databrist. Prediktion ner till 6m djup.",
+  "licens": "CC BY 4.0",
+  "kontakt": "SLU-Aqua-fiskkartor@slu.se",
+  "sprak": "sv",
+  "doi": null,
+  "farg": "YlGnBu",
+  "visas": true,
+  "metadata": "kartor/nmk/mort-uppvaxt-ostkusten-2021/metadata.json",
+  "falt": {
+    "art": "Mört",
+    "vetenskapligt_namn": "Rutilus rutilus",
+    "livsstadium": "Uppväxt",
+    "havsomrade": "Östersjön",
+    "omrade": "Östersjön och Bottniska viken, djup 0-6 m. Omfattar ej Gotland, Öland eller stora delar av Skåne län.",
+    "rodlista": "LC",
+    "fiskbarometern": null,
+    "simblasa": "Ja",
+    "livsmiljo": "Demersal (kustnära)"
+  },
+  "aktuellVersion": 2,
+  "versioner": [
+    {
+      "version": 1,
+      "publicerad": "2026-11-25",
+      "klassad": {
+        "fil": "kartor/nmk/mort-uppvaxt-ostkusten-2021/v1/visning.tif",
+        "sha256": "0e4874aeaed4a5913ee44f0fb27c8dbd4bc9900f4c20835a0965422761c02ac3",
+        "kallaSha256": "4da60ce9a0f6ca1b7b635ad363f218f1f23f25cddbc53c199e78dc23c9b7769a",
+        "bytes": 52676,
+        "epsg": 3035,
+        "upplosning": 250,
+        "klasser": [
+          {
+            "varde": 5,
+            "namn": "Viktigt",
+            "farg": true
+          },
+          {
+            "varde": 10,
+            "namn": "Mycket viktigt",
+            "farg": true
+          }
+        ]
+      },
+      "kontinuerlig": {
+        "fil": "kartor/nmk/mort-uppvaxt-ostkusten-2021/v1/radata.tif",
+        "sha256": "1a192240a4b2f9cd0d238b073ed3d7cb05805844b85494a663274b586d55d43a",
+        "kallaSha256": "c8ca7e8a0a42daf5e56dd880336dc788cf1009e91ad86facd80f4580e52f041c",
+        "bytes": 422663,
+        "epsg": 3035,
+        "upplosning": 250,
+        "skala": 1000,
+        "enhet": "sannolikhet",
+        "min": 0.026,
+        "max": 0.88,
+        "p2": 0.027,
+        "p98": 0.27
+      }
+    },
+    {
+      "version": 2,
+      "publicerad": "2026-11-25",
+      "format": 2,
+      "klassad": {
+        "fil": "kartor/nmk/mort-uppvaxt-ostkusten-2021/v2/visning.tif",
+        "sha256": "ff0e9eaf6efc573e4317f50d2088b340f73199c6287d8a5e724bb7e7096e5e2b",
+        "kallaSha256": "4da60ce9a0f6ca1b7b635ad363f218f1f23f25cddbc53c199e78dc23c9b7769a",
+        "bytes": 51782,
+        "epsg": 3035,
+        "upplosning": 250,
+        "vy3006": {
+          "fil": "kartor/nmk/mort-uppvaxt-ostkusten-2021/v2/visning_3006.tif",
+          "sha256": "1921c51971cb024c36094f5e0cbc372e0f3fefd92495dd46e9dc2c22d4989384",
+          "bytes": 155205
+        },
+        "klasser": [
+          {
+            "varde": 5,
+            "namn": "Viktigt",
+            "farg": true
+          },
+          {
+            "varde": 10,
+            "namn": "Mycket viktigt",
+            "farg": true
+          }
+        ]
+      },
+      "kontinuerlig": {
+        "fil": "kartor/nmk/mort-uppvaxt-ostkusten-2021/v2/radata.tif",
+        "sha256": "1a192240a4b2f9cd0d238b073ed3d7cb05805844b85494a663274b586d55d43a",
+        "kallaSha256": "c8ca7e8a0a42daf5e56dd880336dc788cf1009e91ad86facd80f4580e52f041c",
+        "bytes": 422663,
+        "epsg": 3035,
+        "upplosning": 250,
+        "vy3006": {
+          "fil": "kartor/nmk/mort-uppvaxt-ostkusten-2021/v2/radata_3006.tif",
+          "sha256": "9a686f1bee88ebfddf770fcc3fca2475e5aa1b3779527ae9c15c8f9d0a68473c",
+          "bytes": 1101143
+        },
+        "skala": 1000,
+        "enhet": "sannolikhet",
+        "min": 0.026,
+        "max": 0.88,
+        "p2": 0.027,
+        "p98": 0.27
+      }
+    }
+  ]
+}

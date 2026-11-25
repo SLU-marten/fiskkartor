@@ -1,0 +1,117 @@
+{
+  "id": "storspigg-uppvaxt-ostkusten-2021",
+  "titel": "Storspigg uppväxt ostkusten",
+  "projekt": "NMK",
+  "kalla": "Nationell marin kartering (Yngel)",
+  "citering": "Erlandsson m fl 2021",
+  "ar": 2021,
+  "kvalitet": "Omfattar inte Öland, Gotland och Skåne pga databrist. Prediktion ner till 6m djup.",
+  "licens": "CC BY 4.0",
+  "kontakt": "SLU-Aqua-fiskkartor@slu.se",
+  "sprak": "sv",
+  "doi": null,
+  "farg": "YlGnBu",
+  "visas": true,
+  "metadata": "kartor/nmk/storspigg-uppvaxt-ostkusten-2021/metadata.json",
+  "falt": {
+    "art": "Storspigg",
+    "vetenskapligt_namn": "Gasterosteus aculeatus",
+    "livsstadium": "Uppväxt",
+    "havsomrade": "Östersjön",
+    "omrade": "Östersjön och Bottniska viken, djup 0-6 m. Omfattar ej Gotland, Öland eller stora delar av Skåne län.",
+    "rodlista": "LC",
+    "fiskbarometern": null,
+    "simblasa": "Ja",
+    "livsmiljo": "Bentopelagisk"
+  },
+  "aktuellVersion": 2,
+  "versioner": [
+    {
+      "version": 1,
+      "publicerad": "2026-11-25",
+      "klassad": {
+        "fil": "kartor/nmk/storspigg-uppvaxt-ostkusten-2021/v1/visning.tif",
+        "sha256": "29d8b24a03554e881248f30de43d56c4975de5c5a275cc68afb28ba7458c982d",
+        "kallaSha256": "aa94c037df4b8f430d4fc9bcabbb69ef57970915e561e0eddcaf9084a9448c6d",
+        "bytes": 135717,
+        "epsg": 3035,
+        "upplosning": 250,
+        "klasser": [
+          {
+            "varde": 5,
+            "namn": "Viktigt",
+            "farg": true
+          },
+          {
+            "varde": 10,
+            "namn": "Mycket viktigt",
+            "farg": true
+          }
+        ]
+      },
+      "kontinuerlig": {
+        "fil": "kartor/nmk/storspigg-uppvaxt-ostkusten-2021/v1/radata.tif",
+        "sha256": "ab293841a8cf618f77f78c0f7ec252116c8851ad5a6c984b9246d11d39a029d8",
+        "kallaSha256": "f16434132f6be5e7b30930b5bb6decf26f46c3ce13dd3fbd909464e6101dcde7",
+        "bytes": 519216,
+        "epsg": 3035,
+        "upplosning": 250,
+        "skala": 1000,
+        "enhet": "sannolikhet",
+        "min": 0.052,
+        "max": 0.877,
+        "p2": 0.067,
+        "p98": 0.766
+      }
+    },
+    {
+      "version": 2,
+      "publicerad": "2026-11-25",
+      "format": 2,
+      "klassad": {
+        "fil": "kartor/nmk/storspigg-uppvaxt-ostkusten-2021/v2/visning.tif",
+        "sha256": "0f12bd8bdd0f5ecc72467ded5a7e5112a357c77619ff594150eafb1046f1cc06",
+        "kallaSha256": "aa94c037df4b8f430d4fc9bcabbb69ef57970915e561e0eddcaf9084a9448c6d",
+        "bytes": 136162,
+        "epsg": 3035,
+        "upplosning": 250,
+        "vy3006": {
+          "fil": "kartor/nmk/storspigg-uppvaxt-ostkusten-2021/v2/visning_3006.tif",
+          "sha256": "f5e17affacf0064f1525fcc6fbdd22293d62e8e18c02dacae661c9364e4b7ac6",
+          "bytes": 354963
+        },
+        "klasser": [
+          {
+            "varde": 5,
+            "namn": "Viktigt",
+            "farg": true
+          },
+          {
+            "varde": 10,
+            "namn": "Mycket viktigt",
+            "farg": true
+          }
+        ]
+      },
+      "kontinuerlig": {
+        "fil": "kartor/nmk/storspigg-uppvaxt-ostkusten-2021/v2/radata.tif",
+        "sha256": "ab293841a8cf618f77f78c0f7ec252116c8851ad5a6c984b9246d11d39a029d8",
+        "kallaSha256": "f16434132f6be5e7b30930b5bb6decf26f46c3ce13dd3fbd909464e6101dcde7",
+        "bytes": 519216,
+        "epsg": 3035,
+        "upplosning": 250,
+        "vy3006": {
+          "fil": "kartor/nmk/storspigg-uppvaxt-ostkusten-2021/v2/radata_3006.tif",
+          "sha256": "63e6fda37ccc910b0a92a368b7040a5beb3737a919a5bd3f2f9d72176688c1eb",
+          "bytes": 1321560
+        },
+        "skala": 1000,
+        "enhet": "sannolikhet",
+        "min": 0.052,
+        "max": 0.877,
+        "p2": 0.067,
+        "p98": 0.766
+      }
+    }
+  ]
+}

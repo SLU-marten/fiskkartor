@@ -1,0 +1,117 @@
+{
+  "id": "grasej-vuxen-vastkusten-2024",
+  "titel": "Gråsej vuxen västkusten",
+  "projekt": "NMK",
+  "kalla": "Nationell marin kartering (Trål)",
+  "citering": "Erlandsson m fl (opubl)",
+  "ar": 2024,
+  "kvalitet": "Grov upplösning då tråldragen är långa. Provtagning inte designad för rumsliga analyser, där tillgänglig data mellan geografiska områden kan variera mellan år. Data från många år ingår dock i modelleringen.",
+  "licens": "CC BY 4.0",
+  "kontakt": "SLU-Aqua-fiskkartor@slu.se",
+  "sprak": "sv",
+  "doi": null,
+  "farg": "YlGnBu",
+  "visas": true,
+  "metadata": "kartor/nmk/grasej-vuxen-vastkusten-2024/metadata.json",
+  "falt": {
+    "art": "Gråsej",
+    "vetenskapligt_namn": "Pollachius virens",
+    "livsstadium": "Vuxen",
+    "havsomrade": "Västerhavet",
+    "omrade": "Västkusten >30 m",
+    "rodlista": "LC",
+    "fiskbarometern": "Ices bedömer att beståndet av gråsej har en fiskeridödlighet som ligger under referensvärdet som ger ett hållbart fiske över tid och att beståndets lekbiomassa ligger över gränsvärdet som inte bör underskridas.",
+    "simblasa": "Ja",
+    "livsmiljo": "Bentopelagisk"
+  },
+  "aktuellVersion": 2,
+  "versioner": [
+    {
+      "version": 1,
+      "publicerad": "2026-11-25",
+      "klassad": {
+        "fil": "kartor/nmk/grasej-vuxen-vastkusten-2024/v1/visning.tif",
+        "sha256": "462d270493131d5325b99a5c20c526e33500ea2f26bf3f93eec2881182287e84",
+        "kallaSha256": "f85e0d682e9cd6ffa2437447e6f41a50c8c4c90de4e57025ab560f4cf167a5e5",
+        "bytes": 1921,
+        "epsg": 4326,
+        "upplosning": 3712,
+        "klasser": [
+          {
+            "varde": 5,
+            "namn": "Viktigt",
+            "farg": true
+          },
+          {
+            "varde": 10,
+            "namn": "Mycket viktigt",
+            "farg": true
+          }
+        ]
+      },
+      "kontinuerlig": {
+        "fil": "kartor/nmk/grasej-vuxen-vastkusten-2024/v1/radata.tif",
+        "sha256": "168b15658445f9a0da537da7c877ac8f72aeab175542507620504025d1473946",
+        "kallaSha256": "354586d96520bc31b76e40c2a448094c0ab5151736bcc85c7097498d68981e69",
+        "bytes": 9015,
+        "epsg": 4326,
+        "upplosning": 3712,
+        "skala": 1000,
+        "enhet": "sannolikhet",
+        "min": 0.054,
+        "max": 0.961,
+        "p2": 0.072,
+        "p98": 0.943
+      }
+    },
+    {
+      "version": 2,
+      "publicerad": "2026-11-25",
+      "format": 2,
+      "klassad": {
+        "fil": "kartor/nmk/grasej-vuxen-vastkusten-2024/v2/visning.tif",
+        "sha256": "85341bb368b1a1019955c60ddb6bdd4b07c9602e576f21488f7116efea055ca9",
+        "kallaSha256": "f85e0d682e9cd6ffa2437447e6f41a50c8c4c90de4e57025ab560f4cf167a5e5",
+        "bytes": 1539,
+        "epsg": 4326,
+        "upplosning": 3712,
+        "vy3006": {
+          "fil": "kartor/nmk/grasej-vuxen-vastkusten-2024/v2/visning_3006.tif",
+          "sha256": "36155e699a6912b3da94cdea52389174b56dcd6c085d4bd5d155c993da65e5a3",
+          "bytes": 2657
+        },
+        "klasser": [
+          {
+            "varde": 5,
+            "namn": "Viktigt",
+            "farg": true
+          },
+          {
+            "varde": 10,
+            "namn": "Mycket viktigt",
+            "farg": true
+          }
+        ]
+      },
+      "kontinuerlig": {
+        "fil": "kartor/nmk/grasej-vuxen-vastkusten-2024/v2/radata.tif",
+        "sha256": "168b15658445f9a0da537da7c877ac8f72aeab175542507620504025d1473946",
+        "kallaSha256": "354586d96520bc31b76e40c2a448094c0ab5151736bcc85c7097498d68981e69",
+        "bytes": 9015,
+        "epsg": 4326,
+        "upplosning": 3712,
+        "vy3006": {
+          "fil": "kartor/nmk/grasej-vuxen-vastkusten-2024/v2/radata_3006.tif",
+          "sha256": "7e22d112544caacae74b74863a4bb49cdb1a58456e52a543827e0762be1adea5",
+          "bytes": 14985
+        },
+        "skala": 1000,
+        "enhet": "sannolikhet",
+        "min": 0.054,
+        "max": 0.961,
+        "p2": 0.072,
+        "p98": 0.943
+      }
+    }
+  ]
+}

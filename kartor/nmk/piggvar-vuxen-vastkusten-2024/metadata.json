@@ -1,0 +1,117 @@
+{
+  "id": "piggvar-vuxen-vastkusten-2024",
+  "titel": "Piggvar vuxen västkusten",
+  "projekt": "NMK",
+  "kalla": "Nationell marin kartering (Trål)",
+  "citering": "Erlandsson m fl (opubl)",
+  "ar": 2024,
+  "kvalitet": "Grov upplösning då tråldragen är långa. Provtagning inte designad för rumsliga analyser, där tillgänglig data mellan geografiska områden kan variera mellan år. Data från många år ingår dock i modelleringen.",
+  "licens": "CC BY 4.0",
+  "kontakt": "SLU-Aqua-fiskkartor@slu.se",
+  "sprak": "sv",
+  "doi": null,
+  "farg": "YlGnBu",
+  "visas": true,
+  "metadata": "kartor/nmk/piggvar-vuxen-vastkusten-2024/metadata.json",
+  "falt": {
+    "art": "Piggvar",
+    "vetenskapligt_namn": "Scophthalmus maximus",
+    "livsstadium": "Vuxen",
+    "havsomrade": "Västerhavet",
+    "omrade": "Västkusten >30 m",
+    "rodlista": "LC",
+    "fiskbarometern": "Ices bedömer att fisketrycket på beståndet av piggvar i Kattegatt och Skagerrak ligger under referensvärdet för fiskeridödlighet som ger ett hållbart fiske över tid.",
+    "simblasa": "Nej",
+    "livsmiljo": "Bentisk (bottenlevande)"
+  },
+  "aktuellVersion": 2,
+  "versioner": [
+    {
+      "version": 1,
+      "publicerad": "2026-11-25",
+      "klassad": {
+        "fil": "kartor/nmk/piggvar-vuxen-vastkusten-2024/v1/visning.tif",
+        "sha256": "5eae2fe443ecd476f9a6df6b028b758e2926b9eb94c566d1953f42aabb89dfbf",
+        "kallaSha256": "3dd3648e679fa503a2105b69b0ee29773ccba3a70841c79452522f4bc13379d3",
+        "bytes": 2080,
+        "epsg": 4326,
+        "upplosning": 3712,
+        "klasser": [
+          {
+            "varde": 5,
+            "namn": "Viktigt",
+            "farg": true
+          },
+          {
+            "varde": 10,
+            "namn": "Mycket viktigt",
+            "farg": true
+          }
+        ]
+      },
+      "kontinuerlig": {
+        "fil": "kartor/nmk/piggvar-vuxen-vastkusten-2024/v1/radata.tif",
+        "sha256": "80bcf8b25b34736b11c6b5abd400308d1d31030b40f0ecb2151fb4c253a4b6fa",
+        "kallaSha256": "7b33f36cc8d96119628ca4fe1dde997cada8c1edaee10d0aa67b9e90aff0a5fa",
+        "bytes": 9041,
+        "epsg": 4326,
+        "upplosning": 3712,
+        "skala": 1000,
+        "enhet": "sannolikhet",
+        "min": 0.03,
+        "max": 0.791,
+        "p2": 0.033,
+        "p98": 0.687
+      }
+    },
+    {
+      "version": 2,
+      "publicerad": "2026-11-25",
+      "format": 2,
+      "klassad": {
+        "fil": "kartor/nmk/piggvar-vuxen-vastkusten-2024/v2/visning.tif",
+        "sha256": "d13836933baee60b62e2ff5689683bff323929bb93ab375e631d82badd226eec",
+        "kallaSha256": "3dd3648e679fa503a2105b69b0ee29773ccba3a70841c79452522f4bc13379d3",
+        "bytes": 1698,
+        "epsg": 4326,
+        "upplosning": 3712,
+        "vy3006": {
+          "fil": "kartor/nmk/piggvar-vuxen-vastkusten-2024/v2/visning_3006.tif",
+          "sha256": "f85af4c686a54b7f2154433bfd715ef1a7ee7ff335f5e19d0045adb00ef9a456",
+          "bytes": 2898
+        },
+        "klasser": [
+          {
+            "varde": 5,
+            "namn": "Viktigt",
+            "farg": true
+          },
+          {
+            "varde": 10,
+            "namn": "Mycket viktigt",
+            "farg": true
+          }
+        ]
+      },
+      "kontinuerlig": {
+        "fil": "kartor/nmk/piggvar-vuxen-vastkusten-2024/v2/radata.tif",
+        "sha256": "80bcf8b25b34736b11c6b5abd400308d1d31030b40f0ecb2151fb4c253a4b6fa",
+        "kallaSha256": "7b33f36cc8d96119628ca4fe1dde997cada8c1edaee10d0aa67b9e90aff0a5fa",
+        "bytes": 9041,
+        "epsg": 4326,
+        "upplosning": 3712,
+        "vy3006": {
+          "fil": "kartor/nmk/piggvar-vuxen-vastkusten-2024/v2/radata_3006.tif",
+          "sha256": "42205eb656c7c606678b4fd4c91744ecd6d822b56f85727651f5219de8ec63dd",
+          "bytes": 15051
+        },
+        "skala": 1000,
+        "enhet": "sannolikhet",
+        "min": 0.03,
+        "max": 0.791,
+        "p2": 0.033,
+        "p98": 0.687
+      }
+    }
+  ]
+}

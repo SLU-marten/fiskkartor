@@ -1,0 +1,96 @@
+{
+  "id": "abborre-lek-ostkusten-2021",
+  "titel": "Abborre lek ostkusten",
+  "projekt": "PanBalticScope",
+  "kalla": "PanBalticScope",
+  "citering": "Bergström m fl 2021",
+  "ar": 2021,
+  "kvalitet": "Recruitment area here refers to essential habitats for young of the year perch (based on inventory data from spawning until the end of the first summer). The map is based on literature and environmental variables, derived from inventory data. Skagerak is not included",
+  "licens": "CC BY 4.0",
+  "kontakt": "SLU-Aqua-fiskkartor@slu.se",
+  "sprak": "en",
+  "doi": null,
+  "farg": "YlGnBu",
+  "visas": true,
+  "metadata": "kartor/panbalticscope/abborre-lek-ostkusten-2021/metadata.json",
+  "falt": {
+    "art": "Abborre",
+    "vetenskapligt_namn": "Perca fluviatilis",
+    "livsstadium": "Lek",
+    "havsomrade": "Östersjön",
+    "omrade": "Bottniska viken och Östersjön, inklusive Öresund, djup 0-4 m",
+    "rodlista": "LC",
+    "fiskbarometern": "Mycket sannolikt ej inom biologiska säkra gränser i Egentliga Östersjön, sannolikt inom biologiska säkra gränser i Bottenhavet och sannolikt inte inom biologiskt säkra gränser i Norra kvarken.",
+    "simblasa": "Ja",
+    "livsmiljo": "Demersal (kustnära)"
+  },
+  "aktuellVersion": 2,
+  "versioner": [
+    {
+      "version": 1,
+      "publicerad": "2026-11-25",
+      "klassad": {
+        "fil": "kartor/panbalticscope/abborre-lek-ostkusten-2021/v1/visning.tif",
+        "sha256": "72ad18017f6d39e86c1b08e7892203a3908113924671a6959f97d856daa9a2d1",
+        "kallaSha256": "8db3ec5e0d0a82f56f0e401888e91b03d9c66faaa758a520eccadf144066f82d",
+        "bytes": 116361,
+        "epsg": 3857,
+        "upplosning": 1000,
+        "klasser": [
+          {
+            "varde": 0,
+            "namn": "Ej viktigt område",
+            "farg": false
+          },
+          {
+            "varde": 5,
+            "namn": "Viktigt",
+            "farg": true
+          },
+          {
+            "varde": 10,
+            "namn": "Mycket viktigt",
+            "farg": true
+          }
+        ]
+      },
+      "kontinuerlig": null
+    },
+    {
+      "version": 2,
+      "publicerad": "2026-11-25",
+      "format": 2,
+      "klassad": {
+        "fil": "kartor/panbalticscope/abborre-lek-ostkusten-2021/v2/visning.tif",
+        "sha256": "c37aec14934a98ee05776e062d8f2631628171c4ec03e6a1e72e50428e79b605",
+        "kallaSha256": "8db3ec5e0d0a82f56f0e401888e91b03d9c66faaa758a520eccadf144066f82d",
+        "bytes": 116865,
+        "epsg": 3857,
+        "upplosning": 497.1,
+        "vy3006": {
+          "fil": "kartor/panbalticscope/abborre-lek-ostkusten-2021/v2/visning_3006.tif",
+          "sha256": "8623de9eed7938cc4bd317991fb489ecd6483aca8faff18d894ed9b1c9e324e6",
+          "bytes": 430513
+        },
+        "klasser": [
+          {
+            "varde": 0,
+            "namn": "Ej viktigt område",
+            "farg": false
+          },
+          {
+            "varde": 5,
+            "namn": "Viktigt",
+            "farg": true
+          },
+          {
+            "varde": 10,
+            "namn": "Mycket viktigt",
+            "farg": true
+          }
+        ]
+      },
+      "kontinuerlig": null
+    }
+  ]
+}

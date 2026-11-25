@@ -1,0 +1,117 @@
+{
+  "id": "braxen-bjorkna-uppvaxt-ostkusten-2021",
+  "titel": "Braxen/björkna uppväxt ostkusten",
+  "projekt": "NMK",
+  "kalla": "Nationell marin kartering (Yngel)",
+  "citering": "Erlandsson m fl 2021",
+  "ar": 2021,
+  "kvalitet": "Omfattar inte Öland, Gotland och Skåne pga databrist. Prediktion ner till 6m djup.",
+  "licens": "CC BY 4.0",
+  "kontakt": "SLU-Aqua-fiskkartor@slu.se",
+  "sprak": "sv",
+  "doi": null,
+  "farg": "YlGnBu",
+  "visas": true,
+  "metadata": "kartor/nmk/braxen-bjorkna-uppvaxt-ostkusten-2021/metadata.json",
+  "falt": {
+    "art": "Braxen/björkna",
+    "vetenskapligt_namn": "Abramis brama",
+    "livsstadium": "Uppväxt",
+    "havsomrade": "Östersjön",
+    "omrade": "Östersjön och Bottniska viken, djup 0-6 m. Omfattar ej Gotland, Öland eller stora delar av Skåne län.",
+    "rodlista": "LC",
+    "fiskbarometern": "Beståndet för braxen kan ej bedömas i Egentliga Östersjön, Ålands hav och Bottenhavet. I Bottenviken bedöms beståndet av braxen mycket sannolikt vara inom biologiskt säkra gränser.",
+    "simblasa": "Ja",
+    "livsmiljo": "Demersal (kustnära)"
+  },
+  "aktuellVersion": 2,
+  "versioner": [
+    {
+      "version": 1,
+      "publicerad": "2026-11-25",
+      "klassad": {
+        "fil": "kartor/nmk/braxen-bjorkna-uppvaxt-ostkusten-2021/v1/visning.tif",
+        "sha256": "c11d35becf5ea98fddb6fc840e7cf062a701553470f002a354630d80d4234021",
+        "kallaSha256": "28aebfccff72d7cfac8196add2b987c3a6dffdf56c32895d860e5a1b1efd9e80",
+        "bytes": 50790,
+        "epsg": 3035,
+        "upplosning": 250,
+        "klasser": [
+          {
+            "varde": 5,
+            "namn": "Viktigt",
+            "farg": true
+          },
+          {
+            "varde": 10,
+            "namn": "Mycket viktigt",
+            "farg": true
+          }
+        ]
+      },
+      "kontinuerlig": {
+        "fil": "kartor/nmk/braxen-bjorkna-uppvaxt-ostkusten-2021/v1/radata.tif",
+        "sha256": "84da643d6ab36b0a5808943cf991bc9c7596c3002a00fefb9adc2a8dc03c0fa3",
+        "kallaSha256": "485cfa08174edff4a96cb8eab0810284947dbf7d32bfc4a690bf9fe4c8ffda3f",
+        "bytes": 335545,
+        "epsg": 3035,
+        "upplosning": 250,
+        "skala": 1000,
+        "enhet": "sannolikhet",
+        "min": 0.008,
+        "max": 0.998,
+        "p2": 0.008,
+        "p98": 0.234
+      }
+    },
+    {
+      "version": 2,
+      "publicerad": "2026-11-25",
+      "format": 2,
+      "klassad": {
+        "fil": "kartor/nmk/braxen-bjorkna-uppvaxt-ostkusten-2021/v2/visning.tif",
+        "sha256": "6d32987103143632603d2a4bbc9ab6b9c872ee04482e716e40c9eb81d9f00601",
+        "kallaSha256": "28aebfccff72d7cfac8196add2b987c3a6dffdf56c32895d860e5a1b1efd9e80",
+        "bytes": 50134,
+        "epsg": 3035,
+        "upplosning": 250,
+        "vy3006": {
+          "fil": "kartor/nmk/braxen-bjorkna-uppvaxt-ostkusten-2021/v2/visning_3006.tif",
+          "sha256": "7c47777bd98785f8ff4470769d847a45d7dc08f42517a159d1c2831497c493e8",
+          "bytes": 151653
+        },
+        "klasser": [
+          {
+            "varde": 5,
+            "namn": "Viktigt",
+            "farg": true
+          },
+          {
+            "varde": 10,
+            "namn": "Mycket viktigt",
+            "farg": true
+          }
+        ]
+      },
+      "kontinuerlig": {
+        "fil": "kartor/nmk/braxen-bjorkna-uppvaxt-ostkusten-2021/v2/radata.tif",
+        "sha256": "84da643d6ab36b0a5808943cf991bc9c7596c3002a00fefb9adc2a8dc03c0fa3",
+        "kallaSha256": "485cfa08174edff4a96cb8eab0810284947dbf7d32bfc4a690bf9fe4c8ffda3f",
+        "bytes": 335545,
+        "epsg": 3035,
+        "upplosning": 250,
+        "vy3006": {
+          "fil": "kartor/nmk/braxen-bjorkna-uppvaxt-ostkusten-2021/v2/radata_3006.tif",
+          "sha256": "41b6c1a28b9223114b28b8be33d1603ac18eaf7b9f0a481e44f3310e7d08e453",
+          "bytes": 928694
+        },
+        "skala": 1000,
+        "enhet": "sannolikhet",
+        "min": 0.008,
+        "max": 0.998,
+        "p2": 0.008,
+        "p98": 0.234
+      }
+    }
+  ]
+}

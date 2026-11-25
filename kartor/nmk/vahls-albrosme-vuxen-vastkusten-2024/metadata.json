@@ -1,0 +1,117 @@
+{
+  "id": "vahls-albrosme-vuxen-vastkusten-2024",
+  "titel": "Vahls ålbrosme vuxen västkusten",
+  "projekt": "NMK",
+  "kalla": "Nationell marin kartering (Trål)",
+  "citering": "Erlandsson m fl (opubl)",
+  "ar": 2024,
+  "kvalitet": "Grov upplösning då tråldragen är långa. Provtagning inte designad för rumsliga analyser, där tillgänglig data mellan geografiska områden kan variera mellan år. Data från många år ingår dock i modelleringen.",
+  "licens": "CC BY 4.0",
+  "kontakt": "SLU-Aqua-fiskkartor@slu.se",
+  "sprak": "sv",
+  "doi": null,
+  "farg": "YlGnBu",
+  "visas": true,
+  "metadata": "kartor/nmk/vahls-albrosme-vuxen-vastkusten-2024/metadata.json",
+  "falt": {
+    "art": "Vahls ålbrosme",
+    "vetenskapligt_namn": "Lycodes vahlii",
+    "livsstadium": "Vuxen",
+    "havsomrade": "Västerhavet",
+    "omrade": "Västkusten >30 m",
+    "rodlista": null,
+    "fiskbarometern": null,
+    "simblasa": "Nej",
+    "livsmiljo": "Demersal (Bottennära)"
+  },
+  "aktuellVersion": 2,
+  "versioner": [
+    {
+      "version": 1,
+      "publicerad": "2026-11-25",
+      "klassad": {
+        "fil": "kartor/nmk/vahls-albrosme-vuxen-vastkusten-2024/v1/visning.tif",
+        "sha256": "52123f0e16a33ec33ee176c1302aaadf8374a1b98454f229dbfef1e423caf93f",
+        "kallaSha256": "3e25fa2dc9e3414616153fd0b1fe24e82ed5b15371d6b8d3036a65561f0c7430",
+        "bytes": 1862,
+        "epsg": 4326,
+        "upplosning": 3712,
+        "klasser": [
+          {
+            "varde": 5,
+            "namn": "Viktigt",
+            "farg": true
+          },
+          {
+            "varde": 10,
+            "namn": "Mycket viktigt",
+            "farg": true
+          }
+        ]
+      },
+      "kontinuerlig": {
+        "fil": "kartor/nmk/vahls-albrosme-vuxen-vastkusten-2024/v1/radata.tif",
+        "sha256": "8978dde144aa85512c2fe526755493781140f69e890e114e7c822c37652850ab",
+        "kallaSha256": "4feaa0d4877bb122613cfae20d6f3748c9baf6f9b00a674cded71653ac022bfd",
+        "bytes": 7029,
+        "epsg": 4326,
+        "upplosning": 3712,
+        "skala": 1000,
+        "enhet": "sannolikhet",
+        "min": 0.013,
+        "max": 0.926,
+        "p2": 0.013,
+        "p98": 0.797
+      }
+    },
+    {
+      "version": 2,
+      "publicerad": "2026-11-25",
+      "format": 2,
+      "klassad": {
+        "fil": "kartor/nmk/vahls-albrosme-vuxen-vastkusten-2024/v2/visning.tif",
+        "sha256": "8cfa5f3e1a5ad7cd31fba8bc3275ede04beee52784a309d078ab2b18d1642d55",
+        "kallaSha256": "3e25fa2dc9e3414616153fd0b1fe24e82ed5b15371d6b8d3036a65561f0c7430",
+        "bytes": 1474,
+        "epsg": 4326,
+        "upplosning": 3712,
+        "vy3006": {
+          "fil": "kartor/nmk/vahls-albrosme-vuxen-vastkusten-2024/v2/visning_3006.tif",
+          "sha256": "7ec0b7f4d63d87bb2baaf024e67b0500ea24dc5c3da9a780e128d2a0e0690e69",
+          "bytes": 2494
+        },
+        "klasser": [
+          {
+            "varde": 5,
+            "namn": "Viktigt",
+            "farg": true
+          },
+          {
+            "varde": 10,
+            "namn": "Mycket viktigt",
+            "farg": true
+          }
+        ]
+      },
+      "kontinuerlig": {
+        "fil": "kartor/nmk/vahls-albrosme-vuxen-vastkusten-2024/v2/radata.tif",
+        "sha256": "8978dde144aa85512c2fe526755493781140f69e890e114e7c822c37652850ab",
+        "kallaSha256": "4feaa0d4877bb122613cfae20d6f3748c9baf6f9b00a674cded71653ac022bfd",
+        "bytes": 7029,
+        "epsg": 4326,
+        "upplosning": 3712,
+        "vy3006": {
+          "fil": "kartor/nmk/vahls-albrosme-vuxen-vastkusten-2024/v2/radata_3006.tif",
+          "sha256": "c43330e1f0acdbb4cb0167bfb9dab19ff65c3fda93525a2ee98220364d631e90",
+          "bytes": 11935
+        },
+        "skala": 1000,
+        "enhet": "sannolikhet",
+        "min": 0.013,
+        "max": 0.926,
+        "p2": 0.013,
+        "p98": 0.797
+      }
+    }
+  ]
+}

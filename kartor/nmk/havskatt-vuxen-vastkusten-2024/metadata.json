@@ -1,0 +1,117 @@
+{
+  "id": "havskatt-vuxen-vastkusten-2024",
+  "titel": "Havskatt vuxen västkusten",
+  "projekt": "NMK",
+  "kalla": "Nationell marin kartering (Trål)",
+  "citering": "Erlandsson m fl (opubl)",
+  "ar": 2024,
+  "kvalitet": "Grov upplösning då tråldragen är långa. Provtagning inte designad för rumsliga analyser, där tillgänglig data mellan geografiska områden kan variera mellan år. Data från många år ingår dock i modelleringen.",
+  "licens": "CC BY 4.0",
+  "kontakt": "SLU-Aqua-fiskkartor@slu.se",
+  "sprak": "sv",
+  "doi": null,
+  "farg": "YlGnBu",
+  "visas": true,
+  "metadata": "kartor/nmk/havskatt-vuxen-vastkusten-2024/metadata.json",
+  "falt": {
+    "art": "Havskatt",
+    "vetenskapligt_namn": "Anarhichas lupus",
+    "livsstadium": "Vuxen",
+    "havsomrade": "Västerhavet",
+    "omrade": "Västkusten >30 m",
+    "rodlista": "EN",
+    "fiskbarometern": "Beståndet av havskatt är sannolikt inte inom biologiskt säkra gränser i Skagerrak och Kattegatt.",
+    "simblasa": "Nej",
+    "livsmiljo": "Demersal (bottennära)"
+  },
+  "aktuellVersion": 2,
+  "versioner": [
+    {
+      "version": 1,
+      "publicerad": "2026-11-25",
+      "klassad": {
+        "fil": "kartor/nmk/havskatt-vuxen-vastkusten-2024/v1/visning.tif",
+        "sha256": "e9c12dcc4a0df50d22fa07c55a69043777c492d672da4f5c5991df9f9f74ac1a",
+        "kallaSha256": "f4a2cdcd0540b884db09a399c0382790239b8227674d65f5eff9232fa75f673d",
+        "bytes": 1997,
+        "epsg": 4326,
+        "upplosning": 3712,
+        "klasser": [
+          {
+            "varde": 5,
+            "namn": "Viktigt",
+            "farg": true
+          },
+          {
+            "varde": 10,
+            "namn": "Mycket viktigt",
+            "farg": true
+          }
+        ]
+      },
+      "kontinuerlig": {
+        "fil": "kartor/nmk/havskatt-vuxen-vastkusten-2024/v1/radata.tif",
+        "sha256": "dd59992e058ededcf809ea040d2366588a6512ffcc0bd5d594c498d8c8665aa0",
+        "kallaSha256": "2bc2b195b0d5daf7eba4f13ded1b08c72169fb328bfe7a9404a38c19d7beb3c2",
+        "bytes": 7919,
+        "epsg": 4326,
+        "upplosning": 3712,
+        "skala": 1000,
+        "enhet": "sannolikhet",
+        "min": 0.07,
+        "max": 0.754,
+        "p2": 0.07,
+        "p98": 0.608
+      }
+    },
+    {
+      "version": 2,
+      "publicerad": "2026-11-25",
+      "format": 2,
+      "klassad": {
+        "fil": "kartor/nmk/havskatt-vuxen-vastkusten-2024/v2/visning.tif",
+        "sha256": "2e250565e1a3833b83f427f987b0ce18553df06979803f1b8ac66aaf83b615d6",
+        "kallaSha256": "f4a2cdcd0540b884db09a399c0382790239b8227674d65f5eff9232fa75f673d",
+        "bytes": 1613,
+        "epsg": 4326,
+        "upplosning": 3712,
+        "vy3006": {
+          "fil": "kartor/nmk/havskatt-vuxen-vastkusten-2024/v2/visning_3006.tif",
+          "sha256": "2151ac1c09fd3f898f33357031f28d282e207d41ce92c495a314dd5376ceae58",
+          "bytes": 2721
+        },
+        "klasser": [
+          {
+            "varde": 5,
+            "namn": "Viktigt",
+            "farg": true
+          },
+          {
+            "varde": 10,
+            "namn": "Mycket viktigt",
+            "farg": true
+          }
+        ]
+      },
+      "kontinuerlig": {
+        "fil": "kartor/nmk/havskatt-vuxen-vastkusten-2024/v2/radata.tif",
+        "sha256": "dd59992e058ededcf809ea040d2366588a6512ffcc0bd5d594c498d8c8665aa0",
+        "kallaSha256": "2bc2b195b0d5daf7eba4f13ded1b08c72169fb328bfe7a9404a38c19d7beb3c2",
+        "bytes": 7919,
+        "epsg": 4326,
+        "upplosning": 3712,
+        "vy3006": {
+          "fil": "kartor/nmk/havskatt-vuxen-vastkusten-2024/v2/radata_3006.tif",
+          "sha256": "b6496b9edaa81d803e61f00e8a27c32373b71922cace801fbf390e0f0076e06e",
+          "bytes": 13524
+        },
+        "skala": 1000,
+        "enhet": "sannolikhet",
+        "min": 0.07,
+        "max": 0.754,
+        "p2": 0.07,
+        "p98": 0.608
+      }
+    }
+  ]
+}

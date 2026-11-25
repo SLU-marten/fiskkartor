@@ -1,0 +1,117 @@
+{
+  "id": "vitling-uppvaxt-vastkusten-2021",
+  "titel": "Vitling uppväxt västkusten",
+  "projekt": "NMK",
+  "kalla": "Nationell marin kartering (Ryssja)",
+  "citering": "Fredriksson m fl 2021",
+  "ar": 2021,
+  "kvalitet": "Provtagning inte designad för rumsliga analyser, där tillgänglig data mellan geografiska områden kan variera mellan år. Provtagninsdata från flera olika år ingår dock i modelleringen.",
+  "licens": "CC BY 4.0",
+  "kontakt": "SLU-Aqua-fiskkartor@slu.se",
+  "sprak": "sv",
+  "doi": null,
+  "farg": "YlGnBu",
+  "visas": true,
+  "metadata": "kartor/nmk/vitling-uppvaxt-vastkusten-2021/metadata.json",
+  "falt": {
+    "art": "Vitling",
+    "vetenskapligt_namn": "Merlangius merlangus",
+    "livsstadium": "Uppväxt",
+    "havsomrade": "Västerhavet",
+    "omrade": "Västkusten, djup 0-30m.",
+    "rodlista": "VU",
+    "fiskbarometern": "Ices bedömer att beståndets storlek i Skagerrak och Kattegatt har en biomassa som ligger över tröskelvärdet som inte bör underskridas.",
+    "simblasa": "Ja",
+    "livsmiljo": "Bentopelagisk"
+  },
+  "aktuellVersion": 2,
+  "versioner": [
+    {
+      "version": 1,
+      "publicerad": "2026-11-25",
+      "klassad": {
+        "fil": "kartor/nmk/vitling-uppvaxt-vastkusten-2021/v1/visning.tif",
+        "sha256": "866812244b52f8cea60150b425a9727ff71b763eecc93805826d23470ec6b964",
+        "kallaSha256": "8e3ed4d65c7ccc5caac418a13581c5f56fda43ca77e330087563c260a5cdb959",
+        "bytes": 23667,
+        "epsg": 25833,
+        "upplosning": 250,
+        "klasser": [
+          {
+            "varde": 5,
+            "namn": "Viktigt",
+            "farg": true
+          },
+          {
+            "varde": 10,
+            "namn": "Mycket viktigt",
+            "farg": true
+          }
+        ]
+      },
+      "kontinuerlig": {
+        "fil": "kartor/nmk/vitling-uppvaxt-vastkusten-2021/v1/radata.tif",
+        "sha256": "29e083eafd1ebafdfced5c780a18e86fa5d8c3f911d32244b742766da50f7f29",
+        "kallaSha256": "64e6ff53d94bdbaffdd87ca479962588689c60785ab9086d84e3268cb9c6dcb4",
+        "bytes": 197017,
+        "epsg": 25833,
+        "upplosning": 250,
+        "skala": 1000,
+        "enhet": "sannolikhet",
+        "min": 0.03,
+        "max": 0.746,
+        "p2": 0.031,
+        "p98": 0.44
+      }
+    },
+    {
+      "version": 2,
+      "publicerad": "2026-11-25",
+      "format": 2,
+      "klassad": {
+        "fil": "kartor/nmk/vitling-uppvaxt-vastkusten-2021/v2/visning.tif",
+        "sha256": "0a53529533262b6202c0cdf1ad072ecec349ecc6ca100f4ed0059bd15b1adb85",
+        "kallaSha256": "8e3ed4d65c7ccc5caac418a13581c5f56fda43ca77e330087563c260a5cdb959",
+        "bytes": 23485,
+        "epsg": 25833,
+        "upplosning": 250,
+        "vy3006": {
+          "fil": "kartor/nmk/vitling-uppvaxt-vastkusten-2021/v2/visning_3006.tif",
+          "sha256": "81af17ef88e24913fed972c52bf94484e6c4d1ba7a1bf52ade6200a21dc04965",
+          "bytes": 45690
+        },
+        "klasser": [
+          {
+            "varde": 5,
+            "namn": "Viktigt",
+            "farg": true
+          },
+          {
+            "varde": 10,
+            "namn": "Mycket viktigt",
+            "farg": true
+          }
+        ]
+      },
+      "kontinuerlig": {
+        "fil": "kartor/nmk/vitling-uppvaxt-vastkusten-2021/v2/radata.tif",
+        "sha256": "29e083eafd1ebafdfced5c780a18e86fa5d8c3f911d32244b742766da50f7f29",
+        "kallaSha256": "64e6ff53d94bdbaffdd87ca479962588689c60785ab9086d84e3268cb9c6dcb4",
+        "bytes": 197017,
+        "epsg": 25833,
+        "upplosning": 250,
+        "vy3006": {
+          "fil": "kartor/nmk/vitling-uppvaxt-vastkusten-2021/v2/radata_3006.tif",
+          "sha256": "f0e489140463ef321095978ed3d000d8ada9bbe2d19f4abaf7a945e35ceb9c27",
+          "bytes": 370813
+        },
+        "skala": 1000,
+        "enhet": "sannolikhet",
+        "min": 0.03,
+        "max": 0.746,
+        "p2": 0.031,
+        "p98": 0.44
+      }
+    }
+  ]
+}

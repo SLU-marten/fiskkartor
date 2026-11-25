@@ -1,0 +1,117 @@
+{
+  "id": "oxsimpa-uppvaxt-vastkusten-2021",
+  "titel": "Oxsimpa uppväxt västkusten",
+  "projekt": "NMK",
+  "kalla": "Nationell marin kartering (Ryssja)",
+  "citering": "Fredriksson m fl 2021",
+  "ar": 2021,
+  "kvalitet": "Provtagning inte designad för rumsliga analyser, där tillgänglig data mellan geografiska områden kan variera mellan år. Provtagninsdata från flera olika år ingår dock i modelleringen.",
+  "licens": "CC BY 4.0",
+  "kontakt": "SLU-Aqua-fiskkartor@slu.se",
+  "sprak": "sv",
+  "doi": null,
+  "farg": "YlGnBu",
+  "visas": true,
+  "metadata": "kartor/nmk/oxsimpa-uppvaxt-vastkusten-2021/metadata.json",
+  "falt": {
+    "art": "Oxsimpa",
+    "vetenskapligt_namn": "Taurulus bubalis",
+    "livsstadium": "Uppväxt",
+    "havsomrade": "Västerhavet",
+    "omrade": "Västkusten, djup 0-30m.",
+    "rodlista": "LC",
+    "fiskbarometern": null,
+    "simblasa": "Nej",
+    "livsmiljo": "Demersal (Bottennära)"
+  },
+  "aktuellVersion": 2,
+  "versioner": [
+    {
+      "version": 1,
+      "publicerad": "2026-11-25",
+      "klassad": {
+        "fil": "kartor/nmk/oxsimpa-uppvaxt-vastkusten-2021/v1/visning.tif",
+        "sha256": "b304273ef92a7249e689cfb70daf38ad988b826e590192e334a9f54c3afb9df9",
+        "kallaSha256": "917410524df689799efaf29c916eb7f41031b0638793e53979e6cefbf1436f75",
+        "bytes": 21610,
+        "epsg": 25833,
+        "upplosning": 250,
+        "klasser": [
+          {
+            "varde": 5,
+            "namn": "Viktigt",
+            "farg": true
+          },
+          {
+            "varde": 10,
+            "namn": "Mycket viktigt",
+            "farg": true
+          }
+        ]
+      },
+      "kontinuerlig": {
+        "fil": "kartor/nmk/oxsimpa-uppvaxt-vastkusten-2021/v1/radata.tif",
+        "sha256": "b1d91516fa5bcd0b64ab6459e94e742659fff7426810aaea7bc3478f72077127",
+        "kallaSha256": "6d173f5b1ac0d42248b50aeeb69efe0fb78ae80621304d12395e234458fbf92c",
+        "bytes": 201497,
+        "epsg": 25833,
+        "upplosning": 250,
+        "skala": 1000,
+        "enhet": "sannolikhet",
+        "min": 0.037,
+        "max": 0.816,
+        "p2": 0.042,
+        "p98": 0.458
+      }
+    },
+    {
+      "version": 2,
+      "publicerad": "2026-11-25",
+      "format": 2,
+      "klassad": {
+        "fil": "kartor/nmk/oxsimpa-uppvaxt-vastkusten-2021/v2/visning.tif",
+        "sha256": "9eab98ac86c4809aa6bb4008c31a631404e7f6134e4c0e7085d1d5682a268fd4",
+        "kallaSha256": "917410524df689799efaf29c916eb7f41031b0638793e53979e6cefbf1436f75",
+        "bytes": 21202,
+        "epsg": 25833,
+        "upplosning": 250,
+        "vy3006": {
+          "fil": "kartor/nmk/oxsimpa-uppvaxt-vastkusten-2021/v2/visning_3006.tif",
+          "sha256": "3e694e8e8db38d615060101d17c01a24361e6daae395d847ef16f93ce9bf9145",
+          "bytes": 40990
+        },
+        "klasser": [
+          {
+            "varde": 5,
+            "namn": "Viktigt",
+            "farg": true
+          },
+          {
+            "varde": 10,
+            "namn": "Mycket viktigt",
+            "farg": true
+          }
+        ]
+      },
+      "kontinuerlig": {
+        "fil": "kartor/nmk/oxsimpa-uppvaxt-vastkusten-2021/v2/radata.tif",
+        "sha256": "b1d91516fa5bcd0b64ab6459e94e742659fff7426810aaea7bc3478f72077127",
+        "kallaSha256": "6d173f5b1ac0d42248b50aeeb69efe0fb78ae80621304d12395e234458fbf92c",
+        "bytes": 201497,
+        "epsg": 25833,
+        "upplosning": 250,
+        "vy3006": {
+          "fil": "kartor/nmk/oxsimpa-uppvaxt-vastkusten-2021/v2/radata_3006.tif",
+          "sha256": "15879250875125993717de0b48135dc067a2bc7a6c9ff3b404f88f3e861e77f0",
+          "bytes": 379489
+        },
+        "skala": 1000,
+        "enhet": "sannolikhet",
+        "min": 0.037,
+        "max": 0.816,
+        "p2": 0.042,
+        "p98": 0.458
+      }
+    }
+  ]
+}

@@ -1,0 +1,117 @@
+{
+  "id": "skarsnultra-uppvaxt-vastkusten-2021",
+  "titel": "Skärsnultra uppväxt västkusten",
+  "projekt": "NMK",
+  "kalla": "Nationell marin kartering (Ryssja)",
+  "citering": "Fredriksson m fl 2021",
+  "ar": 2021,
+  "kvalitet": "Provtagning inte designad för rumsliga analyser, där tillgänglig data mellan geografiska områden kan variera mellan år. Provtagninsdata från flera olika år ingår dock i modelleringen.",
+  "licens": "CC BY 4.0",
+  "kontakt": "SLU-Aqua-fiskkartor@slu.se",
+  "sprak": "sv",
+  "doi": null,
+  "farg": "YlGnBu",
+  "visas": true,
+  "metadata": "kartor/nmk/skarsnultra-uppvaxt-vastkusten-2021/metadata.json",
+  "falt": {
+    "art": "Skärsnultra",
+    "vetenskapligt_namn": "Symphodus melops",
+    "livsstadium": "Uppväxt",
+    "havsomrade": "Västerhavet",
+    "omrade": "Västkusten, djup 0-30m.",
+    "rodlista": "LC",
+    "fiskbarometern": null,
+    "simblasa": "Ja",
+    "livsmiljo": "Demersal (Bottennära)"
+  },
+  "aktuellVersion": 2,
+  "versioner": [
+    {
+      "version": 1,
+      "publicerad": "2026-11-25",
+      "klassad": {
+        "fil": "kartor/nmk/skarsnultra-uppvaxt-vastkusten-2021/v1/visning.tif",
+        "sha256": "e396945f576a14aac90004e0f6239f92170cd8f9aa6af2550ffac0d9a1129ac6",
+        "kallaSha256": "a0bd2ebc2e7673e8a342cf5109d4121ff4c3aed3eb70bf5e50d7d28aac9f6b6c",
+        "bytes": 24233,
+        "epsg": 25833,
+        "upplosning": 250,
+        "klasser": [
+          {
+            "varde": 5,
+            "namn": "Viktigt",
+            "farg": true
+          },
+          {
+            "varde": 10,
+            "namn": "Mycket viktigt",
+            "farg": true
+          }
+        ]
+      },
+      "kontinuerlig": {
+        "fil": "kartor/nmk/skarsnultra-uppvaxt-vastkusten-2021/v1/radata.tif",
+        "sha256": "f15260b5e2fa8037121f2caac4d1c17495a4a4a48c8b4384ec04062d68ab0cfb",
+        "kallaSha256": "c9533603c9979ed412010ac4dff2135459859cfdbffed069236bcdba1748a0a1",
+        "bytes": 192405,
+        "epsg": 25833,
+        "upplosning": 250,
+        "skala": 1000,
+        "enhet": "sannolikhet",
+        "min": 0.029,
+        "max": 0.954,
+        "p2": 0.03,
+        "p98": 0.889
+      }
+    },
+    {
+      "version": 2,
+      "publicerad": "2026-11-25",
+      "format": 2,
+      "klassad": {
+        "fil": "kartor/nmk/skarsnultra-uppvaxt-vastkusten-2021/v2/visning.tif",
+        "sha256": "475f78e6de3f64ad936a1bb86fa1cb775711cc17c98aa95c865dc3c30c70a437",
+        "kallaSha256": "a0bd2ebc2e7673e8a342cf5109d4121ff4c3aed3eb70bf5e50d7d28aac9f6b6c",
+        "bytes": 23756,
+        "epsg": 25833,
+        "upplosning": 250,
+        "vy3006": {
+          "fil": "kartor/nmk/skarsnultra-uppvaxt-vastkusten-2021/v2/visning_3006.tif",
+          "sha256": "551613da0384396c0dcd6eae4bb6d23d357a97c5a315062dbda098f01ee7ce45",
+          "bytes": 46621
+        },
+        "klasser": [
+          {
+            "varde": 5,
+            "namn": "Viktigt",
+            "farg": true
+          },
+          {
+            "varde": 10,
+            "namn": "Mycket viktigt",
+            "farg": true
+          }
+        ]
+      },
+      "kontinuerlig": {
+        "fil": "kartor/nmk/skarsnultra-uppvaxt-vastkusten-2021/v2/radata.tif",
+        "sha256": "f15260b5e2fa8037121f2caac4d1c17495a4a4a48c8b4384ec04062d68ab0cfb",
+        "kallaSha256": "c9533603c9979ed412010ac4dff2135459859cfdbffed069236bcdba1748a0a1",
+        "bytes": 192405,
+        "epsg": 25833,
+        "upplosning": 250,
+        "vy3006": {
+          "fil": "kartor/nmk/skarsnultra-uppvaxt-vastkusten-2021/v2/radata_3006.tif",
+          "sha256": "f1d2bd0cb9691521709228bfd5fde26cdad474eec20b1f6ab1b46342e1eeaf2d",
+          "bytes": 369661
+        },
+        "skala": 1000,
+        "enhet": "sannolikhet",
+        "min": 0.029,
+        "max": 0.954,
+        "p2": 0.03,
+        "p98": 0.889
+      }
+    }
+  ]
+}

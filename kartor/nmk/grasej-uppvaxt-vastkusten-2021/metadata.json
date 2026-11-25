@@ -1,0 +1,117 @@
+{
+  "id": "grasej-uppvaxt-vastkusten-2021",
+  "titel": "Gråsej uppväxt västkusten",
+  "projekt": "NMK",
+  "kalla": "Nationell marin kartering (Ryssja)",
+  "citering": "Fredriksson m fl 2021",
+  "ar": 2021,
+  "kvalitet": "Provtagning inte designad för rumsliga analyser, där tillgänglig data mellan geografiska områden kan variera mellan år. Provtagninsdata från flera olika år ingår dock i modelleringen.",
+  "licens": "CC BY 4.0",
+  "kontakt": "SLU-Aqua-fiskkartor@slu.se",
+  "sprak": "sv",
+  "doi": null,
+  "farg": "YlGnBu",
+  "visas": true,
+  "metadata": "kartor/nmk/grasej-uppvaxt-vastkusten-2021/metadata.json",
+  "falt": {
+    "art": "Gråsej",
+    "vetenskapligt_namn": "Pollachius virens",
+    "livsstadium": "Uppväxt",
+    "havsomrade": "Västerhavet",
+    "omrade": "Västkusten, djup 0-30m.",
+    "rodlista": "LC",
+    "fiskbarometern": "Ices bedömer att beståndet av gråsej har en fiskeridödlighet som ligger under referensvärdet som ger ett hållbart fiske över tid och att beståndets lekbiomassa ligger över gränsvärdet som inte bör underskridas.",
+    "simblasa": "Ja",
+    "livsmiljo": "Bentopelagisk"
+  },
+  "aktuellVersion": 2,
+  "versioner": [
+    {
+      "version": 1,
+      "publicerad": "2026-11-25",
+      "klassad": {
+        "fil": "kartor/nmk/grasej-uppvaxt-vastkusten-2021/v1/visning.tif",
+        "sha256": "8567bef34ee4364a740ee343f8d3cef4089aca53c20e30f310b362e373d19eac",
+        "kallaSha256": "959aa064198da60527d806f2907180e06c5b6ba59df4a7bb41c519f12f450686",
+        "bytes": 29360,
+        "epsg": 25833,
+        "upplosning": 250,
+        "klasser": [
+          {
+            "varde": 5,
+            "namn": "Viktigt",
+            "farg": true
+          },
+          {
+            "varde": 10,
+            "namn": "Mycket viktigt",
+            "farg": true
+          }
+        ]
+      },
+      "kontinuerlig": {
+        "fil": "kartor/nmk/grasej-uppvaxt-vastkusten-2021/v1/radata.tif",
+        "sha256": "5a64574121c149858cfa8ba8b09a1e41e04503c1e29c224b59285ff4a86b2c0d",
+        "kallaSha256": "48598deeff574eb5efb8593610a112a560d2509250d438a037266ef3eb9b6975",
+        "bytes": 200006,
+        "epsg": 25833,
+        "upplosning": 250,
+        "skala": 1000,
+        "enhet": "sannolikhet",
+        "min": 0.037,
+        "max": 0.89,
+        "p2": 0.039,
+        "p98": 0.671
+      }
+    },
+    {
+      "version": 2,
+      "publicerad": "2026-11-25",
+      "format": 2,
+      "klassad": {
+        "fil": "kartor/nmk/grasej-uppvaxt-vastkusten-2021/v2/visning.tif",
+        "sha256": "f4978c89386864258bd5ec06e0d0aa78b6f09d4a88891ed96b3e56356c3892d6",
+        "kallaSha256": "959aa064198da60527d806f2907180e06c5b6ba59df4a7bb41c519f12f450686",
+        "bytes": 29229,
+        "epsg": 25833,
+        "upplosning": 250,
+        "vy3006": {
+          "fil": "kartor/nmk/grasej-uppvaxt-vastkusten-2021/v2/visning_3006.tif",
+          "sha256": "6a85dfa7cf9f1f0a2a87d92ed6a825135651667b9907e10058b0531d4df33ffc",
+          "bytes": 57211
+        },
+        "klasser": [
+          {
+            "varde": 5,
+            "namn": "Viktigt",
+            "farg": true
+          },
+          {
+            "varde": 10,
+            "namn": "Mycket viktigt",
+            "farg": true
+          }
+        ]
+      },
+      "kontinuerlig": {
+        "fil": "kartor/nmk/grasej-uppvaxt-vastkusten-2021/v2/radata.tif",
+        "sha256": "5a64574121c149858cfa8ba8b09a1e41e04503c1e29c224b59285ff4a86b2c0d",
+        "kallaSha256": "48598deeff574eb5efb8593610a112a560d2509250d438a037266ef3eb9b6975",
+        "bytes": 200006,
+        "epsg": 25833,
+        "upplosning": 250,
+        "vy3006": {
+          "fil": "kartor/nmk/grasej-uppvaxt-vastkusten-2021/v2/radata_3006.tif",
+          "sha256": "b70a5a9e43c6a425e86d1e424e7e291188f9a13e6f4e5bee983f78dc864bf1f5",
+          "bytes": 379892
+        },
+        "skala": 1000,
+        "enhet": "sannolikhet",
+        "min": 0.037,
+        "max": 0.89,
+        "p2": 0.039,
+        "p98": 0.671
+      }
+    }
+  ]
+}

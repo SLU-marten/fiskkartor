@@ -1,0 +1,117 @@
+{
+  "id": "fenknot-vuxen-vastkusten-2024",
+  "titel": "Fenknot vuxen västkusten",
+  "projekt": "NMK",
+  "kalla": "Nationell marin kartering (Trål)",
+  "citering": "Erlandsson m fl (opubl)",
+  "ar": 2024,
+  "kvalitet": "Grov upplösning då tråldragen är långa. Provtagning inte designad för rumsliga analyser, där tillgänglig data mellan geografiska områden kan variera mellan år. Data från många år ingår dock i modelleringen.",
+  "licens": "CC BY 4.0",
+  "kontakt": "SLU-Aqua-fiskkartor@slu.se",
+  "sprak": "sv",
+  "doi": null,
+  "farg": "YlGnBu",
+  "visas": true,
+  "metadata": "kartor/nmk/fenknot-vuxen-vastkusten-2024/metadata.json",
+  "falt": {
+    "art": "Fenknot",
+    "vetenskapligt_namn": "Chelidonichthys lucerna",
+    "livsstadium": "Vuxen",
+    "havsomrade": "Västerhavet",
+    "omrade": "Västkusten >30 m",
+    "rodlista": null,
+    "fiskbarometern": null,
+    "simblasa": "Ja",
+    "livsmiljo": "Bentopelagisk"
+  },
+  "aktuellVersion": 2,
+  "versioner": [
+    {
+      "version": 1,
+      "publicerad": "2026-11-25",
+      "klassad": {
+        "fil": "kartor/nmk/fenknot-vuxen-vastkusten-2024/v1/visning.tif",
+        "sha256": "73a63f9f5a18430670d1aff2d86b90daf1a231f4ebcdf4d357f92d8334840d6e",
+        "kallaSha256": "2c9bc305b64d82735ed09cd523c7367338fe0e6d5202b7757f6e9836b87a7c85",
+        "bytes": 2046,
+        "epsg": 4326,
+        "upplosning": 3712,
+        "klasser": [
+          {
+            "varde": 5,
+            "namn": "Viktigt",
+            "farg": true
+          },
+          {
+            "varde": 10,
+            "namn": "Mycket viktigt",
+            "farg": true
+          }
+        ]
+      },
+      "kontinuerlig": {
+        "fil": "kartor/nmk/fenknot-vuxen-vastkusten-2024/v1/radata.tif",
+        "sha256": "bb0d485090efc612f73cca65311bbf144977f4096bb18b645f927e407f74cf3e",
+        "kallaSha256": "8d489f3ef46a9983d2377ee8b43814a3e88e50fd6d179059d2bd7613fb0557e1",
+        "bytes": 8905,
+        "epsg": 4326,
+        "upplosning": 3712,
+        "skala": 1000,
+        "enhet": "sannolikhet",
+        "min": 0.037,
+        "max": 0.819,
+        "p2": 0.046,
+        "p98": 0.697
+      }
+    },
+    {
+      "version": 2,
+      "publicerad": "2026-11-25",
+      "format": 2,
+      "klassad": {
+        "fil": "kartor/nmk/fenknot-vuxen-vastkusten-2024/v2/visning.tif",
+        "sha256": "4b8f399bb6da71d66e6330b0aae9cfe3faefcfc9054d3285fe071fb00c51c91e",
+        "kallaSha256": "2c9bc305b64d82735ed09cd523c7367338fe0e6d5202b7757f6e9836b87a7c85",
+        "bytes": 1664,
+        "epsg": 4326,
+        "upplosning": 3712,
+        "vy3006": {
+          "fil": "kartor/nmk/fenknot-vuxen-vastkusten-2024/v2/visning_3006.tif",
+          "sha256": "13369bebf02d9ce09146168187c80073b3ffa36fb0d654606285ed1f27fa9347",
+          "bytes": 2771
+        },
+        "klasser": [
+          {
+            "varde": 5,
+            "namn": "Viktigt",
+            "farg": true
+          },
+          {
+            "varde": 10,
+            "namn": "Mycket viktigt",
+            "farg": true
+          }
+        ]
+      },
+      "kontinuerlig": {
+        "fil": "kartor/nmk/fenknot-vuxen-vastkusten-2024/v2/radata.tif",
+        "sha256": "bb0d485090efc612f73cca65311bbf144977f4096bb18b645f927e407f74cf3e",
+        "kallaSha256": "8d489f3ef46a9983d2377ee8b43814a3e88e50fd6d179059d2bd7613fb0557e1",
+        "bytes": 8905,
+        "epsg": 4326,
+        "upplosning": 3712,
+        "vy3006": {
+          "fil": "kartor/nmk/fenknot-vuxen-vastkusten-2024/v2/radata_3006.tif",
+          "sha256": "fa693a292eedb05e69474cc0a20c37d64cf982be4adfdc42cdae12c5f2395cb3",
+          "bytes": 15079
+        },
+        "skala": 1000,
+        "enhet": "sannolikhet",
+        "min": 0.037,
+        "max": 0.819,
+        "p2": 0.046,
+        "p98": 0.697
+      }
+    }
+  ]
+}

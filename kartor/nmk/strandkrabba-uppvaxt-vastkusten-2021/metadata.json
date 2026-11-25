@@ -1,0 +1,117 @@
+{
+  "id": "strandkrabba-uppvaxt-vastkusten-2021",
+  "titel": "Strandkrabba uppväxt västkusten",
+  "projekt": "NMK",
+  "kalla": "Nationell marin kartering (Ryssja)",
+  "citering": "Fredriksson m fl 2021",
+  "ar": 2021,
+  "kvalitet": "Provtagning inte designad för rumsliga analyser, där tillgänglig data mellan geografiska områden kan variera mellan år. Provtagninsdata från flera olika år ingår dock i modelleringen.",
+  "licens": "CC BY 4.0",
+  "kontakt": "SLU-Aqua-fiskkartor@slu.se",
+  "sprak": "sv",
+  "doi": null,
+  "farg": "YlGnBu",
+  "visas": true,
+  "metadata": "kartor/nmk/strandkrabba-uppvaxt-vastkusten-2021/metadata.json",
+  "falt": {
+    "art": "Strandkrabba",
+    "vetenskapligt_namn": "Carcinus maenas",
+    "livsstadium": "Uppväxt",
+    "havsomrade": "Västerhavet",
+    "omrade": "Västkusten, djup 0-30m.",
+    "rodlista": "LC",
+    "fiskbarometern": null,
+    "simblasa": null,
+    "livsmiljo": null
+  },
+  "aktuellVersion": 2,
+  "versioner": [
+    {
+      "version": 1,
+      "publicerad": "2026-11-25",
+      "klassad": {
+        "fil": "kartor/nmk/strandkrabba-uppvaxt-vastkusten-2021/v1/visning.tif",
+        "sha256": "1e14ad65cadec3a54b09c488e2ce66961a338529840cbaea0393bedf94968951",
+        "kallaSha256": "deac1a55e3ce98f806cf1af5902010d45926aa3867840abead1ea221fe2e0beb",
+        "bytes": 29408,
+        "epsg": 25833,
+        "upplosning": 250,
+        "klasser": [
+          {
+            "varde": 5,
+            "namn": "Viktigt",
+            "farg": true
+          },
+          {
+            "varde": 10,
+            "namn": "Mycket viktigt",
+            "farg": true
+          }
+        ]
+      },
+      "kontinuerlig": {
+        "fil": "kartor/nmk/strandkrabba-uppvaxt-vastkusten-2021/v1/radata.tif",
+        "sha256": "a62463a8c311645ae4264a613b20131be8ef561334ffbf518b95092e640146a0",
+        "kallaSha256": "2d8090453eab50d3b8a315d45e78d1f310f4581e4a5aedbe576450ecaceb5a2c",
+        "bytes": 191501,
+        "epsg": 25833,
+        "upplosning": 250,
+        "skala": 1000,
+        "enhet": "sannolikhet",
+        "min": 0.009,
+        "max": 0.985,
+        "p2": 0.01,
+        "p98": 0.985
+      }
+    },
+    {
+      "version": 2,
+      "publicerad": "2026-11-25",
+      "format": 2,
+      "klassad": {
+        "fil": "kartor/nmk/strandkrabba-uppvaxt-vastkusten-2021/v2/visning.tif",
+        "sha256": "9c072c637b76d734e279234af1dbc46a000e7afc6f49438f294e40486934065b",
+        "kallaSha256": "deac1a55e3ce98f806cf1af5902010d45926aa3867840abead1ea221fe2e0beb",
+        "bytes": 28982,
+        "epsg": 25833,
+        "upplosning": 250,
+        "vy3006": {
+          "fil": "kartor/nmk/strandkrabba-uppvaxt-vastkusten-2021/v2/visning_3006.tif",
+          "sha256": "76fc4e6f0087ba261a7242b2a54531d4355d037e22000c5c683a39eec719acda",
+          "bytes": 56299
+        },
+        "klasser": [
+          {
+            "varde": 5,
+            "namn": "Viktigt",
+            "farg": true
+          },
+          {
+            "varde": 10,
+            "namn": "Mycket viktigt",
+            "farg": true
+          }
+        ]
+      },
+      "kontinuerlig": {
+        "fil": "kartor/nmk/strandkrabba-uppvaxt-vastkusten-2021/v2/radata.tif",
+        "sha256": "a62463a8c311645ae4264a613b20131be8ef561334ffbf518b95092e640146a0",
+        "kallaSha256": "2d8090453eab50d3b8a315d45e78d1f310f4581e4a5aedbe576450ecaceb5a2c",
+        "bytes": 191501,
+        "epsg": 25833,
+        "upplosning": 250,
+        "vy3006": {
+          "fil": "kartor/nmk/strandkrabba-uppvaxt-vastkusten-2021/v2/radata_3006.tif",
+          "sha256": "a75abdbe9ac08bee1ecf006438294968faaf25d4f8a34cd4f6a03090f9219537",
+          "bytes": 364045
+        },
+        "skala": 1000,
+        "enhet": "sannolikhet",
+        "min": 0.009,
+        "max": 0.985,
+        "p2": 0.01,
+        "p98": 0.985
+      }
+    }
+  ]
+}

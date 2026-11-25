@@ -1,0 +1,117 @@
+{
+  "id": "gos-uppvaxt-ostkusten-2021",
+  "titel": "Gös uppväxt ostkusten",
+  "projekt": "NMK",
+  "kalla": "Nationell marin kartering (Yngel)",
+  "citering": "Erlandsson m fl 2021",
+  "ar": 2021,
+  "kvalitet": "Omfattar inte Öland, Gotland och Skåne pga databrist. Prediktion ner till 6m djup.",
+  "licens": "CC BY 4.0",
+  "kontakt": "SLU-Aqua-fiskkartor@slu.se",
+  "sprak": "sv",
+  "doi": null,
+  "farg": "YlGnBu",
+  "visas": true,
+  "metadata": "kartor/nmk/gos-uppvaxt-ostkusten-2021/metadata.json",
+  "falt": {
+    "art": "Gös",
+    "vetenskapligt_namn": "Sander lucioperca",
+    "livsstadium": "Uppväxt",
+    "havsomrade": "Östersjön",
+    "omrade": "Östersjön och Bottniska viken, djup 0-6 m. Omfattar ej Gotland, Öland eller stora delar av Skåne län.",
+    "rodlista": "LC",
+    "fiskbarometern": "Beståndet av gös i Egentliga Östersjön är mycket sannolikt inte inom biologiskt säkra gränser. I Bottniska viken kan beståndet ej bedömas på grund av databrist.",
+    "simblasa": "Ja",
+    "livsmiljo": "Demersal (kustnära)"
+  },
+  "aktuellVersion": 2,
+  "versioner": [
+    {
+      "version": 1,
+      "publicerad": "2026-11-25",
+      "klassad": {
+        "fil": "kartor/nmk/gos-uppvaxt-ostkusten-2021/v1/visning.tif",
+        "sha256": "7bfa705cb5f42044810b3aad260e01954bd5d1178383a14c41cc092daad3437d",
+        "kallaSha256": "1d6c00f5dbea94afaf7c0dff83810da4acaa978065ac29bfa8d1b4e9b4f10a42",
+        "bytes": 46000,
+        "epsg": 3035,
+        "upplosning": 250,
+        "klasser": [
+          {
+            "varde": 5,
+            "namn": "Viktigt",
+            "farg": true
+          },
+          {
+            "varde": 10,
+            "namn": "Mycket viktigt",
+            "farg": true
+          }
+        ]
+      },
+      "kontinuerlig": {
+        "fil": "kartor/nmk/gos-uppvaxt-ostkusten-2021/v1/radata.tif",
+        "sha256": "7845629fd7682a10effff3724b8ec1c9558adcbc670f561cc3c7d747aaf4bfc2",
+        "kallaSha256": "2dc71ea921fc1df0d7842a66c2cba38f212be4680a5b0e294e22fa86c037c0c4",
+        "bytes": 238655,
+        "epsg": 3035,
+        "upplosning": 250,
+        "skala": 1000,
+        "enhet": "sannolikhet",
+        "min": 0.002,
+        "max": 0.999,
+        "p2": 0.002,
+        "p98": 0.143
+      }
+    },
+    {
+      "version": 2,
+      "publicerad": "2026-11-25",
+      "format": 2,
+      "klassad": {
+        "fil": "kartor/nmk/gos-uppvaxt-ostkusten-2021/v2/visning.tif",
+        "sha256": "54ec5386f4858a987fea2b17b81d3bc7cb8f3638b5051816c899fb35a75bdf24",
+        "kallaSha256": "1d6c00f5dbea94afaf7c0dff83810da4acaa978065ac29bfa8d1b4e9b4f10a42",
+        "bytes": 45546,
+        "epsg": 3035,
+        "upplosning": 250,
+        "vy3006": {
+          "fil": "kartor/nmk/gos-uppvaxt-ostkusten-2021/v2/visning_3006.tif",
+          "sha256": "9273d9368c003472591a7d2e83384c5cb2db7c9e43ef3c7cef30604b1d3eb479",
+          "bytes": 142465
+        },
+        "klasser": [
+          {
+            "varde": 5,
+            "namn": "Viktigt",
+            "farg": true
+          },
+          {
+            "varde": 10,
+            "namn": "Mycket viktigt",
+            "farg": true
+          }
+        ]
+      },
+      "kontinuerlig": {
+        "fil": "kartor/nmk/gos-uppvaxt-ostkusten-2021/v2/radata.tif",
+        "sha256": "7845629fd7682a10effff3724b8ec1c9558adcbc670f561cc3c7d747aaf4bfc2",
+        "kallaSha256": "2dc71ea921fc1df0d7842a66c2cba38f212be4680a5b0e294e22fa86c037c0c4",
+        "bytes": 238655,
+        "epsg": 3035,
+        "upplosning": 250,
+        "vy3006": {
+          "fil": "kartor/nmk/gos-uppvaxt-ostkusten-2021/v2/radata_3006.tif",
+          "sha256": "742a8c6f7edbe65353e34572ab8d0a541fd5e55be44393b826ea3d9434627cfb",
+          "bytes": 736713
+        },
+        "skala": 1000,
+        "enhet": "sannolikhet",
+        "min": 0.002,
+        "max": 0.999,
+        "p2": 0.002,
+        "p98": 0.143
+      }
+    }
+  ]
+}

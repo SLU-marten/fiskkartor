@@ -1,0 +1,117 @@
+{
+  "id": "stromming-uppvaxt-ostkusten-2021",
+  "titel": "Strömming uppväxt ostkusten",
+  "projekt": "NMK",
+  "kalla": "Nationell marin kartering (Yngel)",
+  "citering": "Erlandsson m fl 2021",
+  "ar": 2021,
+  "kvalitet": "Omfattar inte Öland, Gotland och Skåne pga databrist. Prediktion ner till 6m djup.",
+  "licens": "CC BY 4.0",
+  "kontakt": "SLU-Aqua-fiskkartor@slu.se",
+  "sprak": "sv",
+  "doi": null,
+  "farg": "YlGnBu",
+  "visas": true,
+  "metadata": "kartor/nmk/stromming-uppvaxt-ostkusten-2021/metadata.json",
+  "falt": {
+    "art": "Sill",
+    "vetenskapligt_namn": "Clupea harengus",
+    "livsstadium": "Uppväxt",
+    "havsomrade": "Östersjön",
+    "omrade": "Östersjön och Bottniska viken, djup 0-6 m. Omfattar ej Gotland, Öland eller stora delar av Skåne län.",
+    "rodlista": "LC",
+    "fiskbarometern": "Ices bedömer att beståndet av Strömming i centrala Östersjön har ett fisketryck som ligger under referensfärdet för fiskeridödlighet som ger ett hållbart fiske över tid men att både beståndets storlek och lekbeståndets storlek ligger under de gränsvärden som inte bör understigas. I Bottniska viken bedöms fissketrycket ligga under referensvärdet för fiskerifödlighet osm ger ett hållbart fiske över tid men beståndets storlek lika under bränsvärdet som inte bör underskridas. Lekbeståndets stårlek bedöms till skillnad från centrala Östersjön ligga över gränsvärdet.",
+    "simblasa": "Ja",
+    "livsmiljo": "Pelagisk (frivattenlevande)"
+  },
+  "aktuellVersion": 2,
+  "versioner": [
+    {
+      "version": 1,
+      "publicerad": "2026-11-25",
+      "klassad": {
+        "fil": "kartor/nmk/stromming-uppvaxt-ostkusten-2021/v1/visning.tif",
+        "sha256": "ca0d4c970e02d49521b9772e4b5fa34601adc6c92601a8ca5b946698d25e3d9e",
+        "kallaSha256": "851136852d0bf76112012abc8954b3416e6f20360b3489b4e3904c432ed95e7b",
+        "bytes": 56244,
+        "epsg": 3035,
+        "upplosning": 250,
+        "klasser": [
+          {
+            "varde": 5,
+            "namn": "Viktigt",
+            "farg": true
+          },
+          {
+            "varde": 10,
+            "namn": "Mycket viktigt",
+            "farg": true
+          }
+        ]
+      },
+      "kontinuerlig": {
+        "fil": "kartor/nmk/stromming-uppvaxt-ostkusten-2021/v1/radata.tif",
+        "sha256": "6b3f9a755c45e8aac51029b91a4c2307baf1d9905b3cb51bf1c32011a5294eb8",
+        "kallaSha256": "cbef05824f0d0bae715e8a1753ce34c4852a6417eb2922d1b40014e4a573431c",
+        "bytes": 510741,
+        "epsg": 3035,
+        "upplosning": 250,
+        "skala": 1000,
+        "enhet": "sannolikhet",
+        "min": 0.012,
+        "max": 1,
+        "p2": 0.015,
+        "p98": 0.68
+      }
+    },
+    {
+      "version": 2,
+      "publicerad": "2026-11-25",
+      "format": 2,
+      "klassad": {
+        "fil": "kartor/nmk/stromming-uppvaxt-ostkusten-2021/v2/visning.tif",
+        "sha256": "4d72c00a564380c8090a0af5b94bd55efbfe39ee21d4609ec95f141bef9b9b9f",
+        "kallaSha256": "851136852d0bf76112012abc8954b3416e6f20360b3489b4e3904c432ed95e7b",
+        "bytes": 55303,
+        "epsg": 3035,
+        "upplosning": 250,
+        "vy3006": {
+          "fil": "kartor/nmk/stromming-uppvaxt-ostkusten-2021/v2/visning_3006.tif",
+          "sha256": "f2c6f5be09bf97b197c04de25b2f5343e28ae5855de785facbc045ca114212d1",
+          "bytes": 162461
+        },
+        "klasser": [
+          {
+            "varde": 5,
+            "namn": "Viktigt",
+            "farg": true
+          },
+          {
+            "varde": 10,
+            "namn": "Mycket viktigt",
+            "farg": true
+          }
+        ]
+      },
+      "kontinuerlig": {
+        "fil": "kartor/nmk/stromming-uppvaxt-ostkusten-2021/v2/radata.tif",
+        "sha256": "6b3f9a755c45e8aac51029b91a4c2307baf1d9905b3cb51bf1c32011a5294eb8",
+        "kallaSha256": "cbef05824f0d0bae715e8a1753ce34c4852a6417eb2922d1b40014e4a573431c",
+        "bytes": 510741,
+        "epsg": 3035,
+        "upplosning": 250,
+        "vy3006": {
+          "fil": "kartor/nmk/stromming-uppvaxt-ostkusten-2021/v2/radata_3006.tif",
+          "sha256": "0c706e46fe126a0cc88b64476446e4d5ff4e79a01993d27d61e723ff569e6557",
+          "bytes": 1291912
+        },
+        "skala": 1000,
+        "enhet": "sannolikhet",
+        "min": 0.012,
+        "max": 1,
+        "p2": 0.015,
+        "p98": 0.68
+      }
+    }
+  ]
+}

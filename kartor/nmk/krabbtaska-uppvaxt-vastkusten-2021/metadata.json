@@ -1,0 +1,117 @@
+{
+  "id": "krabbtaska-uppvaxt-vastkusten-2021",
+  "titel": "Krabbtaska uppväxt västkusten",
+  "projekt": "NMK",
+  "kalla": "Nationell marin kartering (Ryssja)",
+  "citering": "Fredriksson m fl 2021",
+  "ar": 2021,
+  "kvalitet": "Provtagning inte designad för rumsliga analyser, där tillgänglig data mellan geografiska områden kan variera mellan år. Provtagninsdata från flera olika år ingår dock i modelleringen.",
+  "licens": "CC BY 4.0",
+  "kontakt": "SLU-Aqua-fiskkartor@slu.se",
+  "sprak": "sv",
+  "doi": null,
+  "farg": "YlGnBu",
+  "visas": true,
+  "metadata": "kartor/nmk/krabbtaska-uppvaxt-vastkusten-2021/metadata.json",
+  "falt": {
+    "art": "Krabbtaska",
+    "vetenskapligt_namn": "Cancer pagurus",
+    "livsstadium": "Uppväxt",
+    "havsomrade": "Västerhavet",
+    "omrade": "Västkusten, djup 0-30m.",
+    "rodlista": "LC",
+    "fiskbarometern": "Beståndet av krabbtaska är sannolikt inom biologiskt säkra gränser i Skagerrak, Kattegatt och Norra Öresund.",
+    "simblasa": null,
+    "livsmiljo": null
+  },
+  "aktuellVersion": 2,
+  "versioner": [
+    {
+      "version": 1,
+      "publicerad": "2026-11-25",
+      "klassad": {
+        "fil": "kartor/nmk/krabbtaska-uppvaxt-vastkusten-2021/v1/visning.tif",
+        "sha256": "56bac2d6e097063fccef6665e4ed124c38bd397817b58004b9b6275541d05d5f",
+        "kallaSha256": "66a11d30229b2e10c3308b289602a214f9f68fc4097cbf4973e36b90a8a5774c",
+        "bytes": 26474,
+        "epsg": 25833,
+        "upplosning": 250,
+        "klasser": [
+          {
+            "varde": 5,
+            "namn": "Viktigt",
+            "farg": true
+          },
+          {
+            "varde": 10,
+            "namn": "Mycket viktigt",
+            "farg": true
+          }
+        ]
+      },
+      "kontinuerlig": {
+        "fil": "kartor/nmk/krabbtaska-uppvaxt-vastkusten-2021/v1/radata.tif",
+        "sha256": "650d530cae72dcf812a3bae77883f1713e551af70139090fecb2959b4525bda7",
+        "kallaSha256": "394d380a0bc28114ef834b3ef5e3976e7049d934439e7bdfff3097a6b3cbe0d9",
+        "bytes": 185862,
+        "epsg": 25833,
+        "upplosning": 250,
+        "skala": 1000,
+        "enhet": "sannolikhet",
+        "min": 0.008,
+        "max": 0.965,
+        "p2": 0.008,
+        "p98": 0.851
+      }
+    },
+    {
+      "version": 2,
+      "publicerad": "2026-11-25",
+      "format": 2,
+      "klassad": {
+        "fil": "kartor/nmk/krabbtaska-uppvaxt-vastkusten-2021/v2/visning.tif",
+        "sha256": "b43b400e0303b3424d5ceff3bcbaced1212f63e4c8d82509e2bd85094942a79a",
+        "kallaSha256": "66a11d30229b2e10c3308b289602a214f9f68fc4097cbf4973e36b90a8a5774c",
+        "bytes": 26398,
+        "epsg": 25833,
+        "upplosning": 250,
+        "vy3006": {
+          "fil": "kartor/nmk/krabbtaska-uppvaxt-vastkusten-2021/v2/visning_3006.tif",
+          "sha256": "e2d7262fefcbdef54413636a12799f316216f44bbe4efad6a57fd5b557565317",
+          "bytes": 52057
+        },
+        "klasser": [
+          {
+            "varde": 5,
+            "namn": "Viktigt",
+            "farg": true
+          },
+          {
+            "varde": 10,
+            "namn": "Mycket viktigt",
+            "farg": true
+          }
+        ]
+      },
+      "kontinuerlig": {
+        "fil": "kartor/nmk/krabbtaska-uppvaxt-vastkusten-2021/v2/radata.tif",
+        "sha256": "650d530cae72dcf812a3bae77883f1713e551af70139090fecb2959b4525bda7",
+        "kallaSha256": "394d380a0bc28114ef834b3ef5e3976e7049d934439e7bdfff3097a6b3cbe0d9",
+        "bytes": 185862,
+        "epsg": 25833,
+        "upplosning": 250,
+        "vy3006": {
+          "fil": "kartor/nmk/krabbtaska-uppvaxt-vastkusten-2021/v2/radata_3006.tif",
+          "sha256": "a0311dc0914d9277aff58ea03a2e77ca0954004c7058139e333679012164fb68",
+          "bytes": 355124
+        },
+        "skala": 1000,
+        "enhet": "sannolikhet",
+        "min": 0.008,
+        "max": 0.965,
+        "p2": 0.008,
+        "p98": 0.851
+      }
+    }
+  ]
+}

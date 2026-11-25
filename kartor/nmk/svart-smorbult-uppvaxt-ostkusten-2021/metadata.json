@@ -1,0 +1,117 @@
+{
+  "id": "svart-smorbult-uppvaxt-ostkusten-2021",
+  "titel": "Svart smörbult uppväxt ostkusten",
+  "projekt": "NMK",
+  "kalla": "Nationell marin kartering (Yngel)",
+  "citering": "Erlandsson m fl 2021",
+  "ar": 2021,
+  "kvalitet": "Omfattar inte Öland, Gotland och Skåne pga databrist. Prediktion ner till 6m djup.",
+  "licens": "CC BY 4.0",
+  "kontakt": "SLU-Aqua-fiskkartor@slu.se",
+  "sprak": "sv",
+  "doi": null,
+  "farg": "YlGnBu",
+  "visas": true,
+  "metadata": "kartor/nmk/svart-smorbult-uppvaxt-ostkusten-2021/metadata.json",
+  "falt": {
+    "art": "Svart smörbult",
+    "vetenskapligt_namn": "Gobius niger",
+    "livsstadium": "Uppväxt",
+    "havsomrade": "Östersjön",
+    "omrade": "Östersjön och Bottniska viken, djup 0-6 m. Omfattar ej Gotland, Öland eller stora delar av Skåne län.",
+    "rodlista": "LC",
+    "fiskbarometern": null,
+    "simblasa": "Nej?",
+    "livsmiljo": "Demersal (bottennära)"
+  },
+  "aktuellVersion": 2,
+  "versioner": [
+    {
+      "version": 1,
+      "publicerad": "2026-11-25",
+      "klassad": {
+        "fil": "kartor/nmk/svart-smorbult-uppvaxt-ostkusten-2021/v1/visning.tif",
+        "sha256": "7adc8f281dd3536c2268bc7eb7ee2ec2c9f1e3e181c4e9a9560c0d6240245a83",
+        "kallaSha256": "ab23f6624a9d0c45b752d9c74590ce749cc4cc57a26fc057c52ca0740b65ce25",
+        "bytes": 92591,
+        "epsg": 3035,
+        "upplosning": 250,
+        "klasser": [
+          {
+            "varde": 5,
+            "namn": "Viktigt",
+            "farg": true
+          },
+          {
+            "varde": 10,
+            "namn": "Mycket viktigt",
+            "farg": true
+          }
+        ]
+      },
+      "kontinuerlig": {
+        "fil": "kartor/nmk/svart-smorbult-uppvaxt-ostkusten-2021/v1/radata.tif",
+        "sha256": "78d829a63cfae64ced8cb29c6c2df66bd25aeff2f43454065d12cff322988692",
+        "kallaSha256": "5d52e601d275736400fe8b1b164c48a85fe54751d8d492f699b6091a5405d04e",
+        "bytes": 432042,
+        "epsg": 3035,
+        "upplosning": 250,
+        "skala": 1000,
+        "enhet": "sannolikhet",
+        "min": 0.011,
+        "max": 0.816,
+        "p2": 0.011,
+        "p98": 0.38
+      }
+    },
+    {
+      "version": 2,
+      "publicerad": "2026-11-25",
+      "format": 2,
+      "klassad": {
+        "fil": "kartor/nmk/svart-smorbult-uppvaxt-ostkusten-2021/v2/visning.tif",
+        "sha256": "063eeab6c3c5d7f36f87880eb1a9d1bf469e39949ce17ba2e153c50c0bdab2b0",
+        "kallaSha256": "ab23f6624a9d0c45b752d9c74590ce749cc4cc57a26fc057c52ca0740b65ce25",
+        "bytes": 92657,
+        "epsg": 3035,
+        "upplosning": 250,
+        "vy3006": {
+          "fil": "kartor/nmk/svart-smorbult-uppvaxt-ostkusten-2021/v2/visning_3006.tif",
+          "sha256": "766bac9c1624b0edc8f606dc872ecff9cee4404a1bfe480e377588db6526f04f",
+          "bytes": 255763
+        },
+        "klasser": [
+          {
+            "varde": 5,
+            "namn": "Viktigt",
+            "farg": true
+          },
+          {
+            "varde": 10,
+            "namn": "Mycket viktigt",
+            "farg": true
+          }
+        ]
+      },
+      "kontinuerlig": {
+        "fil": "kartor/nmk/svart-smorbult-uppvaxt-ostkusten-2021/v2/radata.tif",
+        "sha256": "78d829a63cfae64ced8cb29c6c2df66bd25aeff2f43454065d12cff322988692",
+        "kallaSha256": "5d52e601d275736400fe8b1b164c48a85fe54751d8d492f699b6091a5405d04e",
+        "bytes": 432042,
+        "epsg": 3035,
+        "upplosning": 250,
+        "vy3006": {
+          "fil": "kartor/nmk/svart-smorbult-uppvaxt-ostkusten-2021/v2/radata_3006.tif",
+          "sha256": "4db72fa49466b351f9c96ac0407155bb23cbfcba614144a277f3a8c03c283ecb",
+          "bytes": 1126433
+        },
+        "skala": 1000,
+        "enhet": "sannolikhet",
+        "min": 0.011,
+        "max": 0.816,
+        "p2": 0.011,
+        "p98": 0.38
+      }
+    }
+  ]
+}
