@@ -1,7 +1,7 @@
 <script lang="ts">
   // Sidhuvudet enligt SLU:s profil: logotypen i färg överst till vänster med en fri zon på halva
   // logotypens höjd, portalens namn och institutionen. Under 40rem ligger menyn bakom en knapp.
-  import logotyp from '../assets/slu-logotyp.svg';
+  import logotyp from '../assets/slu-logotyp.png';
   import type { Sprak, Vy } from '../lib/rutt';
   import { t } from '../lib/text';
 
@@ -72,22 +72,26 @@
 </header>
 
 <style>
-  /* Logotypen är 36 px hög i ett sidhuvud på 4,5rem, så att den fria zonen (18 px) ryms ovanför,
-     under och till vänster. Under 60rem: 28 px i 3,5rem. */
+  /* SLU:s PNG-fil (slu_logo_webb.zip) har den fria zonen inbyggd: märket är halva bildens höjd och
+     marginalen en fjärdedel på varje sida. Bilden fyller därför sidhuvudets höjd och ligger mot
+     vänsterkanten: 72 px ger ett märke på 36 px. På mobil 68 px, så att märket når 9 mm (34 px). */
   .sidhuvud {
     position: relative;
     display: flex;
     align-items: center;
-    gap: 18px;
+    gap: 0.25rem;
     height: 4.5rem;
     box-sizing: border-box;
-    padding: 0 1.5rem 0 18px;
-    border-bottom: 1px solid var(--linje);
+    padding: 0 1.5rem 0 0;
+    /* Linjen är en skugga och inte en kant, så att logotypens vita bakgrund (hela höjden) inte
+       täcker den. z-index lägger den över innehållet nedanför. */
+    box-shadow: 0 1px 0 var(--linje);
+    z-index: 10;
     background: var(--yta);
   }
   .logotyp {
     display: block;
-    height: 36px;
+    height: 72px;
     width: auto;
   }
   .namnrad {
@@ -142,12 +146,11 @@
   }
   @media (max-width: 60rem) {
     .sidhuvud {
-      height: 3.5rem;
-      gap: 14px;
-      padding: 0 0.75rem 0 14px;
+      height: 4.25rem;
+      padding: 0 0.75rem 0 0;
     }
     .logotyp {
-      height: 28px;
+      height: 68px;
     }
     .namn {
       font-size: 1.2rem;

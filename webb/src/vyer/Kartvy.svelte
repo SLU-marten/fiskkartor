@@ -170,7 +170,7 @@
       /* Kartan får alltid minst min(8rem, 35dvh); en lång titel eller en notis gör att fliken
          skrollar i stället för att trycka ihop kartan. */
       grid-template-rows: auto minmax(min(8rem, 35dvh), 1fr) minmax(0, auto);
-      height: calc(100dvh - 3.5rem);
+      height: calc(100dvh - 4.25rem);
     }
     .lista {
       display: none;

@@ -595,11 +595,23 @@ test.describe('sidhuvud, sidfot och titlar', () => {
     await expect(page.getByRole('banner').getByText('Institutionen för akvatiska resurser')).toBeVisible();
   });
 
-  test.fixme('logotypen är SLU:s riktiga, inte platshållaren', async ({ page }) => {
-    // Spärr inför lanseringen i fas 4: ta bort fixme när Mårtens PNG-fil ligger i src/assets.
+  test('logotypen är SLU:s riktiga, inte platshållaren', async ({ page }) => {
     await page.goto(START());
     await expect(page.getByRole('img', { name: 'SLU, Sveriges lantbruksuniversitet' })).toHaveAttribute('src', /\.png$/);
   });
+
+  // PNG-filen har SLU:s fria zon inbyggd: märket är halva bildens höjd. Märket ska vara minst 9 mm
+  // (cirka 34 px), så bilden är minst 68 px hög, också på mobil.
+  for (const [bredd, hojd] of [[1280, 72], [375, 68]] as const) {
+    test(`logotypen är ${hojd} px hög vid ${bredd} px bredd`, async ({ page }) => {
+      await page.setViewportSize({ width: bredd, height: 800 });
+      await page.goto(START());
+      const bild = page.getByRole('img', { name: 'SLU, Sveriges lantbruksuniversitet' });
+      await expect(bild).toBeVisible();
+      expect(Math.round((await bild.boundingBox())!.height)).toBe(hojd);
+      expect(Math.round((await bild.boundingBox())!.x)).toBe(0);
+    });
+  }
 
   test('varje vy har en egen titel', async ({ page }) => {
     await cartoTom(page);

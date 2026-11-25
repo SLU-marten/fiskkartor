@@ -53,4 +53,3 @@ rättelse har ett test som först föll.
 ## Kvar att göra
 
 - Skärmläsartest på en riktig karta, på dator och mobil.
-- När den riktiga logotypen finns på plats: ta bort `test.fixme` för logotypen i `app.spec.ts`.
