@@ -39,6 +39,22 @@ test.describe('appskalet', () => {
     await page.goto(`${server.url}/dist/index.html?data=/finns-inte/#/`);
     await expect(page.getByRole('alert')).toContainText('Kartkatalogen kunde inte hämtas');
   });
+
+  test('knappen Försök igen står under felmeddelandet med samma marginal', async ({ page }) => {
+    await page.goto(`${server.url}/dist/index.html?data=/finns-inte/#/`);
+    const fel = (await page.getByRole('alert').boundingBox())!;
+    const knapp = (await page.getByRole('button', { name: 'Försök igen' }).boundingBox())!;
+    expect(knapp.x).toBeGreaterThanOrEqual(16);
+    expect(knapp.y).toBeGreaterThanOrEqual(fel.y + fel.height);
+  });
+
+  test('?data= till en annan webbplats används inte', async ({ page }) => {
+    const andra: string[] = [];
+    page.on('request', (r) => !r.url().startsWith(server.url) && andra.push(r.url()));
+    await page.goto(`${server.url}/dist/index.html?data=https://example.com/data/#/`);
+    await expect(page.getByRole('alert')).toContainText('Kartkatalogen kunde inte hämtas');
+    expect(andra).toEqual([]);
+  });
 });
 
 const START = () => start(server.url);
@@ -227,6 +243,29 @@ test.describe('värde under pekaren', () => {
     await expect(page.getByTestId('koordinat-wgs84')).toHaveText(/^59\.\d{5}° N, 1[0-9]\.\d{5}° E$/);
   });
 
+  test('en långsam bakgrundskarta gör inte värdet ungefärligt', async ({ page }) => {
+    await cartoTom(page);
+    await page.goto(KARTA('torsk-test'));
+    await vantaKarta(page);
+    await page.unroute('https://basemaps.cartocdn.com/**');
+    await page.route('https://basemaps.cartocdn.com/**', async (r) => {
+      await new Promise((klar) => setTimeout(klar, 8000));
+      await r.fulfill({ body: TOM_PNG, contentType: 'image/png', headers: { 'Access-Control-Allow-Origin': '*' } }).catch(() => {});
+    });
+    // Vänta på en ritning (inte rendercomplete, som väntar på bakgrunden), så att pixelFor gäller den nya vyn.
+    await page.evaluate(
+      () =>
+        new Promise((klar) => {
+          const k = (window as any).__karta.karta;
+          k.once('postrender', klar);
+          k.getView().setCenter([613287.5, 6636712.5]);
+          k.getView().setResolution(25);
+        }),
+    );
+    await hovra(page, 613287.5, 6636712.5, 3006);
+    await expect(page.getByTestId('varde')).toHaveText('Mycket viktigt', { timeout: 5000 });
+  });
+
   test('pekaren flyttas innan svaret kommer: aldrig det gamla värdet', async ({ page }) => {
     await page.goto(KARTA('torsk-test', 'bakgrund=ingen&lager=kontinuerlig'));
     await vantaKarta(page);
@@ -340,7 +379,7 @@ test.describe('panelen', () => {
     await expect(v.nth(0)).toContainText('2026-11-25');
     await expect(v.nth(1)).toContainText('Version 1');
     await expect(v.nth(1)).toContainText('2026-11-01');
-    await expect(v.nth(1).getByRole('link')).toHaveAttribute('href', /#\/karta\/pbs-test\?v=1$/);
+    await expect(v.nth(1).getByRole('link')).toHaveAttribute('href', /#\/karta\/pbs-test\?(.*&)?v=1$/);
   });
 
   test('kartans namn står kvar överst när panelen skrollas', async ({ page }) => {
@@ -772,6 +811,51 @@ test.describe('Lagerval och teckenförklaring i kartan', () => {
   }
 });
 
+test.describe('lagerbyte, kartbyte och versioner', () => {
+  test('ett annat lager säger att kartan laddas tills det har laddats', async ({ page }) => {
+    await page.goto(KARTA('torsk-test', 'bakgrund=ingen'));
+    await vantaKarta(page);
+    await expect(page.getByText('Laddar kartan …')).toHaveCount(0);
+    await fordroj(page, '**/radata.tif*', 1500);
+    await oppnaLagerval(page);
+    await page.getByRole('radio', { name: 'Kontinuerlig' }).check();
+    await expect(page.getByText('Laddar kartan …')).toBeVisible();
+    await expect(page.getByText('Laddar kartan …')).toHaveCount(0, { timeout: 20_000 });
+  });
+
+  test('Kopierad står inte kvar när en annan karta öppnas', async ({ page, context }) => {
+    await context.grantPermissions(['clipboard-read', 'clipboard-write']);
+    await cartoTom(page);
+    await page.goto(KARTA('torsk-test'));
+    await vantaKarta(page);
+    await page.getByRole('button', { name: 'Kopiera länk till vyn' }).click();
+    await expect(page.getByRole('status').filter({ hasText: 'Kopierad' })).toBeVisible();
+    await page.locator('main a[href*="karta/pbs-test"]').first().click();
+    await expect(page).toHaveURL(/karta\/pbs-test/);
+    await expect(page.getByRole('status').filter({ hasText: 'Kopierad' })).toHaveCount(0);
+  });
+
+  test('länkarna till andra versioner behåller vyn, lagret och bakgrunden', async ({ page }) => {
+    await cartoTom(page);
+    await page.goto(KARTA('pbs-test', 'x=630000&y=6620000&upp=100&bakgrund=ingen'));
+    await vantaKarta(page);
+    const href = (await page.getByTestId('versioner').getByRole('link', { name: 'Version 1' }).getAttribute('href'))!;
+    const q = new URLSearchParams(href.split('?')[1]);
+    expect(q.get('v')).toBe('1');
+    expect(q.get('x')).toBe('630000');
+    expect(q.get('y')).toBe('6620000');
+    expect(q.get('upp')).toBe('100');
+    expect(q.get('bakgrund')).toBe('ingen');
+  });
+
+  test('nedladdningens förklaring är löpande text', async ({ page }) => {
+    await cartoTom(page);
+    await page.goto(KARTA('torsk-test'));
+    const info = page.getByTestId('nedladdning').locator('p.info');
+    expect(await info.evaluate((e) => getComputedStyle(e).fontFamily)).toContain('Merriweather');
+  });
+});
+
 test.describe('mobil', () => {
   test.use({ viewport: { width: 390, height: 844 } });
   const greppet = (page: import('@playwright/test').Page) => page.locator('.grepp');
@@ -846,8 +930,27 @@ test.describe('mobil', () => {
     await expect(greppet(page)).toHaveAttribute('aria-expanded', 'false');
   });
 
+  test('mobil: högerklick på greppet växlar inte', async ({ page }) => {
+    await cartoTom(page);
+    await page.goto(KARTA('torsk-test'));
+    await vantaKarta(page);
+    await greppet(page).click({ button: 'right' });
+    await page.waitForTimeout(600);
+    await expect(greppet(page)).toHaveAttribute('aria-expanded', 'false');
+  });
+
   test.describe('pekskärm', () => {
     test.use({ hasTouch: true });
+    test('mobil: ett tryck på ett sökförslag väljer det', async ({ page }) => {
+      await page.goto(START());
+      await page.getByRole('combobox').fill('tor');
+      const forslag = page.getByRole('option').first();
+      await expect(forslag).toHaveText('Torsk');
+      await forslag.tap();
+      await expect(page.getByRole('combobox')).toHaveValue('Torsk');
+      await expect(page.getByRole('option')).toBeHidden();
+      expect(new URL(page.url()).hash).toBe('#/?q=Torsk');
+    });
     test('mobil: ett svep med fingret och sedan ett tryck på greppet', async ({ page }) => {
       await cartoTom(page);
       await page.goto(KARTA('torsk-test'));
@@ -871,7 +974,10 @@ test.describe('mobil', () => {
       const [px, py] = await page.evaluate(() => (window as any).__karta.pixelFor(613287.5, 6636712.5, 3006) as [number, number]);
       await page.touchscreen.tap(px, py);
       await expect(page.getByTestId('varde')).toBeVisible();
-      await expect(page.getByTestId('varde')).not.toHaveText('');
+      await expect(page.getByTestId('varde')).toHaveText(/^(≈ )?Mycket viktigt$/);
+      // Fingret har lyfts (pointerleave), men värdet ska stå kvar tills man trycker någon annanstans.
+      await page.waitForTimeout(1000);
+      await expect(page.getByTestId('varde')).toHaveText(/^(≈ )?Mycket viktigt$/);
     });
   });
 

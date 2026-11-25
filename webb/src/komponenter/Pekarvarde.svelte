@@ -5,6 +5,8 @@
   // eller slutar laddas: medan rutor laddas kan getData ge en grövre ersättningsruta.
   import { onDestroy } from 'svelte';
   import type MapBrowserEvent from 'ol/MapBrowserEvent.js';
+  import type { EventsKey } from 'ol/events.js';
+  import { unByKey } from 'ol/Observable.js';
   import { NODATA, VY, type KartFil, type Kartan } from '../karta/karta';
   import { kartUrl, type Klass, type Roll } from '../lib/katalog';
   import type { Sprak } from '../lib/rutt';
@@ -101,13 +103,22 @@
   }
 
   const flyttad = () => berakna();
-  const borjarLadda = () => {
-    laddar = true;
-    berakna();
-  };
-  const klarLaddad = () => {
-    laddar = false;
-    berakna();
+  // Bara datalagrets rutor: en långsam bakgrundskarta ska inte göra värdet ungefärligt.
+  // Rutorna kan läsas ur lagret först när kartan har ritats om, därför väntar "klar" på nästa ritning.
+  let ritning: EventsKey | null = null;
+  const dataladdning = (l: boolean) => {
+    if (ritning) unByKey(ritning);
+    ritning = null;
+    if (l) {
+      laddar = true;
+      berakna();
+      return;
+    }
+    ritning = kartan.karta.once('postrender', () => {
+      ritning = null;
+      laddar = kartan.dataLaddar();
+      berakna();
+    });
   };
 
   $effect(() => {
@@ -116,16 +127,17 @@
     // En pekskärm ger ingen pointermove vid ett tryck; värdet visas där man trycker.
     k.on('singleclick', rorelse);
     k.on('moveend', flyttad);
-    k.on('loadstart', borjarLadda);
-    k.on('loadend', klarLaddad);
+    laddar = kartan.dataLaddar();
+    const slutaLyssna = kartan.vidDataladdning(dataladdning);
     const mal = k.getTargetElement();
     mal?.addEventListener('pointerleave', lamna);
     return () => {
       k.un('pointermove', rorelse);
       k.un('singleclick', rorelse);
       k.un('moveend', flyttad);
-      k.un('loadstart', borjarLadda);
-      k.un('loadend', klarLaddad);
+      slutaLyssna();
+      if (ritning) unByKey(ritning);
+      ritning = null;
       mal?.removeEventListener('pointerleave', lamna);
     };
   });

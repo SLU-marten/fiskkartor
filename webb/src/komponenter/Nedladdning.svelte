@@ -43,7 +43,7 @@
       <a href={textUrl} download={nedladdningsnamn(karta.id, version.version, 'metadata.txt')}>{t('metadata_text', lang)}</a>
     </li>
   </ul>
-  <p class="info">{t('original_info', lang)} (EPSG:{version.klassad.epsg}).</p>
+  <p class="info lopande">{t('original_info', lang)} (EPSG:{version.klassad.epsg}).</p>
 </section>
 
 <style>

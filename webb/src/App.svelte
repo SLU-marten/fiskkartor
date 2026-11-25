@@ -9,9 +9,10 @@
   import Sidfot from './komponenter/Sidfot.svelte';
   import { byggRutt, medParametrar, RUTT_ANDRAD, sprak, tolkaRutt, type Rutt, type Vy } from './lib/rutt';
   import { sidtitel, t } from './lib/text';
+  import { dataRot } from './lib/datarot';
 
-  // Datamappen ligger bredvid sidan. ?data=<url> pekar om den, för tester.
-  const dataUrl = new URLSearchParams(location.search).get('data') ?? 'data/';
+  // Datamappen ligger bredvid sidan. ?data=<mapp> på samma webbplats pekar om den, för tester.
+  const dataUrl = dataRot(location.search, location.href);
   const cartoNyckel = import.meta.env.VITE_CARTO_NYCKEL ?? '';
 
   let rutt = $state<Rutt>(tolkaRutt(location.hash));
@@ -69,8 +70,10 @@
   {:else if rutt.vy === 'tillganglighet'}
     <Tillganglighet {lang} />
   {:else if fel}
-    <p class="sida" role="alert">{t('katalog_fel', lang)} ({fel})</p>
-    <button onclick={hamtaKatalog}>{t('forsok_igen', lang)}</button>
+    <div class="sida">
+      <p role="alert">{t('katalog_fel', lang)} ({fel})</p>
+      <button onclick={hamtaKatalog}>{t('forsok_igen', lang)}</button>
+    </div>
   {:else if kartor === null}
     <p class="sida" aria-live="polite">{t('laddar_katalog', lang)}</p>
   {:else if rutt.vy === 'start'}

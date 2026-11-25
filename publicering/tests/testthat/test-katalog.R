@@ -59,3 +59,13 @@ test_that("exportera_csv skriver semikolon och BOM", {
   expect_match(sub("^﻿", "", rader[1]), "^id;titel;")
   expect_match(rader[2], "Åsa")
 })
+
+test_that("exportera_csv varnar men stoppar inte när katalog.csv inte kan skrivas", {
+  # Som när filen är öppen i Excel: här är katalog.csv en mapp, så den kan inte öppnas för skrivning.
+  d <- tempfile(); dir.create(d)
+  x <- file.path(d, "katalog.xlsx")
+  skriv_katalog(las_katalog(skriv_test_xlsx(data.frame(id = "a-1", visas = "ja"))), x)
+  dir.create(file.path(d, "katalog.csv"))
+  expect_warning(svar <- exportera_csv(x), "katalog.csv")
+  expect_true(is.na(svar))
+})

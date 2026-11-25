@@ -328,3 +328,11 @@ test_that("skriv_om_visningskopior byter kopiorna och uppdaterar hash och storle
   expect_identical(digest::digest(file = kartmapp(m, "v1", "visning.tif"), algo = "sha256"), original)
   expect_true(schema_giltig(i_mal(m, "katalog", "katalog.json")))
 })
+
+test_that(".skriv_json lämnar ingen .tmp-fil efter sig när den inte kan skriva", {
+  d <- tempfile(); dir.create(d)
+  mal <- file.path(d, "metadata.json")
+  dir.create(mal)
+  expect_error(.skriv_json(list(a = 1), mal), "Kunde inte skriva")
+  expect_false(file.exists(paste0(mal, ".tmp")))
+})

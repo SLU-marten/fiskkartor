@@ -121,7 +121,10 @@ export function sparaSomBild(
 ): Promise<{ blob: Blob; utanBakgrund: boolean }> {
   return new Promise((klar, fel) => {
     // Hänger en ruta blir kartan aldrig klar; då ges ett fel i stället för att ingenting händer.
+    // Har tiden gått ut innan typsnitten laddats ritas ingenting heller efteråt.
+    let avbruten = false;
     const vakt = setTimeout(() => {
+      avbruten = true;
       karta.un('rendercomplete', rita);
       fel(new Error('Tidsgränsen för att spara bilden gick ut'));
     }, tidsgransMs);
@@ -156,6 +159,7 @@ export function sparaSomBild(
     // Texten i bilden ritas med Roboto Condensed. Vänta tills båda vikterna har laddats, annars blir
     // den första bilden ritad med reservtypsnittet.
     void typsnittLaddade().then(() => {
+      if (avbruten) return;
       karta.once('rendercomplete', rita);
       karta.renderSync();
     });

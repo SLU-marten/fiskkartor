@@ -15,6 +15,8 @@
   let pekareVaxlade = -Infinity;
 
   function ned(e: PointerEvent) {
+    // Bara vänster musknapp, ett finger eller en penna; högerklick öppnar webbläsarens meny.
+    if (e.button !== 0) return;
     startY = e.clientY;
     (e.currentTarget as HTMLElement).setPointerCapture(e.pointerId);
   }

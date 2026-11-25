@@ -14,8 +14,9 @@ mal_lokal <- function(mapp) list(typ = "lokal", mapp = mapp)
 .skriv_json <- function(x, sokvag) {
   dir.create(dirname(sokvag), recursive = TRUE, showWarnings = FALSE)
   tmp <- paste0(sokvag, ".tmp")
+  on.exit(if (file.exists(tmp)) unlink(tmp), add = TRUE)
   jsonlite::write_json(x, tmp, auto_unbox = TRUE, pretty = TRUE, null = "null", na = "null", digits = NA)
-  if (!file.rename(tmp, sokvag)) stop(sprintf("Kunde inte skriva %s", sokvag), call. = FALSE)
+  if (!suppressWarnings(file.rename(tmp, sokvag))) stop(sprintf("Kunde inte skriva %s", sokvag), call. = FALSE)
   invisible(sokvag)
 }
 

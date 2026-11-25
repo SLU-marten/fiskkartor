@@ -57,6 +57,7 @@
     const forsta = visad === '';
     visad = nyckel;
     fel = false;
+    laddar = true;
     const lager = kartan.visa(kf, roll, klasser);
     lager.getSource()?.on('change', () => {
       if (lager.getSource()?.getState() === 'error') fel = true;

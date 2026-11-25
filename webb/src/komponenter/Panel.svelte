@@ -80,13 +80,18 @@
     void citering;
     kopierat = '';
   });
+  // En annan karta eller version: meddelandena gällde den förra.
+  $effect(() => {
+    void karta.id;
+    void version.version;
+    lankKopierad = '';
+    bildstatus = '';
+  });
 
   const versioner = $derived([...karta.versioner].sort((a, b) => b.version - a.version));
+  // Samma vy, lager och bakgrund, så att versionerna kan jämföras på samma ställe.
   function versionLank(v: number): string {
-    const q = new URLSearchParams();
-    if (v !== karta.aktuellVersion) q.set('v', String(v));
-    if (lang === 'en') q.set('lang', 'en');
-    return byggRutt({ vy: 'karta', id: karta.id, q });
+    return byggRutt(medParametrar(rutt, { v: v === karta.aktuellVersion ? null : String(v) }));
   }
 </script>
 

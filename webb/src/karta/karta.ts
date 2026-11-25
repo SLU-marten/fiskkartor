@@ -28,6 +28,10 @@ export type Kartan = {
   lager(): WebGLTileLayer | null;
   /** Antal rendercomplete medan datalagrets källa är klar. */
   renderingar(): number;
+  /** Om datalagrets rutor laddas just nu. Bakgrundskartans rutor räknas inte. */
+  dataLaddar(): boolean;
+  /** f anropas när dataLaddar() ändras. Ger en funktion som slutar lyssna. */
+  vidDataladdning(f: (laddar: boolean) => void): () => void;
 };
 
 declare global {
@@ -56,6 +60,16 @@ export function skapaKarta(
   let lager: WebGLTileLayer | null = null;
   let opacitet = 1;
   let antal = 0;
+  // Datalagrets rutor som laddas. Kartans loadend (alla lager klara) nollställer, så att en ruta som
+  // slängdes medan den laddades aldrig kan lämna räkningen hängande längre än förut.
+  let laddas = 0;
+  const lyssnare = new Set<(laddar: boolean) => void>();
+  const satt = (n: number) => {
+    const fore = laddas > 0;
+    laddas = Math.max(0, n);
+    if (fore !== laddas > 0) for (const f of lyssnare) f(laddas > 0);
+  };
+  karta.on('loadend', () => satt(0));
 
   // Kartan säger rendercomplete även innan COG-filens huvud är läst. Räkna bara när källan är klar.
   karta.on('rendercomplete', () => {
@@ -86,6 +100,11 @@ export function skapaKarta(
       }
       karta.addLayer(ny);
       lager = ny;
+      satt(0);
+      const kalla = ny.getSource();
+      kalla?.on('tileloadstart', () => lager === ny && satt(laddas + 1));
+      kalla?.on('tileloadend', () => lager === ny && satt(laddas - 1));
+      kalla?.on('tileloaderror', () => lager === ny && satt(laddas - 1));
       return ny;
     },
     async passa() {
@@ -103,5 +122,10 @@ export function skapaKarta(
     },
     lager: () => lager,
     renderingar: () => antal,
+    dataLaddar: () => laddas > 0,
+    vidDataladdning(f) {
+      lyssnare.add(f);
+      return () => lyssnare.delete(f);
+    },
   };
 }

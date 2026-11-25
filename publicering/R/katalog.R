@@ -91,7 +91,14 @@ exportera_csv <- function(sokvag_xlsx) {
   rader <- c(paste(names(df), collapse = ";"),
              do.call(paste, c(lapply(df, .csv_falt), sep = ";")))
   sokvag <- file.path(dirname(sokvag_xlsx), "katalog.csv")
-  con <- file(sokvag, open = "wb")
+  # CSV:n är en kopia för att se ändringar i git. Går den inte att skriva (oftast för att den är
+  # öppen i Excel) ska publiceringen ändå gå vidare, med en varning.
+  con <- tryCatch(suppressWarnings(file(sokvag, open = "wb")), error = function(e) NULL)
+  if (is.null(con)) {
+    warning(sprintf("Kunde inte skriva %s. Är filen öppen i Excel? Stäng den och publicera igen.", sokvag),
+            call. = FALSE)
+    return(invisible(NA_character_))
+  }
   on.exit(close(con))
   writeBin(as.raw(c(0xEF, 0xBB, 0xBF)), con)
   writeBin(charToRaw(enc2utf8(paste0(paste(rader, collapse = "\n"), "\n"))), con)
