@@ -1,7 +1,8 @@
 # Kontrollpunkt 2 – kartvisaren (fas 2)
 
-**Status:** klar för teamets granskning, 25 november 2026. Uppdaterad samma kväll efter en extern
-granskning av fas 2.
+**Status:** godkänd av Mårten den 25 november 2026, med två ändringar. Kartans namn står nu kvar
+överst i panelen (a4c74d3). Visa, teckenförklaring, opacitet och bakgrundskarta flyttas till kartan
+i fas 3. Rapporten uppdaterades samma kväll efter en extern granskning av fas 2.
 **Portal:** <https://slu-marten.github.io/fiskkartor/>
 **Plan:** `docs/superpowers/plans/2026-11-25-fas-2-kartvisare.md` · **Design:** `docs/superpowers/specs/2026-11-25-kartportal-design.md`
 
