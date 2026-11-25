@@ -55,6 +55,7 @@ export const TEXT = {
   },
   till_alla_kartor: { sv: 'Till alla kartor', en: 'To all maps' },
   varde_under_pekaren: { sv: 'Värde under pekaren', en: 'Value under the pointer' },
+  oversiktsvarde: { sv: 'Översiktsvärde – zooma in för exakt värde', en: 'Overview value – zoom in for the exact value' },
 } as const satisfies Record<string, Record<Sprak, string>>;
 
 export type Nyckel = keyof typeof TEXT;

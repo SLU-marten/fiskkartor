@@ -198,3 +198,60 @@ test.describe('kartvyn', () => {
     expect(fel).toEqual([]);
   });
 });
+
+async function stallVy(page: import('@playwright/test').Page, x: number, y: number, upp: number) {
+  const fore = await page.evaluate(() => (window as any).__karta.rendercomplete as number);
+  await page.evaluate(([x, y, upp]) => {
+    const vy = (window as any).__karta.karta.getView();
+    vy.setCenter([x, y]);
+    vy.setResolution(upp);
+  }, [x, y, upp] as const);
+  await vantaKarta(page, fore + 1);
+}
+const fordroj = (page: import('@playwright/test').Page, monster: string, ms: number) =>
+  page.route(monster, async (r) => {
+    await new Promise((klar) => setTimeout(klar, ms));
+    await r.continue();
+  });
+
+test.describe('värde under pekaren', () => {
+  test('nära full upplösning: ≈ först, sedan det exakta värdet, och koordinater', async ({ page }) => {
+    await page.goto(KARTA('torsk-test', 'bakgrund=ingen&lager=kontinuerlig'));
+    await vantaKarta(page);
+    await stallVy(page, 613287.5, 6636712.5, 75);
+    await fordroj(page, '**/radata.tif', 600);
+    await hovra(page, 613287.5, 6636712.5, 3006);
+    await expect(page.getByTestId('varde')).toHaveText('≈0.75');
+    await expect(page.getByTestId('varde')).toHaveText('0.75');
+    await expect(page.getByTestId('koordinat-sweref')).toHaveText(/^N 66\d{5}, E 61\d{4}$/);
+    await expect(page.getByTestId('koordinat-wgs84')).toHaveText(/^59\.\d{5}° N, 1[0-9]\.\d{5}° E$/);
+  });
+
+  test('pekaren flyttas innan svaret kommer: aldrig det gamla värdet', async ({ page }) => {
+    await page.goto(KARTA('torsk-test', 'bakgrund=ingen&lager=kontinuerlig'));
+    await vantaKarta(page);
+    await stallVy(page, 613287.5, 6636712.5, 75);
+    await fordroj(page, '**/radata.tif', 1000);
+    await hovra(page, 613287.5, 6636712.5, 3006);
+    await page.waitForTimeout(400);
+    await hovra(page, 607487.5, 6642512.5, 3006);
+    await expect(page.getByTestId('varde')).toHaveText('—');
+    await page.waitForTimeout(1500);
+    await expect(page.getByTestId('varde')).toHaveText('—');
+  });
+
+  test('långt utzoomat: översiktsvärdet med ≈ och ingen hämtning', async ({ page }) => {
+    await page.goto(KARTA('torsk-test', 'bakgrund=ingen'));
+    await vantaKarta(page);
+    await stallVy(page, 630762.5, 6619237.5, 400);
+    const tif: string[] = [];
+    page.on('request', (r) => r.url().endsWith('.tif') && tif.push(r.url()));
+    await hovra(page, 630762.5, 6619237.5, 3006);
+    await expect(page.getByTestId('varde')).toHaveText('≈ Mycket viktigt');
+    await expect(page.getByTestId('varde-tips')).toHaveText('Översiktsvärde – zooma in för exakt värde');
+    const antal = tif.length;
+    await page.waitForTimeout(700);
+    await expect(page.getByTestId('varde')).toHaveText('≈ Mycket viktigt');
+    expect(tif.length).toBe(antal);
+  });
+});
