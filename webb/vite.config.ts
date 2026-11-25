@@ -1,8 +1,10 @@
 import { defineConfig } from 'vitest/config';
+import { svelte } from '@sveltejs/vite-plugin-svelte';
 import { resolve } from 'node:path';
 
 export default defineConfig({
   base: './',
+  plugins: [svelte()],
   build: {
     chunkSizeWarningLimit: 1000,
     rollupOptions: {

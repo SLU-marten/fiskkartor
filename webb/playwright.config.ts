@@ -4,7 +4,7 @@ import { defineConfig, devices } from '@playwright/test';
 // när `npx playwright install` inte går att köra.
 export default defineConfig({
   testDir: 'tests',
-  testMatch: 'perf.spec.ts',
+  testMatch: '*.spec.ts',
   timeout: 120_000,
   workers: 1,
   reporter: [['list']],
