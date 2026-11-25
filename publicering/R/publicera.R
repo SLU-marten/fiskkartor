@@ -123,8 +123,8 @@ mal_lokal <- function(mapp) list(typ = "lokal", mapp = mapp)
   fel <- validera_rad(rad, filrot)
   if (length(fel)) stop(paste(c(sprintf("Kan inte publicera %s:", id), fel), collapse = "\n"), call. = FALSE)
   klasser <- tolka_klasser(rad$klasser, rad$ofargade_klasser)
-  kallor <- c(klassad = file.path(filrot, rad$fil_klassad),
-              kontinuerlig = if (is.na(rad$fil_kontinuerlig)) NA_character_ else file.path(filrot, rad$fil_kontinuerlig))
+  kallor <- c(klassad = .hitta_fil(filrot, rad$fil_klassad),
+              kontinuerlig = if (is.na(rad$fil_kontinuerlig)) NA_character_ else .hitta_fil(filrot, rad$fil_kontinuerlig))
   sha <- vapply(kallor, function(f) if (is.na(f)) NA_character_ else digest::digest(file = f, algo = "sha256"), "")
 
   # Kartmappen följer den första publiceringen, så att länkar och filer ligger still om projektet byter namn.
@@ -145,7 +145,19 @@ mal_lokal <- function(mapp) list(typ = "lokal", mapp = mapp)
                  if (is.null(akt$kontinuerlig)) NA_character_ else akt$kontinuerlig$kallaSha256)
     if (identical(unname(sha), akt_sha)) {
       ny_version <- FALSE
-      # Klassnamn och enhet är text: de följer katalogen utan ny version.
+      # Klassnamn och enhet är text: de följer katalogen utan ny version. Ändrade klassvärden eller
+      # färgval styr vad som ritas och kontrolleras därför mot rastret först.
+      fore <- akt$klassad$klasser
+      samma_varden <- length(fore) == nrow(klasser) &&
+        identical(vapply(fore, function(k) as.integer(k$varde), 1L), klasser$varde) &&
+        identical(vapply(fore, function(k) isTRUE(k$farg), TRUE), klasser$farg)
+      if (!samma_varden) {
+        fel <- validera_raster(kallor[["klassad"]], "klassad", klasser)
+        if (length(fel)) {
+          stop(paste(c(sprintf("Kan inte publicera %s med de nya klasserna:", id), fel), collapse = "\n"),
+               call. = FALSE)
+        }
+      }
       versioner[[i]]$klassad$klasser <- .klasser_json(klasser)
       if (!is.null(akt$kontinuerlig)) versioner[[i]]$kontinuerlig$enhet <- .enhet(rad)
     }

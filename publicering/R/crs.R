@@ -69,6 +69,11 @@ kalla_skala <- function(min, max, skala_kalla = NA_integer_) {
       stop(sprintf("Värdena (%s) ligger utanför 0–%d trots skala_kalla = %d. Kontrollera filen.",
                    rad, skala_kalla, skala_kalla), call. = FALSE)
     }
+    # 0–1-värden lagrade som 0–1000 skulle avrundas till 0 och 1 och förstöra kartan.
+    if (skala_kalla == 1000L && max <= 1.001) {
+      stop(sprintf(paste("Värdena (%s) ser ut att vara 0–1, men skala_kalla = 1000. Ändra skala_kalla till 1",
+                         "eller lämna den tom."), rad), call. = FALSE)
+    }
     return(skala_kalla)
   }
   if (min < 0 || max > 1000) {

@@ -102,3 +102,12 @@ test_that("UTM 33N på WGS84 utan EPSG-kod tolkas inte som EPSG:25833", {
   terra::crs(r) <- "+proj=utm +zone=33 +ellps=WGS84 +units=m +no_defs"
   expect_false(identical(epsg_kod(r), 25833L))
 })
+
+test_that("skala_kalla = 1000 på data som ser ut som 0–1 stoppar", {
+  expect_error(kalla_skala(0, 0.84, skala_kalla = 1000L), "skala_kalla")
+  expect_error(kalla_skala(0, 0.84, skala_kalla = 1000L), "0.84")
+  f <- testraster(seq(0, 0.84, length.out = 400), typ = "FLT4S", nodata = NaN)
+  fel <- validera_raster(f, "kontinuerlig", skala_kalla = 1000L)
+  expect_match(fel, basename(f), fixed = TRUE, all = FALSE)
+  expect_match(fel, "skala_kalla", all = FALSE)
+})

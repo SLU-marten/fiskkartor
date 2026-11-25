@@ -51,3 +51,10 @@ test_that("tomma klasser ger standardklasserna", {
 test_that("klasser som inte går att tolka ger ett tydligt fel", {
   expect_error(tolka_klasser("5 Viktigt;10=Mycket viktigt"), "Kan inte tolka klasserna")
 })
+
+test_that("källfiler med NFD-namn på disken hittas", {
+  rot <- tempfile("nfd")
+  dir.create(file.path(rot, stringi::stri_trans_nfd("NMK Trål")), recursive = TRUE)
+  file.copy(testraster(c(5, 10)), file.path(rot, stringi::stri_trans_nfd("NMK Trål"), stringi::stri_trans_nfd("Gädda_uppväxt.tif")))
+  expect_identical(validera_rad(testrad(fil_klassad = "NMK Trål/Gädda_uppväxt.tif"), rot), character(0))
+})

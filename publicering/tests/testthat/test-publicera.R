@@ -182,3 +182,27 @@ test_that("en publicerad version skrivs aldrig om när katalog.json saknas lokal
   expect_error(pub(m), "hamta_data")
   expect_identical(digest::digest(file = kartmapp(m, "v1", "visning.tif"), algo = "sha256"), sha_v1)
 })
+
+test_that("ändrade klassvärden kontrolleras mot rastret", {
+  m <- publiceringsmiljo()
+  pub(m)
+  andra_rad(m, "a-1", klasser = "0=Ej viktigt område;5=Viktigt")
+  expect_error(pub(m), "värdet 10")
+})
+
+test_that("nya klassnamn uppdaterar texten utan ny version", {
+  m <- publiceringsmiljo()
+  pub(m)
+  andra_rad(m, "a-1", klasser = "0=Ej viktigt område;5=Viktigt område;10=Mycket viktigt område")
+  res <- pub(m)
+  expect_identical(res$status, "uppdaterad")
+  expect_identical(post(m)[[1]]$versioner[[1]]$klassad$klasser[[3]]$namn, "Mycket viktigt område")
+})
+
+test_that("en NFD-källfil publiceras", {
+  m <- publiceringsmiljo()
+  gammal <- file.path(m$rot, "källor", "Torsk lek_klassad.tif")
+  file.rename(gammal, file.path(m$rot, "källor", stringi::stri_trans_nfd("Torsk lek_klassad_ä.tif")))
+  andra_rad(m, "a-1", fil_klassad = "källor/Torsk lek_klassad_ä.tif")
+  expect_identical(pub(m)$status, "publicerad")
+})

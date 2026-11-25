@@ -7,6 +7,27 @@ KRAVDA_KOLUMNER <- c("id", "titel", "projekt", "kalla", "citering", "ar", "licen
 
 .tom <- function(x) length(x) == 0 || is.na(x) || !nzchar(trimws(x))
 
+# Sökvägen till en källfil. Katalogen lagrar namn i NFC, men filer som kommit från macOS kan ha
+# NFD-namn på disken. Hittas inte sökvägen direkt jämförs varje del med NFC-normaliserade namn.
+# Ger den naiva sökvägen när filen inte finns, så att felmeddelandet visar vad katalogen säger.
+.hitta_fil <- function(filrot, rel) {
+  naiv <- file.path(filrot, rel)
+  if (file.exists(naiv)) return(naiv)
+  aktuell <- filrot
+  for (del in Filter(nzchar, strsplit(rel, "/", fixed = TRUE)[[1]])) {
+    kandidat <- file.path(aktuell, del)
+    if (file.exists(kandidat)) {
+      aktuell <- kandidat
+      next
+    }
+    namn <- list.files(aktuell, all.files = TRUE, no.. = TRUE)
+    traff <- namn[stringi::stri_trans_nfc(namn) == stringi::stri_trans_nfc(del)]
+    if (length(traff) != 1) return(naiv)
+    aktuell <- file.path(aktuell, traff)
+  }
+  aktuell
+}
+
 #' Tolkar klasstexten "5=Viktigt;10=Mycket viktigt" till en tabell, sorterad efter värde.
 #' `ofargade` är en lista med värden (";" eller ",") som visas utan färg.
 tolka_klasser <- function(text, ofargade = NA_character_) {
@@ -70,7 +91,7 @@ validera_rad <- function(rad, filrot) {
   for (k in c("fil_klassad", "fil_kontinuerlig")) {
     f <- v(k)
     if (!.tom(f)) {
-      sokvag <- file.path(filrot, f)
+      sokvag <- .hitta_fil(filrot, f)
       if (!file.exists(sokvag)) fel <- c(fel, sprintf("%s: hittar inte filen %s", k, sokvag))
     }
   }
