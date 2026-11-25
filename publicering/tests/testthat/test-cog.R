@@ -166,3 +166,16 @@ test_that("visningskopian visar varje källcell i Web Mercator över många bred
   k <- kopia_av(r)
   expect_length(osynliga_celler(k$cog, k$vy), 0)
 })
+
+test_that("en mycket stor visningskopia ger en varning om tid och utrymme", {
+  r <- terra::rast(nrows = 20, ncols = 20, crs = "EPSG:3857", xmin = 1.8e6, xmax = 1.8e6 + 2000,
+                   ymin = 8e6, ymax = 8e6 + 2000, vals = 5L)
+  src <- tempfile(fileext = ".tif")
+  terra::writeRaster(r, src, datatype = "INT1U", NAflag = 255)
+  cog <- tempfile(fileext = ".tif")
+  skriv_cog(src, cog, "klassad")
+  upp <- .upplosning_vy3006(terra::rast(cog), 3857L)
+  expect_no_warning(.skriv_vy3006(cog, tempfile(fileext = ".tif"), "klassad", upp))
+  withr::local_options(fiskkartor.vy3006_varning = 100)
+  expect_warning(.skriv_vy3006(cog, tempfile(fileext = ".tif"), "klassad", upp), "EPSG:3006", fixed = TRUE)
+})

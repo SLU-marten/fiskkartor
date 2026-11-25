@@ -73,6 +73,7 @@ statistik <- function(cog, roll = c("klassad", "kontinuerlig")) {
 #' regler (.skriv_portal_cog), aldrig genom skriv_cog():s skalning.
 .skriv_vy3006 <- function(cog, mal, roll = c("klassad", "kontinuerlig"), upplosning) {
   roll <- match.arg(roll)
+  .varna_stor_kopia(cog, mal, upplosning)
   # gdalwarp läser och skriver i block. terra::project lägger hela källan i minnet, och en
   # 25 m-karta över kusten (1,9 miljarder celler) ryms inte där.
   tmp <- tempfile("vy3006", fileext = ".tif")
@@ -107,4 +108,26 @@ statistik <- function(cog, roll = c("klassad", "kontinuerlig")) {
     min(upp)
   }
   floor(minst / 2 * 10) / 10
+}
+
+# Ungefärligt antal celler i visningskopian: källans utbredning i SWEREF 99 TM delat med cellytan.
+.vy3006_celler <- function(cog, upplosning) {
+  r <- terra::rast(cog)
+  e <- terra::ext(terra::project(terra::as.polygons(terra::ext(r), crs = terra::crs(r)), "EPSG:3006"))
+  unname((e$xmax - e$xmin) * (e$ymax - e$ymin) / upplosning^2)
+}
+
+# En 25 m-karta som levereras i ett annat koordinatsystem blir en kopia med 12,5 m celler, flera
+# miljarder celler. Det går, men tar lång tid och mycket disk, så publiceringen säger till.
+.varna_stor_kopia <- function(cog, mal, upplosning) {
+  grans <- getOption("fiskkartor.vy3006_varning", 1e9)
+  celler <- .vy3006_celler(cog, upplosning)
+  if (celler > grans) {
+    warning(sprintf(paste("Visningskopian %s blir cirka %s miljoner celler (%s m). Det kan ta lång tid och",
+                          "mycket diskutrymme. Leverera hellre kartan i SWEREF 99 TM (EPSG:3006), som inte",
+                          "behöver någon kopia."),
+                    basename(mal), format(round(celler / 1e6), big.mark = " "), upplosning),
+            call. = FALSE)
+  }
+  invisible(celler)
 }
