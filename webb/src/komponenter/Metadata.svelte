@@ -1,5 +1,6 @@
 <script lang="ts">
   import type { Karta } from '../lib/katalog';
+  import { doiLank, kontaktLank } from '../lib/lankar';
   import { faltetikett } from '../lib/metadatatext';
   import type { Sprak } from '../lib/rutt';
   import { t } from '../lib/text';
@@ -27,12 +28,14 @@
     {/each}
     {#if karta.doi}
       <dt>{faltetikett('doi', lang)}</dt>
-      <dd><a href={`https://doi.org/${karta.doi}`}>{karta.doi}</a></dd>
+      <dd><a href={doiLank(karta.doi)}>{karta.doi}</a></dd>
     {/if}
     <dt>{faltetikett('licens', lang)}</dt>
     <dd>{karta.licens}</dd>
     <dt>{faltetikett('kontakt', lang)}</dt>
-    <dd><a href={`mailto:${karta.kontakt}`}>{karta.kontakt}</a></dd>
+    <dd>
+      {#if kontaktLank(karta.kontakt)}<a href={kontaktLank(karta.kontakt)}>{karta.kontakt}</a>{:else}{karta.kontakt}{/if}
+    </dd>
   </dl>
 </section>
 

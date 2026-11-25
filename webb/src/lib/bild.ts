@@ -105,9 +105,20 @@ function ritaAttribution(ctx: CanvasRenderingContext2D, text: string, bredd: num
  * Sparar kartan som PNG i kartans storlek. Ritas när alla rutor är laddade (rendercomplete efter
  * renderSync). Om bakgrundskartan gör duken spärrad för export ritas bilden om utan bakgrund.
  */
-export function sparaSomBild(karta: Map, legend: LegendData, attribution: string): Promise<{ blob: Blob; utanBakgrund: boolean }> {
+export function sparaSomBild(
+  karta: Map,
+  legend: LegendData,
+  attribution: string,
+  tidsgransMs = 20_000,
+): Promise<{ blob: Blob; utanBakgrund: boolean }> {
   return new Promise((klar, fel) => {
-    karta.once('rendercomplete', () => {
+    // Hänger en ruta blir kartan aldrig klar; då ges ett fel i stället för att ingenting händer.
+    const vakt = setTimeout(() => {
+      karta.un('rendercomplete', rita);
+      fel(new Error('Tidsgränsen för att spara bilden gick ut'));
+    }, tidsgransMs);
+    const rita = () => {
+      clearTimeout(vakt);
       try {
         const [bredd, hojd] = karta.getSize() ?? [0, 0];
         const rita = (medBakgrund: boolean) => {
@@ -133,7 +144,8 @@ export function sparaSomBild(karta: Map, legend: LegendData, attribution: string
       } catch (e) {
         fel(e);
       }
-    });
+    };
+    karta.once('rendercomplete', rita);
     karta.renderSync();
   });
 }

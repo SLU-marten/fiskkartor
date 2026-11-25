@@ -91,7 +91,7 @@
       {/key}
     </div>
     <aside class="panel">
-      <Panel {karta} {version} {roll} {opacitet} {bakgrund} {dataUrl} {lang} {satt} {kartan} />
+      <Panel {karta} {version} {roll} {opacitet} {bakgrund} {dataUrl} {lang} {satt} {kartan} {rutt} />
     </aside>
   </div>
 {/if}

@@ -552,3 +552,22 @@ test.describe('efter granskningen', () => {
     await expect(page.getByTestId('varde')).toHaveText('—', { timeout: 10_000 });
   });
 });
+
+test.describe('mindre fynd', () => {
+  test('en version som inte finns säger det och visar den aktuella', async ({ page }) => {
+    await cartoTom(page);
+    await page.goto(KARTA('pbs-test', 'v=9'));
+    await expect(page.getByText('Version 9 finns inte. Visar version 2.')).toBeVisible();
+  });
+
+  test('länken till den nyare versionen behåller bakgrund och lager', async ({ page }) => {
+    await cartoTom(page);
+    await page.goto(KARTA('pbs-test', 'v=1'));
+    await vantaKarta(page);
+    await page.getByRole('radio', { name: 'Ingen' }).check();
+    await page.getByRole('link', { name: 'Visa version 2' }).click();
+    const hash = new URL(page.url()).hash;
+    expect(hash).toContain('bakgrund=ingen');
+    expect(hash).not.toContain('v=1');
+  });
+});

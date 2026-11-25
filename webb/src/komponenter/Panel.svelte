@@ -6,8 +6,8 @@
   import { sparaSomBild } from '../lib/bild';
   import { citeringstext, versionslank } from '../lib/citering';
   import type { Karta, Roll, Version } from '../lib/katalog';
-  import { byggRutt, medParametrar, tolkaRutt, type Sprak } from '../lib/rutt';
-  import { t, visaVersion } from '../lib/text';
+  import { byggRutt, medParametrar, type Rutt, type Sprak } from '../lib/rutt';
+  import { t, versionSaknas, visaVersion } from '../lib/text';
 
   type Props = {
     karta: Karta;
@@ -19,13 +19,20 @@
     lang: Sprak;
     satt: (andra: Record<string, string | null>) => void;
     kartan: Kartan | null;
+    rutt: Rutt;
   };
-  let { karta, version, roll, opacitet, bakgrund, dataUrl, lang, satt, kartan }: Props = $props();
+  let { karta, version, roll, opacitet, bakgrund, dataUrl, lang, satt, kartan, rutt }: Props = $props();
+
+  // ?v= med en version som inte finns: den aktuella visas, och det sägs.
+  const begard = $derived(rutt.q.get('v'));
+  const saknadVersion = $derived(begard !== null && String(version.version) !== begard ? begard : null);
 
   let bildstatus = $state('');
+  let sparar = $state(false);
   async function sparaBild() {
-    if (!kartan) return;
+    if (!kartan || sparar) return;
     bildstatus = '';
+    sparar = true;
     const enhet =
       !version.kontinuerlig || version.kontinuerlig.enhet === 'sannolikhet' ? t('sannolikhet', lang) : version.kontinuerlig.enhet;
     try {
@@ -43,6 +50,8 @@
       if (utanBakgrund) bildstatus = t('bild_utan_bakgrund', lang);
     } catch {
       bildstatus = t('bild_fel', lang);
+    } finally {
+      sparar = false;
     }
   }
 
@@ -87,8 +96,11 @@
 {#if version.version !== karta.aktuellVersion}
   <p class="notis" role="note">
     {t('nyare_version', lang)}
-    <a href={byggRutt(medParametrar(tolkaRutt(location.hash), { v: null }))}>{visaVersion(karta.aktuellVersion, lang)}</a>
+    <a href={byggRutt(medParametrar(rutt, { v: null }))}>{visaVersion(karta.aktuellVersion, lang)}</a>
   </p>
+{/if}
+{#if saknadVersion}
+  <p class="notis" role="note">{versionSaknas(saknadVersion, version.version, lang)}</p>
 {/if}
 
 <h1>{karta.titel}</h1>
@@ -127,7 +139,9 @@
   <span role="status">{lankKopierad}</span>
 </p>
 <p>
-  <button type="button" class="knapp" onclick={sparaBild} disabled={!kartan}>{t('spara_bild', lang)}</button>
+  <button type="button" class="knapp" onclick={sparaBild} disabled={!kartan || sparar} aria-busy={sparar}>
+    {sparar ? t('sparar_bild', lang) : t('spara_bild', lang)}
+  </button>
   <span role="status">{bildstatus}</span>
 </p>
 

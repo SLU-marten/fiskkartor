@@ -79,6 +79,7 @@ export const TEXT = {
   nyare_version: { sv: 'Det finns en nyare version av kartan.', en: 'There is a newer version of this map.' },
   kopiera_lank: { sv: 'Kopiera länk till vyn', en: 'Copy link to this view' },
   spara_bild: { sv: 'Spara som bild', en: 'Save as image' },
+  sparar_bild: { sv: 'Sparar bilden …', en: 'Saving the image …' },
   bild_utan_bakgrund: {
     sv: 'Bakgrundskartan tillåter inte export – sparar utan bakgrund',
     en: 'The background map does not allow export – saving without it',
@@ -114,4 +115,11 @@ export function faltEtikett(f: Faltnamn, lang: Sprak): string {
 /** "Visa version 2" / "Show version 2". */
 export function visaVersion(n: number, lang: Sprak): string {
   return lang === 'en' ? `Show version ${n}` : `Visa version ${n}`;
+}
+
+/** "Version 9 finns inte. Visar version 2." */
+export function versionSaknas(begard: string, visad: number, lang: Sprak): string {
+  return lang === 'en'
+    ? `Version ${begard} does not exist. Showing version ${visad}.`
+    : `Version ${begard} finns inte. Visar version ${visad}.`;
 }
