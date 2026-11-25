@@ -271,3 +271,44 @@ test_that("visningskopian skalas inte om", {
   vy <- terra::rast(kartmapp(m, "v1", "radata_3006.tif"))
   expect_setequal(terra::unique(vy)[[1]], c(0, 1))
 })
+
+# Lägger till rader i Excelfilen som text, så att även ogiltiga värden kan skrivas.
+lagg_till_text <- function(m, ...) {
+  x <- as.data.frame(readxl::read_excel(m$katalog, sheet = "katalog", col_types = "text"))
+  for (andra in list(...)) {
+    ny <- x[1, , drop = FALSE]
+    ny[names(andra)] <- andra
+    x <- rbind(x, ny)
+  }
+  writexl::write_xlsx(list(katalog = x), m$katalog)
+}
+
+test_that("en trasig rad ger fel för den raden och de andra publiceras", {
+  m <- publiceringsmiljo()
+  lagg_till_text(m, list(id = "c-kanske", visas = "kanske"), list(id = "d-ar", ar = "2021 x"),
+                 list(id = "e-tom", visas = NA_character_))
+  ut <- publicera_alla(m$katalog, m$rot, m$mal, idag = IDAG)
+  status <- stats::setNames(ut$status, ut$id)
+  expect_identical(unname(status[c("a-1", "b-hidden", "c-kanske", "d-ar", "e-tom")]),
+                   c("publicerad", "dold", "fel", "fel", "fel"))
+  expect_match(ut$meddelande[ut$id == "e-tom"], "visas saknas (ja eller nej)", fixed = TRUE)
+  expect_match(ut$meddelande[ut$id == "d-ar"], "ar måste vara ett heltal", fixed = TRUE)
+  expect_identical(vapply(las_json(m)$kartor, function(k) k$id, ""), "a-1")
+})
+
+test_that("publicera stoppar på en rad med tom visas i stället för att dölja kartan", {
+  m <- publiceringsmiljo()
+  lagg_till_text(m, list(id = "e-tom", visas = NA_character_))
+  expect_error(publicera("e-tom", m$katalog, m$rot, m$mal, idag = IDAG), "visas saknas", fixed = TRUE)
+})
+
+test_that("publicera_alla varnar för kartor som finns i katalog.json men inte i Excel", {
+  m <- publiceringsmiljo()
+  pub(m)
+  df <- las_katalog(m$katalog)
+  skriv_katalog(df[df$id != "a-1", ], m$katalog)
+  expect_warning(ut <- publicera_alla(m$katalog, m$rot, m$mal, idag = IDAG),
+                 "kartor som finns i katalog.json men inte i Excel: a-1", fixed = TRUE)
+  expect_identical(attr(ut, "saknas_i_excel"), "a-1")
+  expect_length(post(m), 1)
+})

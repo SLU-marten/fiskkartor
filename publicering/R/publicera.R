@@ -123,6 +123,13 @@ mal_lokal <- function(mapp) list(typ = "lokal", mapp = mapp)
   }
   gammal <- if (!is.na(id) && id %in% names(kartor)) kartor[[id]] else NULL
 
+  # En trasig cell (t.ex. tom visas) stoppar raden: kartan ska varken döljas eller visas av misstag.
+  cellfel <- if ("cellfel" %in% names(rad)) rad$cellfel[[1]] else NA_character_
+  if (!is.na(cellfel) || is.na(rad$visas)) {
+    stop(paste(c(sprintf("Kan inte publicera %s:", id), validera_rad(rad, filrot)), collapse = "\n"),
+         call. = FALSE)
+  }
+
   if (!isTRUE(rad$visas)) {
     if (is.null(gammal)) return(svar("dold", NA_integer_))
     if (isFALSE(gammal$visas)) return(svar("dold", gammal$aktuellVersion))
@@ -209,6 +216,7 @@ publicera_alla <- function(katalog = "katalog/katalog.xlsx", filrot = ".", mal, 
   df <- las_katalog(katalog)
   exportera_csv(katalog)
   kartor <- .las_kartor(mal)
+  saknas <- setdiff(names(kartor), df$id)
   andrad <- FALSE
   ut <- data.frame(id = df$id, status = NA_character_, meddelande = "", stringsAsFactors = FALSE)
   dubbletter <- unique(df$id[!is.na(df$id) & duplicated(df$id)])
@@ -230,5 +238,11 @@ publicera_alla <- function(katalog = "katalog/katalog.xlsx", filrot = ".", mal, 
     message(sprintf("%s: %s", if (is.na(rad$id)) "(rad utan id)" else rad$id, ut$status[i]))
   }
   if (andrad || !file.exists(.json_sokvag(mal))) .skriv_katalog_json(kartor, mal)
+  # Kartor som tagits bort ur Excel ligger kvar i katalogen (länkar och citeringar ska fungera).
+  if (length(saknas)) {
+    attr(ut, "saknas_i_excel") <- saknas
+    warning(sprintf("kartor som finns i katalog.json men inte i Excel: %s", paste(saknas, collapse = ", ")),
+            call. = FALSE)
+  }
   ut
 }

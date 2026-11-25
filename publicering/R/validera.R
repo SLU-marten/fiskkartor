@@ -66,10 +66,11 @@ tolka_klasser <- function(text, ofargade = NA_character_) {
 validera_rad <- function(rad, filrot) {
   stopifnot(is.data.frame(rad), nrow(rad) == 1)
   v <- function(k) rad[[k]][[1]]
+  cellfel <- if ("cellfel" %in% names(rad)) v("cellfel") else NA_character_
   har_filer <- !.tom(v("fil_klassad")) || !.tom(v("fil_kontinuerlig"))
-  if (!isTRUE(v("visas")) && !har_filer) return(character(0))
+  if (isFALSE(v("visas")) && !har_filer && is.na(cellfel)) return(character(0))
 
-  fel <- character(0)
+  fel <- if (is.na(cellfel)) character(0) else strsplit(cellfel, "; ", fixed = TRUE)[[1]]
   for (k in KRAVDA_KOLUMNER) {
     if (.tom(as.character(v(k)))) fel <- c(fel, sprintf("%s saknas", k))
   }
