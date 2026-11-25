@@ -3,6 +3,10 @@
 Datum: 2026-11-25. Fas 0–1 enligt byggplanen. Kontrollpunkten är godkänd när både de uppmätta
 gränserna och Mårtens egen bedömning på sin dator är godkända. Därefter skrivs plan 2 (kartvisaren).
 
+**Status: godkänd 2026-11-25.** Mårten godkände zoomen med `vy=3006&transition=0&preload=99&reserv=1`
+och CARTO som bakgrund. Besluten står i designdokumentet under "Beslut vid kontrollpunkt 1".
+Kvar att bekräfta: −9990 i flundrakartan mot PBS-underlaget.
+
 ## Sammanfattning
 
 - **Alla 75 befintliga kartor är publicerade** på <https://slu-marten.github.io/fiskkartor/data/katalog/katalog.json>,

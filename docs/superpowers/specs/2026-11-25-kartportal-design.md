@@ -326,6 +326,27 @@ Tjugo arter blir då ungefär 1,2 GB kontinuerligt och 70 MB klassat. De befintl
 
 **Backup:** originalfilerna och katalogtabellen ligger kvar i SLU:s lagring och i git. Publiceringslagringen är en kopia som skriptet kan återskapa.
 
+## Beslut vid kontrollpunkt 1 (25 november 2026)
+
+Godkända av Mårten efter prestandatestet. De ersätter motsvarande rader ovan. Underlaget finns i
+`docs/kontrollpunkt-1.md`.
+
+- **Kartvy i SWEREF 99 TM (EPSG:3006)**, inte Web Mercator. Omprojicering i webbläsaren gav pauser
+  på 250–317 ms under zoom; utan den 67–150 ms. Alla 25 m-kartor ligger redan i 3006.
+- **Visningskopior i 3006** för kartor i andra koordinatsystem. Publiceringen gör en liten kopia
+  (närmaste granne, samma cellstorlek i meter) som visas i kartan. Nedladdningen är alltid originalfilen
+  i originalprojektionen, så principen "det du laddar ner är originalet" gäller fortfarande.
+- **Översikter med MAX för klassade kartor**, byggda i R (aggregering) och inskrivna i COG-filen med
+  GDAL (`OVERVIEWS=FORCE_USE_EXISTING`). Försiktighetsprincipen: "Mycket viktigt" ska inte röstas bort
+  utzoomat. Kontinuerliga kartor behåller AVERAGE.
+- **Lugn zoom:** ingen intoning av nya rutor, förladdning av grövre nivåer, och ersättningsrutor högst
+  en nivå grövre än den som laddas (`reserv=1`). Det tog bort blinkandet helt i mätningen.
+- **Bakgrundskarta: CARTO Positron (raster) med SLU:s webbläsarnyckel**, begränsad till portalens
+  adresser. Den omprojiceras till 3006 i webbläsaren. Lantmäteriets nedtonade karta via proxy på
+  slu.se är en senare förbättring, inte ett krav för version 1.
+- **−9990 i flundrakartan (PBS)** behandlas som nodata i en kopia bredvid originalet, i väntan på
+  Mårtens kontroll mot PBS-underlaget.
+
 ## Genomförande i faser
 
 Arbetet delas in i fem faser, som tillsammans tar cirka 4–6 veckor. Den tekniskt mest osäkra delen, att visa 25 m-data smidigt, testas i fas 1 innan resten av gränssnittet byggs.
