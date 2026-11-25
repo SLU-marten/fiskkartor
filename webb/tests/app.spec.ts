@@ -90,8 +90,8 @@ test.describe('startsidan', () => {
 
   test('skrivande fyller inte bakåtknappen', async ({ page }) => {
     await page.goto(START());
-    await page.getByRole('link', { name: 'Om portalen' }).click();
-    await page.getByRole('link', { name: 'Kartor', exact: true }).click();
+    await page.getByRole('banner').getByRole('link', { name: 'Om portalen' }).click();
+    await page.getByRole('banner').getByRole('link', { name: 'Kartor', exact: true }).click();
     await page.getByRole('combobox').pressSequentially('torsk');
     await expect(page.getByTestId('traff')).toHaveCount(1);
     await page.goBack();
@@ -508,7 +508,7 @@ test.describe('om-sidan', () => {
   test('finns på svenska och engelska med kontakt och licens', async ({ page }) => {
     await page.goto(`${server.url}/dist/index.html?data=/tests/fixtures/data/#/om`);
     await expect(page.getByRole('heading', { level: 1 })).toHaveText('Om Fiskkartor');
-    await expect(page.getByRole('link', { name: 'SLU-Aqua-fiskkartor@slu.se' })).toHaveAttribute('href', 'mailto:SLU-Aqua-fiskkartor@slu.se');
+    await expect(page.getByRole('main').getByRole('link', { name: 'SLU-Aqua-fiskkartor@slu.se' })).toHaveAttribute('href', 'mailto:SLU-Aqua-fiskkartor@slu.se');
     await expect(page.getByText('CC BY 4.0').first()).toBeVisible();
     await page.getByTestId('sprak').click();
     await expect(page.getByRole('heading', { level: 1 })).toHaveText('About Fish maps');
@@ -592,5 +592,94 @@ test.describe('mindre fynd', () => {
     const hash = new URL(page.url()).hash;
     expect(hash).toContain('bakgrund=ingen');
     expect(hash).not.toContain('v=1');
+  });
+});
+
+test.describe('sidhuvud, sidfot och titlar', () => {
+  const OM = () => `${server.url}/dist/index.html?data=/tests/fixtures/data/#/om`;
+  const TILLG = () => `${server.url}/dist/index.html?data=/tests/fixtures/data/#/tillganglighet`;
+
+  test('sidhuvudet har SLU:s logotyp och institutionen', async ({ page }) => {
+    await page.goto(START());
+    await expect(page.getByRole('img', { name: 'SLU, Sveriges lantbruksuniversitet' })).toBeVisible();
+    await expect(page.getByRole('banner').getByText('Institutionen för akvatiska resurser')).toBeVisible();
+  });
+
+  test.fixme('logotypen är SLU:s riktiga, inte platshållaren', async ({ page }) => {
+    // Spärr inför lanseringen i fas 4: ta bort fixme när Mårtens PNG-fil ligger i src/assets.
+    await page.goto(START());
+    await expect(page.getByRole('img', { name: 'SLU, Sveriges lantbruksuniversitet' })).toHaveAttribute('src', /\.png$/);
+  });
+
+  test('varje vy har en egen titel', async ({ page }) => {
+    await cartoTom(page);
+    await page.goto(START());
+    await expect(page).toHaveTitle('Kartor – Fiskkartor');
+    await page.goto(KARTA('torsk-test'));
+    await expect(page).toHaveTitle('Torsk större än 20 cm, uppväxt, västkusten (test) – Fiskkartor');
+    await page.goto(OM());
+    await expect(page).toHaveTitle('Om portalen – Fiskkartor');
+    await page.goto(TILLG());
+    await expect(page).toHaveTitle('Tillgänglighet – Fiskkartor');
+    await page.goto(START().replace('#/', '#/?lang=en'));
+    await expect(page).toHaveTitle('Maps – Fish maps');
+    await page.goto(KARTA('finns-inte'));
+    await expect(page).toHaveTitle('Kartan finns inte – Fiskkartor');
+  });
+
+  test('sidfoten länkar till tillgänglighetsredogörelsen men finns inte i kartvyn', async ({ page }) => {
+    await cartoTom(page);
+    await page.goto(START());
+    await page.getByRole('contentinfo').getByRole('link', { name: 'Tillgänglighet' }).click();
+    await expect(page.getByRole('heading', { level: 1 })).toContainText('Tillgänglighet');
+    await page.goto(KARTA('torsk-test'));
+    await expect(page.locator('.kartyta')).toBeVisible();
+    await expect(page.getByRole('contentinfo')).toHaveCount(0);
+  });
+
+  test('kartvyn fyller fönstret utan sidskroll', async ({ page }) => {
+    await cartoTom(page);
+    await page.goto(KARTA('torsk-test'));
+    await vantaKarta(page);
+    expect(await page.evaluate(() => document.documentElement.scrollHeight <= innerHeight)).toBe(true);
+  });
+
+  test('mobil: menyn ligger bakom Meny-knappen', async ({ page }) => {
+    await page.setViewportSize({ width: 375, height: 812 });
+    await page.goto(START());
+    const meny = page.getByRole('button', { name: 'Meny' });
+    await expect(meny).toHaveAttribute('aria-expanded', 'false');
+    await expect(page.getByRole('banner').getByRole('link', { name: 'Om portalen' })).toBeHidden();
+    await meny.click();
+    await expect(meny).toHaveAttribute('aria-expanded', 'true');
+    await expect(page.getByRole('banner').getByRole('link', { name: 'Om portalen' })).toBeVisible();
+    await page.keyboard.press('Escape');
+    await expect(meny).toHaveAttribute('aria-expanded', 'false');
+    await expect(meny).toBeFocused();
+  });
+
+  test('mobil: menyn stängs av en länk och av ett klick utanför', async ({ page }) => {
+    await page.setViewportSize({ width: 375, height: 812 });
+    await page.goto(START());
+    const meny = page.getByRole('button', { name: 'Meny' });
+    await meny.click();
+    await page.getByRole('banner').getByRole('link', { name: 'Om portalen' }).click();
+    await expect(page).toHaveURL(/#\/om/);
+    await expect(meny).toHaveAttribute('aria-expanded', 'false');
+    await meny.click();
+    await expect(meny).toHaveAttribute('aria-expanded', 'true');
+    await page.getByRole('main').click({ position: { x: 10, y: 300 } });
+    await expect(meny).toHaveAttribute('aria-expanded', 'false');
+  });
+
+  test('hopplänken går förbi sidhuvudet', async ({ page }) => {
+    await page.goto(START());
+    await page.keyboard.press('Tab');
+    const hopp = page.getByRole('link', { name: 'Hoppa till innehållet' });
+    await expect(hopp).toBeFocused();
+    await expect(hopp).toBeVisible();
+    await page.keyboard.press('Enter');
+    await expect(page.getByRole('main')).toBeFocused();
+    await expect(page.getByRole('main')).toHaveAttribute('tabindex', '-1');
   });
 });

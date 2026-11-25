@@ -100,7 +100,7 @@
   .kartvy {
     display: grid;
     grid-template-columns: minmax(13rem, 17rem) minmax(0, 1fr) minmax(16rem, 21rem);
-    height: calc(100vh - 3.4rem);
+    height: calc(100dvh - 4.5rem);
   }
   .lista {
     overflow: auto;

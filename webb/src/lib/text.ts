@@ -11,6 +11,15 @@ export const TEXT = {
   byt_sprak: { sv: 'In English', en: 'På svenska' },
   meny_start: { sv: 'Kartor', en: 'Maps' },
   meny_om: { sv: 'Om portalen', en: 'About' },
+  meny_tillganglighet: { sv: 'Tillgänglighet', en: 'Accessibility' },
+  meny: { sv: 'Meny', en: 'Menu' },
+  hoppa: { sv: 'Hoppa till innehållet', en: 'Skip to content' },
+  institution: { sv: 'Institutionen för akvatiska resurser', en: 'Department of Aquatic Resources' },
+  slu_alt: { sv: 'SLU, Sveriges lantbruksuniversitet', en: 'SLU, Swedish University of Agricultural Sciences' },
+  lagerval: { sv: 'Lagerval', en: 'Layers' },
+  till_traffarna: { sv: 'Till träffarna', en: 'Back to results' },
+  visa_mer: { sv: 'Visa mer om kartan', en: 'Show more about the map' },
+  visa_mindre: { sv: 'Visa mindre', en: 'Show less' },
   laddar_katalog: { sv: 'Hämtar kartkatalogen …', en: 'Loading the map catalogue …' },
   katalog_fel: { sv: 'Kartkatalogen kunde inte hämtas.', en: 'The map catalogue could not be loaded.' },
   forsok_igen: { sv: 'Försök igen', en: 'Try again' },
@@ -94,6 +103,11 @@ export type Nyckel = keyof typeof TEXT;
 
 export function t(nyckel: Nyckel, lang: Sprak): string {
   return TEXT[nyckel][lang];
+}
+
+/** Sidans titel: "Om portalen – Fiskkartor", eller bara portalens namn. */
+export function sidtitel(del: string | null, lang: Sprak): string {
+  return del ? `${del} – ${t('portalnamn', lang)}` : t('portalnamn', lang);
 }
 
 /** "1 karta", "3 kartor" / "1 map", "3 maps". */

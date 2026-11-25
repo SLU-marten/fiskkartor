@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 88 88" width="88" height="88">
+  <!-- Platshållare för SLU:s logotyp. Byts mot PNG-filen ur slu_logo_webb.zip före lanseringen. -->
+  <rect x="2" y="2" width="84" height="84" fill="#fff" stroke="#595959" stroke-width="2" stroke-dasharray="6 4"/>
+  <text x="44" y="40" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="#595959">SLU-</text>
+  <text x="44" y="58" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="#595959">logotyp</text>
+</svg>

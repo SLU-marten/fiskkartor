@@ -1,7 +1,7 @@
-// Rutter i adressens hash: #/ (start), #/karta/<id> (karta) och #/om. Parametrar efter "?".
+// Rutter i adressens hash: #/ (start), #/karta/<id> (karta), #/om och #/tillganglighet. Parametrar efter "?".
 // Hashen gör att sidan fungerar som statiska filer utan serverregler.
 
-export type Vy = 'start' | 'karta' | 'om';
+export type Vy = 'start' | 'karta' | 'om' | 'tillganglighet';
 export type Rutt = { vy: Vy; id?: string; q: URLSearchParams };
 export type Sprak = 'sv' | 'en';
 
@@ -22,12 +22,13 @@ export function tolkaRutt(hash: string): Rutt {
   const delar = sokvag.split('/').filter(Boolean);
   if (delar[0] === 'karta' && delar[1]) return { vy: 'karta', id: avkoda(delar[1]), q };
   if (delar[0] === 'om') return { vy: 'om', q };
+  if (delar[0] === 'tillganglighet') return { vy: 'tillganglighet', q };
   return { vy: 'start', q };
 }
 
 /** Alltid en ren hash ("#/…"), så att sökvägen och ?data= ligger kvar när den skrivs. */
 export function byggRutt(r: Rutt): string {
-  const sokvag = r.vy === 'karta' ? `karta/${encodeURIComponent(r.id ?? '')}` : r.vy === 'om' ? 'om' : '';
+  const sokvag = r.vy === 'karta' ? `karta/${encodeURIComponent(r.id ?? '')}` : r.vy === 'start' ? '' : r.vy;
   const q = r.q.toString();
   return `#/${sokvag}${q ? `?${q}` : ''}`;
 }

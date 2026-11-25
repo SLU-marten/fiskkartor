@@ -4,8 +4,11 @@
   import Start from './vyer/Start.svelte';
   import Kartvy from './vyer/Kartvy.svelte';
   import Om from './vyer/Om.svelte';
+  import Tillganglighet from './vyer/Tillganglighet.svelte';
+  import Sidhuvud from './komponenter/Sidhuvud.svelte';
+  import Sidfot from './komponenter/Sidfot.svelte';
   import { byggRutt, medParametrar, RUTT_ANDRAD, sprak, tolkaRutt, type Rutt, type Vy } from './lib/rutt';
-  import { t } from './lib/text';
+  import { sidtitel, t } from './lib/text';
 
   // Datamappen ligger bredvid sidan. ?data=<url> pekar om den, för tester.
   const dataUrl = new URLSearchParams(location.search).get('data') ?? 'data/';
@@ -41,24 +44,30 @@
     };
   });
 
+  // Varje vy har en egen titel (WCAG 2.4.2). I kartvyn är kartans namn vyns namn.
+  const titel = $derived.by(() => {
+    if (rutt.vy === 'om') return sidtitel(t('meny_om', lang), lang);
+    if (rutt.vy === 'tillganglighet') return sidtitel(t('meny_tillganglighet', lang), lang);
+    if (rutt.vy === 'karta') {
+      if (kartor === null) return sidtitel(null, lang);
+      return sidtitel(kartor.find((k) => k.id === rutt.id)?.titel ?? t('karta_finns_inte', lang), lang);
+    }
+    return sidtitel(t('meny_start', lang), lang);
+  });
+
   $effect(() => {
     document.documentElement.lang = lang;
-    document.title = t('portalnamn', lang);
+    document.title = titel;
   });
 </script>
 
-<header class="sidhuvud">
-  <a class="namn" href={lank('start')}>{t('portalnamn', lang)}</a>
-  <nav>
-    <a href={lank('start')} aria-current={rutt.vy === 'start' ? 'page' : undefined}>{t('meny_start', lang)}</a>
-    <a href={lank('om')} aria-current={rutt.vy === 'om' ? 'page' : undefined}>{t('meny_om', lang)}</a>
-    <a href={spraklank} hreflang={lang === 'sv' ? 'en' : 'sv'} data-testid="sprak">{t('byt_sprak', lang)}</a>
-  </nav>
-</header>
+<Sidhuvud {lang} vy={rutt.vy} {lank} {spraklank} />
 
-<main>
+<main id="innehall" tabindex="-1">
   {#if rutt.vy === 'om'}
     <Om {lang} />
+  {:else if rutt.vy === 'tillganglighet'}
+    <Tillganglighet {lang} />
   {:else if fel}
     <p class="sida" role="alert">{t('katalog_fel', lang)} ({fel})</p>
     <button onclick={hamtaKatalog}>{t('forsok_igen', lang)}</button>
@@ -71,30 +80,13 @@
   {/if}
 </main>
 
+{#if rutt.vy !== 'karta'}
+  <Sidfot {lang} {lank} />
+{/if}
+
 <style>
-  .sidhuvud {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: baseline;
-    justify-content: space-between;
-    gap: 0.5rem 1.5rem;
-    padding: 0.75rem 1.25rem;
-    border-bottom: 1px solid var(--linje);
-    background: var(--yta);
-  }
-  .namn {
-    font-weight: 500;
-    font-size: 1.15rem;
-    text-decoration: none;
-    color: inherit;
-  }
-  nav {
-    display: flex;
-    gap: 1.25rem;
-  }
-  nav a[aria-current='page'] {
-    font-weight: 500;
-    text-decoration: none;
+  main:focus {
+    outline: none;
   }
   .sida {
     padding: 1.25rem;

@@ -46,3 +46,11 @@ describe('byggRutt', () => {
     expect(byggRutt({ vy: 'start', q: new URLSearchParams('q=å') })).toBe('#/?q=%C3%A5');
   });
 });
+
+describe('tillgänglighetssidan', () => {
+  it('#/tillganglighet tolkas och byggs', () => {
+    const r = tolkaRutt('#/tillganglighet?lang=en');
+    expect(r.vy).toBe('tillganglighet');
+    expect(byggRutt(r)).toBe('#/tillganglighet?lang=en');
+  });
+});
