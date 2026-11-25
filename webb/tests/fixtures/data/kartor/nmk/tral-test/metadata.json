@@ -1,0 +1,56 @@
+{
+  "id": "tral-test",
+  "titel": "Trålfångst, en klass (test)",
+  "projekt": "NMK",
+  "kalla": "Nationell marin kartering (Trål)",
+  "citering": "Testsson 2021",
+  "ar": 2021,
+  "kvalitet": null,
+  "licens": "CC BY 4.0",
+  "kontakt": "SLU-Aqua-fiskkartor@slu.se",
+  "sprak": "sv",
+  "doi": null,
+  "farg": "YlGnBu",
+  "visas": true,
+  "metadata": "kartor/nmk/tral-test/metadata.json",
+  "falt": {
+    "art": null,
+    "vetenskapligt_namn": null,
+    "livsstadium": null,
+    "havsomrade": null,
+    "omrade": null,
+    "rodlista": null,
+    "fiskbarometern": null,
+    "simblasa": null,
+    "livsmiljo": null
+  },
+  "aktuellVersion": 1,
+  "versioner": [
+    {
+      "version": 1,
+      "publicerad": "2026-11-01",
+      "format": 2,
+      "klassad": {
+        "fil": "kartor/nmk/tral-test/v1/visning.tif",
+        "sha256": "855d750efc254cc2d4b824b51fbbf6b3764283ae829f106f8332574e4fad5edc",
+        "kallaSha256": "a46a276ccfe43346a7428a711b45e100ccb7b7c0842e516745276151b2a64448",
+        "bytes": 912,
+        "epsg": 4326,
+        "upplosning": 597.1,
+        "vy3006": {
+          "fil": "kartor/nmk/tral-test/v1/visning_3006.tif",
+          "sha256": "d7ed152b6f323b89cb612a949eb1c4d44390b687c96385b5fe0dd459dee3b4f0",
+          "bytes": 906
+        },
+        "klasser": [
+          {
+            "varde": 1,
+            "namn": "Förekomst",
+            "farg": true
+          }
+        ]
+      },
+      "kontinuerlig": null
+    }
+  ]
+}

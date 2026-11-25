@@ -1,0 +1,56 @@
+{
+  "id": "dold-test",
+  "titel": "Sill, dold (test)",
+  "projekt": "NMK",
+  "kalla": "Nationell marin kartering (Yngel)",
+  "citering": "Testsson 2021",
+  "ar": 2021,
+  "kvalitet": null,
+  "licens": "CC BY 4.0",
+  "kontakt": "SLU-Aqua-fiskkartor@slu.se",
+  "sprak": "sv",
+  "doi": null,
+  "farg": "YlGnBu",
+  "visas": false,
+  "metadata": "kartor/nmk/dold-test/metadata.json",
+  "falt": {
+    "art": "Sill",
+    "vetenskapligt_namn": "Clupea harengus",
+    "livsstadium": null,
+    "havsomrade": null,
+    "omrade": null,
+    "rodlista": null,
+    "fiskbarometern": null,
+    "simblasa": null,
+    "livsmiljo": null
+  },
+  "aktuellVersion": 1,
+  "versioner": [
+    {
+      "version": 1,
+      "publicerad": "2026-11-01",
+      "format": 2,
+      "klassad": {
+        "fil": "kartor/nmk/dold-test/v1/visning.tif",
+        "sha256": "3a7b85551ec9f72a05140e6f53f58c267389fa240a91e4b3c575f5cb05819535",
+        "kallaSha256": "c5a59dcd8e12901fd8761e57036a4d46c54f244928af0b7ccfe892296ce4f4ad",
+        "bytes": 894,
+        "epsg": 3006,
+        "upplosning": 25,
+        "klasser": [
+          {
+            "varde": 5,
+            "namn": "Viktigt",
+            "farg": true
+          },
+          {
+            "varde": 10,
+            "namn": "Mycket viktigt",
+            "farg": true
+          }
+        ]
+      },
+      "kontinuerlig": null
+    }
+  ]
+}

@@ -1,6 +1,7 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-  import { lasKatalog, type Karta } from './lib/katalog';
+  import { lasKatalog, synliga, type Karta } from './lib/katalog';
+  import Start from './vyer/Start.svelte';
   import { byggRutt, medParametrar, RUTT_ANDRAD, sprak, tolkaRutt, type Rutt, type Vy } from './lib/rutt';
   import { t } from './lib/text';
 
@@ -54,30 +55,20 @@
 
 <main>
   {#if fel}
-    <p role="alert">{t('katalog_fel', lang)} ({fel})</p>
+    <p class="sida" role="alert">{t('katalog_fel', lang)} ({fel})</p>
     <button onclick={hamtaKatalog}>{t('forsok_igen', lang)}</button>
   {:else if kartor === null}
-    <p aria-live="polite">{t('laddar_katalog', lang)}</p>
+    <p class="sida" aria-live="polite">{t('laddar_katalog', lang)}</p>
   {:else if rutt.vy === 'start'}
-    <h1>{t('undertitel', lang)}</h1>
-    <p data-testid="antal">{kartor.length}</p>
+    <Start kartor={synliga(kartor)} {rutt} {lang} />
   {:else if rutt.vy === 'karta'}
-    <h1>{rutt.id}</h1>
+    <div class="sida"><h1>{rutt.id}</h1></div>
   {:else}
-    <h1>{t('meny_om', lang)}</h1>
+    <div class="sida"><h1>{t('meny_om', lang)}</h1></div>
   {/if}
 </main>
 
 <style>
-  :global(body) {
-    margin: 0;
-    font: 16px/1.5 system-ui, sans-serif;
-    color: #1d2a33;
-    background: #fbfbf9;
-  }
-  :global(a) {
-    color: #1f5f8b;
-  }
   .sidhuvud {
     display: flex;
     flex-wrap: wrap;
@@ -102,7 +93,7 @@
     font-weight: 600;
     text-decoration: none;
   }
-  main {
+  .sida {
     padding: 1.25rem;
   }
 </style>

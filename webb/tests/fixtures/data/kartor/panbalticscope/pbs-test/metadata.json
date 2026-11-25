@@ -1,0 +1,102 @@
+{
+  "id": "pbs-test",
+  "titel": "Perch spawning, Baltic Sea (test)",
+  "projekt": "PanBalticScope",
+  "kalla": "PanBalticScope",
+  "citering": "Test et al. 2024",
+  "ar": 2024,
+  "kvalitet": "Test data in English.",
+  "licens": "CC BY 4.0",
+  "kontakt": "SLU-Aqua-fiskkartor@slu.se",
+  "sprak": "en",
+  "doi": null,
+  "farg": "YlGnBu",
+  "visas": true,
+  "metadata": "kartor/panbalticscope/pbs-test/metadata.json",
+  "falt": {
+    "art": "Abborre",
+    "vetenskapligt_namn": "Perca fluviatilis",
+    "livsstadium": "lek",
+    "havsomrade": "Östersjön",
+    "omrade": null,
+    "rodlista": null,
+    "fiskbarometern": null,
+    "simblasa": null,
+    "livsmiljo": null
+  },
+  "aktuellVersion": 2,
+  "versioner": [
+    {
+      "version": 1,
+      "publicerad": "2026-11-01",
+      "format": 2,
+      "klassad": {
+        "fil": "kartor/panbalticscope/pbs-test/v1/visning.tif",
+        "sha256": "c6482fc81704620fc8a2fdaf07ef79b211d611afbd8457080b17cd977637a775",
+        "kallaSha256": "f6f27ab598cbbaed5257b45ca648719b511a4bb5431037be62edacb83b8f1d24",
+        "bytes": 944,
+        "epsg": 3857,
+        "upplosning": 52.7,
+        "vy3006": {
+          "fil": "kartor/panbalticscope/pbs-test/v1/visning_3006.tif",
+          "sha256": "c5d6b17b2c6d0855366b51fb2a40f5727f765a85afdeecc986511ec20990b2e7",
+          "bytes": 960
+        },
+        "klasser": [
+          {
+            "varde": 0,
+            "namn": "Ej viktigt område",
+            "farg": false
+          },
+          {
+            "varde": 5,
+            "namn": "Viktigt",
+            "farg": true
+          },
+          {
+            "varde": 10,
+            "namn": "Mycket viktigt",
+            "farg": true
+          }
+        ]
+      },
+      "kontinuerlig": null
+    },
+    {
+      "version": 2,
+      "publicerad": "2026-11-25",
+      "format": 2,
+      "klassad": {
+        "fil": "kartor/panbalticscope/pbs-test/v2/visning.tif",
+        "sha256": "2d64c4fdae29e5c15dcb26aab75f6f4aaf460c84036040a719cb2ee3226fd76a",
+        "kallaSha256": "ef44a8a7bcca88d6630a699c7dd9a876102140460d950632773404d8edce88d9",
+        "bytes": 944,
+        "epsg": 3857,
+        "upplosning": 52.7,
+        "vy3006": {
+          "fil": "kartor/panbalticscope/pbs-test/v2/visning_3006.tif",
+          "sha256": "39dcf59098b269fa4ee3f78341070a8fb917242898671c57e931af5523e1c8e6",
+          "bytes": 960
+        },
+        "klasser": [
+          {
+            "varde": 0,
+            "namn": "Ej viktigt område",
+            "farg": false
+          },
+          {
+            "varde": 5,
+            "namn": "Viktigt",
+            "farg": true
+          },
+          {
+            "varde": 10,
+            "namn": "Mycket viktigt",
+            "farg": true
+          }
+        ]
+      },
+      "kontinuerlig": null
+    }
+  ]
+}
