@@ -14,15 +14,16 @@ export function formatera(v: number | null, roll: Roll, klasser: Klass[], skala 
 export type VardeLage = 'exakt' | 'hamta' | 'oversikt';
 
 /**
- * Vad pekarvärdet bygger på (beslut vid planeringen av fas 2):
+ * Vad pekarvärdet bygger på (beslut vid planeringen av fas 2, ändrat efter kontrollpunkt 2):
  * - exakt: vyn använder full upplösning, värdet i rutan är exakt;
- * - hamta: upp till fyra gånger dataupplösningen visas översiktsvärdet med ≈ tills det exakta har hämtats;
- * - oversikt: längre ut visas översiktsvärdet med ≈ och inget hämtas. En skärmpixel täcker då
- *   tusentals celler, så en enskild cell är inte det man ser.
+ * - hamta (bara kontinuerliga kartor): upp till 2× originalets cellstorlek visas översiktsvärdet med ≈
+ *   tills det exakta har hämtats;
+ * - oversikt: annars visas översiktsvärdet med ≈ och inget hämtas. En klassad översikt (MAX) färgar
+ *   hela rutan om en cell har data, så ett exakt punktvärde ("—") skulle motsäga det man ser.
  */
-export function vardeLage(z: number, maxZ: number, vyUpp: number, dataUpp: number): VardeLage {
+export function vardeLage(z: number, maxZ: number, vyUpp: number, originalUpp: number, roll: Roll): VardeLage {
   if (z >= maxZ) return 'exakt';
-  return vyUpp <= 4 * dataUpp ? 'hamta' : 'oversikt';
+  return roll === 'kontinuerlig' && vyUpp <= 2 * originalUpp ? 'hamta' : 'oversikt';
 }
 
 const filer = new Map<string, Promise<GeoTIFF>>();

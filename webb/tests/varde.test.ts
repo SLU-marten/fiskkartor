@@ -35,12 +35,16 @@ describe('formatera', () => {
 });
 
 describe('vardeLage', () => {
-  it('full upplösning är exakt', () => {
-    expect(vardeLage(2, 2, 30, 25)).toBe('exakt');
+  it('full upplösning är exakt för båda kartorna', () => {
+    expect(vardeLage(2, 2, 30, 25, 'klassad')).toBe('exakt');
+    expect(vardeLage(2, 2, 30, 25, 'kontinuerlig')).toBe('exakt');
   });
-  it('upp till fyra gånger dataupplösningen hämtas det exakta värdet', () => {
-    expect(vardeLage(1, 2, 100, 25)).toBe('hamta');
-    expect(vardeLage(0, 2, 100.25, 25)).toBe('oversikt');
+  it('klassad: översiktsvärdet tills man zoomat in fullt, inget hämtas', () => {
+    expect(vardeLage(1, 2, 40, 25, 'klassad')).toBe('oversikt');
+  });
+  it('kontinuerlig: det exakta värdet hämtas upp till 2× originalupplösningen', () => {
+    expect(vardeLage(1, 2, 50, 25, 'kontinuerlig')).toBe('hamta');
+    expect(vardeLage(0, 2, 50.1, 25, 'kontinuerlig')).toBe('oversikt');
   });
 });
 

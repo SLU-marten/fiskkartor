@@ -141,11 +141,11 @@ test.describe('kartvyn', () => {
     await vantaKarta(page);
     expect(rutor.length).toBeGreaterThan(0);
     await hovra(page, 613287.5, 6636712.5, 3006);
-    await expect(page.getByTestId('varde')).toHaveText('Mycket viktigt');
+    await expect(page.getByTestId('varde')).toHaveText(/^(≈ )?Mycket viktigt$/);
     await page.getByRole('radio', { name: 'Kontinuerlig' }).check();
     await vantaKarta(page, 2);
     await hovra(page, 613287.5, 6636712.5, 3006);
-    await expect(page.getByTestId('varde')).toHaveText('0.75');
+    await expect(page.getByTestId('varde')).toHaveText(/^≈?0\.75$/);
     expect(new URL(page.url()).hash).toContain('lager=kontinuerlig');
   });
 
@@ -157,7 +157,7 @@ test.describe('kartvyn', () => {
     await vantaKarta(page);
     await expect(page.getByRole('radio', { name: 'Kontinuerlig' })).toHaveCount(0);
     await hovra(page, 1801000, 8003000, 3857);
-    await expect(page.getByTestId('varde')).toHaveText('Ej viktigt område');
+    await expect(page.getByTestId('varde')).toHaveText(/^(≈ )?Ej viktigt område$/);
     await hovra(page, 1803000, 8001000, 3857);
     await expect(page.getByTestId('varde')).toHaveText('—');
     expect(tif.every((u) => u.endsWith('/v2/visning_3006.tif'))).toBe(true);
@@ -167,7 +167,7 @@ test.describe('kartvyn', () => {
     await page.goto(KARTA('torsk-test', 'bakgrund=ingen&opacitet=0'));
     await vantaKarta(page);
     const [px, py] = await hovra(page, 613287.5, 6636712.5, 3006);
-    await expect(page.getByTestId('varde')).toHaveText('Mycket viktigt');
+    await expect(page.getByTestId('varde')).toHaveText(/^(≈ )?Mycket viktigt$/);
     await page.mouse.move(5, 5);
     // Kartytans egen bakgrund (#eef2f3) syns rakt igenom datalagret.
     expect(await fargVid(page, px, py)).toEqual([238, 242, 243]);
@@ -215,10 +215,10 @@ const fordroj = (page: import('@playwright/test').Page, monster: string, ms: num
   });
 
 test.describe('värde under pekaren', () => {
-  test('nära full upplösning: ≈ först, sedan det exakta värdet, och koordinater', async ({ page }) => {
+  test('kontinuerlig nära full upplösning: ≈ först, sedan det exakta värdet, och koordinater', async ({ page }) => {
     await page.goto(KARTA('torsk-test', 'bakgrund=ingen&lager=kontinuerlig'));
     await vantaKarta(page);
-    await stallVy(page, 613287.5, 6636712.5, 75);
+    await stallVy(page, 613287.5, 6636712.5, 40);
     await fordroj(page, '**/radata.tif', 600);
     await hovra(page, 613287.5, 6636712.5, 3006);
     await expect(page.getByTestId('varde')).toHaveText('≈0.75');
@@ -230,7 +230,7 @@ test.describe('värde under pekaren', () => {
   test('pekaren flyttas innan svaret kommer: aldrig det gamla värdet', async ({ page }) => {
     await page.goto(KARTA('torsk-test', 'bakgrund=ingen&lager=kontinuerlig'));
     await vantaKarta(page);
-    await stallVy(page, 613287.5, 6636712.5, 75);
+    await stallVy(page, 613287.5, 6636712.5, 40);
     await fordroj(page, '**/radata.tif', 1000);
     await hovra(page, 613287.5, 6636712.5, 3006);
     await page.waitForTimeout(400);
@@ -238,6 +238,20 @@ test.describe('värde under pekaren', () => {
     await expect(page.getByTestId('varde')).toHaveText('—');
     await page.waitForTimeout(1500);
     await expect(page.getByTestId('varde')).toHaveText('—');
+  });
+
+  test('klassad gles ruta nära full upplösning: översiktsvärdet står kvar och inget hämtas', async ({ page }) => {
+    await page.goto(KARTA('torsk-test', 'bakgrund=ingen'));
+    await vantaKarta(page);
+    await stallVy(page, 630762.5, 6619237.5, 40);
+    const tif: string[] = [];
+    page.on('request', (r) => r.url().includes('.tif') && tif.push(r.url()));
+    await hovra(page, 630762.5, 6619237.5, 3006);
+    await expect(page.getByTestId('varde')).toHaveText('≈ Mycket viktigt');
+    const antal = tif.length;
+    await page.waitForTimeout(800);
+    await expect(page.getByTestId('varde')).toHaveText('≈ Mycket viktigt');
+    expect(tif.length).toBe(antal);
   });
 
   test('långt utzoomat: översiktsvärdet med ≈ och ingen hämtning', async ({ page }) => {

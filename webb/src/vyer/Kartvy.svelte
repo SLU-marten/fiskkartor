@@ -78,6 +78,7 @@
         kf={kartfil(fil)}
         {roll}
         klasser={version.klassad.klasser}
+        upplosning={fil.upplosning}
         {opacitet}
         {bakgrund}
         {cartoNyckel}

@@ -12,6 +12,8 @@
     kf: KartFil;
     roll: Roll;
     klasser: Klass[];
+    /** Originalets cellstorlek i meter. */
+    upplosning: number;
     opacitet: number;
     bakgrund: Bakgrund;
     cartoNyckel: string;
@@ -22,7 +24,7 @@
     onflytt?: (lage: { x: number; y: number; upp: number }) => void;
     onklar?: (kartan: Kartan) => void;
   };
-  let { kf, roll, klasser, opacitet, bakgrund, cartoNyckel, dataUrl, lang, start, onflytt, onklar }: Props = $props();
+  let { kf, roll, klasser, upplosning, opacitet, bakgrund, cartoNyckel, dataUrl, lang, start, onflytt, onklar }: Props = $props();
 
   let mal: HTMLDivElement;
   let kartan = $state<Kartan | null>(null);
@@ -76,7 +78,7 @@
     <p class="status" aria-live="polite">{t('laddar_karta', lang)}</p>
   {/if}
   {#if kartan}
-    <Pekarvarde {kartan} {kf} {roll} {klasser} {dataUrl} {lang} />
+    <Pekarvarde {kartan} {kf} {roll} {klasser} {upplosning} {dataUrl} {lang} />
   {/if}
 </div>
 

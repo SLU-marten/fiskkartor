@@ -427,3 +427,8 @@ Godkända av Mårten efter en extern granskning av byggplanen. De ersätter mots
   hämtas. Utzoomat täcker en skärmpixel tusentals celler, så en enskild cell är inte det man ser.
 - **Fiskbarometern är inget filter** (beslutat efter kontrollpunkt 2). Värdena är långa bedömningstexter
   och blir oläsliga som filterknappar. Fältet visas i kartans metadata.
+- **Pekarvärdet för klassade kartor** (beslutat efter kontrollpunkt 2, ersätter raden om tre lägen för
+  klassade kartor): det exakta värdet visas bara i full upplösning. Utzoomat visas översiktens klass med
+  ≈ och inget hämtas, eftersom en MAX-översikt färgar hela rutan om en cell har data och ett exakt
+  punktvärde ("—") då skulle motsäga färgen. Kontinuerliga kartor hämtar det exakta värdet upp till
+  2× originalets cellstorlek.

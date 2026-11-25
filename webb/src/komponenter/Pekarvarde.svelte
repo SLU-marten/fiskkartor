@@ -11,8 +11,17 @@
   import { t } from '../lib/text';
   import { exaktVarde, formatera, koordinater, vardeLage } from '../lib/varde';
 
-  type Props = { kartan: Kartan; kf: KartFil; roll: Roll; klasser: Klass[]; dataUrl: string; lang: Sprak };
-  let { kartan, kf, roll, klasser, dataUrl, lang }: Props = $props();
+  type Props = {
+    kartan: Kartan;
+    kf: KartFil;
+    roll: Roll;
+    klasser: Klass[];
+    /** Originalets cellstorlek i meter (katalogens upplosning). */
+    upplosning: number;
+    dataUrl: string;
+    lang: Sprak;
+  };
+  let { kartan, kf, roll, klasser, upplosning, dataUrl, lang }: Props = $props();
 
   let text = $state('');
   let tips = $state(false);
@@ -60,17 +69,18 @@
     const upp = vy.getResolution() ?? 0;
     const maxZ = grid.getMaxZoom();
     const z = grid.getZForResolution(upp, (kalla as unknown as { zDirection?: number }).zDirection ?? 0);
-    let lage = vardeLage(z, maxZ, upp, grid.getResolution(maxZ));
+    const lage = vardeLage(z, maxZ, upp, upplosning, roll);
     // Full upplösning som inte har laddats än: getData kan ha gett en grövre ruta.
-    if (lage === 'exakt' && laddar) lage = 'hamta';
-    if (lage === 'exakt') {
+    const vantar = lage === 'exakt' && laddar;
+    if (lage === 'exakt' && !vantar) {
       text = formatera(v, roll, klasser);
       tips = false;
       return;
     }
     text = (roll === 'klassad' ? '≈ ' : '≈') + formatera(v, roll, klasser);
     tips = lage === 'oversikt';
-    if (lage === 'oversikt') return;
+    // Klassade kartor hämtar inget; värdet räknas om när rutorna har laddat klart.
+    if (lage === 'oversikt' || (vantar && roll === 'klassad')) return;
     const ac = (pagaende = new AbortController());
     const url = new URL(kf.fil, new URL(dataUrl, location.href)).href;
     timer = setTimeout(async () => {
