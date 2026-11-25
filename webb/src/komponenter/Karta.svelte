@@ -20,8 +20,9 @@
     /** Vyn från en permanent länk. Saknas den anpassas vyn efter kartan. Läses bara första gången. */
     start?: { x: number; y: number; upp: number };
     onflytt?: (lage: { x: number; y: number; upp: number }) => void;
+    onklar?: (kartan: Kartan) => void;
   };
-  let { kf, roll, klasser, opacitet, bakgrund, cartoNyckel, dataUrl, lang, start, onflytt }: Props = $props();
+  let { kf, roll, klasser, opacitet, bakgrund, cartoNyckel, dataUrl, lang, start, onflytt, onklar }: Props = $props();
 
   let mal: HTMLDivElement;
   let kartan = $state<Kartan | null>(null);
@@ -31,6 +32,7 @@
 
   onMount(() => {
     kartan = skapaKarta(mal, { bakgrund, cartoNyckel, dataUrl });
+    onklar?.(kartan);
     kartan.karta.on('moveend', () => {
       if (kartan) onflytt?.(kartlage(kartan.karta));
     });

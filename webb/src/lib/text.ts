@@ -78,6 +78,13 @@ export const TEXT = {
   },
   nyare_version: { sv: 'Det finns en nyare version av kartan.', en: 'There is a newer version of this map.' },
   kopiera_lank: { sv: 'Kopiera länk till vyn', en: 'Copy link to this view' },
+  spara_bild: { sv: 'Spara som bild', en: 'Save as image' },
+  bild_utan_bakgrund: {
+    sv: 'Bakgrundskartan tillåter inte export – sparar utan bakgrund',
+    en: 'The background map does not allow export – saving without it',
+  },
+  bild_fel: { sv: 'Bilden kunde inte sparas. Försök igen.', en: 'The image could not be saved. Try again.' },
+  kartdata: { sv: 'Kartdata', en: 'Map data' },
   visas_nu: { sv: 'visas nu', en: 'shown now' },
   oversiktsvarde: { sv: 'Översiktsvärde – zooma in för exakt värde', en: 'Overview value – zoom in for the exact value' },
 } as const satisfies Record<string, Record<Sprak, string>>;

@@ -2,7 +2,7 @@
   import Karta from '../komponenter/Karta.svelte';
   import Panel from '../komponenter/Panel.svelte';
   import Traffar from '../komponenter/Traffar.svelte';
-  import type { Bakgrund } from '../karta/karta';
+  import type { Bakgrund, Kartan } from '../karta/karta';
   import { aktuellVersion, kartfil, synliga, type Karta as KartaTyp, type Roll } from '../lib/katalog';
   import { franUrl } from '../lib/permalank';
   import { byggRutt, medParametrar, skrivRutt, type Rutt, type Sprak } from '../lib/rutt';
@@ -28,6 +28,8 @@
     void karta?.id;
     document.querySelector('.lista [aria-current="page"]')?.scrollIntoView({ block: 'nearest' });
   });
+
+  let kartan = $state<Kartan | null>(null);
 
   // Vyn ur adressen, om länken har en. Kartan läser den bara när den öppnas.
   const start = $derived.by(() => {
@@ -75,11 +77,12 @@
         {lang}
         {start}
         onflytt={flytt}
+        onklar={(k) => (kartan = k)}
       />
       {/key}
     </div>
     <aside class="panel">
-      <Panel {karta} {version} {roll} {opacitet} {bakgrund} {dataUrl} {lang} {satt} />
+      <Panel {karta} {version} {roll} {opacitet} {bakgrund} {dataUrl} {lang} {satt} {kartan} />
     </aside>
   </div>
 {/if}

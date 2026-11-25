@@ -2,7 +2,8 @@
   import Legend from './Legend.svelte';
   import Metadata from './Metadata.svelte';
   import Nedladdning from './Nedladdning.svelte';
-  import type { Bakgrund } from '../karta/karta';
+  import type { Bakgrund, Kartan } from '../karta/karta';
+  import { sparaSomBild } from '../lib/bild';
   import { citeringstext, versionslank } from '../lib/citering';
   import type { Karta, Roll, Version } from '../lib/katalog';
   import { byggRutt, medParametrar, tolkaRutt, type Sprak } from '../lib/rutt';
@@ -17,8 +18,33 @@
     dataUrl: string;
     lang: Sprak;
     satt: (andra: Record<string, string | null>) => void;
+    kartan: Kartan | null;
   };
-  let { karta, version, roll, opacitet, bakgrund, dataUrl, lang, satt }: Props = $props();
+  let { karta, version, roll, opacitet, bakgrund, dataUrl, lang, satt, kartan }: Props = $props();
+
+  let bildstatus = $state('');
+  async function sparaBild() {
+    if (!kartan) return;
+    bildstatus = '';
+    const enhet =
+      !version.kontinuerlig || version.kontinuerlig.enhet === 'sannolikhet' ? t('sannolikhet', lang) : version.kontinuerlig.enhet;
+    try {
+      const { blob, utanBakgrund } = await sparaSomBild(
+        kartan.karta,
+        { titel: karta.titel, roll, klasser: version.klassad.klasser, enhet },
+        `${t('kartdata', lang)}: SLU Aqua, ${karta.kalla}. ${karta.titel}, version ${version.version}.`,
+      );
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `${karta.id}_v${version.version}.png`;
+      a.click();
+      setTimeout(() => URL.revokeObjectURL(url), 10_000);
+      if (utanBakgrund) bildstatus = t('bild_utan_bakgrund', lang);
+    } catch {
+      bildstatus = t('bild_fel', lang);
+    }
+  }
 
   // Citeringen pekar på kartan och versionen, inte på vyn (sidans adress utan ?data= och index.html).
   const bas = `${location.origin}${location.pathname.replace(/index\.html$/, '')}`;
@@ -99,6 +125,10 @@
 <p>
   <button type="button" class="knapp" onclick={kopieraLank}>{t('kopiera_lank', lang)}</button>
   <span role="status">{lankKopierad}</span>
+</p>
+<p>
+  <button type="button" class="knapp" onclick={sparaBild} disabled={!kartan}>{t('spara_bild', lang)}</button>
+  <span role="status">{bildstatus}</span>
 </p>
 
 <Nedladdning {karta} {version} {dataUrl} {lang} />

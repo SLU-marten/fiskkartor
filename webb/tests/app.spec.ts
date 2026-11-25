@@ -392,3 +392,75 @@ test.describe('permanenta länkar och specialfall', () => {
     await expect(page.getByTestId('nedladdning').getByRole('link', { name: /Klassad karta/ })).toHaveAttribute('href', /\/v2\/visning\.tif$/);
   });
 });
+
+async function pngPixlar(page: import('@playwright/test').Page, fil: string, punkter: [number, number][]) {
+  const b64 = readFileSync(fil).toString('base64');
+  return page.evaluate(
+    async ([b64, punkter]) => {
+      const bild = await createImageBitmap(await (await fetch(`data:image/png;base64,${b64}`)).blob());
+      const duk = new OffscreenCanvas(bild.width, bild.height);
+      const ctx = duk.getContext('2d')!;
+      ctx.drawImage(bild, 0, 0);
+      const px = (punkter as [number, number][]).map(([x, y]) => Array.from(ctx.getImageData(x, y, 1, 1).data));
+      const remsa = ctx.getImageData(0, bild.height - 12, bild.width, 1).data;
+      let morka = 0;
+      for (let i = 0; i < remsa.length; i += 4) if (remsa[i] < 80 && remsa[i + 1] < 80 && remsa[i + 2] < 90) morka += 1;
+      return { bredd: bild.width, hojd: bild.height, px, morka };
+    },
+    [b64, punkter] as const,
+  );
+}
+async function sparaBild(page: import('@playwright/test').Page) {
+  const [hamtning] = await Promise.all([page.waitForEvent('download'), page.getByRole('button', { name: 'Spara som bild' }).click()]);
+  return { namn: hamtning.suggestedFilename(), fil: (await hamtning.path())! };
+}
+
+test.describe('spara som bild', () => {
+  test('PNG i kartans storlek med datalager, legend och attribution', async ({ page }) => {
+    await cartoTom(page);
+    await page.goto(KARTA('torsk-test'));
+    await vantaKarta(page);
+    const ruta = (await page.locator('.kartyta').boundingBox())!;
+    const [px, py] = await page.evaluate(() => (window as any).__karta.pixelFor(613287.5, 6636712.5, 3006));
+    const { namn, fil } = await sparaBild(page);
+    expect(namn).toBe('torsk-test_v1.png');
+    // Legendens andra ruta (Mycket viktigt) ligger på en fast plats uppe till vänster.
+    const r = await pngPixlar(page, fil, [[Math.round(px - ruta.x), Math.round(py - ruta.y)], [29, 71]]);
+    expect([r.bredd, r.hojd]).toEqual([Math.round(ruta.width), Math.round(ruta.height)]);
+    expect(r.px[0].slice(0, 3)).toEqual([37, 52, 148]);
+    expect(r.px[1].slice(0, 3)).toEqual([37, 52, 148]);
+    expect(r.morka).toBeGreaterThan(20);
+  });
+
+  test('när bakgrundsrutorna inte går att hämta blir bilden ändå gjord', async ({ page }) => {
+    await page.route('https://basemaps.cartocdn.com/**', (r) => r.abort());
+    await page.goto(KARTA('torsk-test'));
+    await vantaKarta(page);
+    const ruta = (await page.locator('.kartyta').boundingBox())!;
+    const [px, py] = await page.evaluate(() => (window as any).__karta.pixelFor(613287.5, 6636712.5, 3006));
+    const { fil } = await sparaBild(page);
+    const r = await pngPixlar(page, fil, [[Math.round(px - ruta.x), Math.round(py - ruta.y)], [29, 71]]);
+    expect(r.px[0].slice(0, 3)).toEqual([37, 52, 148]);
+    expect(r.px[1].slice(0, 3)).toEqual([37, 52, 148]);
+  });
+
+  test('en bakgrund som spärrar export: bilden sparas utan bakgrund och det sägs', async ({ page }) => {
+    // Rutor utan CORS-huvud, och en källa utan crossOrigin, så att kartans duk blir spärrad.
+    await page.route('https://basemaps.cartocdn.com/**', (r) => r.fulfill({ body: TOM_PNG, contentType: 'image/png' }));
+    await page.goto(KARTA('torsk-test'));
+    await vantaKarta(page);
+    const fore = await page.evaluate(() => (window as any).__karta.rendercomplete);
+    await page.evaluate(() => {
+      const kalla = (window as any).__karta.karta.getLayers().item(0).getSource();
+      kalla.crossOrigin = null;
+      kalla.refresh();
+    });
+    await vantaKarta(page, fore + 1);
+    const ruta = (await page.locator('.kartyta').boundingBox())!;
+    const [px, py] = await page.evaluate(() => (window as any).__karta.pixelFor(613287.5, 6636712.5, 3006));
+    const { fil } = await sparaBild(page);
+    await expect(page.getByText('Bakgrundskartan tillåter inte export – sparar utan bakgrund')).toBeVisible();
+    const r = await pngPixlar(page, fil, [[Math.round(px - ruta.x), Math.round(py - ruta.y)]]);
+    expect(r.px[0].slice(0, 3)).toEqual([37, 52, 148]);
+  });
+});
