@@ -32,7 +32,10 @@ export type Version = {
   kontinuerlig: KontinuerligFil | null;
 };
 
-/** Fälten som går att filtrera på, i den ordning de visas. */
+/**
+ * Fälten som går att filtrera på, i den ordning de visas. Fiskbarometern är inget filter:
+ * värdena är långa bedömningstexter. Fältet visas i kartans metadata.
+ */
 export const FALTNAMN = [
   'projekt',
   'art',
@@ -41,7 +44,6 @@ export const FALTNAMN = [
   'kalla',
   'ar',
   'rodlista',
-  'fiskbarometern',
   'livsmiljo',
   'simblasa',
 ] as const;

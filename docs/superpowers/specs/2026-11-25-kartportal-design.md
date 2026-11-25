@@ -425,3 +425,5 @@ Godkända av Mårten efter en extern granskning av byggplanen. De ersätter mots
   fyra gånger kartans upplösning visas "≈" tills det exakta värdet har hämtats. Längre ut visas
   översiktsvärdet med "≈" och texten "Översiktsvärde – zooma in för exakt värde", utan att något
   hämtas. Utzoomat täcker en skärmpixel tusentals celler, så en enskild cell är inte det man ser.
+- **Fiskbarometern är inget filter** (beslutat efter kontrollpunkt 2). Värdena är långa bedömningstexter
+  och blir oläsliga som filterknappar. Fältet visas i kartans metadata.

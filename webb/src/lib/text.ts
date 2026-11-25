@@ -32,7 +32,6 @@ export const TEXT = {
   falt_kalla: { sv: 'Källa', en: 'Source' },
   falt_ar: { sv: 'År', en: 'Year' },
   falt_rodlista: { sv: 'Rödlistan', en: 'Red List' },
-  falt_fiskbarometern: { sv: 'Fiskbarometern', en: 'Fiskbarometern' },
   falt_livsmiljo: { sv: 'Livsmiljö', en: 'Habitat' },
   falt_simblasa: { sv: 'Simblåsa', en: 'Swim bladder' },
   alla_kartor: { sv: 'Alla kartor', en: 'All maps' },

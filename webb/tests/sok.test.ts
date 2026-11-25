@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import type { Faltnamn, Karta } from '../src/lib/katalog';
+import { FALTNAMN, type Faltnamn, type Karta } from '../src/lib/katalog';
 import { fasetter, forslag, normalisera, sok, synligaVarden, tomtFilter } from '../src/lib/sok';
 
 function karta(id: string, titel: string, falt: Record<string, string | null>, ovrigt: Partial<Karta> = {}): Karta {
@@ -78,5 +78,12 @@ describe('forslag', () => {
   });
   it('ingenting för en enda bokstav', () => {
     expect(forslag(KARTOR, 't')).toEqual([]);
+  });
+});
+
+describe('filterfälten', () => {
+  it('Fiskbarometern är inget filter (värdena är långa bedömningstexter)', () => {
+    expect(FALTNAMN).not.toContain('fiskbarometern');
+    expect(Object.keys(fasetter([]))).not.toContain('fiskbarometern');
   });
 });
