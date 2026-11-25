@@ -3,6 +3,7 @@
 //   [&vy=3857|3006]  vyns projektion (3006 = SWEREF 99 TM, ingen omprojicering av 3006-kartor)
 //   [&transition=ms] intoning av nya rutor (OpenLayers standard 250)
 //   [&preload=n]     håll n grövre nivåer laddade, så att något alltid syns medan skarpa rutor laddas
+//   [&reserv=n]      visa som ersättning bara rutor högst n nivåer grövre än den som laddas
 import Map from 'ol/Map.js';
 import DragPan from 'ol/interaction/DragPan.js';
 import { defaults as standardInteraktioner } from 'ol/interaction/defaults.js';
@@ -22,6 +23,8 @@ declare global {
       /** performance.now() när musknappen senast släpptes */
       slapp: number;
       vyProjektion: string;
+      /** satt när reserv=n är aktivt */
+      reserv?: number;
       pixelFor(x: number, y: number, epsg: number): [number, number];
     };
   }
@@ -61,6 +64,21 @@ const karta = new Map({
   interactions: standardInteraktioner({ dragPan: false }).extend([new DragPan()]),
 });
 
+// Medan skarpa rutor laddas visar OpenLayers en grövre nivå förstorad, hur grov som helst. Grova
+// översikter täcker mycket mer yta (en cell har värde om någon undercell har det), så kartan sväller
+// och krymper. reserv=n begränsar ersättningen till n nivåer grövre; resten lämnas tomt tills det laddats.
+// findAltTiles_ är intern i OpenLayers, så finns den inte sätts ingen begränsning (och testet larmar).
+function begransaReserv(n: number): number | undefined {
+  const renderare = lager.getRenderer() as unknown as {
+    findAltTiles_?: (grid: unknown, koord: number[], altZ: number, uppslag: unknown) => boolean;
+  };
+  const original = renderare.findAltTiles_;
+  if (typeof original !== 'function') return undefined;
+  renderare.findAltTiles_ = (grid, koord, altZ, uppslag) =>
+    altZ < koord[0] - n ? false : original.call(renderare, grid, koord, altZ, uppslag);
+  return n;
+}
+
 window.__perf = {
   rendercomplete: 0,
   senast: 0,
@@ -72,6 +90,8 @@ window.__perf = {
 };
 // Kartan säger rendercomplete även innan COG-filens huvud är läst (inga rutor väntar ännu).
 // Räkna bara när källan är klar, så att mätningen tar med hämtningen av kartdata.
+if (q.has('reserv')) window.__perf.reserv = begransaReserv(Number(q.get('reserv')));
+
 karta.on('rendercomplete', () => {
   if (lager.getSource()?.getState() !== 'ready') return;
   window.__perf.rendercomplete += 1;

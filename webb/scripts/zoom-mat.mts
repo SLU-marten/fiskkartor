@@ -13,6 +13,11 @@ const varianter: Record<string, Record<string, string | number>> = {
   'D 3006 transition=0 preload=99': { vy: 3006, transition: 0, preload: 99 },
   'E fil i 3857, 3857-vy': { vy: 3857, epsg: 3857, fil: 'abborre_klassad_3857.tif' },
 };
+// VARIANTER_JSON ersätter listan, t.ex. {"Yngel 3006-vy": {"fil": "kartor/.../visning.tif", "epsg": 3035, "vy": 3006}}
+if (process.env.VARIANTER_JSON) {
+  for (const k of Object.keys(varianter)) delete varianter[k];
+  Object.assign(varianter, JSON.parse(process.env.VARIANTER_JSON));
+}
 const valda = process.env.VARIANTER?.split(',');
 for (const [namn, { fil = 'abborre_klassad.tif', ...extra }] of Object.entries(varianter)) {
   if (valda && !valda.some((v) => namn.startsWith(v))) continue;

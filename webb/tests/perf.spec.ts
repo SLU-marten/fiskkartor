@@ -84,6 +84,15 @@ test('vy=3006 visar kartan i SWEREF 99 TM på rätt plats', async ({ page }) => 
   await expect(page.locator('#varde')).toHaveText('—');
 });
 
+test('reserv=2 begränsar ersättningsrutor och kartan visas ändå rätt', async ({ page }) => {
+  await page.goto(sida({ cog: fixtur('test_klassad.tif'), roll: 'klassad', epsg: 3006, res: 25, vy: 3006, reserv: 2 }));
+  await vantaRender(page);
+  // Kräver att OpenLayers fortfarande har metoden som byts ut (skyddar mot en tyst uppgradering).
+  expect(await page.evaluate(() => (window as any).__perf.reserv)).toBe(2);
+  await hovra(page, 603762.5, 6597487.5, 3006);
+  await expect(page.locator('#varde')).toHaveText('Mycket viktigt');
+});
+
 test('vy=3006 med startpunkt i lon/lat/z', async ({ page }) => {
   await page.goto(sida({ cog: fixtur('test_klassad.tif'), roll: 'klassad', epsg: 3006, res: 25, vy: 3006, lon: 16.8107, lat: 59.5034, z: 13 }));
   await vantaRender(page);
