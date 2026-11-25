@@ -1,7 +1,7 @@
 /*
  * Grundstil enligt SLU:s grafiska profil (stil A: ett återhållsamt verktyg).
  * Färgerna kommer ur SLU:s färgpalett. Logotypens färger tonas aldrig, och grått är toningar av svart.
- * Kartornas egna färger (YlGnBu) ligger i karta/stil.ts och följer inte profilen.
+ * Kartornas egna färger (havsskalan) ligger i karta/stil.ts.
  * tests/farger.test.ts kontrollerar kontrasten för paren som används för text och kontroller.
  */
 :root {

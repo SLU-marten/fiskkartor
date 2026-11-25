@@ -504,8 +504,8 @@ test.describe('spara som bild', () => {
     // Legendens andra ruta (Mycket viktigt) ligger på en fast plats uppe till vänster.
     const r = await pngPixlar(page, fil, [[Math.round(px - ruta.x), Math.round(py - ruta.y)], [29, 71]]);
     expect([r.bredd, r.hojd]).toEqual([Math.round(ruta.width), Math.round(ruta.height)]);
-    expect(r.px[0].slice(0, 3)).toEqual([37, 52, 148]);
-    expect(r.px[1].slice(0, 3)).toEqual([37, 52, 148]);
+    expect(r.px[0].slice(0, 3)).toEqual([0, 72, 81]);
+    expect(r.px[1].slice(0, 3)).toEqual([0, 72, 81]);
     expect(r.morka).toBeGreaterThan(20);
   });
 
@@ -517,8 +517,8 @@ test.describe('spara som bild', () => {
     const [px, py] = await page.evaluate(() => (window as any).__karta.pixelFor(613287.5, 6636712.5, 3006));
     const { fil } = await sparaBild(page);
     const r = await pngPixlar(page, fil, [[Math.round(px - ruta.x), Math.round(py - ruta.y)], [29, 71]]);
-    expect(r.px[0].slice(0, 3)).toEqual([37, 52, 148]);
-    expect(r.px[1].slice(0, 3)).toEqual([37, 52, 148]);
+    expect(r.px[0].slice(0, 3)).toEqual([0, 72, 81]);
+    expect(r.px[1].slice(0, 3)).toEqual([0, 72, 81]);
   });
 
   test('en bakgrund som spärrar export: bilden sparas utan bakgrund och det sägs', async ({ page }) => {
@@ -538,7 +538,7 @@ test.describe('spara som bild', () => {
     const { fil } = await sparaBild(page);
     await expect(page.getByText('Bakgrundskartan tillåter inte export – sparar utan bakgrund')).toBeVisible();
     const r = await pngPixlar(page, fil, [[Math.round(px - ruta.x), Math.round(py - ruta.y)]]);
-    expect(r.px[0].slice(0, 3)).toEqual([37, 52, 148]);
+    expect(r.px[0].slice(0, 3)).toEqual([0, 72, 81]);
   });
 });
 

@@ -2,7 +2,7 @@ import { expect, it } from 'vitest';
 import View from 'ol/View.js';
 import { transform } from 'ol/proj.js';
 import proj4 from 'proj4';
-import { klassadStil, kontinuerligStil, type Klass } from '../src/karta/stil';
+import { klassadStil, klassfarger, kontinuerligStil, KONTINUERLIGA_STEG, legendfarger, type Klass } from '../src/karta/stil';
 import { markUpplosning } from '../src/karta/lager';
 import { registreraProjektioner, TILLATNA_EPSG } from '../src/karta/projektioner';
 
@@ -33,6 +33,27 @@ it('klassadStil gör ofärgade klasser genomskinliga och mörkare färg för hö
   const uttryck = stil.color as unknown[];
   expect(uttryck[0]).toBe('case');
   expect(uttryck[uttryck.length - 1]).toEqual([0, 0, 0, 0]);
+});
+
+it('klassfarger följer havsskalan', () => {
+  expect(klassfarger(1)).toEqual([[0, 72, 81]]);
+  expect(klassfarger(2)).toEqual([[0, 176, 185], [0, 72, 81]]);
+  expect(klassfarger(3)).toEqual([[0, 176, 185], [0, 118, 129], [0, 72, 81]]);
+  const fem = klassfarger(5);
+  expect(fem[0]).toEqual([0, 176, 185]);
+  expect(fem[2]).toEqual([0, 118, 129]);
+  expect(fem[4]).toEqual([0, 72, 81]);
+});
+
+it('legenden och kartan har samma färger', () => {
+  expect(legendfarger(PBS).map((l) => l.rgb)).toEqual(['rgb(0 176 185)', 'rgb(0 72 81)']);
+  expect(fargFor(klassadStil(PBS), 5)).toEqual([0, 176, 185, 1]);
+  expect(fargFor(klassadStil(PBS), 10)).toEqual([0, 72, 81, 1]);
+});
+
+it('kontinuerliga steg går från Himmel till Havsdjup', () => {
+  expect(KONTINUERLIGA_STEG[0]).toBe('rgb(106 209 227)');
+  expect(KONTINUERLIGA_STEG.at(-1)).toBe('rgb(0 72 81)');
 });
 
 it('kontinuerligStil gör nodata genomskinligt innan färgskalan', () => {
