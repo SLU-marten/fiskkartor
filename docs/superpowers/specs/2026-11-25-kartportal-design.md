@@ -416,3 +416,12 @@ Godkänd den 25 november 2026.
 - [ ] Skicka lagringskraven till SLU IT, så att steg 2 kan förberedas parallellt.
 
 - [ ] Rasterskillen uppdateras till COG och OpenLayers, så att den kan användas i fler projekt.
+
+## Beslut vid planeringen av fas 2 (25 november 2026)
+
+Godkända av Mårten efter en extern granskning av byggplanen. De ersätter motsvarande rader ovan.
+
+- **Värde under muspekaren i tre zoomlägen.** Fullt inzoomat visas det exakta värdet direkt. Upp till
+  fyra gånger kartans upplösning visas "≈" tills det exakta värdet har hämtats. Längre ut visas
+  översiktsvärdet med "≈" och texten "Översiktsvärde – zooma in för exakt värde", utan att något
+  hämtas. Utzoomat täcker en skärmpixel tusentals celler, så en enskild cell är inte det man ser.
