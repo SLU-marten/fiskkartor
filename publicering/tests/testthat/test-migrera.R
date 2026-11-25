@@ -76,6 +76,6 @@ test_that("den migrerade katalogen överlever en tur genom Excel", {
   f <- tempfile(fileext = ".xlsx")
   skriv_katalog(df, f)
   tillbaka <- las_katalog(f)
-  attr(tillbaka, "excelrad") <- NULL
-  expect_equal(tillbaka, df, ignore_attr = TRUE)
+  expect_true(all(is.na(tillbaka$cellfel)))
+  expect_equal(tillbaka[, KATALOG_KOLUMNER], df, ignore_attr = TRUE)
 })
