@@ -152,7 +152,7 @@ test.describe('kartvyn', () => {
   test('PanBalticScope: ingen växling, klass 0 och nodata under pekaren, visningskopian laddas', async ({ page }) => {
     await cartoTom(page);
     const tif: string[] = [];
-    page.on('request', (r) => r.url().endsWith('.tif') && tif.push(r.url()));
+    page.on('request', (r) => new URL(r.url()).pathname.endsWith('.tif') && tif.push(r.url()));
     await page.goto(KARTA('pbs-test'));
     await vantaKarta(page);
     await expect(page.getByRole('radio', { name: 'Kontinuerlig' })).toHaveCount(0);
@@ -160,7 +160,9 @@ test.describe('kartvyn', () => {
     await expect(page.getByTestId('varde')).toHaveText(/^(≈ )?Ej viktigt område$/);
     await hovra(page, 1803000, 8001000, 3857);
     await expect(page.getByTestId('varde')).toHaveText('—');
-    expect(tif.every((u) => u.endsWith('/v2/visning_3006.tif'))).toBe(true);
+    expect(tif.length).toBeGreaterThan(0);
+    expect(tif.every((u) => new URL(u).pathname.endsWith('/v2/visning_3006.tif'))).toBe(true);
+    expect(new Set(tif.map((u) => new URL(u).searchParams.get('h')))).toEqual(new Set([expect.stringMatching(/^[0-9a-f]{12}$/)]));
   });
 
   test('genomskinlighet 0 döljer kartan men pekaren visar värdet', async ({ page }) => {
@@ -189,12 +191,12 @@ test.describe('kartvyn', () => {
     page.on('console', (m) => m.type() === 'error' && fel.push(m.text()));
     page.on('pageerror', (e) => fel.push(String(e)));
     const tif: string[] = [];
-    page.on('request', (r) => r.url().endsWith('.tif') && tif.push(r.url()));
+    page.on('request', (r) => new URL(r.url()).pathname.endsWith('.tif') && tif.push(r.url()));
     for (const id of ['torsk-test', 'pbs-test', 'tral-test', 'dold-test']) {
       await page.goto(KARTA(id));
       await vantaKarta(page);
     }
-    expect(tif.some((u) => u.endsWith('tral-test/v1/visning_3006.tif'))).toBe(true);
+    expect(tif.some((u) => new URL(u).pathname.endsWith('tral-test/v1/visning_3006.tif'))).toBe(true);
     expect(fel).toEqual([]);
   });
 });
@@ -219,7 +221,7 @@ test.describe('värde under pekaren', () => {
     await page.goto(KARTA('torsk-test', 'bakgrund=ingen&lager=kontinuerlig'));
     await vantaKarta(page);
     await stallVy(page, 613287.5, 6636712.5, 40);
-    await fordroj(page, '**/radata.tif', 600);
+    await fordroj(page, '**/radata.tif*', 600);
     await hovra(page, 613287.5, 6636712.5, 3006);
     await expect(page.getByTestId('varde')).toHaveText('≈0.75');
     await expect(page.getByTestId('varde')).toHaveText('0.75');
@@ -231,7 +233,7 @@ test.describe('värde under pekaren', () => {
     await page.goto(KARTA('torsk-test', 'bakgrund=ingen&lager=kontinuerlig'));
     await vantaKarta(page);
     await stallVy(page, 613287.5, 6636712.5, 40);
-    await fordroj(page, '**/radata.tif', 1000);
+    await fordroj(page, '**/radata.tif*', 1000);
     await hovra(page, 613287.5, 6636712.5, 3006);
     await page.waitForTimeout(400);
     await hovra(page, 607487.5, 6642512.5, 3006);
@@ -245,7 +247,7 @@ test.describe('värde under pekaren', () => {
     await vantaKarta(page);
     await stallVy(page, 630762.5, 6619237.5, 40);
     const tif: string[] = [];
-    page.on('request', (r) => r.url().includes('.tif') && tif.push(r.url()));
+    page.on('request', (r) => new URL(r.url()).pathname.endsWith('.tif') && tif.push(r.url()));
     await hovra(page, 630762.5, 6619237.5, 3006);
     await expect(page.getByTestId('varde')).toHaveText('≈ Mycket viktigt');
     const antal = tif.length;
@@ -259,7 +261,7 @@ test.describe('värde under pekaren', () => {
     await vantaKarta(page);
     await stallVy(page, 630762.5, 6619237.5, 400);
     const tif: string[] = [];
-    page.on('request', (r) => r.url().endsWith('.tif') && tif.push(r.url()));
+    page.on('request', (r) => new URL(r.url()).pathname.endsWith('.tif') && tif.push(r.url()));
     await hovra(page, 630762.5, 6619237.5, 3006);
     await expect(page.getByTestId('varde')).toHaveText('≈ Mycket viktigt');
     await expect(page.getByTestId('varde-tips')).toHaveText('Översiktsvärde – zooma in för exakt värde');
@@ -543,7 +545,7 @@ test.describe('efter granskningen', () => {
     await vantaKarta(page);
     await stallVy(page, 630762.5, 6619237.5, 400);
     await hovra(page, 630762.5, 6619237.5, 3006);
-    await fordroj(page, '**/visning.tif', 1500);
+    await fordroj(page, '**/visning.tif*', 1500);
     await page.evaluate(() => (window as any).__karta.karta.getView().setResolution(25));
     await page.waitForTimeout(400);
     await expect(page.getByTestId('varde')).not.toHaveText('Mycket viktigt');

@@ -89,10 +89,24 @@ export function aktuellVersion(k: Karta, v?: number): Version {
   return vald ?? k.versioner.find((x) => x.version === k.aktuellVersion) ?? k.versioner[k.versioner.length - 1];
 }
 
+export type KartFil = { fil: string; epsg: number; hash: string };
+
 /**
- * Filen som visas i kartan och dess koordinatsystem, som ett par: visningskopian i SWEREF 99 TM
- * när den finns, annars originalet. Nedladdning använder alltid `fil`.
+ * Filen som visas i kartan, dess koordinatsystem och början av dess SHA-256: visningskopian i
+ * SWEREF 99 TM när den finns, annars originalet. Nedladdning använder alltid `fil`.
  */
-export function kartfil(f: Fil): { fil: string; epsg: number } {
-  return f.vy3006 ? { fil: f.vy3006.fil, epsg: 3006 } : { fil: f.fil, epsg: f.epsg };
+export function kartfil(f: Fil): KartFil {
+  return f.vy3006
+    ? { fil: f.vy3006.fil, epsg: 3006, hash: f.vy3006.sha256.slice(0, 12) }
+    : { fil: f.fil, epsg: f.epsg, hash: f.sha256.slice(0, 12) };
+}
+
+/**
+ * Adressen kartan läser filen från. Hashen i adressen gör att en omgjord visningskopia på samma
+ * sökväg aldrig blandas med delar av en cachad äldre fil (statiska servrar bortser från ?h=).
+ */
+export function kartUrl(kf: KartFil, dataUrl: string): string {
+  const url = new URL(kf.fil, new URL(dataUrl, globalThis.location?.href ?? dataUrl));
+  url.searchParams.set('h', kf.hash);
+  return url.href;
 }

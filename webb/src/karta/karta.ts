@@ -6,13 +6,13 @@ import ScaleLine from 'ol/control/ScaleLine.js';
 import Zoom from 'ol/control/Zoom.js';
 import type WebGLTileLayer from 'ol/layer/WebGLTile.js';
 import { transform, transformExtent } from 'ol/proj.js';
-import type { Klass, Roll } from '../lib/katalog';
+import { kartUrl, type KartFil, type Klass, type Roll } from '../lib/katalog';
 import { skapaCarto } from './bakgrund';
 import { skapaCogLager } from './lager';
 import { registreraProjektioner } from './projektioner';
 import { klassadStil, kontinuerligStil } from './stil';
 
-export type KartFil = { fil: string; epsg: number };
+export type { KartFil };
 export type Bakgrund = 'carto' | 'ingen';
 export const VY = 'EPSG:3006';
 export const NODATA: Record<Roll, number> = { klassad: 255, kontinuerlig: 65535 };
@@ -51,7 +51,6 @@ export function skapaKarta(mal: HTMLElement, opt: { bakgrund: Bakgrund; cartoNyc
   let lager: WebGLTileLayer | null = null;
   let opacitet = 1;
   let antal = 0;
-  const bas = new URL(opt.dataUrl, location.href);
 
   // Kartan säger rendercomplete även innan COG-filens huvud är läst. Räkna bara när källan är klar.
   karta.on('rendercomplete', () => {
@@ -74,7 +73,7 @@ export function skapaKarta(mal: HTMLElement, opt: { bakgrund: Bakgrund; cartoNyc
     karta,
     visa(kf, roll, klasser) {
       const stil = roll === 'klassad' ? klassadStil(klasser) : kontinuerligStil(1000, 0, 1, NODATA.kontinuerlig);
-      const ny = skapaCogLager(new URL(kf.fil, bas).href, kf.epsg, NODATA[roll], stil);
+      const ny = skapaCogLager(kartUrl(kf, opt.dataUrl), kf.epsg, NODATA[roll], stil);
       ny.setOpacity(opacitet);
       if (lager) {
         karta.removeLayer(lager);

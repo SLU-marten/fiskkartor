@@ -6,7 +6,7 @@
   import { onDestroy } from 'svelte';
   import type MapBrowserEvent from 'ol/MapBrowserEvent.js';
   import { NODATA, VY, type KartFil, type Kartan } from '../karta/karta';
-  import type { Klass, Roll } from '../lib/katalog';
+  import { kartUrl, type Klass, type Roll } from '../lib/katalog';
   import type { Sprak } from '../lib/rutt';
   import { t } from '../lib/text';
   import { exaktVarde, formatera, koordinater, vardeLage } from '../lib/varde';
@@ -82,7 +82,7 @@
     // Klassade kartor hämtar inget; värdet räknas om när rutorna har laddat klart.
     if (lage === 'oversikt' || (vantar && roll === 'klassad')) return;
     const ac = (pagaende = new AbortController());
-    const url = new URL(kf.fil, new URL(dataUrl, location.href)).href;
+    const url = kartUrl(kf, dataUrl);
     timer = setTimeout(async () => {
       try {
         const exakt = await exaktVarde(url, x, y, Number(VY.split(':')[1]), ac.signal);
