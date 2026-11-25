@@ -28,3 +28,18 @@ jobs:
         with: { node-version: 22 }
       - run: npm ci && node --test
         working-directory: schema
+  webb:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: webb
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22, cache: npm, cache-dependency-path: webb/package-lock.json }
+      - run: npm ci
+      - run: npx vitest run
+      - run: npm run build
+      - run: npx playwright install --with-deps chromium
+      # Bara testfilerna i webb/tests/fixtures. 25 m-testerna hoppas över utan PERF_KLASSAD.
+      - run: npx playwright test
