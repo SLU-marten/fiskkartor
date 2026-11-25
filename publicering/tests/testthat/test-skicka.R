@@ -99,3 +99,37 @@ test_that("skicka_data stoppar på för stora filer och lämnar repot orört", {
   expect_error(skicka_data(mapp, bar), "100 MB")
   expect_true(is.na(git("-C", bar, "rev-parse", "--verify", "--quiet", "data")))
 })
+
+test_that("skicka_data vägrar skriva över en publicerad kartfil med nytt innehåll", {
+  bar <- bar_repo()
+  skicka_data(datatrad(list("katalog/katalog.json" = "{}", "kartor/p/a/v1/visning.tif" = "tif A")), bar)
+  fore <- git("-C", bar, "rev-parse", "data")
+  fel <- tryCatch(skicka_data(datatrad(list("katalog/katalog.json" = "{}", "kartor/p/a/v1/visning.tif" = "tif B")), bar),
+                  error = conditionMessage)
+  expect_match(fel, "kartor/p/a/v1/visning.tif", fixed = TRUE)
+  expect_match(fel, "hamta_data", fixed = TRUE)
+  expect_identical(git("-C", bar, "rev-parse", "data"), fore)
+})
+
+test_that("en samtidig publicering skrivs inte över", {
+  skip_on_os("windows")
+  bar <- bar_repo()
+  skicka_data(datatrad(list("katalog/katalog.json" = "{}", "kartor/p/a/v1/visning.tif" = "tif")), bar)
+  # En post-commit-krok låter "någon annan" publicera mellan kontrollen och pushen.
+  krokar <- tempfile("krokar")
+  dir.create(krokar)
+  markor <- tempfile("markor")
+  krok <- file.path(krokar, "post-commit")
+  writeLines(c("#!/bin/sh",
+               "unset GIT_DIR GIT_WORK_TREE GIT_INDEX_FILE GIT_PREFIX",
+               sprintf("[ -e '%s' ] && exit 0", markor),
+               sprintf("touch '%s'", markor),
+               sprintf("ny=$(git --git-dir='%s' commit-tree 'data^{tree}' -p data -m annan)", bar),
+               sprintf("git --git-dir='%s' update-ref refs/heads/data \"$ny\"", bar)), krok)
+  Sys.chmod(krok, "755")
+  withr::local_envvar(GIT_CONFIG_COUNT = "1", GIT_CONFIG_KEY_0 = "core.hooksPath", GIT_CONFIG_VALUE_0 = krokar)
+  fel <- tryCatch(skicka_data(datatrad(list("katalog/katalog.json" = "{\"ny\": 1}", "kartor/p/a/v1/visning.tif" = "tif")), bar),
+                  error = conditionMessage)
+  expect_match(fel, "samtidigt")
+  expect_identical(git("-C", bar, "log", "-1", "--format=%s", "data"), "annan")
+})

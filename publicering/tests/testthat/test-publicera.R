@@ -172,3 +172,13 @@ test_that("ett okänt id ger ett tydligt fel", {
   m <- publiceringsmiljo()
   expect_error(pub(m, "finns-inte"), "finns inte i katalogen")
 })
+
+test_that("en publicerad version skrivs aldrig om när katalog.json saknas lokalt", {
+  m <- publiceringsmiljo()
+  pub(m)
+  sha_v1 <- digest::digest(file = kartmapp(m, "v1", "visning.tif"), algo = "sha256")
+  unlink(i_mal(m, "katalog"), recursive = TRUE)
+  file.copy(testraster(c(0, 10, 10)), file.path(m$rot, "källor", "Torsk lek_klassad.tif"), overwrite = TRUE)
+  expect_error(pub(m), "hamta_data")
+  expect_identical(digest::digest(file = kartmapp(m, "v1", "visning.tif"), algo = "sha256"), sha_v1)
+})

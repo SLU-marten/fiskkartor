@@ -68,6 +68,16 @@ mal_lokal <- function(mapp) list(typ = "lokal", mapp = mapp)
   rel <- paste(kartmapp, paste0("v", n), sep = "/")
   mapp <- file.path(mal$mapp, rel)
   if (dir.exists(mapp)) {
+    # En mapp som metadata.json pekar på är publicerad och får aldrig skrivas om.
+    meta <- file.path(mal$mapp, kartmapp, "metadata.json")
+    publicerade <- if (file.exists(meta)) {
+      vapply(jsonlite::read_json(meta)$versioner, function(v) as.integer(v$version), 1L)
+    } else integer(0)
+    if (n %in% publicerade) {
+      stop(sprintf(paste("%s: %s är redan publicerad men saknas i katalog.json. Dataträdet verkar",
+                         "ofullständigt: kör hamta_data() i en ny mapp och publicera där."), rad$id, rel),
+           call. = FALSE)
+    }
     message(sprintf("%s: tar bort %s från en avbruten körning", rad$id, rel))
     unlink(mapp, recursive = TRUE)
   }
@@ -119,6 +129,11 @@ mal_lokal <- function(mapp) list(typ = "lokal", mapp = mapp)
 
   # Kartmappen följer den första publiceringen, så att länkar och filer ligger still om projektet byter namn.
   kartmapp <- if (is.null(gammal)) paste("kartor", skapa_id(rad$projekt), id, sep = "/") else dirname(gammal$metadata)
+  if (is.null(gammal) && file.exists(file.path(mal$mapp, kartmapp, "metadata.json"))) {
+    stop(sprintf(paste("%s: kartan finns i dataträdet (%s/metadata.json) men inte i katalog.json. Dataträdet",
+                       "verkar ofullständigt: kör hamta_data() i en ny mapp och publicera där."), id, kartmapp),
+         call. = FALSE)
+  }
   versioner <- if (is.null(gammal)) list() else gammal$versioner
   nummer <- vapply(versioner, function(v) as.integer(v$version), 1L)
 

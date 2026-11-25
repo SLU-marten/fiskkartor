@@ -97,9 +97,27 @@ hamta_data <- function(remote, mapp, gren = "data") {
   invisible(ok)
 }
 
+# Filer i publicerade versionsmappar skrivs aldrig om och tas aldrig bort.
+.VERSIONSFIL <- "^kartor/.+/v[0-9]+/[^/]+$"
+
+# Sökväg -> blob-id för filer i ett träd (FETCH_HEAD) eller i indexet.
+.blobbar_trad <- function(arbets, ref) {
+  rader <- .git(c("-c", "core.quotepath=off", "ls-tree", "-r", ref), arbets)
+  stats::setNames(sub("^\\S+ \\S+ (\\S+)\t.*$", "\\1", rader), sub("^[^\t]*\t", "", rader))
+}
+.blobbar_index <- function(arbets, trad) {
+  rader <- .git(c("--work-tree", trad, "-c", "core.quotepath=off", "ls-files", "-s"), arbets)
+  stats::setNames(sub("^\\S+ (\\S+) \\S+\t.*$", "\\1", rader), sub("^[^\t]*\t", "", rader))
+}
+
+.lista <- function(rubrik, filer) {
+  c(rubrik, utils::head(filer, 20), if (length(filer) > 20) sprintf("... och %d till", length(filer) - 20))
+}
+
 #' Skickar dataträdet som en enda commit till datagrenen (force-push) och startar Pages-flödet.
-#' Stoppar om en fil är för stor, eller om en publicerad kartfil på grenen saknas i `mapp`
-#' (då har mappen inte hämtats med hamta_data()). Returnerar commitens sha.
+#' Stoppar om en fil är för stor, om en publicerad kartfil på grenen saknas i `mapp` eller har
+#' annat innehåll där (då har mappen inte hämtats med hamta_data()), eller om någon annan har
+#' publicerat sedan kontrollen. Returnerar commitens sha.
 skicka_data <- function(mapp, remote, gren = "data",
                         meddelande = paste("data:", format(Sys.time(), "%Y-%m-%d %H:%M")),
                         tillat_borttag = FALSE) {
@@ -109,18 +127,28 @@ skicka_data <- function(mapp, remote, gren = "data",
   arbets <- tempfile("skicka")
   on.exit(unlink(arbets, recursive = TRUE, force = TRUE), add = TRUE)
   .git(c("init", "--quiet", arbets))
+  trad <- normalizePath(mapp, winslash = "/")
+  .git(c("--work-tree", trad, "-c", "core.autocrlf=false", "add", "--all"), arbets)
 
+  # Förväntat läge på grenen när vi pushar: tomt om grenen inte finns.
+  forvantad <- ""
   if (.gren_finns(remote, gren)) {
     .git(c("fetch", "--quiet", "--depth", "1", remote, gren), arbets)
-    pa_grenen <- .git(c("-c", "core.quotepath=off", "ls-tree", "-r", "--name-only", "FETCH_HEAD"), arbets)
-    kartfiler <- grep("^kartor/.+/v[0-9]+/.+\\.tif$", pa_grenen, value = TRUE)
-    saknas <- setdiff(kartfiler, .filer_i(mapp))
-    if (length(saknas) && !tillat_borttag) {
-      stop(paste(c(sprintf("%d publicerade kartfiler på grenen %s saknas i %s:", length(saknas), gren, mapp),
-                   utils::head(saknas, 20),
-                   if (length(saknas) > 20) sprintf("... och %d till", length(saknas) - 20),
-                   "Kör hamta_data() först och publicera sedan i den mappen."), collapse = "\n"),
-           call. = FALSE)
+    forvantad <- .git(c("rev-parse", "FETCH_HEAD"), arbets)
+    pa_grenen <- .blobbar_trad(arbets, "FETCH_HEAD")
+    lokalt <- .blobbar_index(arbets, trad)
+    publicerade <- grep(.VERSIONSFIL, names(pa_grenen), value = TRUE)
+    saknas <- setdiff(publicerade, names(lokalt))
+    finns <- intersect(publicerade, names(lokalt))
+    andrade <- finns[pa_grenen[finns] != lokalt[finns]]
+    if (length(andrade) || (length(saknas) && !tillat_borttag)) {
+      stop(paste(c(
+        if (length(andrade)) .lista(sprintf("%d publicerade kartfiler har annat innehåll i %s än på grenen %s:",
+                                            length(andrade), mapp, gren), andrade),
+        if (length(saknas) && !tillat_borttag) .lista(sprintf("%d publicerade kartfiler på grenen %s saknas i %s:",
+                                                              length(saknas), gren, mapp), saknas),
+        "En publicerad fil skrivs aldrig om. Kör hamta_data() i en ny mapp och publicera sedan i den mappen."),
+        collapse = "\n"), call. = FALSE)
     }
   }
 
@@ -128,10 +156,16 @@ skicka_data <- function(mapp, remote, gren = "data",
   epost <- tryCatch(.git(c("config", "user.email"), arbets), error = function(e) character(0))
   identitet <- c(if (!length(namn)) c("-c", "user.name=fiskkartor"),
                  if (!length(epost)) c("-c", "user.email=SLU-Aqua-fiskkartor@slu.se"))
-  trad <- normalizePath(mapp, winslash = "/")
-  .git(c("--work-tree", trad, "-c", "core.autocrlf=false", "add", "--all"), arbets)
   .git(c(identitet, "--work-tree", trad, "commit", "--quiet", "-m", meddelande), arbets)
-  .git(c("push", "--quiet", "--force", remote, paste0("HEAD:refs/heads/", gren)), arbets)
+  # --force-with-lease: pushen misslyckas om grenen har ändrats sedan kontrollen ovan.
+  lease <- sprintf("--force-with-lease=refs/heads/%s:%s", gren, forvantad)
+  pushad <- tryCatch(.git(c("push", "--quiet", lease, remote, paste0("HEAD:refs/heads/", gren)), arbets),
+                     error = function(e) e)
+  if (inherits(pushad, "error")) {
+    stop(paste(c(sprintf(paste("Grenen %s har ändrats sedan kontrollen, troligen för att någon annan publicerade",
+                               "samtidigt. Inget skickades. Kör hamta_data() i en ny mapp och publicera igen."), gren),
+                 conditionMessage(pushad)), collapse = "\n"), call. = FALSE)
+  }
   sha <- .git(c("rev-parse", "HEAD"), arbets)
   antal <- length(.filer_i(mapp))
   message(sprintf("Skickade %d %s till %s (%s).", antal, if (antal == 1) "fil" else "filer", gren, substr(sha, 1, 7)))
