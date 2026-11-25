@@ -5,8 +5,8 @@
   import type { Bakgrund } from '../karta/karta';
   import { citeringstext, versionslank } from '../lib/citering';
   import type { Karta, Roll, Version } from '../lib/katalog';
-  import { byggRutt, type Sprak } from '../lib/rutt';
-  import { t } from '../lib/text';
+  import { byggRutt, medParametrar, tolkaRutt, type Sprak } from '../lib/rutt';
+  import { t, visaVersion } from '../lib/text';
 
   type Props = {
     karta: Karta;
@@ -24,12 +24,21 @@
   const bas = `${location.origin}${location.pathname.replace(/index\.html$/, '')}`;
   const citering = $derived(citeringstext(karta, version, versionslank(bas, karta.id, version.version), new Date(), lang));
   let kopierat = $state('');
+  let lankKopierad = $state('');
   async function kopiera() {
     try {
       await navigator.clipboard.writeText(citering);
       kopierat = t('kopierad', lang);
     } catch {
       kopierat = t('kopiera_fel', lang);
+    }
+  }
+  async function kopieraLank() {
+    try {
+      await navigator.clipboard.writeText(location.href);
+      lankKopierad = t('kopierad', lang);
+    } catch {
+      lankKopierad = t('kopiera_fel', lang);
     }
   }
   $effect(() => {
@@ -45,6 +54,16 @@
     return byggRutt({ vy: 'karta', id: karta.id, q });
   }
 </script>
+
+{#if !karta.visas}
+  <p class="notis" role="note">{t('inte_aktuell', lang)}</p>
+{/if}
+{#if version.version !== karta.aktuellVersion}
+  <p class="notis" role="note">
+    {t('nyare_version', lang)}
+    <a href={byggRutt(medParametrar(tolkaRutt(location.hash), { v: null }))}>{visaVersion(karta.aktuellVersion, lang)}</a>
+  </p>
+{/if}
 
 <h1>{karta.titel}</h1>
 
@@ -76,6 +95,11 @@
     </label>
   {/each}
 </fieldset>
+
+<p>
+  <button type="button" class="knapp" onclick={kopieraLank}>{t('kopiera_lank', lang)}</button>
+  <span role="status">{lankKopierad}</span>
+</p>
 
 <Nedladdning {karta} {version} {dataUrl} {lang} />
 
@@ -133,6 +157,12 @@
   }
   .reglage input {
     width: 100%;
+  }
+  .notis {
+    margin: 0 0 1rem;
+    padding: 0.5rem 0.75rem;
+    background: var(--notis);
+    border-left: 4px solid var(--notis-kant);
   }
   .citering {
     font-size: 0.92rem;

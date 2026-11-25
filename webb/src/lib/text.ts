@@ -72,6 +72,12 @@ export const TEXT = {
     en: 'The map files are downloaded as published, in their own coordinate system',
   },
   versioner: { sv: 'Versioner', en: 'Versions' },
+  inte_aktuell: {
+    sv: 'Kartan är inte längre aktuell. Den finns kvar här så att länkar och citeringar fungerar.',
+    en: 'This map is no longer current. It remains here so that links and citations keep working.',
+  },
+  nyare_version: { sv: 'Det finns en nyare version av kartan.', en: 'There is a newer version of this map.' },
+  kopiera_lank: { sv: 'Kopiera länk till vyn', en: 'Copy link to this view' },
   visas_nu: { sv: 'visas nu', en: 'shown now' },
   oversiktsvarde: { sv: 'Översiktsvärde – zooma in för exakt värde', en: 'Overview value – zoom in for the exact value' },
 } as const satisfies Record<string, Record<Sprak, string>>;
@@ -96,4 +102,9 @@ export function visaAlla(n: number, lang: Sprak): string {
 /** Etiketten för ett filterfält. */
 export function faltEtikett(f: Faltnamn, lang: Sprak): string {
   return t(`falt_${f}` as Nyckel, lang);
+}
+
+/** "Visa version 2" / "Show version 2". */
+export function visaVersion(n: number, lang: Sprak): string {
+  return lang === 'en' ? `Show version ${n}` : `Visa version ${n}`;
 }

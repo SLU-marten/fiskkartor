@@ -4,6 +4,7 @@
   import Pekarvarde from './Pekarvarde.svelte';
   import { skapaKarta, type Bakgrund, type KartFil, type Kartan } from '../karta/karta';
   import type { Klass, Roll } from '../lib/katalog';
+  import { kartlage } from '../lib/permalank';
   import type { Sprak } from '../lib/rutt';
   import { t } from '../lib/text';
 
@@ -16,8 +17,11 @@
     cartoNyckel: string;
     dataUrl: string;
     lang: Sprak;
+    /** Vyn från en permanent länk. Saknas den anpassas vyn efter kartan. Läses bara första gången. */
+    start?: { x: number; y: number; upp: number };
+    onflytt?: (lage: { x: number; y: number; upp: number }) => void;
   };
-  let { kf, roll, klasser, opacitet, bakgrund, cartoNyckel, dataUrl, lang }: Props = $props();
+  let { kf, roll, klasser, opacitet, bakgrund, cartoNyckel, dataUrl, lang, start, onflytt }: Props = $props();
 
   let mal: HTMLDivElement;
   let kartan = $state<Kartan | null>(null);
@@ -27,6 +31,9 @@
 
   onMount(() => {
     kartan = skapaKarta(mal, { bakgrund, cartoNyckel, dataUrl });
+    kartan.karta.on('moveend', () => {
+      if (kartan) onflytt?.(kartlage(kartan.karta));
+    });
     kartan.karta.on('rendercomplete', () => {
       if (kartan?.lager()?.getSource()?.getState() === 'ready') laddar = false;
     });
@@ -44,7 +51,12 @@
     lager.getSource()?.on('change', () => {
       if (lager.getSource()?.getState() === 'error') fel = true;
     });
-    if (forsta) kartan.passa().catch(() => (fel = true));
+    if (forsta && start) {
+      kartan.karta.getView().setCenter([start.x, start.y]);
+      kartan.karta.getView().setResolution(start.upp);
+    } else if (forsta) {
+      kartan.passa().catch(() => (fel = true));
+    }
   });
   $effect(() => kartan?.setOpacitet(opacitet));
   $effect(() => kartan?.setBakgrund(bakgrund));

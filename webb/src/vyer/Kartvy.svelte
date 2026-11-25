@@ -4,6 +4,7 @@
   import Traffar from '../komponenter/Traffar.svelte';
   import type { Bakgrund } from '../karta/karta';
   import { aktuellVersion, kartfil, synliga, type Karta as KartaTyp, type Roll } from '../lib/katalog';
+  import { franUrl } from '../lib/permalank';
   import { byggRutt, medParametrar, skrivRutt, type Rutt, type Sprak } from '../lib/rutt';
   import { antalKartor, t } from '../lib/text';
 
@@ -27,6 +28,15 @@
     void karta?.id;
     document.querySelector('.lista [aria-current="page"]')?.scrollIntoView({ block: 'nearest' });
   });
+
+  // Vyn ur adressen, om länken har en. Kartan läser den bara när den öppnas.
+  const start = $derived.by(() => {
+    const l = franUrl(rutt.q);
+    return l.x !== undefined && l.y !== undefined && l.upp !== undefined ? { x: l.x, y: l.y, upp: l.upp } : undefined;
+  });
+  function flytt(l: { x: number; y: number; upp: number }) {
+    satt({ x: String(Math.round(l.x)), y: String(Math.round(l.y)), upp: String(Number(l.upp.toPrecision(3))) });
+  }
 
   function satt(andra: Record<string, string | null>) {
     skrivRutt(medParametrar(rutt, andra), 'ersatt');
@@ -53,6 +63,7 @@
       </details>
     </nav>
     <div class="kartyta">
+      {#key karta.id}
       <Karta
         kf={kartfil(fil)}
         {roll}
@@ -62,7 +73,10 @@
         {cartoNyckel}
         {dataUrl}
         {lang}
+        {start}
+        onflytt={flytt}
       />
+      {/key}
     </div>
     <aside class="panel">
       <Panel {karta} {version} {roll} {opacitet} {bakgrund} {dataUrl} {lang} {satt} />

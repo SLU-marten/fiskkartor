@@ -329,3 +329,66 @@ test.describe('panelen', () => {
     await expect(v.nth(1).getByRole('link')).toHaveAttribute('href', /#\/karta\/pbs-test\?v=1$/);
   });
 });
+
+test.describe('permanenta länkar och specialfall', () => {
+  test('en kopierad länk öppnar samma vy, lager, opacitet, bakgrund och språk', async ({ page, context }) => {
+    await context.grantPermissions(['clipboard-read', 'clipboard-write']);
+    await page.goto(KARTA('torsk-test', 'lager=kontinuerlig&opacitet=0.5&bakgrund=ingen&lang=en'));
+    await vantaKarta(page);
+    const kartyta = (await page.locator('.kartyta').boundingBox())!;
+    await page.mouse.move(kartyta.x + 200, kartyta.y + 200);
+    await page.mouse.down();
+    await page.mouse.move(kartyta.x + 320, kartyta.y + 260, { steps: 8 });
+    const fore_hash = new URL(page.url()).hash;
+    await page.mouse.up();
+    // Vänta tills kartan har glidit klart och adressen har uppdaterats.
+    await page.waitForFunction(() => {
+      const vy = (window as any).__karta.karta.getView();
+      return !vy.getAnimating() && !vy.getInteracting();
+    });
+    await expect.poll(() => new URL(page.url()).hash).not.toBe(fore_hash);
+    await page.waitForTimeout(300);
+    await page.getByRole('button', { name: 'Copy link to this view' }).click();
+    const lank = await page.evaluate(() => navigator.clipboard.readText());
+    expect(lank).toBe(page.url());
+    const fore = await page.evaluate(() => (window as any).__karta.pixelFor(613287.5, 6636712.5, 3006));
+
+    const ny = await context.newPage();
+    await ny.goto(lank);
+    await vantaKarta(ny);
+    const efter = await ny.evaluate(() => (window as any).__karta.pixelFor(613287.5, 6636712.5, 3006));
+    expect(Math.abs(efter[0] - fore[0])).toBeLessThanOrEqual(2);
+    expect(Math.abs(efter[1] - fore[1])).toBeLessThanOrEqual(2);
+    await expect(ny.getByRole('radio', { name: 'Continuous' })).toBeChecked();
+    await expect(ny.getByRole('radio', { name: 'None' })).toBeChecked();
+    await expect(ny.getByLabel('Opacity')).toHaveValue('0.5');
+    expect(await ny.evaluate(() => document.documentElement.lang)).toBe('en');
+  });
+
+  test('en okänd karta säger det och länkar till startsidan', async ({ page }) => {
+    await page.goto(KARTA('finns-inte'));
+    await expect(page.getByRole('heading', { name: 'Kartan finns inte' })).toBeVisible();
+    await page.getByRole('link', { name: 'Till alla kartor' }).click();
+    await expect(page.getByTestId('traff')).toHaveCount(3);
+  });
+
+  test('en dold karta visas med en notis och går att ladda ned', async ({ page }) => {
+    await cartoTom(page);
+    await page.goto(KARTA('dold-test'));
+    await expect(page.getByText('Kartan är inte längre aktuell')).toBeVisible();
+    const href = await page.getByTestId('nedladdning').getByRole('link', { name: /Klassad karta/ }).getAttribute('href');
+    const svar = await page.request.get(href!);
+    expect(svar.status()).toBe(200);
+  });
+
+  test('en äldre version visas med en länk till den nyare', async ({ page }) => {
+    await cartoTom(page);
+    await page.goto(KARTA('pbs-test', 'v=1'));
+    await vantaKarta(page);
+    await expect(page.getByText('Det finns en nyare version')).toBeVisible();
+    await expect(page.getByTestId('nedladdning').getByRole('link', { name: /Klassad karta/ })).toHaveAttribute('href', /\/v1\/visning\.tif$/);
+    await page.getByRole('link', { name: 'Visa version 2' }).click();
+    await expect(page.getByText('Det finns en nyare version')).toHaveCount(0);
+    await expect(page.getByTestId('nedladdning').getByRole('link', { name: /Klassad karta/ })).toHaveAttribute('href', /\/v2\/visning\.tif$/);
+  });
+});
