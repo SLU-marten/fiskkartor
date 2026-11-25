@@ -86,6 +86,40 @@ NEAREST är ytriktig och blinkar mindre, men ser glest och prickigt ut utzoomat
 (`docs/oversikter-mode-nearest.png`). Prova:
 <https://slu-marten.github.io/fiskkartor/perf.html?cog=data/test/abborre_klassad_nearest.tif&roll=klassad&epsg=3006&res=25&vy=3006&transition=0&preload=99>
 
+**Lösningen på blinkandet ligger i webbläsaren.** Med `reserv=1` visar OpenLayers bara en ersättningsruta
+som är högst en nivå grövre, och lämnar resten tomt tills de skarpa rutorna laddats. Mätt som hur mycket
+den färgade ytan sväller under en snabb zoom (största täckning delat med slutlig täckning):
+
+| Inställning | Svällning, punkt 1 | Svällning, punkt 2 |
+|---|---:|---:|
+| Variant 3 (D) | 4,9× | 31× |
+| Variant 3 + `reserv=2` | 2,3× | 12× |
+| Variant 3 + `reserv=1` | 1,0× | 1,0× |
+
+Prova: <https://slu-marten.github.io/fiskkartor/perf.html?cog=data/test/abborre_klassad.tif&roll=klassad&epsg=3006&res=25&vy=3006&transition=0&preload=99&reserv=1>
+
+Eftersom blinkandet kommer från ersättningsrutorna, kan översiktsnivåerna väljas för innehållet:
+en andelströskel skulle radera smala vikar och strandremsor utzoomat (en 100 m bred remsa täcker cirka
+6 % av en 1,6 km-cell), så förslaget i plan 2 är MAX, eventuellt med ett lågt brusfilter räknat direkt
+från 25 m-originalet. NEAREST stryks.
+
+## Kartor i andra koordinatsystem i en SWEREF 99 TM-vy
+
+Villkor för variant C: att de små äldre kartorna i andra system flyter i en 3006-vy. Mätt med samma zoom:
+
+| Karta | Vy | Längsta paus | 95:e percentilen |
+|---|---|---:|---:|
+| Gädda uppväxt (Yngel, EPSG:3035, 250 m) | Web Mercator | 67–100 ms | 50 ms |
+| Gädda uppväxt (Yngel, EPSG:3035, 250 m) | SWEREF 99 TM | 99–250 ms | 50–67 ms |
+| Abborre lek (PanBalticScope, EPSG:3857) | Web Mercator | 50–67 ms | 50 ms |
+| Abborre lek (PanBalticScope, EPSG:3857) | SWEREF 99 TM | 67 ms | 50 ms |
+| Abborre 25 m (EPSG:3006), variant 3 | SWEREF 99 TM | 100–117 ms | 50 ms |
+
+Yngelkartan får enstaka längre pauser när den omprojiceras. Det går att undvika helt: vid publicering
+kan R göra en liten visningskopia i 3006 av kartor i andra system (några hundra kB för de befintliga
+kartorna), medan nedladdningsfilen behåller originalet. Östersjön ser bra ut i SWEREF 99 TM
+(`docs/ostersjon-3857-3006.png`), med mindre utdragen Bottenviken än i Web Mercator.
+
 ## Översikterna (MODE) när man zoomar ut
 
 GDAL kan inte bygga COG-översikter med MAX, så de klassade filerna använder MODE (vanligaste klassen).
@@ -159,6 +193,9 @@ behövs av den lagring SLU tillhandahåller:
 - Utrymme: minst 50 GB, med marginal för 25 m-kartorna (uppskattning).
 - Ingen inloggning för att läsa. Gärna kort cachetid för katalog.json och lång för kartfilerna,
   eftersom de aldrig skrivs över.
+- En enkel reverse proxy-regel i samma webbserver som vidarebefordrar till exempel `/tiles/lm/` till
+  Lantmäteriets Topografisk webbkarta Visning, översiktlig i SWEREF 99 TM, med API-nyckeln i en
+  header och cache på svaren. Nyckeln syns då aldrig i webbläsaren, och "Spara som bild" fungerar.
 
 ## Granskning av koden
 
