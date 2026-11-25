@@ -4,10 +4,14 @@
 //   [&transition=ms] intoning av nya rutor (OpenLayers standard 250)
 //   [&preload=n]     håll n grövre nivåer laddade, så att något alltid syns medan skarpa rutor laddas
 //   [&reserv=n]      visa som ersättning bara rutor högst n nivåer grövre än den som laddas
+//   [&bakgrund=carto] CARTO Positron under kartlagret (nyckel från bygget, VITE_CARTO_NYCKEL, eller &nyckel=)
 import Map from 'ol/Map.js';
 import DragPan from 'ol/interaction/DragPan.js';
 import { defaults as standardInteraktioner } from 'ol/interaction/defaults.js';
 import View from 'ol/View.js';
+import Attribution from 'ol/control/Attribution.js';
+import TileLayer from 'ol/layer/Tile.js';
+import XYZ from 'ol/source/XYZ.js';
 import { fromLonLat, toLonLat, transform, transformExtent } from 'ol/proj.js';
 import type { Coordinate } from 'ol/coordinate.js';
 import { registreraProjektioner } from './karta/projektioner';
@@ -55,12 +59,29 @@ const lager = skapaCogLager(
   { transition: tal('transition'), preload: tal('preload') },
 );
 const vy = new View({ projection: vyProjektion });
+
+// CARTO:s nyckel är en webbläsarnyckel, begränsad till portalens adresser hos CARTO.
+const cartoNyckel = q.get('nyckel') ?? import.meta.env.VITE_CARTO_NYCKEL ?? '';
+const bakgrund =
+  q.get('bakgrund') === 'carto'
+    ? [
+        new TileLayer({
+          source: new XYZ({
+            url: `https://basemaps.cartocdn.com/rastertiles/light_all/{z}/{x}/{y}.png?key=${encodeURIComponent(cartoNyckel)}`,
+            crossOrigin: 'anonymous',
+            maxZoom: 20,
+            attributions:
+              '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>, © <a href="https://carto.com/attributions">CARTO</a>',
+          }),
+        }),
+      ]
+    : [];
 // Panorering utan glid (kinetic), så att tiden efter en dragning bara mäter hämtning och rendering.
 const karta = new Map({
   target: 'karta',
-  layers: [lager],
+  layers: [...bakgrund, lager],
   view: vy,
-  controls: [],
+  controls: bakgrund.length ? [new Attribution({ collapsible: false })] : [],
   interactions: standardInteraktioner({ dragPan: false }).extend([new DragPan()]),
 });
 

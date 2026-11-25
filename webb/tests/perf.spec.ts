@@ -16,6 +16,8 @@ test.afterAll(async () => {
 });
 
 type Parametrar = Record<string, string | number>;
+// 1 × 1 genomskinlig PNG
+const TOM_PNG = Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=', 'base64');
 const sida = (q: Parametrar) =>
   `${server.url}/dist/perf.html?` + new URLSearchParams(Object.entries(q).map(([k, v]) => [k, String(v)]));
 const fixtur = (namn: string) => `${server.url}/tests/fixtures/${namn}`;
@@ -89,6 +91,22 @@ test('reserv=2 begränsar ersättningsrutor och kartan visas ändå rätt', asyn
   await vantaRender(page);
   // Kräver att OpenLayers fortfarande har metoden som byts ut (skyddar mot en tyst uppgradering).
   expect(await page.evaluate(() => (window as any).__perf.reserv)).toBe(2);
+  await hovra(page, 603762.5, 6597487.5, 3006);
+  await expect(page.locator('#varde')).toHaveText('Mycket viktigt');
+});
+
+test('bakgrund=carto lägger CARTO Positron med nyckel under kartlagret', async ({ page }) => {
+  // CARTO nås inte från testmiljön: svara med en tom ruta och kontrollera adresserna.
+  const rutor: string[] = [];
+  await page.route('https://basemaps.cartocdn.com/**', (route) => {
+    rutor.push(route.request().url());
+    return route.fulfill({ status: 200, contentType: 'image/png', body: TOM_PNG, headers: { 'Access-Control-Allow-Origin': '*' } });
+  });
+  await page.goto(sida({ cog: fixtur('test_klassad.tif'), roll: 'klassad', epsg: 3006, res: 25, vy: 3006, reserv: 1, bakgrund: 'carto', nyckel: 'testnyckel' }));
+  await vantaRender(page);
+  expect(rutor.length).toBeGreaterThan(0);
+  expect(rutor[0]).toMatch(/^https:\/\/basemaps\.cartocdn\.com\/rastertiles\/light_all\/\d+\/\d+\/\d+\.png\?key=testnyckel$/);
+  await expect(page.locator('.ol-attribution')).toContainText('CARTO');
   await hovra(page, 603762.5, 6597487.5, 3006);
   await expect(page.locator('#varde')).toHaveText('Mycket viktigt');
 });

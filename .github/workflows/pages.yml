@@ -25,6 +25,9 @@ jobs:
         with: { node-version: 22, cache: npm, cache-dependency-path: webb/package-lock.json }
       - name: Bygg webbplatsen
         working-directory: webb
+        # CARTO:s webbläsarnyckel (repovariabel, begränsad till portalens adresser hos CARTO)
+        env:
+          VITE_CARTO_NYCKEL: ${{ vars.CARTO_NYCKEL }}
         run: npm ci && npm run build
       - name: Finns datagrenen?
         id: data
