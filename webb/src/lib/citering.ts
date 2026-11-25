@@ -19,8 +19,12 @@ export function citeringstext(k: Karta, v: Version, permalank: string, idag: Dat
 
 export type Del = 'klassad' | 'kontinuerlig' | 'metadata.json' | 'metadata.txt';
 
-/** Beskrivande filnamn vid nedladdning, i stället för visning.tif och radata.tif. */
+/**
+ * Beskrivande filnamn vid nedladdning, i stället för visning.tif och radata.tif. metadata.json gäller
+ * hela kartan med alla versioner och får därför inget versionsnummer.
+ */
 export function nedladdningsnamn(id: string, v: number, del: Del): string {
+  if (del === 'metadata.json') return `${id}_metadata.json`;
   const slut = del === 'klassad' || del === 'kontinuerlig' ? `${del}.tif` : del;
   return `${id}_v${v}_${slut}`;
 }

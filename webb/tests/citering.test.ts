@@ -42,7 +42,8 @@ describe('nedladdningsnamn', () => {
   it('beskrivande filnamn med id och version', () => {
     expect(nedladdningsnamn('torsk-test', 1, 'klassad')).toBe('torsk-test_v1_klassad.tif');
     expect(nedladdningsnamn('torsk-test', 1, 'kontinuerlig')).toBe('torsk-test_v1_kontinuerlig.tif');
-    expect(nedladdningsnamn('pbs-test', 2, 'metadata.json')).toBe('pbs-test_v2_metadata.json');
+    // metadata.json gäller hela kartan med alla versioner, så namnet har ingen version.
+    expect(nedladdningsnamn('pbs-test', 2, 'metadata.json')).toBe('pbs-test_metadata.json');
     expect(nedladdningsnamn('pbs-test', 2, 'metadata.txt')).toBe('pbs-test_v2_metadata.txt');
   });
 });

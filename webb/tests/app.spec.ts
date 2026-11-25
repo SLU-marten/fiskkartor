@@ -308,7 +308,7 @@ test.describe('panelen', () => {
     const klassad = n.getByRole('link', { name: /Klassad karta/ });
     await expect(klassad).toHaveAttribute('href', /\/tests\/fixtures\/data\/kartor\/panbalticscope\/pbs-test\/v2\/visning\.tif$/);
     await expect(klassad).toHaveAttribute('download', 'pbs-test_v2_klassad.tif');
-    await expect(n.getByRole('link', { name: /Metadata \(JSON\)/ })).toHaveAttribute('download', 'pbs-test_v2_metadata.json');
+    await expect(n.getByRole('link', { name: /Metadata \(JSON\)/ })).toHaveAttribute('download', 'pbs-test_metadata.json');
     const [hamtning] = await Promise.all([page.waitForEvent('download'), n.getByRole('link', { name: /Metadata \(text\)/ }).click()]);
     expect(hamtning.suggestedFilename()).toBe('pbs-test_v2_metadata.txt');
     const text = readFileSync((await hamtning.path())!, 'utf8');
