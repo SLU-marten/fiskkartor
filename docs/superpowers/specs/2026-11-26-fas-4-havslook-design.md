@@ -66,7 +66,7 @@ här fasen ändrar det valet: havsfärgerna blir appens temafärg.
 | Temafärg | Hav: petrol som temafärg, som Artfakta. Skog: SLU-grönt, havsfärgerna bara i kartan | Hav | Mårten |
 | Kartans färger | YlGnBu som i dag, havsskalan eller gröna skalan | Havsskalan | Mårten |
 | Mönstret | Fyllda silhuetter eller konturer som hos Artfakta | Fyllda, på Havsvik, lite tätare än i skissen | Mårten |
-| Menyns mönster | Samma remsa som sidhuvudet eller ett eget | Eget: mindre fiskar, varje art en gång | Mårten |
+| Menyns mönster | Samma remsa som sidhuvudet eller ett eget | Eget: över hela menyn, varje art en gång | Mårten |
 | Artikoner i listorna | Med eller utan | Med, fisken liten för lek och uppväxt och stor för vuxen | Claude föreslog, Mårten valde storlekarna |
 | Silhuetternas källa | Artfaktas illustrationer eller von Wrights planscher | Artfakta | Mårten: SLU äger bilderna |
 | Hur silhuetterna görs | Ett skript i R, i Python, eller bara färdiga filer | R | Claude: teamet underhåller R, och nya arter kommer |
@@ -135,7 +135,8 @@ Under 40rem öppnar Meny-knappen en panel som glider in från höger.
 - **Länkarna:** Kartor, Om portalen, Tillgänglighet och språkbytet, med tunna vita linjer mellan. Den
   aktuella sidan har ett vitt streck framför.
 - **En rad om avsändaren:** "Fiskkartor tas fram av SLU Aqua, Institutionen för akvatiska resurser."
-- **Mönster:** längst ned i panelen, med mindre fiskar där varje art finns en gång. Inget upprepas.
+- **Mönster:** över hela panelen, 24 arter där varje art finns en gång, en art per ruta i ett rutnät
+  på 3 × 8 med slump i läget. Fiskarna är något mindre än i sidhuvudet (44–88 px långa). Inget upprepas.
 - **Resten av sidan** tonas ned bakom panelen. Ett tryck där stänger menyn.
 - **Beteendet är som i dag.** Menyn stängs med Escape, med en länk, med ett tryck utanför och när
   fokus lämnar den. Fokus flyttas till stängknappen när menyn öppnas och tillbaka till Meny-knappen när
