@@ -3,6 +3,7 @@ import { readFileSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { startaRangeServer } from './range-server';
+import { cartoTom, KARTA as karta, START as start, TOM_PNG, vantaKarta } from './hjalp';
 
 const WEBB = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const EXEMPEL = readFileSync(resolve(WEBB, '..', 'schema', 'exempel', 'katalog.json'));
@@ -40,7 +41,7 @@ test.describe('appskalet', () => {
   });
 });
 
-const START = () => `${server.url}/dist/index.html?data=/tests/fixtures/data/#/`;
+const START = () => start(server.url);
 
 test.describe('startsidan', () => {
   test('visar projektkort och bara synliga kartor', async ({ page }) => {
@@ -104,23 +105,10 @@ test.describe('startsidan', () => {
   });
 });
 
-const TOM_PNG = Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=', 'base64');
-const KARTA = (id: string, q = '') => `${server.url}/dist/index.html?data=/tests/fixtures/data/#/karta/${id}${q ? `?${q}` : ''}`;
-
-async function cartoTom(page: import('@playwright/test').Page): Promise<string[]> {
-  const rutor: string[] = [];
-  await page.route('https://basemaps.cartocdn.com/**', (r) => {
-    rutor.push(r.request().url());
-    return r.fulfill({ body: TOM_PNG, contentType: 'image/png', headers: { 'Access-Control-Allow-Origin': '*' } });
-  });
-  return rutor;
-}
+const KARTA = (id: string, q = '') => karta(server.url, id, q);
 async function oppnaLagerval(page: import('@playwright/test').Page, namn = 'Lagerval') {
   const knapp = page.getByRole('button', { name: namn });
   if ((await knapp.getAttribute('aria-expanded')) !== 'true') await knapp.click();
-}
-async function vantaKarta(page: import('@playwright/test').Page, minst = 1) {
-  await page.waitForFunction((n) => ((window as any).__karta?.rendercomplete ?? 0) >= n, minst, { timeout: 30_000 });
 }
 async function hovra(page: import('@playwright/test').Page, x: number, y: number, epsg: number) {
   const [px, py] = await page.evaluate(([x, y, e]) => (window as any).__karta.pixelFor(x, y, e) as [number, number], [x, y, epsg] as const);
