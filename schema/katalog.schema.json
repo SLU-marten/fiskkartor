@@ -25,6 +25,7 @@
       }
     },
     "klassad": {
+      "type": "object",
       "allOf": [{ "$ref": "#/$defs/fil" }],
       "required": ["klasser"],
       "properties": {
@@ -42,6 +43,7 @@
       }
     },
     "kontinuerlig": {
+      "type": "object",
       "allOf": [{ "$ref": "#/$defs/fil" }],
       "required": ["skala", "enhet", "min", "max", "p2", "p98"],
       "properties": {
