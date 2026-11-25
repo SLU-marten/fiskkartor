@@ -82,9 +82,10 @@ test('rendercomplete räknas först när kartdata finns, även med startvy och l
   await expect(page.locator('#varde')).toHaveText('Mycket viktigt', { timeout: 500 });
 });
 
-// --- 25 m-filerna: körs bara när PERF_KLASSAD pekar på en COG (sökväg eller URL) ---
+// --- 25 m-filerna: körs bara när PERF_KLASSAD (och PERF_KONTINUERLIG) pekar på en COG (sökväg eller URL) ---
 
 const PERF_KLASSAD = process.env.PERF_KLASSAD;
+const PERF_KONTINUERLIG = process.env.PERF_KONTINUERLIG;
 const NAT = { offline: false, latency: 40, downloadThroughput: 1.25e6, uploadThroughput: 5e5 };
 const RAPPORT = resolve(WEBB, 'perf', 'rapport.json');
 
@@ -139,22 +140,45 @@ function bedom(info: TestInfo, ms: number, tifKlartMs: number, gpu: string, gran
   expect(ms, `total tid (nätet klart efter ${tifKlartMs} ms, ${gpu})`).toBeLessThanOrEqual(grans);
 }
 
+// En URL används som den är; en lokal sökväg delas ut av en egen Range-server.
+const extraServrar: Awaited<ReturnType<typeof startaRangeServer>>[] = [];
+async function cogUrl(kalla: string): Promise<string> {
+  if (/^https?:\/\//.test(kalla)) return kalla;
+  const fil = resolve(kalla);
+  const s = await startaRangeServer(dirname(fil));
+  extraServrar.push(s);
+  return `${s.url}/${encodeURIComponent(basename(fil))}`;
+}
+test.afterAll(async () => {
+  await Promise.all(extraServrar.splice(0).map((s) => s.stang()));
+});
+
+test.describe('25 m kontinuerlig', () => {
+  test.skip(!PERF_KONTINUERLIG, 'sätt PERF_KONTINUERLIG till en kontinuerlig 25 m-COG (sökväg eller URL)');
+
+  test('25 m första vy kontinuerlig', async ({ page }, info) => {
+    const cog = await cogUrl(PERF_KONTINUERLIG!);
+    await strypNat(page);
+    let t0 = 0;
+    const m = mat(page, () => t0);
+    t0 = Date.now();
+    await page.goto(sida({ cog, roll: 'kontinuerlig', epsg: 3006, res: 25 }));
+    await vantaRender(page);
+    const ms = Date.now() - t0;
+    const bytes = await m.bytes();
+    const gpu = await renderare(page);
+    rapportera({ test: 'första vy kontinuerlig', punkt: null, ms, tifKlartMs: m.tifKlartMs, bytes, renderare: gpu });
+    bedom(info, ms, m.tifKlartMs, gpu, 4000);
+    expect(bytes).toBeLessThanOrEqual(8e6);
+  });
+});
+
 test.describe('25 m', () => {
   test.skip(!PERF_KLASSAD, 'sätt PERF_KLASSAD till en klassad 25 m-COG (sökväg eller URL)');
   let cog = '';
-  let extra: Awaited<ReturnType<typeof startaRangeServer>> | undefined;
 
   test.beforeAll(async () => {
-    if (/^https?:\/\//.test(PERF_KLASSAD!)) {
-      cog = PERF_KLASSAD!;
-    } else {
-      const fil = resolve(PERF_KLASSAD!);
-      extra = await startaRangeServer(dirname(fil));
-      cog = `${extra.url}/${encodeURIComponent(basename(fil))}`;
-    }
-  });
-  test.afterAll(async () => {
-    await extra?.stang();
+    cog = await cogUrl(PERF_KLASSAD!);
   });
 
   test('25 m första vy', async ({ page }, info) => {

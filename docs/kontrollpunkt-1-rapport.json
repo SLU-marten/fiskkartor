@@ -1,0 +1,59 @@
+[
+  {
+    "test": "första vy kontinuerlig",
+    "punkt": null,
+    "ms": 2630,
+    "tifKlartMs": 1724,
+    "bytes": 196608,
+    "renderare": "ANGLE (Mesa, Vulkan 1.4.335 (llvmpipe (LLVM 20.1.2 256 bits) (0x00000000)), llvmpipe)",
+    "tid": "2026-11-25T13:03:41.141Z"
+  },
+  {
+    "test": "första vy",
+    "punkt": null,
+    "ms": 2670,
+    "tifKlartMs": 986,
+    "bytes": 65536,
+    "renderare": "ANGLE (Mesa, Vulkan 1.4.335 (llvmpipe (LLVM 20.1.2 256 bits) (0x00000000)), llvmpipe)",
+    "tid": "2026-11-25T13:03:44.024Z"
+  },
+  {
+    "test": "inzoomat",
+    "punkt": [
+      59.33,
+      18.9
+    ],
+    "ms": 3878,
+    "tifKlartMs": 2290,
+    "bytes": 327680,
+    "panMs": 841,
+    "renderare": "ANGLE (Mesa, Vulkan 1.4.335 (llvmpipe (LLVM 20.1.2 256 bits) (0x00000000)), llvmpipe)",
+    "tid": "2026-11-25T13:03:49.595Z"
+  },
+  {
+    "test": "inzoomat",
+    "punkt": [
+      60.7,
+      17.3
+    ],
+    "ms": 3167,
+    "tifKlartMs": 1342,
+    "bytes": 196608,
+    "panMs": 827,
+    "renderare": "ANGLE (Mesa, Vulkan 1.4.335 (llvmpipe (LLVM 20.1.2 256 bits) (0x00000000)), llvmpipe)",
+    "tid": "2026-11-25T13:03:54.396Z"
+  },
+  {
+    "test": "inzoomat",
+    "punkt": [
+      56.9,
+      16.5
+    ],
+    "ms": 3163,
+    "tifKlartMs": 1259,
+    "bytes": 131072,
+    "panMs": 798,
+    "renderare": "ANGLE (Mesa, Vulkan 1.4.335 (llvmpipe (LLVM 20.1.2 256 bits) (0x00000000)), llvmpipe)",
+    "tid": "2026-11-25T13:03:59.120Z"
+  }
+]
