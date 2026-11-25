@@ -1,12 +1,12 @@
 IDAG <- as.Date("2026-11-25")
 
 # Katalog med två rader: a-1 (synlig, PanBalticScope, klassad + kontinuerlig) och b-hidden (dold, aldrig publicerad)
-publiceringsmiljo <- function() {
+publiceringsmiljo <- function(crs = "EPSG:3006", kontinuerlig = seq(0, 1, length.out = 400)) {
   rot <- tempfile("pub")
   dir.create(file.path(rot, "källor"), recursive = TRUE)
   dir.create(file.path(rot, "katalog"))
-  file.copy(testraster(c(0, 5, 10)), file.path(rot, "källor", "Torsk lek_klassad.tif"))
-  file.copy(testraster(seq(0, 1, length.out = 400), typ = "FLT4S", nodata = NaN),
+  file.copy(testraster(c(0, 5, 10), crs = crs), file.path(rot, "källor", "Torsk lek_klassad.tif"))
+  file.copy(testraster(kontinuerlig, crs = crs, typ = "FLT4S", nodata = NaN),
             file.path(rot, "källor", "Torsk lek_kontinuerlig.tif"))
   df <- rbind(
     testrad(id = "a-1", titel = "Torsk lek", projekt = "PanBalticScope", sprak = "en",
@@ -236,4 +236,38 @@ test_that("en version utan format (från fas 1) räknas som format 1 och ger ny 
   res <- pub(m)
   expect_identical(res$status, "publicerad")
   expect_identical(res$version, 2L)
+})
+
+test_that("en karta i Web Mercator får visningskopior i SWEREF 99 TM", {
+  m <- publiceringsmiljo(crs = "EPSG:3857")
+  pub(m)
+  v <- post(m)[[1]]$versioner[[1]]
+  vy <- kartmapp(m, "v1", "visning_3006.tif")
+  expect_true(file.exists(vy))
+  expect_identical(epsg_kod(terra::rast(vy)), 3006L)
+  expect_setequal(terra::unique(terra::rast(vy))[[1]], c(0, 5, 10))
+  expect_identical(v$klassad$epsg, 3857L)
+  expect_identical(v$klassad$vy3006$fil, "kartor/panbalticscope/a-1/v1/visning_3006.tif")
+  expect_identical(v$klassad$vy3006$sha256, digest::digest(file = vy, algo = "sha256"))
+  expect_equal(v$klassad$vy3006$bytes, file.size(vy))
+  expect_identical(v$kontinuerlig$vy3006$fil, "kartor/panbalticscope/a-1/v1/radata_3006.tif")
+  expect_true(file.exists(kartmapp(m, "v1", "radata_3006.tif")))
+  expect_true(schema_giltig(i_mal(m, "katalog", "katalog.json")))
+})
+
+test_that("en karta i SWEREF 99 TM får ingen visningskopia", {
+  m <- publiceringsmiljo()
+  pub(m)
+  v <- post(m)[[1]]$versioner[[1]]
+  expect_null(v$klassad$vy3006)
+  expect_null(v$kontinuerlig$vy3006)
+  expect_false(file.exists(kartmapp(m, "v1", "visning_3006.tif")))
+})
+
+test_that("visningskopian skalas inte om", {
+  # Sannolikheter upp till 0,001 lagras som 0 och 1 på skalan × 1000.
+  m <- publiceringsmiljo(crs = "EPSG:3857", kontinuerlig = seq(0, 0.001, length.out = 400))
+  expect_identical(pub(m)$status, "publicerad")
+  vy <- terra::rast(kartmapp(m, "v1", "radata_3006.tif"))
+  expect_setequal(terra::unique(vy)[[1]], c(0, 1))
 })

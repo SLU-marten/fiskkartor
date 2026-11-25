@@ -54,3 +54,12 @@ test('format på en version är ett heltal från 1', () => {
   k.kartor[0].versioner[0].format = 1.5;
   assert.equal(validera(k), false);
 });
+
+test('vy3006 kräver fil, sha256 och bytes', () => {
+  const k = kopia();
+  const f = k.kartor[0].versioner[0].klassad;
+  f.vy3006 = { fil: 'kartor/x/v1/visning_3006.tif', sha256: 'c'.repeat(64), bytes: 10 };
+  assert.equal(validera(k), true, JSON.stringify(validera.errors));
+  delete f.vy3006.sha256;
+  assert.equal(validera(k), false);
+});

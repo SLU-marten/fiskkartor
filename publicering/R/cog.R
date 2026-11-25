@@ -1,6 +1,12 @@
-# Cellstorlek i meter. Grader räknas om geodetiskt vid rastrets mittlatitud; den grövsta axeln gäller.
+# Cellstorlek i markmeter; den grövsta axeln gäller. Grader räknas om geodetiskt vid rastrets
+# mittlatitud. Web Mercator-meter är förstorade med 1/cos(latitud), så de räknas om vid mittlatituden.
 .upplosning_meter <- function(r, epsg) {
   upp <- terra::res(r)
+  if (epsg == 3857L) {
+    e <- terra::ext(r)
+    lat <- 2 * atan(exp((e$ymin + e$ymax) / 2 / 6378137)) - pi / 2
+    return(round(max(upp) * cos(unname(lat)), 1))
+  }
   if (epsg != 4326L) return(max(upp))
   e <- terra::ext(r)
   lat <- (e$ymin + e$ymax) / 2
@@ -60,4 +66,23 @@ statistik <- function(cog, roll = c("klassad", "kontinuerlig")) {
     p2 = round(percentil(2), 3),
     p98 = round(percentil(98), 3)
   )
+}
+
+#' Visningskopia i SWEREF 99 TM av en publicerad COG i ett annat koordinatsystem. Närmaste granne
+#' vid källans cellstorlek i markmeter. Rastret är redan på portalens skala och skrivs med samma
+#' regler (.skriv_portal_cog), aldrig genom skriv_cog():s skalning.
+.skriv_vy3006 <- function(cog, mal, roll = c("klassad", "kontinuerlig"), upplosning) {
+  roll <- match.arg(roll)
+  # gdalwarp läser och skriver i block. terra::project lägger hela källan i minnet, och en
+  # 25 m-karta över kusten (1,9 miljarder celler) ryms inte där.
+  tmp <- tempfile("vy3006", fileext = ".tif")
+  on.exit(unlink(tmp), add = TRUE)
+  klassad <- roll == "klassad"
+  ok <- sf::gdal_utils("warp", cog, tmp, options = c(
+    "-t_srs", "EPSG:3006", "-tr", upplosning, upplosning, "-tap", "-r", "near",
+    "-ot", if (klassad) "Byte" else "UInt16", "-dstnodata", if (klassad) "255" else "65535",
+    "-wm", "512", as.vector(rbind("-co", c(.ARBETSFIL, "BIGTIFF=IF_SAFER")))))
+  if (!isTRUE(ok) || !file.exists(tmp)) stop(sprintf("GDAL kunde inte projicera %s", cog), call. = FALSE)
+  .skriv_portal_cog(terra::rast(tmp), mal, roll)
+  list(sha256 = digest::digest(file = mal, algo = "sha256"), bytes = file.size(mal))
 }

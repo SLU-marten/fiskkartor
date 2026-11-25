@@ -13,9 +13,10 @@
               "fiskbarometern": null, "simblasa": "Ja", "livsmiljo": "Demersal (kustnära)" },
     "aktuellVersion": 1,
     "versioner": [{
-      "version": 1, "publicerad": "2026-11-25",
+      "version": 1, "publicerad": "2026-11-25", "format": 2,
       "klassad": { "fil": "kartor/nmk/berggylta-uppvaxt-vastkusten-2021/v1/visning.tif",
                    "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", "kallaSha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb", "bytes": 25941, "epsg": 25833, "upplosning": 250,
+                   "vy3006": { "fil": "kartor/nmk/berggylta-uppvaxt-vastkusten-2021/v1/visning_3006.tif", "sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc", "bytes": 24310 },
                    "klasser": [{"varde": 5, "namn": "Viktigt", "farg": true}, {"varde": 10, "namn": "Mycket viktigt", "farg": true}] },
       "kontinuerlig": { "fil": "kartor/nmk/berggylta-uppvaxt-vastkusten-2021/v1/radata.tif",
                         "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", "kallaSha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb", "bytes": 3409817, "epsg": 25833, "upplosning": 250,

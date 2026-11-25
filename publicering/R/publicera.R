@@ -46,9 +46,19 @@ mal_lokal <- function(mapp) list(typ = "lokal", mapp = mapp)
   lapply(seq_len(nrow(kl)), function(i) list(varde = kl$varde[i], namn = kl$namn[i], farg = kl$farg[i]))
 }
 
-.fil_post <- function(rel, cog) {
-  list(fil = rel, sha256 = cog$sha256, kallaSha256 = cog$kallaSha256, bytes = cog$bytes,
-       epsg = cog$epsg, upplosning = cog$upplosning)
+.fil_post <- function(rel, cog, vy3006 = NULL) {
+  c(list(fil = rel, sha256 = cog$sha256, kallaSha256 = cog$kallaSha256, bytes = cog$bytes,
+         epsg = cog$epsg, upplosning = cog$upplosning),
+    if (!is.null(vy3006)) list(vy3006 = vy3006))
+}
+
+# Kartor i andra koordinatsystem får en visningskopia i SWEREF 99 TM bredvid originalet
+# (visning.tif -> visning_3006.tif). Nedladdningen är alltid originalet.
+.vy3006 <- function(cog, mapp, rel, fil, roll) {
+  if (cog$epsg == 3006L) return(NULL)
+  kopia <- sub("\\.tif$", "_3006.tif", fil)
+  vy <- .skriv_vy3006(file.path(mapp, fil), file.path(mapp, kopia), roll, cog$upplosning)
+  list(fil = paste(rel, kopia, sep = "/"), sha256 = vy$sha256, bytes = vy$bytes)
 }
 
 .enhet <- function(rad) if (is.na(rad$enhet)) "sannolikhet" else rad$enhet
@@ -85,19 +95,21 @@ mal_lokal <- function(mapp) list(typ = "lokal", mapp = mapp)
   on.exit(if (!klar) unlink(mapp, recursive = TRUE), add = TRUE)
 
   k <- skriv_cog(kallor[["klassad"]], file.path(mapp, "visning.tif"), "klassad", klasser = klasser)
+  vy_k <- .vy3006(k, mapp, rel, "visning.tif", "klassad")
   kontinuerlig <- NULL
   if (!is.na(kallor[["kontinuerlig"]])) {
     radata <- file.path(mapp, "radata.tif")
     skala <- if (is.na(rad$skala_kalla)) NA_integer_ else as.integer(rad$skala_kalla)
     c1 <- skriv_cog(kallor[["kontinuerlig"]], radata, "kontinuerlig", skala_kalla = skala)
     st <- statistik(radata, "kontinuerlig")
-    kontinuerlig <- c(.fil_post(paste(rel, "radata.tif", sep = "/"), c1),
+    kontinuerlig <- c(.fil_post(paste(rel, "radata.tif", sep = "/"), c1,
+                                .vy3006(c1, mapp, rel, "radata.tif", "kontinuerlig")),
                       list(skala = 1000L, enhet = .enhet(rad), min = st$min, max = st$max,
                            p2 = st$p2, p98 = st$p98))
   }
   klar <- TRUE
   list(version = n, publicerad = format(idag, "%Y-%m-%d"), format = .cog_format(),
-       klassad = c(.fil_post(paste(rel, "visning.tif", sep = "/"), k),
+       klassad = c(.fil_post(paste(rel, "visning.tif", sep = "/"), k, vy_k),
                    list(klasser = .klasser_json(klasser))),
        kontinuerlig = kontinuerlig)
 }
