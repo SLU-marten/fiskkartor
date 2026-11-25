@@ -172,8 +172,23 @@
 </section>
 
 <style>
+  /* Kartans namn står kvar överst när panelen skrollas. Bakgrunden täcker texten under.
+     top tar bort panelens utfyllnad (1rem), som annars blir en glipa ovanför rubriken. */
   h1 {
     font-size: 1.35rem;
+    position: sticky;
+    top: -1rem;
+    z-index: 1;
+    margin: 0 -1.25rem 0.75rem;
+    padding: 0.5rem 1.25rem;
+    background: var(--yta);
+    border-bottom: 1px solid var(--linje);
+  }
+  /* På mobil skrollar hela sidan, och fönstret har ingen utfyllnad att ta bort. */
+  @media (max-width: 60rem) {
+    h1 {
+      top: 0;
+    }
   }
   :global(.panel h2) {
     font-size: 1.05rem;

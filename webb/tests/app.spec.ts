@@ -344,6 +344,29 @@ test.describe('panelen', () => {
     await expect(v.nth(1)).toContainText('2026-11-01');
     await expect(v.nth(1).getByRole('link')).toHaveAttribute('href', /#\/karta\/pbs-test\?v=1$/);
   });
+
+  test('kartans namn står kvar överst när panelen skrollas', async ({ page }) => {
+    await cartoTom(page);
+    await page.setViewportSize({ width: 1280, height: 600 });
+    await page.goto(KARTA('torsk-test'));
+    const rubrik = page.locator('.panel h1');
+    await expect(rubrik).toBeVisible();
+    await page.locator('.panel').evaluate((el) => el.scrollTo(0, el.scrollHeight));
+    const lage = await page.evaluate(() => {
+      const panel = document.querySelector('.panel')!;
+      const h1 = panel.querySelector('h1')!;
+      const r = h1.getBoundingClientRect();
+      const overst = document.elementFromPoint(r.left + 4, r.top + r.height / 2);
+      return {
+        skrollat: panel.scrollTop,
+        avstand: r.top - panel.getBoundingClientRect().top,
+        synlig: h1.contains(overst),
+      };
+    });
+    expect(lage.skrollat).toBeGreaterThan(200);
+    expect(Math.abs(lage.avstand)).toBeLessThanOrEqual(2);
+    expect(lage.synlig).toBe(true);
+  });
 });
 
 test.describe('permanenta länkar och specialfall', () => {

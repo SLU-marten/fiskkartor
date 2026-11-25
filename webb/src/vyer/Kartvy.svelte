@@ -141,5 +141,9 @@
       border-right: 0;
       border-bottom: 1px solid var(--linje);
     }
+    /* Sidan skrollar på mobil, så rubriken i panelen ska fastna mot fönstret och inte mot panelen. */
+    .panel {
+      overflow: visible;
+    }
   }
 </style>
