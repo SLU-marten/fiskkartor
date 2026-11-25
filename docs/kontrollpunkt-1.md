@@ -68,6 +68,24 @@ C och E är lika jämna, båda för att webbläsaren inte omprojicerar. De skilj
 - Intoning och förladdning (D) gav ingen mätbar vinst på CPU, men kan minska blinkandet på ett
   riktigt grafikkort. Det är billigt att slå på i plan 2 om du tycker att D känns bättre.
 
+## Blinkandet (din andra bedömning, variant D)
+
+Inspelningen visar att blinkandet kommer från översiktsnivåerna, inte från omprojiceringen. Vid en
+snabb hjulzoom är de skarpa rutorna inte laddade, och OpenLayers visar under tiden en grövre nivå
+förstorad. Grova nivåer täcker mycket större yta än full upplösning, eftersom en grov cell får ett
+värde så fort någon av dess underceller har data. Därför sväller kartan och krymper sedan.
+
+| Nivå | Andel celler med data, MODE (nu) | NEAREST | Andel 10 bland dem, MODE | NEAREST |
+|---|---:|---:|---:|---:|
+| 25 m | 0,30 % | 0,30 % | – | – |
+| 400 m | 1,16 % | 0,29 % | 35 % | 50 % |
+| 3200 m | 3,54 % | 0,29 % | 26 % | 52 % |
+
+MAX ger samma täckning som MODE (båda bortser från nodata) och tar alltså inte bort blinkandet.
+NEAREST är ytriktig och blinkar mindre, men ser glest och prickigt ut utzoomat
+(`docs/oversikter-mode-nearest.png`). Prova:
+<https://slu-marten.github.io/fiskkartor/perf.html?cog=data/test/abborre_klassad_nearest.tif&roll=klassad&epsg=3006&res=25&vy=3006&transition=0&preload=99>
+
 ## Översikterna (MODE) när man zoomar ut
 
 GDAL kan inte bygga COG-översikter med MAX, så de klassade filerna använder MODE (vanligaste klassen).
@@ -89,8 +107,8 @@ steg (R aggregerar, GDAL skriver översikterna) i plan 2.
 |---|---:|---:|---|
 | Klassade kartor (visning.tif) | 75 | 3,0 MB | – |
 | Kontinuerliga råfiler (radata.tif) | 67 | 12,1 MB | storspigg-uppvaxt-ostkusten-2021, 0,52 MB |
-| 25 m-testfiler (test/) | 3 | 67,9 MB | abborre_kontinuerlig.tif, 58,9 MB |
-| Hela dataträdet | 222 | 83,3 MB | |
+| 25 m-testfiler (test/) | 4 | 71,2 MB | abborre_kontinuerlig.tif, 58,9 MB |
+| Hela dataträdet | 223 | 86,6 MB | |
 
 Konverteringstid för 25 m-filerna i byggmiljön (2 kärnor): kontinuerlig 164 s, klassad 63 s.
 
