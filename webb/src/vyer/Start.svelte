@@ -145,14 +145,14 @@
     text-align: left;
     padding: 0.7rem 0.9rem;
     border: 1px solid var(--linje);
-    border-left: 4px solid var(--accent);
+    border-left: 4px solid var(--gron);
     border-radius: 4px;
-    background: var(--papper);
+    background: var(--mjuk);
     cursor: pointer;
   }
   .projekt button[aria-pressed='true'] {
-    background: var(--accent-ljus);
-    border-color: var(--accent);
+    background: var(--markering);
+    border-color: var(--gron);
   }
   .projekt span {
     color: var(--dampad);
@@ -183,7 +183,7 @@
     border: 0;
     background: none;
     padding: 0;
-    color: var(--accent);
+    color: var(--gron);
     text-decoration: underline;
     cursor: pointer;
   }

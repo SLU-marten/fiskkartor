@@ -85,7 +85,7 @@
   }
   label {
     display: block;
-    font-weight: 700;
+    font-weight: 500;
     margin-bottom: 0.35rem;
   }
   input {
@@ -94,7 +94,7 @@
     font: inherit;
     font-size: 1.3rem;
     padding: 0.6rem 0.8rem;
-    border: 2px solid var(--black);
+    border: 2px solid var(--text);
     border-radius: 6px;
     background: var(--yta);
     color: inherit;
@@ -113,7 +113,7 @@
     background: var(--yta);
     border: 1px solid var(--linje);
     border-radius: 6px;
-    box-shadow: 0 6px 18px rgb(23 48 59 / 12%);
+    box-shadow: 0 6px 18px rgb(0 0 0 / 12%);
   }
   li {
     padding: 0.4rem 0.8rem;
@@ -121,6 +121,6 @@
   }
   li[aria-selected='true'],
   li:hover {
-    background: var(--accent-ljus);
+    background: var(--markering);
   }
 </style>

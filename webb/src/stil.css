@@ -1,40 +1,68 @@
-/* Grundstil. Färgerna kommer från sjökort och kartornas egen YlGnBu-skala; SLU:s profil kommer i fas 3. */
+/*
+ * Grundstil enligt SLU:s grafiska profil (stil A: ett återhållsamt verktyg).
+ * Färgerna kommer ur SLU:s färgpalett. Logotypens färger tonas aldrig, och grått är toningar av svart.
+ * Kartornas egna färger (YlGnBu) ligger i karta/stil.ts och följer inte profilen.
+ * tests/farger.test.ts kontrollerar kontrasten för paren som används för text och kontroller.
+ */
 :root {
-  --black: #17303b;
-  --dampad: #4e6470;
-  --papper: #f6f8f7;
+  --text: #222222; /* svart, tonad */
+  --dampad: #595959; /* svart, tonad */
+  --linje: #d9d9d9; /* svart 15 % */
+  --kant: #8c8c8c; /* svart 45 %: kanter på fält och reglage, 3,4:1 */
+  --mjuk: #f5f5f5; /* svart 4 % */
   --yta: #ffffff;
-  --linje: #c9d6d8;
-  --accent: #225ea8;
-  --accent-ljus: #e6eff7;
-  --notis: #fff5dc;
-  --notis-kant: #e0c27a;
-  font-family: 'Atkinson Hyperlegible Next', system-ui, sans-serif;
+  --gron: #00664f; /* Logotyp Natur: knappar, länkar, valt läge och fokus */
+  --gron-mork: #154734; /* Skog: hovring och aktivt läge */
+  --markering: #eef6d6; /* Lindblom, tonad mot vitt */
+  --notis: #fdf6c4; /* Solsken, tonad */
+  --notis-kant: #ffb81c; /* Kåda */
+  --fel: #a80833; /* Rädisa */
+  --fel-yta: #fbd7c9; /* Aprikos */
+  font-family: 'Roboto Condensed', Arial, sans-serif;
   font-size: 100%;
   line-height: 1.5;
-  color: var(--black);
-  background: var(--papper);
+  color: var(--text);
+  background: var(--yta);
 }
 body {
   margin: 0;
 }
 a {
-  color: var(--accent);
+  color: var(--gron);
   text-underline-offset: 0.15em;
 }
+a:hover {
+  color: var(--gron-mork);
+}
 :focus-visible {
-  outline: 3px solid var(--accent);
+  outline: 3px solid var(--gron);
   outline-offset: 2px;
+}
+/* Över kartan ligger den gröna ramen mellan två vita ringar, så att den syns mot mörka kartfärger. */
+.kartyta :focus-visible {
+  box-shadow: 0 0 0 7px var(--yta);
 }
 button {
   font: inherit;
   color: inherit;
 }
+/* Profilen: inga tunga vikter. Roboto Condensed finns i 400 och 500. */
 h1,
 h2,
 h3 {
   line-height: 1.2;
   margin: 0 0 0.5em;
+  font-weight: 500;
+}
+strong,
+b {
+  font-weight: 500;
+}
+/* Löpande text: Merriweather, profilens typsnitt för brödtext. */
+.lopande {
+  font-family: Merriweather, 'Times New Roman', serif;
+  font-weight: 300;
+  line-height: 1.6;
 }
 /* hidden ska alltid dölja, även när en komponent sätter display. */
 [hidden] {

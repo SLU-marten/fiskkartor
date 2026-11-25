@@ -26,14 +26,14 @@
   }
   a {
     display: block;
-    font-weight: 700;
+    font-weight: 500;
     text-decoration: none;
   }
   a:hover {
     text-decoration: underline;
   }
   a[aria-current='page'] {
-    color: var(--black);
+    color: var(--text);
   }
   .kalla {
     display: block;

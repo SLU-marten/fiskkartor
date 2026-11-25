@@ -109,7 +109,7 @@
     font-size: 0.95rem;
   }
   summary {
-    font-weight: 700;
+    font-weight: 500;
     cursor: pointer;
   }
   summary span {

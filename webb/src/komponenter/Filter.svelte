@@ -48,7 +48,7 @@
     padding: 0;
   }
   legend {
-    font-weight: 700;
+    font-weight: 500;
     margin-bottom: 0.4rem;
     padding: 0;
   }
@@ -66,12 +66,12 @@
     font-size: 0.95rem;
   }
   .chips button:hover {
-    border-color: var(--accent);
+    border-color: var(--gron);
   }
   .chips button[aria-pressed='true'] {
-    background: var(--accent);
-    border-color: var(--accent);
-    color: #fff;
+    background: var(--gron);
+    border-color: var(--gron);
+    color: var(--yta);
   }
   .antal {
     opacity: 0.75;
@@ -81,7 +81,7 @@
     border: 0;
     background: none;
     padding: 0;
-    color: var(--accent);
+    color: var(--gron);
     text-decoration: underline;
     cursor: pointer;
   }

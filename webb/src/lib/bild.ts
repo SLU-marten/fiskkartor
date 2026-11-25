@@ -10,8 +10,8 @@ export type LegendData = { titel: string; roll: Roll; klasser: Klass[]; enhet: s
 export const LEGEND = { x: 12, y: 12, kant: 10, rubrik: 20, rad: 22, ruta: 14 };
 const REMSA = 24;
 const BAKGRUND_ATTRIBUTION = '© OpenStreetMap, © CARTO';
-const BLACK = '#17303b';
-const TYPSNITT = "'Atkinson Hyperlegible Next', system-ui, sans-serif";
+const BLACK = '#222222';
+const TYPSNITT = "'Roboto Condensed', Arial, sans-serif";
 
 function arBakgrund(duk: HTMLCanvasElement): boolean {
   return duk.classList.contains('bakgrund') || duk.closest('.bakgrund') !== null;
@@ -52,7 +52,7 @@ function ritaLegend(ctx: CanvasRenderingContext2D, legend: LegendData, maxBredd:
   const { x, y, kant, rubrik, rad, ruta } = LEGEND;
   const poster = legend.roll === 'klassad' ? legendfarger(legend.klasser) : [];
   const rader = legend.roll === 'klassad' ? poster.length : 2;
-  ctx.font = `700 13px ${TYPSNITT}`;
+  ctx.font = `500 13px ${TYPSNITT}`;
   const titel = kortad(ctx, legend.titel, maxBredd - 2 * kant);
   ctx.font = `13px ${TYPSNITT}`;
   const textbredd = Math.max(
@@ -64,11 +64,11 @@ function ritaLegend(ctx: CanvasRenderingContext2D, legend: LegendData, maxBredd:
   const hojd = 2 * kant + rubrik + rader * rad;
   ctx.fillStyle = 'rgb(255 255 255 / 92%)';
   ctx.fillRect(x, y, bredd, hojd);
-  ctx.strokeStyle = '#c9d6d8';
+  ctx.strokeStyle = '#d9d9d9';
   ctx.strokeRect(x + 0.5, y + 0.5, bredd - 1, hojd - 1);
   ctx.fillStyle = BLACK;
   ctx.textBaseline = 'middle';
-  ctx.font = `700 13px ${TYPSNITT}`;
+  ctx.font = `500 13px ${TYPSNITT}`;
   ctx.fillText(titel, x + kant, y + kant + rubrik / 2 - 2);
   ctx.font = `13px ${TYPSNITT}`;
   const forsta = y + kant + rubrik;
@@ -99,6 +99,14 @@ function ritaAttribution(ctx: CanvasRenderingContext2D, text: string, bredd: num
   ctx.font = `12px ${TYPSNITT}`;
   ctx.textBaseline = 'middle';
   ctx.fillText(kortad(ctx, text, bredd - 16), 8, hojd - REMSA / 2);
+}
+
+function typsnittLaddade(): Promise<unknown> {
+  if (typeof document === 'undefined' || !document.fonts) return Promise.resolve();
+  return Promise.all([
+    document.fonts.load("400 13px 'Roboto Condensed'"),
+    document.fonts.load("500 13px 'Roboto Condensed'"),
+  ]).catch(() => undefined);
 }
 
 /**
@@ -145,7 +153,11 @@ export function sparaSomBild(
         fel(e);
       }
     };
-    karta.once('rendercomplete', rita);
-    karta.renderSync();
+    // Texten i bilden ritas med Roboto Condensed. Vänta tills båda vikterna har laddats, annars blir
+    // den första bilden ritad med reservtypsnittet.
+    void typsnittLaddade().then(() => {
+      karta.once('rendercomplete', rita);
+      karta.renderSync();
+    });
   });
 }

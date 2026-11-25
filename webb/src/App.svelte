@@ -79,11 +79,11 @@
     justify-content: space-between;
     gap: 0.5rem 1.5rem;
     padding: 0.75rem 1.25rem;
-    border-bottom: 1px solid #dde3e6;
-    background: #fff;
+    border-bottom: 1px solid var(--linje);
+    background: var(--yta);
   }
   .namn {
-    font-weight: 700;
+    font-weight: 500;
     font-size: 1.15rem;
     text-decoration: none;
     color: inherit;
@@ -93,7 +93,7 @@
     gap: 1.25rem;
   }
   nav a[aria-current='page'] {
-    font-weight: 600;
+    font-weight: 500;
     text-decoration: none;
   }
   .sida {

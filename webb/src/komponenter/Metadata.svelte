@@ -47,7 +47,7 @@
     margin: 0;
   }
   dt {
-    font-weight: 700;
+    font-weight: 500;
     font-size: 0.9rem;
     margin-top: 0.5rem;
   }

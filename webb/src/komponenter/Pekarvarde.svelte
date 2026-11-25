@@ -154,25 +154,27 @@
     bottom: 2.6rem;
     display: grid;
     gap: 0.1rem;
-    padding: 0.4rem 0.7rem;
-    background: rgb(23 48 59 / 90%);
-    color: #fff;
-    border-radius: 4px;
+    padding: 0.5rem 0.75rem;
+    background: var(--yta);
+    color: var(--text);
+    border: 1px solid var(--linje);
+    border-radius: 6px;
     pointer-events: none;
   }
   .pekare[hidden] {
     display: none;
   }
   output {
-    font-weight: 700;
+    font-weight: 500;
     font-size: 1.05rem;
   }
   .tips {
     font-size: 0.85rem;
+    color: var(--dampad);
   }
   .koord {
-    font-size: 0.8rem;
-    opacity: 0.85;
+    font-size: 0.85rem;
+    color: var(--dampad);
     font-variant-numeric: tabular-nums;
   }
 </style>

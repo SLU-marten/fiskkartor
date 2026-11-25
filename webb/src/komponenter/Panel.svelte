@@ -200,7 +200,7 @@
     padding: 0;
   }
   legend {
-    font-weight: 700;
+    font-weight: 500;
     padding: 0;
     margin-bottom: 0.25rem;
   }
@@ -211,7 +211,7 @@
   }
   .reglage {
     display: grid;
-    font-weight: 700;
+    font-weight: 500;
     margin: 1rem 0;
   }
   .reglage input {
@@ -229,9 +229,9 @@
     overflow-wrap: anywhere;
   }
   .knapp {
-    border: 1px solid var(--accent);
+    border: 1px solid var(--gron);
     background: var(--yta);
-    color: var(--accent);
+    color: var(--gron);
     border-radius: 4px;
     padding: 0.3rem 0.7rem;
     cursor: pointer;
