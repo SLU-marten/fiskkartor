@@ -1464,4 +1464,18 @@ test.describe('slutputs av startsidan', () => {
     });
     expect(fel).toEqual([]);
   });
+
+  test('utan träffar visar en knapp alla kartor igen', async ({ page }) => {
+    await page.goto(START() + '?q=xyzq&projekt=NMK');
+    await expect(page.getByText('Inga kartor matchar')).toBeVisible();
+    await page.getByRole('button', { name: 'Visa alla kartor' }).click();
+    await expect(page.locator('.artkort')).toHaveCount(3);
+    await expect(page.getByRole('combobox')).toHaveValue('');
+    await expect(page.locator('#traffrubrik')).toBeFocused();
+  });
+
+  test('filtret säger till när inga filter passar sökningen', async ({ page }) => {
+    await page.goto(START() + '?q=xyzq');
+    await expect(page.locator('.filterkort').getByText('Inga filter passar sökningen.')).toBeVisible();
+  });
 });

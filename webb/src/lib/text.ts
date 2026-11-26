@@ -61,6 +61,8 @@ export const TEXT = {
   sok_knapp: { sv: 'Sök', en: 'Search' },
   rensa_filter: { sv: 'Rensa filter', en: 'Clear filters' },
   visa_farre: { sv: 'Visa färre', en: 'Show fewer' },
+  visa_alla_kartor: { sv: 'Visa alla kartor', en: 'Show all maps' },
+  inga_filter: { sv: 'Inga filter passar sökningen.', en: 'No filters match the search.' },
   inga_traffar: {
     sv: 'Inga kartor matchar. Ta bort ett filter eller ändra sökningen.',
     en: 'No maps match. Remove a filter or change the search.',

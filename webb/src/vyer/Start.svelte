@@ -3,6 +3,7 @@
   import Filter from '../komponenter/Filter.svelte';
   import Lasa from '../komponenter/Lasa.svelte';
   import Sokfalt from '../komponenter/Sokfalt.svelte';
+  import { tick } from 'svelte';
   import { grupperaArter } from '../lib/artgrupper';
   import { FALTNAMN, type Faltnamn, type Karta } from '../lib/katalog';
   import { byggRutt, medParametrar, skrivRutt, type Rutt, type Sprak } from '../lib/rutt';
@@ -24,6 +25,8 @@
     >,
   );
   const harFilter = $derived(FALTNAMN.some((f) => filter[f].length > 0));
+  // Arten är dold i filtret; finns inget annat fält med värden säger filterkortet det i stället.
+  const harFasetter = $derived(FALTNAMN.some((f) => filter[f].length > 0 || (f !== 'art' && faset[f].length > 0)));
 
   // Kartorna som artkort. Högst MAX kort först; en ny sökning eller ett nytt filter visar åter MAX.
   const MAX = 12;
@@ -64,6 +67,12 @@
   function rensa() {
     skrivRutt(medParametrar(rutt, Object.fromEntries(FALTNAMN.map((f) => [f, null]))), 'ny');
   }
+
+  // Utan träffar: töm sökningen och filtren och flytta fokus till rubriken över alla kort.
+  function visaAllt() {
+    skrivRutt(medParametrar(rutt, { q: null, ...Object.fromEntries(FALTNAMN.map((f) => [f, null])) }), 'ny');
+    void tick().then(() => document.getElementById('traffrubrik')?.focus());
+  }
 </script>
 
 <section class="hero">
@@ -90,7 +99,11 @@
   <aside class="filterkort" aria-label={t('filter_rubrik', lang)}>
     <details open={bred || harFilter}>
       <summary><h2>{t('filter_rubrik', lang)}</h2></summary>
-      <Filter fasetter={faset} {filter} {lang} onvaxla={vaxla} dolda={['art']} fler={['rodlista', 'livsmiljo', 'simblasa']} />
+      {#if harFasetter}
+        <Filter fasetter={faset} {filter} {lang} onvaxla={vaxla} dolda={['art']} fler={['rodlista', 'livsmiljo', 'simblasa']} />
+      {:else}
+        <p class="dampad">{t('inga_filter', lang)}</p>
+      {/if}
     </details>
   </aside>
   <section class="arter" aria-live="polite">
@@ -110,7 +123,10 @@
         <button type="button" class="visa-alla" onclick={() => (allaArter = true)}>{visaAllaArter(grupper.length, lang)}</button>
       {/if}
     {:else}
-      <p>{t('inga_traffar', lang)}</p>
+      <div class="tomt">
+        <p>{t('inga_traffar', lang)}</p>
+        <button type="button" class="visa-alla" onclick={visaAllt}>{t('visa_alla_kartor', lang)}</button>
+      </div>
     {/if}
   </section>
   <div class="bara-mobil"><Lasa {lang} lank={byggRutt({ vy: 'om', q: sprakQ })} id="lasa-mobil" /></div>
@@ -211,6 +227,27 @@
   .visa-alla:hover {
     background: var(--tema);
     color: #ffffff;
+  }
+  .tomt {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+    padding: 1.5rem;
+    background: var(--yta);
+    border: 1px solid var(--kortkant);
+    border-radius: 4px;
+  }
+  .tomt p {
+    margin: 0;
+  }
+  .tomt .visa-alla {
+    align-self: flex-start;
+    margin-top: 0.5rem;
+  }
+  .dampad {
+    margin: 0;
+    color: var(--dampad);
   }
   .bara-mobil {
     display: none;
