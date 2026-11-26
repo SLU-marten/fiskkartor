@@ -615,3 +615,20 @@ it('arVuxen gäller bara vuxen', () => {
 - [ ] **Step 5:** Kör `npx vitest run`, `npm run build` och hela `npx playwright test`. Rätta tester som
   byggde på den gamla startsidan (`data-testid="traff"` finns på knapparna, en per karta).
 - [ ] **Step 6: Commit** `feat(webb): ny startsida med artkort`.
+
+### Task 13: Den externa granskningens synpunkter på startsidan (01:29)
+
+- **Kartlänkarna skiljs från filterknapparna.** De får rundade hörn (4 px, inte piller), bakgrunden
+  `--sida`, text i `--tema` (4,8:1) och en liten kartikon. Filterknapparna behåller pillerformen.
+- **Ett kort med bara en karta är klickbart i sin helhet**, med en länk som täcker kortet.
+- **Etiketter som krockar inom ett kort** får årtalet: "Uppväxt ostkusten (2021)". Krockar de ändå
+  får de källan och årtalet.
+- **Rödlista, Livsmiljö och Simblåsa** hamnar under en hopfälld "Fler filter". Den är öppen om något
+  av fälten har valda värden.
+- **På mobil** blir kartlänkar och filterknappar minst 44 px höga.
+- **Om-sidan** anger källan till silhuetterna: Artfaktas illustrationer, SLU Artdatabanken.
+
+Tester:
+- enhetstest för krockande etiketter;
+- E2E för kartlänkens stil och det klickbara enkelkortet, "Fler filter", 44 px på mobil och källan
+  på Om-sidan.
