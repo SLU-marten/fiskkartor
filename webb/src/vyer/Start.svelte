@@ -4,7 +4,7 @@
   import Traffar from '../komponenter/Traffar.svelte';
   import { FALTNAMN, type Faltnamn, type Karta } from '../lib/katalog';
   import { byggRutt, medParametrar, skrivRutt, type Rutt, type Sprak } from '../lib/rutt';
-  import { fasetter, filterFranQ, forslag, sok, type Fasett } from '../lib/sok';
+  import { fasetter, filterFranQ, forslag, lika, sok, type Fasett } from '../lib/sok';
   import { antalKartor, t } from '../lib/text';
 
   type Props = { kartor: Karta[]; rutt: Rutt; lang: Sprak };
@@ -62,7 +62,8 @@
     const p = new URLSearchParams(rutt.q);
     const valda = p.getAll(falt);
     p.delete(falt);
-    for (const v of valda.includes(varde) ? valda.filter((x) => x !== varde) : [...valda, varde]) p.append(falt, v);
+    const vald = valda.some((x) => lika(x, varde));
+    for (const v of vald ? valda.filter((x) => !lika(x, varde)) : [...valda, varde]) p.append(falt, v);
     skrivRutt({ ...rutt, q: p }, 'ny');
   }
 

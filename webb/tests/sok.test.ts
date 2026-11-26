@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { FALTNAMN, type Faltnamn, type Karta } from '../src/lib/katalog';
-import { fasetter, forslag, normalisera, sok, synligaVarden, tomtFilter } from '../src/lib/sok';
+import { fasetter, forslag, lika, normalisera, sok, synligaVarden, tomtFilter } from '../src/lib/sok';
 
 function karta(id: string, titel: string, falt: Record<string, string | null>, ovrigt: Partial<Karta> = {}): Karta {
   return {
@@ -85,5 +85,36 @@ describe('filterfälten', () => {
   it('Fiskbarometern är inget filter (värdena är långa bedömningstexter)', () => {
     expect(FALTNAMN).not.toContain('fiskbarometern');
     expect(Object.keys(fasetter([]))).not.toContain('fiskbarometern');
+  });
+});
+
+describe('värden som bara skiljer sig i skiftläge', () => {
+  const MILJO = [
+    karta('a', 'A', { art: 'A', livsmiljo: 'Demersal (bottennära)' }),
+    karta('b', 'B', { art: 'B', livsmiljo: 'Demersal (bottennära)' }),
+    karta('c', 'C', { art: 'C', livsmiljo: 'Demersal (Bottennära)' }),
+    karta('d', 'D', { art: 'D', livsmiljo: 'Pelagisk' }),
+  ];
+
+  it('fasetter slår ihop värden som bara skiljer sig i skiftläge', () => {
+    expect(fasetter(MILJO).livsmiljo).toEqual([
+      { varde: 'Demersal (bottennära)', antal: 3 },
+      { varde: 'Pelagisk', antal: 1 },
+    ]);
+  });
+
+  it('vid lika antal vinner den första stavningen i bokstavsordning', () => {
+    const tva = [karta('a', 'A', { livsmiljo: 'Bentisk (Bottenlevande)' }), karta('b', 'B', { livsmiljo: 'Bentisk (bottenlevande)' })];
+    expect(fasetter(tva).livsmiljo).toEqual([{ varde: 'Bentisk (bottenlevande)', antal: 2 }]);
+  });
+
+  it('sok matchar filtervärden utan hänsyn till skiftläge', () => {
+    const filter = { ...tomtFilter(), livsmiljo: ['Demersal (bottennära)'] };
+    expect(ids(sok(MILJO, '', filter))).toEqual(['a', 'b', 'c']);
+  });
+
+  it('lika jämför utan skiftläge och blanksteg i kanterna', () => {
+    expect(lika(' Demersal (Bottennära)', 'demersal (bottennära)')).toBe(true);
+    expect(lika('Demersal', 'Pelagisk')).toBe(false);
   });
 });

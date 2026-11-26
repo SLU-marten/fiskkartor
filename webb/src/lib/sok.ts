@@ -11,6 +11,11 @@ export function normalisera(s: string): string {
   return s.toLowerCase().normalize('NFD').replace(/\p{M}/gu, '').replace(/\s+/g, ' ').trim();
 }
 
+/** Sant när två filtervärden är lika utan hänsyn till skiftläge och blanksteg i kanterna. */
+export function lika(a: string, b: string): boolean {
+  return a.trim().toLocaleLowerCase('sv') === b.trim().toLocaleLowerCase('sv');
+}
+
 export function tomtFilter(): Filter {
   return Object.fromEntries(FALTNAMN.map((f) => [f, []])) as unknown as Filter;
 }
@@ -38,7 +43,8 @@ export function sok(kartor: Karta[], q: string, filter: Filter): Karta[] {
   return kartor.filter((k) => {
     for (const f of FALTNAMN) {
       const valda = filter[f];
-      if (valda.length && !valda.includes(faltvarde(k, f) ?? '')) return false;
+      const v = faltvarde(k, f) ?? '';
+      if (valda.length && !valda.some((x) => lika(x, v))) return false;
     }
     if (!ord.length) return true;
     const text = sokbarText(k);
@@ -46,17 +52,28 @@ export function sok(kartor: Karta[], q: string, filter: Filter): Karta[] {
   });
 }
 
-/** Värden och antal per filterfält bland kartorna, vanligast först och sedan i bokstavsordning. */
+/**
+ * Värden och antal per filterfält bland kartorna, vanligast först och sedan i bokstavsordning.
+ * Värden som bara skiljer sig i skiftläge räknas som ett; den vanligaste stavningen visas, och vid
+ * lika antal den första i bokstavsordning.
+ */
 export function fasetter(kartor: Karta[]): Record<Faltnamn, Fasett> {
   const ut = {} as Record<Faltnamn, Fasett>;
   for (const f of FALTNAMN) {
-    const antal = new Map<string, number>();
+    const grupper = new Map<string, Map<string, number>>();
     for (const k of kartor) {
-      const v = faltvarde(k, f);
-      if (v) antal.set(v, (antal.get(v) ?? 0) + 1);
+      const v = faltvarde(k, f)?.trim();
+      if (!v) continue;
+      const nyckel = v.toLocaleLowerCase('sv');
+      const stavningar = grupper.get(nyckel) ?? new Map<string, number>();
+      stavningar.set(v, (stavningar.get(v) ?? 0) + 1);
+      grupper.set(nyckel, stavningar);
     }
-    ut[f] = [...antal]
-      .map(([varde, n]) => ({ varde, antal: n }))
+    ut[f] = [...grupper.values()]
+      .map((stavningar) => {
+        const [varde] = [...stavningar].sort((a, b) => b[1] - a[1] || sv.compare(a[0], b[0]))[0];
+        return { varde, antal: [...stavningar.values()].reduce((s, n) => s + n, 0) };
+      })
       .sort((a, b) => b.antal - a.antal || sv.compare(a.varde, b.varde));
   }
   return ut;
@@ -66,7 +83,7 @@ export function fasetter(kartor: Karta[]): Record<Faltnamn, Fasett> {
 export function synligaVarden(fasett: Fasett, valda: string[], visaAlla: boolean, max = 8): Fasett {
   if (visaAlla || fasett.length <= max) return fasett;
   const topp = fasett.slice(0, max);
-  return [...topp, ...fasett.slice(max).filter((v) => valda.includes(v.varde))];
+  return [...topp, ...fasett.slice(max).filter((v) => valda.some((x) => lika(x, v.varde)))];
 }
 
 /** Förslag medan man skriver: titlar, artnamn och vetenskapliga namn som innehåller texten. */

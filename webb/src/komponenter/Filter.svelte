@@ -1,7 +1,7 @@
 <script lang="ts">
   import { FALTNAMN, type Faltnamn } from '../lib/katalog';
   import type { Fasett, Filter } from '../lib/sok';
-  import { synligaVarden } from '../lib/sok';
+  import { lika, synligaVarden } from '../lib/sok';
   import type { Sprak } from '../lib/rutt';
   import { faltEtikett, t, visaAlla } from '../lib/text';
 
@@ -22,11 +22,11 @@
       <legend>{faltEtikett(falt, lang)}</legend>
       <div class="chips">
         {#each varden as v (v.varde)}
-          <button type="button" aria-pressed={filter[falt].includes(v.varde)} onclick={() => onvaxla(falt, v.varde)}>
+          <button type="button" aria-pressed={filter[falt].some((x) => lika(x, v.varde))} onclick={() => onvaxla(falt, v.varde)}>
             {v.varde} <span class="antal">({v.antal})</span>
           </button>
         {/each}
-        {#each filter[falt].filter((x) => !fasetter[falt].some((v) => v.varde === x)) as x (x)}
+        {#each filter[falt].filter((x) => !fasetter[falt].some((v) => lika(v.varde, x))) as x (x)}
           <button type="button" aria-pressed="true" onclick={() => onvaxla(falt, x)}>
             {x} <span class="antal">(0)</span>
           </button>
