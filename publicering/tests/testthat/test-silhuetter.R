@@ -1,7 +1,7 @@
 # Testbild: 200 x 100 bildpunkter. En ellips med mitten (100, 50) och radierna 70 och 30 (x 30–170,
 # y 20–80) i färgen `fisk`, en fläck med radien 10 mitt i i färgen `flack`, resten i `bakgrund`.
 # alfa = TRUE ger ett fjärde band som är 0 utanför ellipsen och 255 innanför.
-testbild <- function(bakgrund, fisk, flack = fisk, alfa = FALSE) {
+testbild <- function(bakgrund, fisk, flack = fisk, alfa = FALSE, tackande = FALSE) {
   r <- terra::rast(nrows = 100, ncols = 200, xmin = 0, xmax = 200, ymin = 0, ymax = 100, nlyrs = if (alfa) 4 else 3)
   xy <- terra::xyFromCell(r, seq_len(terra::ncell(r)))
   x <- xy[, 1]; y <- 100 - xy[, 2]
@@ -10,7 +10,7 @@ testbild <- function(bakgrund, fisk, flack = fisk, alfa = FALSE) {
   v <- matrix(rep(bakgrund, each = terra::ncell(r)), ncol = 3)
   v[i_ellips, ] <- matrix(rep(fisk, each = sum(i_ellips)), ncol = 3)
   v[i_flack, ] <- matrix(rep(flack, each = sum(i_flack)), ncol = 3)
-  if (alfa) v <- cbind(v, ifelse(i_ellips, 255, 0))
+  if (alfa) v <- cbind(v, if (tackande) 255 else ifelse(i_ellips, 255, 0))
   terra::values(r) <- v
   f <- file.path(withr::local_tempdir(.local_envir = parent.frame()), "x.png")
   terra::writeRaster(r, f, datatype = "INT1U", filetype = "PNG")
@@ -24,6 +24,13 @@ test_that("silhuett skär ut fisken mot vit bakgrund och behåller en ljus buk",
   expect_lte(abs(s$h - 61L), 2)
   expect_match(s$d, "^M[0-9]")
   expect_equal(lengths(regmatches(s$d, gregexpr("M", s$d))), 1)
+})
+
+test_that("silhuett klarar en bild med alfakanal men ogenomskinlig vit bakgrund", {
+  # Många program sparar en vit PNG med alfakanal. Då avgör färgen, inte alfakanalen.
+  s <- silhuett(testbild(bakgrund = c(255, 255, 255), fisk = c(60, 60, 60), alfa = TRUE, tackande = TRUE))
+  expect_lte(abs(s$w - 141L), 2)
+  expect_lte(abs(s$h - 61L), 2)
 })
 
 test_that("silhuett klarar svart bakgrund", {

@@ -55,3 +55,16 @@ it('etiketter som krockar inom ett kort får årtalet, och annars källan', () =
     'Uppväxt ostkusten (PanBalticScope, 2024)',
   ]);
 });
+
+it('länknamnet är hela kartnamnet och innehåller etiketten, också när etiketter krockar', () => {
+  const k1 = { ...karta('g1', 'Gädda uppväxt ostkusten', 'Gädda'), ar: 2021 };
+  const k2 = { ...karta('g2', 'Gädda uppväxt ostkusten', 'Gädda'), ar: 2024 };
+  const k3 = { ...karta('g3', 'Gädda uppväxt ostkusten', 'Gädda'), ar: 2024, kalla: 'PanBalticScope' };
+  const g = grupperaArter([k1, k2, k3, karta('g4', 'Gädda vuxen', 'Gädda')]).find((x) => x.namn === 'Gädda')!;
+  const namn = g.kartor.map((k) => k.namn);
+  expect(new Set(namn).size).toBe(4);
+  for (const k of g.kartor) expect(k.namn.toLocaleLowerCase('sv')).toContain(k.etikett!.toLocaleLowerCase('sv'));
+  expect(g.kartor.find((k) => k.karta.id === 'g4')!.namn).toBe('Gädda vuxen');
+  expect(g.kartor.find((k) => k.karta.id === 'g1')!.namn).toBe('Gädda uppväxt ostkusten (2021)');
+});
+

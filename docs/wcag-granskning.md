@@ -46,7 +46,9 @@ Granskningen sammanfattas i tillgänglighetsredogörelsen på `#/tillganglighet`
 ## Fas 4: havslooken
 
 Fas 4 gav appen SLU:s havsfärger, fisksiluetter, en meny som glider in på telefon och en ny startsida med artkort.
-Axe och hela testsviten kördes igen, med 0 överträdelser. Det här kontrollerades särskilt:
+Axe och hela testsviten kördes igen, med 0 överträdelser. Axe körs nu också på startsidan med ett
+valt filter, eftersom slutgranskningen hittade att antalet på ett valt filter (vitt med 75 % täckning
+på Havsvik, 3,7:1) inte klarade kravet; antalet är nu helt vitt. Det här kontrollerades särskilt:
 
 | Kriterium | Vad som kontrollerades | Hur | Resultat |
 |---|---|---|---|
@@ -55,9 +57,12 @@ Axe och hela testsviten kördes igen, med 0 överträdelser. Det här kontroller
 | 1.4.11 Kontrast för icke-text | Kanter på filterknapparna och sökfältet | `farger.test.ts` | Kanterna är 3,4:1 mot vitt. Kortens kanter är dekor och avgränsar inget reglage. |
 | 1.4.10 Omflödning | Startsidans rutnät och filterkort vid 320 px | test `omflödning vid 320 px` | Ingen vågrät rullning. Långa filtervärden radbryts inuti knappen. |
 | 2.1.1 Tangentbord, 2.4.3 Fokusordning | Menyn på telefon | tester i `app.spec.ts` | Fokus flyttas till Stäng menyn när menyn öppnas. Escape och Stäng menyn stänger den och lämnar fokus på Meny, och menyn stängs när fokus lämnar den. Stängd är menyn `visibility: hidden` och går inte att tabba till. |
+| 2.4.3 Fokusordning | Startsidans Visa alla och filtren | tester i `app.spec.ts` | Visa alla flyttar fokus till det första nya kortet. Filtrera och Fler filter fälls inte ihop när det sista valda värdet väljs bort, så fokus stannar på knappen. |
+| 2.5.3 Etikett i namn | Kartlänkarna i artkorten | tester i `app.spec.ts` och `artgrupper.test.ts` | Länkens namn är hela kartnamnet och innehåller knappens synliga text. När två etiketter i ett kort krockar får namnet samma tillägg (årtal eller källa) som etiketten. En karta utan art heter "Öppna kartan:" och kartans namn. |
+| 4.1.3 Statusmeddelanden | Antalet över artkorten | test i `app.spec.ts` | Bara rubriken med antalet arter och kartor är en levande region, så att Visa alla inte läser upp alla nya kort. |
 | 2.4.7 Synligt fokus | Fokusramen i sidhuvudet, menyn och sidfoten | genomläsning och tester | På Havsvik och Havsdjup är ramen vit. |
 | 2.5.5 Målstorlek (AAA, frivilligt) | Kartlänkar, filterknappar och sökknappen på telefon | test `mobil: kartlänkar och filterknappar är minst 44 px höga` | Minst 44 px höga. |
-| 4.1.2 Namn, roll och värde | Kartlänkarna i artkorten och sökknappen | tester | Länken heter hela kartans namn, även när kortet visar en kortare etikett. Sökknappen heter Sök också när den bara visar förstoringsglaset. |
+| 4.1.2 Namn, roll och värde | Sökknappen | tester | Sökknappen heter Sök också när den bara visar förstoringsglaset. |
 
 ## Slutgranskning
 

@@ -32,12 +32,17 @@
   const MAX = 12;
   const grupper = $derived(grupperaArter(traffar));
   const antalArter = $derived(grupper.filter((g) => g.art).length);
-  let allaArter = $state(false);
-  $effect(() => {
-    void rutt.q.toString();
-    allaArter = false;
-  });
+  // Att alla visas står i adressen (alla=1), så att Tillbaka från en karta visar samma lista. En ny
+  // sökning eller ett nytt filter tar bort det.
+  const allaArter = $derived(rutt.q.get('alla') === '1');
   const synliga = $derived(allaArter ? grupper : grupper.slice(0, MAX));
+
+  async function visaAllaKort() {
+    skrivRutt(medParametrar(rutt, { alla: '1' }), 'ersatt');
+    await tick();
+    // Fokus till det första nya kortet, så att Tab fortsätter där listan växte.
+    document.querySelectorAll<HTMLElement>('ul.rutnat > li')[MAX]?.querySelector<HTMLElement>('a')?.focus();
+  }
 
   const sprakQ = $derived(new URLSearchParams(lang === 'en' ? { lang: 'en' } : {}));
 
@@ -45,6 +50,11 @@
   // platshållaren i sökfältet kortare, så att den får plats.
   const bred = typeof matchMedia === 'function' ? matchMedia('(min-width: 52rem)').matches : true;
   const telefon = typeof matchMedia === 'function' ? matchMedia('(max-width: 40rem)').matches : false;
+  // Filtret öppnas när ett filter är valt, men fälls aldrig ihop av sig själv.
+  let filterOppet = $state(bred);
+  $effect.pre(() => {
+    if (harFilter) filterOppet = true;
+  });
 
   // Sökningen och filtren följer med till kartvyn, så att listan där visar samma träffar.
   function kartlank(id: string): string {
@@ -52,25 +62,26 @@
   }
 
   function skriv(text: string) {
-    skrivRutt(medParametrar(rutt, { q: text.trim() ? text : null }), 'ersatt');
+    skrivRutt(medParametrar(rutt, { q: text.trim() ? text : null, alla: null }), 'ersatt');
   }
 
   function vaxla(falt: Faltnamn, varde: string) {
     const p = new URLSearchParams(rutt.q);
     const valda = p.getAll(falt);
     p.delete(falt);
+    p.delete('alla');
     const vald = valda.some((x) => lika(x, varde));
     for (const v of vald ? valda.filter((x) => !lika(x, varde)) : [...valda, varde]) p.append(falt, v);
     skrivRutt({ ...rutt, q: p }, 'ny');
   }
 
   function rensa() {
-    skrivRutt(medParametrar(rutt, Object.fromEntries(FALTNAMN.map((f) => [f, null]))), 'ny');
+    skrivRutt(medParametrar(rutt, { alla: null, ...Object.fromEntries(FALTNAMN.map((f) => [f, null])) }), 'ny');
   }
 
   // Utan träffar: töm sökningen och filtren och flytta fokus till rubriken över alla kort.
   function visaAllt() {
-    skrivRutt(medParametrar(rutt, { q: null, ...Object.fromEntries(FALTNAMN.map((f) => [f, null])) }), 'ny');
+    skrivRutt(medParametrar(rutt, { q: null, alla: null, ...Object.fromEntries(FALTNAMN.map((f) => [f, null])) }), 'ny');
     void tick().then(() => document.getElementById('traffrubrik')?.focus());
   }
 </script>
@@ -97,7 +108,7 @@
 
 <div class="behallare innehall">
   <aside class="filterkort" aria-label={t('filter_rubrik', lang)}>
-    <details open={bred || harFilter}>
+    <details bind:open={filterOppet}>
       <summary><h2>{t('filter_rubrik', lang)}</h2></summary>
       {#if harFasetter}
         <Filter fasetter={faset} {filter} {lang} onvaxla={vaxla} dolda={['art']} fler={['rodlista', 'livsmiljo', 'simblasa']} />
@@ -106,9 +117,9 @@
       {/if}
     </details>
   </aside>
-  <section class="arter" aria-live="polite">
+  <section class="arter">
     <div class="rad">
-      <h2 id="traffrubrik" tabindex="-1">{antalArterKartor(antalArter, traffar.length, lang)}</h2>
+      <h2 id="traffrubrik" tabindex="-1" aria-live="polite">{antalArterKartor(antalArter, traffar.length, lang)}</h2>
       {#if harFilter}
         <button type="button" class="rensa" onclick={rensa}>{t('rensa_filter', lang)}</button>
       {/if}
@@ -120,7 +131,7 @@
         {/each}
       </ul>
       {#if grupper.length > synliga.length}
-        <button type="button" class="visa-alla" onclick={() => (allaArter = true)}>{visaAllaArter(grupper.length, lang)}</button>
+        <button type="button" class="visa-alla" onclick={visaAllaKort}>{visaAllaArter(grupper.length, lang)}</button>
       {/if}
     {:else}
       <div class="tomt">

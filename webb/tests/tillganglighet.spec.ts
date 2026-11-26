@@ -25,6 +25,7 @@ const klicka = (namn: string) => async (page: Page) => {
 const DATOR: Fall[] = [
   { namn: 'startsidan', adress: () => START(server.url) },
   { namn: 'startsidan med sökning', adress: () => START(server.url, 'q=torsk') },
+  { namn: 'startsidan med valt filter', adress: () => START(server.url, 'rodlista=Starkt%20hotad%20(EN)') },
   { namn: 'klassad karta', adress: () => KARTA(server.url, 'torsk-test'), karta: true },
   { namn: 'kontinuerlig karta', adress: () => KARTA(server.url, 'torsk-test', 'lager=kontinuerlig'), karta: true },
   { namn: 'karta med Lagerval öppen', adress: () => KARTA(server.url, 'torsk-test'), karta: true, sedan: klicka('Lagerval') },

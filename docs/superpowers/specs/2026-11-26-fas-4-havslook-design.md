@@ -248,12 +248,15 @@ att visa alla (01:22). Projektkorten under sökrutan tas bort (01:11).
 - **Ett kort per art:**
   - artens silhuett i Havsvik, namnet och det latinska namnet;
   - en knapp per karta. Knappens text är kartans namn utan artnamnet, till exempel "Uppväxt
-    västkusten". Länkens tillgängliga namn är hela kartnamnet.
+    västkusten". Länkens tillgängliga namn är hela kartnamnet, och det ska innehålla knappens text
+    (WCAG 2.5.3): krockar två etiketter får namnet samma tillägg som etiketten, och en karta utan art
+    heter "Öppna kartan:" och kartans namn. (Rättat efter slutgranskningen.)
   - Korten står i bokstavsordning, och knapparna i kartnamnets ordning.
   - En karta utan art får ett eget kort med kartans namn och knappen "Öppna kartan".
   - På mobil står silhuetten till vänster om namnet.
 - **Rubriken** ovanför korten anger antalet arter och kartor, till exempel "58 arter, 75 kartor".
 - **Högst 12 kort visas först.** Fler visas med knappen "Visa alla 58 arter" längst ned. Knappen
   visas också vid sökning och filter, om träffarna är fler än 12. En ny sökning eller ett nytt filter
-  visar åter 12.
+  visar åter 12. Att alla visas står i adressen (`alla=1`), så att Tillbaka från en karta visar samma
+  lista, och fokus flyttas till det första nya kortet.
 - **Kartvyns lista** behåller artikonerna.

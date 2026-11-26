@@ -1,4 +1,4 @@
-import { expect, test } from '@playwright/test';
+import { expect, test, type Page } from '@playwright/test';
 import { readFileSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -1495,3 +1495,68 @@ test.describe('slutputs av startsidan', () => {
     expect(tg.vikt).toBe(start);
   });
 });
+
+test.describe('rättelser efter slutgranskningen', () => {
+  const femtonArter = async (page: Page) => {
+    const katalog = JSON.parse(readFileSync(resolve(WEBB, 'tests', 'fixtures', 'data', 'katalog', 'katalog.json'), 'utf8'));
+    const mall = katalog.kartor.find((k: { id: string }) => k.id === 'torsk-test');
+    const arter = ['Abborre', 'Berggylta', 'Gädda', 'Gös', 'Kolja', 'Lax', 'Makrill', 'Mört', 'Piggvar', 'Rödspätta', 'Sill', 'Sutare', 'Torsk', 'Vitling', 'Ål'];
+    katalog.kartor = arter.map((art, i) => ({ ...mall, id: `art-${i}`, titel: `${art} uppväxt`, falt: { ...mall.falt, art } }));
+    await page.route('**/katalog/katalog.json', (r) => r.fulfill({ body: JSON.stringify(katalog), contentType: 'application/json' }));
+  };
+
+  test('Fler filter fälls inte ihop när det sista valda värdet väljs bort', async ({ page }) => {
+    await page.goto(START());
+    await page.locator('summary', { hasText: 'Fler filter' }).click();
+    const knapp = page.getByRole('group', { name: 'Rödlista' }).getByRole('button').first();
+    await knapp.click();
+    await expect(knapp).toHaveAttribute('aria-pressed', 'true');
+    await knapp.click();
+    await expect(knapp).toHaveAttribute('aria-pressed', 'false');
+    await expect(page.locator('details.fler-filter')).toHaveJSProperty('open', true);
+    await expect(knapp).toBeFocused();
+  });
+
+  test('mobil: Filtrera fälls inte ihop när det sista filtret väljs bort', async ({ page }) => {
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page.goto(START());
+    await page.locator('summary', { hasText: 'Filtrera' }).click();
+    const knapp = page.getByRole('group', { name: 'Källa' }).getByRole('button').first();
+    await knapp.click();
+    await knapp.click();
+    await expect(knapp).toHaveAttribute('aria-pressed', 'false');
+    await expect(page.locator('.filterkort > details')).toHaveJSProperty('open', true);
+    await expect(knapp).toBeFocused();
+  });
+
+  test('Visa alla flyttar fokus till det första nya kortet', async ({ page }) => {
+    await femtonArter(page);
+    await page.goto(START());
+    await page.getByRole('button', { name: 'Visa alla 15 arter' }).click();
+    await expect(page.locator('ul.rutnat > li').nth(12).getByRole('link').first()).toBeFocused();
+  });
+
+  test('bara antalet över korten läses upp när träffarna ändras', async ({ page }) => {
+    await page.goto(START());
+    await expect(page.locator('section.arter')).not.toHaveAttribute('aria-live', /.*/);
+    await expect(page.locator('#traffrubrik')).toHaveAttribute('aria-live', 'polite');
+  });
+
+  test('länken till en karta utan art börjar med sin synliga text', async ({ page }) => {
+    await page.goto(START());
+    await expect(page.getByRole('link', { name: 'Öppna kartan: Trålfångst, en klass (test)', exact: true })).toBeVisible();
+  });
+
+  test('Visa alla finns kvar efter Tillbaka från en karta, men inte efter en ny sökning', async ({ page }) => {
+    await femtonArter(page);
+    await page.goto(START());
+    await page.getByRole('button', { name: 'Visa alla 15 arter' }).click();
+    await page.getByRole('link', { name: 'Vitling uppväxt' }).click();
+    await expect(page).toHaveURL(/#\/karta\/art-13/);
+    await page.goBack();
+    await expect(page.locator('.artkort')).toHaveCount(15);
+    await page.getByRole('combobox').fill('uppväxt');
+    await expect(page.locator('.artkort')).toHaveCount(12);
+  });
+});
+

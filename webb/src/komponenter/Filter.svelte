@@ -20,6 +20,12 @@
   const forsta = $derived(FALTNAMN.filter((f) => !fler.includes(f) && visas(f)));
   const ovriga = $derived(FALTNAMN.filter((f) => fler.includes(f) && visas(f)));
   const flerValda = $derived(ovriga.some((f) => filter[f].length > 0));
+  // "Fler filter" öppnas när något av fälten har valda värden, men fälls aldrig ihop av sig själv:
+  // den som väljer bort det sista värdet ska inte tappa sin plats.
+  let flerOppen = $state(false);
+  $effect.pre(() => {
+    if (flerValda) flerOppen = true;
+  });
   let alla = $state<Partial<Record<Faltnamn, boolean>>>({});
 </script>
 
@@ -51,7 +57,7 @@
   {@render grupp(falt)}
 {/each}
 {#if ovriga.length}
-  <details class="fler-filter" open={flerValda}>
+  <details class="fler-filter" bind:open={flerOppen}>
     <summary>{t('fler_filter', lang)}</summary>
     {#each ovriga as falt (falt)}
       {@render grupp(falt)}
@@ -108,6 +114,10 @@
   .antal {
     opacity: 0.75;
     white-space: nowrap;
+  }
+  /* Vitt med 75 % täckning på Havsvik är bara 3,7:1; på ett valt värde är antalet helt vitt. */
+  .chips button[aria-pressed='true'] .antal {
+    opacity: 1;
   }
   .fler {
     margin-top: 0.4rem;

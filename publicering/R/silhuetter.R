@@ -5,7 +5,7 @@
 ART_ALIAS <- c("Hummer" = "Europeisk hummer", "Östersjöflundra" = "Skrubbskädda")
 
 #' Silhuetten i en bild: bakgrunden är det som hänger ihop med kanten och har kantens vanligaste
-#' färg (eller är genomskinligt). Allt annat är arten. Ger bredd, höjd och en SVG-sökväg med y nedåt.
+#' färg (eller är genomskinligt, när kanten är det). Allt annat är arten. Ger bredd, höjd och en SVG-sökväg med y nedåt.
 silhuett <- function(fil, tolerans = 0.005) {
   r <- suppressWarnings(terra::rast(fil))
   nr <- terra::nrow(r)
@@ -14,7 +14,9 @@ silhuett <- function(fil, tolerans = 0.005) {
   # En bild har ingen nodata, men en .aux.xml bredvid kan ge 8-bitarsvärdet 255 som NA.
   v[is.na(v)] <- 255
   kant <- unique(c(seq_len(nc), (nr - 1) * nc + seq_len(nc), seq(1, nr * nc, by = nc), seq(nc, nr * nc, by = nc)))
-  if (ncol(v) >= 4) {
+  # Alfakanalen avgör bara när kanten verkligen är genomskinlig; en vit bild som sparats med
+  # alfakanal har täckande kant, och då avgör färgen.
+  if (ncol(v) >= 4 && any(v[kant, 4] < 40)) {
     bakgrund <- v[, 4] < 40
   } else {
     if (ncol(v) < 3) v <- cbind(v[, 1], v[, 1], v[, 1])

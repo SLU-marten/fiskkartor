@@ -7,7 +7,12 @@ export type ArtGrupp = {
   namn: string;
   latin: string | null;
   art: string | null;
-  kartor: { karta: Karta; etikett: string | null }[];
+  /**
+   * etikett: knappens text, kartans namn utan artnamnet. namn: länkens namn för skärmläsare, hela
+   * kartnamnet med samma tillägg som etiketten fick när två etiketter krockade, så att namnet
+   * innehåller den synliga texten (WCAG 2.5.3) och skiljer kartorna åt.
+   */
+  kartor: { karta: Karta; etikett: string | null; namn: string }[];
 };
 
 const sv = new Intl.Collator('sv');
@@ -32,7 +37,7 @@ export function grupperaArter(kartor: Karta[]): ArtGrupp[] {
       art,
       kartor: [],
     };
-    g.kartor.push({ karta: k, etikett: art ? etikett(k.titel, art) : null });
+    g.kartor.push({ karta: k, etikett: art ? etikett(k.titel, art) : null, namn: k.titel });
     grupper.set(nyckel, g);
   }
   const ut = [...grupper.values()].sort((a, b) => sv.compare(a.namn, b.namn));
@@ -54,6 +59,8 @@ function skiljAt(kartor: ArtGrupp['kartor']) {
   const sammaAr = krockar((k) => `${k.etikett} ${k.karta.ar}`);
   for (const k of kartor) {
     if (!samma(k)) continue;
-    k.etikett = sammaAr(k) ? `${k.etikett} (${k.karta.kalla}, ${k.karta.ar})` : `${k.etikett} (${k.karta.ar})`;
+    const tillagg = sammaAr(k) ? `(${k.karta.kalla}, ${k.karta.ar})` : `(${k.karta.ar})`;
+    k.etikett = `${k.etikett} ${tillagg}`;
+    k.namn = `${k.karta.titel} ${tillagg}`;
   }
 }

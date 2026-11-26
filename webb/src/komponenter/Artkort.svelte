@@ -1,6 +1,8 @@
 <script lang="ts">
   // Ett kort per art: silhuetten, namnet, det latinska namnet och en knapp per karta. Knappens text
-  // är kartans namn utan artnamnet; länkens namn för skärmläsare är hela kartnamnet.
+  // är kartans namn utan artnamnet; länkens namn för skärmläsare är hela kartnamnet, som innehåller
+  // knappens text. En karta utan art har knappen "Öppna kartan", och länken heter "Öppna kartan:"
+  // och kartans namn.
   import type { ArtGrupp } from '../lib/artgrupper';
   import { silhuettFor } from '../lib/arter';
   import type { Sprak } from '../lib/rutt';
@@ -24,12 +26,14 @@
     <h3>{grupp.namn}</h3>
     {#if grupp.latin}<p class="latin" lang="la">{grupp.latin}</p>{/if}
     <ul>
-      {#each grupp.kartor as { karta, etikett } (karta.id)}
+      {#each grupp.kartor as { karta, etikett, namn } (karta.id)}
         <li data-testid="traff">
           <a class="knapp" href={lank(karta.id)}
             ><svg class="ikon" viewBox="0 0 24 24" aria-hidden="true"
               ><path d="M3 6.5 9 4l6 2.5L21 4v13.5L15 20l-6-2.5L3 20Z M9 4v13.5 M15 6.5V20" /></svg
-            ><span class="visuellt-dold">{karta.titel}</span><span aria-hidden="true">{etikett ?? t('oppna_karta', lang)}</span></a
+            ><span class="visuellt-dold">{etikett ? namn : `${t('oppna_karta', lang)}: ${namn}`}</span><span aria-hidden="true"
+              >{etikett ?? t('oppna_karta', lang)}</span
+            ></a
           >
         </li>
       {/each}
