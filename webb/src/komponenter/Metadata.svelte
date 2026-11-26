@@ -46,13 +46,20 @@
   dl {
     margin: 0;
   }
+  /* Rubriken liten och dämpad, värdet större och mörkt: tydlig skillnad mellan dem. */
   dt {
-    font-weight: 500;
-    font-size: 0.9rem;
-    margin-top: 0.5rem;
+    font-weight: 400;
+    font-size: 0.85rem;
+    color: var(--dampad);
+    margin-top: 0.85rem;
+  }
+  dt:first-child {
+    margin-top: 0;
   }
   dd {
-    margin: 0;
+    margin: 0.1rem 0 0;
+    font-size: 1.05rem;
+    color: var(--text);
     overflow-wrap: anywhere;
   }
 </style>

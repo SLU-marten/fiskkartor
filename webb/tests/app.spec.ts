@@ -926,6 +926,18 @@ test.describe('Lagerval och teckenförklaring i kartan', () => {
 });
 
 test.describe('lagerbyte, kartbyte och versioner', () => {
+  test('metadatans rubriker är dämpade och värdena tydliga', async ({ page }) => {
+    await cartoTom(page);
+    await page.goto(KARTA('torsk-test'));
+    const dt = page.locator('dl dt').first();
+    const dd = page.locator('dl dd').first();
+    await expect(dt).toHaveCSS('color', 'rgb(89, 89, 89)');
+    await expect(dt).toHaveCSS('font-weight', '400');
+    await expect(dd).toHaveCSS('color', 'rgb(34, 34, 34)');
+    const storlek = async (l: typeof dt) => parseFloat(await l.evaluate((e) => getComputedStyle(e).fontSize));
+    expect((await storlek(dd)) - (await storlek(dt))).toBeGreaterThanOrEqual(2);
+  });
+
   test('kartvyns lista har mindre ikoner', async ({ page }) => {
     await cartoTom(page);
     await page.goto(KARTA('torsk-test'));
