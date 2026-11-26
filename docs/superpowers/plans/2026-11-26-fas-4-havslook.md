@@ -567,3 +567,51 @@ it('arVuxen gäller bara vuxen', () => {
 - [ ] **Step 4:** Kör `npm run build` och `npx playwright test tests/app.spec.ts -g "projekt|startsidan"`.
   Expected: godkänt.
 - [ ] **Step 5: Commit** `feat(webb): projektkorten under sökrutan tas bort`.
+
+### Task 12: Ny startsida med artkort
+
+**Spec:** tillägget "ny startsida" i specen. Skiss: `Start-Dator`, `Start-Dator-Sok` och `Start-Mobil` på skissytan.
+
+**Files:**
+- Create: `webb/src/lib/artgrupper.ts`, `webb/src/komponenter/Artkort.svelte`,
+  `webb/src/komponenter/Lasa.svelte`, `webb/tests/artgrupper.test.ts`.
+- Modify: `webb/src/vyer/Start.svelte`, `webb/src/komponenter/Filter.svelte` (prop `dolda`),
+  `webb/src/lib/text.ts`, `webb/tests/app.spec.ts`.
+
+**Interfaces:**
+- `type ArtGrupp = { nyckel: string; namn: string; latin: string | null; art: string | null; kartor: { karta: Karta; etikett: string | null }[] }`
+- `grupperaArter(kartor: Karta[]): ArtGrupp[]`
+  - Kartor med samma `falt.art` (trimmat, utan skiftläge) hamnar i en grupp. Grupperna sorteras på
+    namnet (sv), kartorna på titeln.
+  - `etikett` är titeln utan artnamnet i början (utan skiftläge), med inledande skiljetecken och
+    blanksteg bortskalade och första bokstaven versal. Titeln själv om den inte börjar med artnamnet.
+    `null` för en karta utan art.
+  - En karta utan art får gruppen `karta:<id>`, med `namn` = titeln.
+- `antalArterKartor(arter: number, kartor: number, lang): string`: "58 arter, 75 kartor", "1 art,
+  1 karta", "58 species, 75 maps".
+- `visaAllaArter(n, lang)`: "Visa alla 58 arter" / "Show all 58 species".
+- `Filter`: ny prop `dolda?: Faltnamn[]`. Ett dolt fält visas ändå om det har valda värden.
+
+- [ ] **Step 1: Skriv de fallerande enhetstesterna** för `grupperaArter`:
+  - gruppering utan hänsyn till skiftläge;
+  - ordning;
+  - etiketten ("Torsk <20 cm västkusten" → "<20 cm västkusten", "Torsk större än 20 cm, uppväxt" →
+    "Större än 20 cm, uppväxt", "Braxen/björkna uppväxt ostkusten" → "Uppväxt ostkusten",
+    "Perch spawning" med art Abborre → "Perch spawning");
+  - en karta utan art.
+- [ ] **Step 2: Skriv E2E-testerna:**
+  - **`startsidan visar arterna som kort`:** testdatan ger två artkort (Abborre och Torsk) och ett
+    kort för tral-test. Rubriken är "2 arter, 3 kartor".
+  - **`artkortets knapp öppnar kartan`:** länken "Torsk större än 20 cm, uppväxt, västkusten (test)"
+    leder till `#/karta/torsk-test`.
+  - **`artkorten har artens silhuett`:** Torsk-kortet har en `svg`, och tral-test-kortet har ingen.
+  - **`högst 12 arter först och sedan Visa alla`:** katalogen fångas med `page.route` och får 15
+    arter. 12 kort syns, och efter "Visa alla 15 arter" syns 15.
+  - **`Art visas inte i startsidans filter`:** gruppen "Art" finns inte.
+  - **`Så läser du kartorna`:** kortet finns, och länken går till Om-sidan.
+  - Ta bort `valt projektkort markeras` och `träfflistan har artikoner` på startsidan.
+- [ ] **Step 3:** Kör och se testerna falla.
+- [ ] **Step 4: Implementera** efter skisserna och specens tillägg.
+- [ ] **Step 5:** Kör `npx vitest run`, `npm run build` och hela `npx playwright test`. Rätta tester som
+  byggde på den gamla startsidan (`data-testid="traff"` finns på knapparna, en per karta).
+- [ ] **Step 6: Commit** `feat(webb): ny startsida med artkort`.

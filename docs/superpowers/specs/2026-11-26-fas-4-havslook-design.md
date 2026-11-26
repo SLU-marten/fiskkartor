@@ -228,3 +228,31 @@ styras med CSS.
 
 - **Bilder för de sex arter som saknas.** Tills de finns står cirklarna tomma.
 - **Granskning i mobilen** när bygget ligger ute.
+
+## Tillägg 26 november 01:14–01:22: ny startsida
+
+Mårten tyckte att startsidan kändes ofärdig: allt låg till vänster, och listan med 75 kartor var
+lång. Han godkände skissen "Startsidan, nytt förslag" (01:21) och ville ha en knapp längst ned för
+att visa alla (01:22). Projektkorten under sökrutan tas bort (01:11).
+
+- **Överst** ligger en ruta i sidornas färg, centrerad i högst 1200 px:
+  - till vänster rubriken "Hitta en fiskkarta", en mening om portalen (Merriweather) och sökrutan
+    med knappen Sök;
+  - till höger kortet "Så läser du kartorna", med teckenförklaringen för klassade kartor (Turkos och
+    Havsdjup) och kontinuerliga kartor (havsskalan), och en länk till Om-sidan.
+  - På mobil hamnar kortet längst ned på sidan.
+- **Under rutan** ligger filtren till vänster i ett vitt kort, 17rem brett, och arterna till höger.
+  Fältet Art visas inte i filtren, eftersom korten är artlistan. Det visas ändå om adressen har
+  ett art-filter.
+- **Ett kort per art:**
+  - artens silhuett i Havsvik, namnet och det latinska namnet;
+  - en knapp per karta. Knappens text är kartans namn utan artnamnet, till exempel "Uppväxt
+    västkusten". Länkens tillgängliga namn är hela kartnamnet.
+  - Korten står i bokstavsordning, och knapparna i kartnamnets ordning.
+  - En karta utan art får ett eget kort med kartans namn och knappen "Öppna kartan".
+  - På mobil står silhuetten till vänster om namnet.
+- **Rubriken** ovanför korten anger antalet arter och kartor, till exempel "58 arter, 75 kartor".
+- **Högst 12 kort visas först.** Fler visas med knappen "Visa alla 58 arter" längst ned. Knappen
+  visas också vid sökning och filter, om träffarna är fler än 12. En ny sökning eller ett nytt filter
+  visar åter 12.
+- **Kartvyns lista** behåller artikonerna.
