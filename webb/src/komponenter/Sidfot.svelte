@@ -7,18 +7,20 @@
 </script>
 
 <footer class="sidfot">
-  <p>{t('portalnamn', lang)}, {t('institution', lang)}, SLU</p>
-  <ul>
-    <li><a href={lank('om')}>{t('meny_om', lang)}</a></li>
-    <li><a href={lank('tillganglighet')}>{t('meny_tillganglighet', lang)}</a></li>
-    <li><a href={`mailto:${KONTAKT}`}>{KONTAKT}</a></li>
-  </ul>
+  <div class="behallare">
+    <p>{t('portalnamn', lang)}, {t('institution', lang)}, SLU</p>
+    <ul>
+      <li><a href={lank('om')}>{t('meny_om', lang)}</a></li>
+      <li><a href={lank('tillganglighet')}>{t('meny_tillganglighet', lang)}</a></li>
+      <li><a href={`mailto:${KONTAKT}`}>{KONTAKT}</a></li>
+    </ul>
+  </div>
 </footer>
 
 <style>
   .sidfot {
     margin-top: 3rem;
-    padding: 1.5rem 1.5rem 2.25rem;
+    padding: 1.75rem 0 2.5rem;
     background: var(--tema-mork);
     color: #ffffff;
     font-size: 0.95rem;

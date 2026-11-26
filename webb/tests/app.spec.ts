@@ -1382,3 +1382,86 @@ test.describe('efter slutgranskningen', () => {
     await expect(brister.locator('xpath=following-sibling::*[1]')).not.toContainText('navigering');
   });
 });
+
+test.describe('slutputs av startsidan', () => {
+  test('sidfoten linjerar med sidans innehåll', async ({ page }) => {
+    for (const bredd of [1280, 390]) {
+      await page.setViewportSize({ width: bredd, height: 844 });
+      await page.goto(START());
+      const rubrik = (await page.getByRole('heading', { level: 1 }).boundingBox())!;
+      const fot = (await page.getByRole('contentinfo').locator('p').first().boundingBox())!;
+      expect(Math.abs(fot.x - rubrik.x)).toBeLessThanOrEqual(1);
+    }
+  });
+
+  test('mobil: innehållet har 16 px marginal', async ({ page }) => {
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page.goto(START());
+    expect((await page.getByRole('heading', { level: 1 }).boundingBox())!.x).toBe(16);
+    expect((await page.locator('.artkort').first().boundingBox())!.x).toBe(16);
+  });
+
+  test('långa filtervärden radbryts vänsterställt och antalet hålls ihop', async ({ page }) => {
+    await page.goto(START());
+    const knapp = page.getByRole('group', { name: 'Källa' }).getByRole('button').first();
+    await expect(knapp).toHaveCSS('text-align', 'left');
+    await expect(knapp.locator('.antal')).toHaveCSS('white-space', 'nowrap');
+  });
+
+  test('utfällbara rubriker har en egen pil som vänds när de öppnas', async ({ page }) => {
+    await page.goto(START());
+    const fler = page.locator('summary', { hasText: 'Fler filter' });
+    await expect(fler).toHaveCSS('list-style-type', 'none');
+    const pil = () => fler.evaluate((e) => getComputedStyle(e, '::before').transform);
+    const stangd = await pil();
+    expect(stangd).not.toBe('none');
+    await fler.click();
+    await expect.poll(pil).not.toBe(stangd);
+  });
+
+  test('mobil: platshållaren i sökfältet får plats', async ({ page }) => {
+    for (const lang of ['', '?lang=en']) {
+      await page.setViewportSize({ width: 360, height: 800 });
+      await page.goto(START() + lang);
+      const falt = page.getByRole('combobox');
+      const { text, ledigt } = await falt.evaluate((e: HTMLInputElement) => {
+        const s = getComputedStyle(e);
+        const ctx = document.createElement('canvas').getContext('2d')!;
+        ctx.font = `${s.fontSize} ${s.fontFamily}`;
+        const ledigt = e.clientWidth - parseFloat(s.paddingLeft) - parseFloat(s.paddingRight);
+        return { text: ctx.measureText(e.placeholder).width, ledigt };
+      });
+      expect(text).toBeLessThanOrEqual(ledigt);
+    }
+  });
+
+  test('mobil: sökknappen visar förstoringsglaset och heter Sök', async ({ page }) => {
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page.goto(START());
+    const knapp = page.getByRole('button', { name: 'Sök', exact: true });
+    const ruta = (await knapp.boundingBox())!;
+    expect(ruta.width).toBeLessThanOrEqual(48);
+    expect(ruta.height).toBeGreaterThanOrEqual(44);
+  });
+
+  test('antalet står på samma rad som filtervärdets sista ord', async ({ page }) => {
+    await page.setViewportSize({ width: 1280, height: 900 });
+    await page.goto(START());
+    const knapp = page.getByRole('group', { name: 'Källa' }).getByRole('button').first();
+    // Prova alla bredder där värdet radbryts: antalet får aldrig hamna ensamt på en egen rad.
+    const fel = await knapp.evaluate((e: HTMLElement) => {
+      const text = e.firstChild!;
+      const n = text.textContent!.trimEnd().length;
+      const r = document.createRange();
+      r.setStart(text, n - 1);
+      r.setEnd(text, n);
+      const fel: number[] = [];
+      for (let b = 120; b <= 320; b += 2) {
+        e.style.maxWidth = `${b}px`;
+        if (Math.abs(r.getBoundingClientRect().top - e.querySelector('.antal')!.getBoundingClientRect().top) > 2) fel.push(b);
+      }
+      return fel;
+    });
+    expect(fel).toEqual([]);
+  });
+});

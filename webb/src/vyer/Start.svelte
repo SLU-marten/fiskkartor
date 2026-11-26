@@ -38,8 +38,10 @@
 
   const sprakQ = $derived(new URLSearchParams(lang === 'en' ? { lang: 'en' } : {}));
 
-  // På smala skärmar är filtret hopfällt, så att träffarna syns direkt.
+  // På smala skärmar är filtret hopfällt, så att träffarna syns direkt. På en telefon är
+  // platshållaren i sökfältet kortare, så att den får plats.
   const bred = typeof matchMedia === 'function' ? matchMedia('(min-width: 52rem)').matches : true;
+  const telefon = typeof matchMedia === 'function' ? matchMedia('(max-width: 40rem)').matches : false;
 
   // Sökningen och filtren följer med till kartvyn, så att listan där visar samma träffar.
   function kartlank(id: string): string {
@@ -73,7 +75,7 @@
         varde={q}
         forslag={forslag(kartor, q)}
         etikett={t('sok_etikett', lang)}
-        platshallare={t('sok_platshallare', lang)}
+        platshallare={t(telefon ? 'sok_platshallare_kort' : 'sok_platshallare', lang)}
         onskriv={skriv}
         onval={skriv}
         sokknapp={t('sok_knapp', lang)}
@@ -115,12 +117,6 @@
 </div>
 
 <style>
-  .behallare {
-    max-width: 75rem;
-    margin: 0 auto;
-    padding: 0 2rem;
-    box-sizing: border-box;
-  }
   .hero {
     padding: 2.75rem 0 2.25rem;
   }
@@ -148,7 +144,7 @@
   }
   .innehall {
     display: grid;
-    grid-template-columns: 17rem minmax(0, 1fr);
+    grid-template-columns: 18rem minmax(0, 1fr);
     gap: 2rem;
     align-items: start;
     padding-top: 0.25rem;
@@ -160,13 +156,13 @@
     border: 1px solid var(--kortkant);
     border-radius: 4px;
   }
-  summary {
-    cursor: pointer;
-  }
   summary h2 {
     display: inline;
     margin: 0;
     font-size: 1.2rem;
+  }
+  details[open] > summary {
+    margin-bottom: 1rem;
   }
   .arter {
     display: flex;
@@ -232,14 +228,8 @@
     }
   }
   @media (max-width: 40rem) {
-    .behallare {
-      padding: 0 0.75rem;
-    }
     .hero {
       padding: 1.5rem 0 1.25rem;
-    }
-    .intro {
-      padding: 0 0.25rem;
     }
     .innehall {
       gap: 0.75rem;

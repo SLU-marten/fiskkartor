@@ -135,6 +135,41 @@ b {
     height: 44px;
   }
 }
+/* Sidornas innehållsbredd. Startsidan och sidfoten linjerar mot den. */
+.behallare {
+  max-width: 75rem;
+  margin: 0 auto;
+  padding: 0 2rem;
+  box-sizing: border-box;
+}
+@media (max-width: 40rem) {
+  .behallare {
+    padding: 0 1rem;
+  }
+}
+/* Utfällbara rubriker får en egen pil i stället för webbläsarens triangel. Pilen pekar åt höger och
+   vänds nedåt när innehållet visas. */
+summary {
+  list-style: none;
+  cursor: pointer;
+}
+summary::-webkit-details-marker {
+  display: none;
+}
+summary::before {
+  content: '';
+  display: inline-block;
+  width: 0.42em;
+  height: 0.42em;
+  margin: 0 0.6em 0.14em 0.05em;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: rotate(-45deg);
+  transition: transform 0.15s ease;
+}
+details[open] > summary::before {
+  transform: rotate(45deg);
+}
 /* hidden ska alltid dölja, även när en komponent sätter display. */
 [hidden] {
   display: none !important;

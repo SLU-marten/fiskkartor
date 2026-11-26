@@ -74,7 +74,7 @@
           stroke-width="2"
           stroke-linecap="round"
         /></svg
-      >{sokknapp}</button
+      ><span class="sokknapp-text">{sokknapp}</span></button
     >
   {/if}
   </div>
@@ -145,6 +145,25 @@
   .sokknapp svg {
     width: 22px;
     height: 22px;
+  }
+  /* På en telefon får fältet platsen: knappen visar bara förstoringsglaset men heter fortfarande Sök. */
+  @media (max-width: 40rem) {
+    input {
+      font-size: 1.05rem;
+    }
+    .sokknapp {
+      width: 48px;
+      padding: 0;
+      justify-content: center;
+    }
+    .sokknapp-text {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip-path: inset(50%);
+      white-space: nowrap;
+    }
   }
   input::placeholder {
     color: var(--dampad);

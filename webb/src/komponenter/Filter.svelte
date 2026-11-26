@@ -30,12 +30,12 @@
     <div class="chips">
       {#each varden as v (v.varde)}
         <button type="button" aria-pressed={filter[falt].some((x) => lika(x, v.varde))} onclick={() => onvaxla(falt, v.varde)}>
-          {v.varde} <span class="antal">({v.antal})</span>
+          {v.varde}&nbsp;<span class="antal">({v.antal})</span>
         </button>
       {/each}
       {#each filter[falt].filter((x) => !fasetter[falt].some((v) => lika(v.varde, x))) as x (x)}
         <button type="button" aria-pressed="true" onclick={() => onvaxla(falt, x)}>
-          {x} <span class="antal">(0)</span>
+          {x}&nbsp;<span class="antal">(0)</span>
         </button>
       {/each}
     </div>
@@ -75,14 +75,17 @@
     flex-wrap: wrap;
     gap: 0.35rem;
   }
+  /* Ett långt värde radbryts vänsterställt; rundningen är en halv rad, så att en kort knapp blir
+     en pille och en lång en rundad ruta. */
   .chips button {
     border: 1px solid var(--kant);
     background: var(--yta);
-    border-radius: 999px;
+    border-radius: 1.1rem;
     min-height: 32px;
     padding: 0.2rem 0.75rem;
     cursor: pointer;
     font-size: 0.95rem;
+    text-align: left;
   }
   .chips button:hover {
     border-color: var(--tema);
@@ -104,6 +107,7 @@
   }
   .antal {
     opacity: 0.75;
+    white-space: nowrap;
   }
   .fler {
     margin-top: 0.4rem;

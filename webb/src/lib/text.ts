@@ -55,6 +55,7 @@ export const TEXT = {
   oppna_karta: { sv: 'Öppna kartan', en: 'Open the map' },
   sok_etikett: { sv: 'Sök art, område eller projekt', en: 'Search species, area or project' },
   sok_platshallare: { sv: 'Till exempel torsk, Gadus morhua eller Östersjön', en: 'For example cod, Gadus morhua or Baltic' },
+  sok_platshallare_kort: { sv: 'Till exempel torsk eller Östersjön', en: 'For example cod or Baltic' },
   filter_rubrik: { sv: 'Filtrera', en: 'Filter' },
   fler_filter: { sv: 'Fler filter', en: 'More filters' },
   sok_knapp: { sv: 'Sök', en: 'Search' },
