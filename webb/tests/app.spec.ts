@@ -1044,11 +1044,16 @@ test.describe('profil', () => {
     expect(await page.locator('main p').first().evaluate((e) => getComputedStyle(e).fontFamily)).toContain('Merriweather');
   });
 
+  test('sidan har havsgrå bakgrund', async ({ page }) => {
+    await page.goto(START());
+    await expect(page.locator('body')).toHaveCSS('background-color', 'rgb(238, 244, 246)');
+  });
+
   test('valt projektkort markeras', async ({ page }) => {
     await page.goto(START());
     await page.getByTestId('projekt-NMK').click();
     await expect(page.getByTestId('projekt-NMK')).toHaveAttribute('aria-pressed', 'true');
-    await expect(page.getByTestId('projekt-NMK')).toHaveCSS('background-color', 'rgb(238, 246, 214)');
+    await expect(page.getByTestId('projekt-NMK')).toHaveCSS('background-color', 'rgb(220, 233, 238)');
   });
 
   test('Om-sidan länkar till tillgänglighetsredogörelsen', async ({ page }) => {
@@ -1096,7 +1101,7 @@ test.describe('efter slutgranskningen', () => {
     const knapp = page.getByRole('button', { name: 'Zooma in' });
     await expect(knapp).toBeFocused();
     await expect(knapp).toHaveCSS('outline-width', '3px');
-    await expect(knapp).toHaveCSS('outline-color', 'rgb(0, 102, 79)');
+    await expect(knapp).toHaveCSS('outline-color', 'rgb(0, 118, 129)');
     expect(Number(await knapp.evaluate((e) => getComputedStyle(e).fontWeight))).toBeLessThanOrEqual(500);
   });
 

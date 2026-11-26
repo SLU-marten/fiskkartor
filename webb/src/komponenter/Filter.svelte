@@ -67,11 +67,11 @@
     font-size: 0.95rem;
   }
   .chips button:hover {
-    border-color: var(--gron);
+    border-color: var(--tema);
   }
   .chips button[aria-pressed='true'] {
-    background: var(--gron);
-    border-color: var(--gron);
+    background: var(--tema);
+    border-color: var(--tema);
     color: var(--yta);
   }
   .antal {
@@ -82,7 +82,7 @@
     border: 0;
     background: none;
     padding: 0;
-    color: var(--gron);
+    color: var(--tema);
     text-decoration: underline;
     cursor: pointer;
   }

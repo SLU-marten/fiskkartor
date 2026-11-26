@@ -111,14 +111,14 @@
     gap: 0.5rem;
     height: 40px;
     padding: 0 0.9rem;
-    border: 1px solid var(--gron);
+    border: 1px solid var(--tema);
     border-radius: 4px;
-    background: var(--gron);
+    background: var(--tema);
     color: var(--yta);
     cursor: pointer;
   }
   .knapp:hover {
-    background: var(--gron-mork);
+    background: var(--tema-mork);
   }
   /* Rutan ryms i kartytan (en storlekscontainer) och skrollar inuti när kartan är låg. */
   .ruta {
@@ -157,8 +157,8 @@
     align-items: center;
     justify-content: center;
     min-height: 36px;
-    border: 1px solid var(--gron);
-    color: var(--gron);
+    border: 1px solid var(--tema);
+    color: var(--tema);
     background: var(--yta);
     cursor: pointer;
   }
@@ -170,7 +170,7 @@
     border-left: 0;
   }
   .delad label:has(input:checked) {
-    background: var(--gron);
+    background: var(--tema);
     color: var(--yta);
   }
   /* Den inbyggda radioknappen täcker etiketten men syns inte. Klick träffar den direkt, och fokus
@@ -187,7 +187,7 @@
   .delad label:has(input:focus-visible) {
     position: relative;
     z-index: 1;
-    outline: 3px solid var(--gron);
+    outline: 3px solid var(--tema);
     outline-offset: 2px;
     box-shadow: 0 0 0 7px var(--yta);
   }
@@ -208,7 +208,7 @@
   }
   .reglage input {
     width: 100%;
-    accent-color: var(--gron);
+    accent-color: var(--tema);
   }
   @media (max-width: 60rem) {
     .knapp {

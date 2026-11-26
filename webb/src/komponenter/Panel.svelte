@@ -226,16 +226,16 @@
   }
   .knapp {
     min-height: 40px;
-    border: 1px solid var(--gron);
+    border: 1px solid var(--tema);
     background: var(--yta);
-    color: var(--gron);
+    color: var(--tema);
     border-radius: 4px;
     padding: 0 0.8rem;
     cursor: pointer;
   }
   .knapp:hover {
-    border-color: var(--gron-mork);
-    color: var(--gron-mork);
+    border-color: var(--tema-mork);
+    color: var(--tema-mork);
   }
   .knapp:disabled {
     cursor: default;

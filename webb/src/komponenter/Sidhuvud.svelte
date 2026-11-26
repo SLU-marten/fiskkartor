@@ -117,17 +117,17 @@
   nav a[aria-current='page'] {
     color: var(--text);
     text-decoration: none;
-    border-bottom: 2px solid var(--gron);
+    border-bottom: 2px solid var(--tema);
   }
   .menyknapp {
     display: none;
     margin-left: auto;
     min-height: 44px;
     padding: 0 0.75rem;
-    border: 1px solid var(--gron);
+    border: 1px solid var(--tema);
     border-radius: 4px;
     background: var(--yta);
-    color: var(--gron);
+    color: var(--tema);
     cursor: pointer;
   }
   .hopp {
@@ -137,7 +137,7 @@
     z-index: 20;
     padding: 0.5rem 0.75rem;
     background: var(--yta);
-    border: 2px solid var(--gron);
+    border: 2px solid var(--tema);
     border-radius: 4px;
     transform: translateY(-200%);
   }

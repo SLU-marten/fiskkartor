@@ -1,5 +1,5 @@
 /*
- * Grundstil enligt SLU:s grafiska profil (stil A: ett återhållsamt verktyg).
+ * Grundstil enligt SLU:s grafiska profil, stil Hav (fas 4): havsfärgerna ur paletten är appens tema.
  * Färgerna kommer ur SLU:s färgpalett. Logotypens färger tonas aldrig, och grått är toningar av svart.
  * Kartornas egna färger (havsskalan) ligger i karta/stil.ts.
  * tests/farger.test.ts kontrollerar kontrasten för paren som används för text och kontroller.
@@ -11,9 +11,11 @@
   --kant: #8c8c8c; /* svart 45 %: kanter på fält och reglage, 3,4:1 */
   --mjuk: #f5f5f5; /* svart 4 % */
   --yta: #ffffff;
-  --gron: #00664f; /* Logotyp Natur: knappar, länkar, valt läge och fokus */
-  --gron-mork: #154734; /* Skog: hovring och aktivt läge */
-  --markering: #eef6d6; /* Lindblom, tonad mot vitt */
+  --tema: #007681; /* Havsvik: sidhuvud, knappar, länkar, valt läge och fokus */
+  --tema-mork: #004851; /* Havsdjup: hovring, aktivt läge och sidfot */
+  --sida: #eef4f6; /* Duva 25 %: sidornas bakgrund */
+  --markering: #dce9ee; /* Duva 50 %: vald rad, alltid med --text */
+  --kortkant: #d5e5ea; /* Duva 60 %: kant på kort */
   --notis: #fdf6c4; /* Solsken, tonad */
   --notis-kant: #ffb81c; /* Kåda */
   --fel: #a80833; /* Rädisa */
@@ -26,19 +28,20 @@
 }
 body {
   margin: 0;
+  background: var(--sida);
 }
 a {
-  color: var(--gron);
+  color: var(--tema);
   text-underline-offset: 0.15em;
 }
 a:hover {
-  color: var(--gron-mork);
+  color: var(--tema-mork);
 }
 :focus-visible {
-  outline: 3px solid var(--gron);
+  outline: 3px solid var(--tema);
   outline-offset: 2px;
 }
-/* Över kartan ligger den gröna ramen mellan två vita ringar, så att den syns mot mörka kartfärger. */
+/* Över kartan ligger fokusramen mellan två vita ringar, så att den syns mot mörka kartfärger. */
 .kartyta :focus-visible {
   box-shadow: 0 0 0 7px var(--yta);
 }
@@ -79,14 +82,14 @@ b {
   border: 1px solid var(--linje);
   border-radius: 4px;
   background: var(--yta);
-  color: var(--gron);
+  color: var(--tema);
   font-size: 1.4rem;
   line-height: 1;
 }
 .ol-zoom .ol-zoom-in:hover,
 .ol-zoom .ol-zoom-out:hover {
   background: var(--mjuk);
-  color: var(--gron-mork);
+  color: var(--tema-mork);
 }
 /* OpenLayers ger knapparna fetstil och en grå ram på 1 px vid hovring och fokus. Profilen har
    ingen fetstil, och fokus ska se ut som överallt annars. */
@@ -98,7 +101,7 @@ b {
   outline: none;
 }
 .ol-control.ol-zoom button:focus-visible {
-  outline: 3px solid var(--gron);
+  outline: 3px solid var(--tema);
   outline-offset: 2px;
   box-shadow: 0 0 0 7px var(--yta);
 }
@@ -117,7 +120,7 @@ b {
   color: var(--dampad);
 }
 .ol-attribution a {
-  color: var(--gron);
+  color: var(--tema);
 }
 /* En låg karta (liggande telefon): skalstocken döljs, så att den inte krockar med zoomknapparna. */
 @container kartyta (max-height: 16rem) {

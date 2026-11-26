@@ -150,11 +150,11 @@
     cursor: pointer;
   }
   .projekt button:hover {
-    border-color: var(--gron);
+    border-color: var(--tema);
   }
   .projekt button[aria-pressed='true'] {
     background: var(--markering);
-    border-color: var(--gron);
+    border-color: var(--tema);
   }
   .projekt span {
     color: var(--dampad);
@@ -184,10 +184,10 @@
   .rensa {
     min-height: 36px;
     padding: 0 0.75rem;
-    border: 1px solid var(--gron);
+    border: 1px solid var(--tema);
     border-radius: 4px;
     background: var(--yta);
-    color: var(--gron);
+    color: var(--tema);
     cursor: pointer;
   }
   @media (max-width: 52rem) {
