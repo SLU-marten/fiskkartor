@@ -60,6 +60,43 @@ test.describe('appskalet', () => {
 const START = () => start(server.url);
 
 test.describe('startsidan', () => {
+  test('kartlänkarna skiljer sig från filterknapparna', async ({ page }) => {
+    await page.goto(START());
+    const lank = page.getByRole('link', { name: 'Torsk större än 20 cm, uppväxt, västkusten (test)' });
+    await expect(lank).toHaveCSS('background-color', 'rgb(238, 244, 246)');
+    await expect(lank).toHaveCSS('border-top-left-radius', '4px');
+    await expect(lank.locator('svg')).toHaveCount(1);
+    const filter = page.getByRole('group', { name: 'Projekt' }).getByRole('button').first();
+    expect(await filter.evaluate((e) => getComputedStyle(e).borderTopLeftRadius)).not.toBe('4px');
+  });
+
+  test('ett artkort med en karta är klickbart i sin helhet', async ({ page }) => {
+    await cartoTom(page);
+    await page.goto(START());
+    // Klicka där artens namn står: länken täcker hela kortet.
+    const namn = (await page.locator('.artkort').filter({ hasText: 'Torsk' }).getByRole('heading', { name: 'Torsk' }).boundingBox())!;
+    await page.mouse.click(namn.x + namn.width / 2, namn.y + namn.height / 2);
+    await expect(page).toHaveURL(/#\/karta\/torsk-test/);
+  });
+
+  test('ovanliga filter ligger under Fler filter', async ({ page }) => {
+    await page.goto(START());
+    await expect(page.getByRole('group', { name: 'Livsmiljö' })).toBeHidden();
+    await page.getByText('Fler filter').click();
+    await expect(page.getByRole('group', { name: 'Livsmiljö' })).toBeVisible();
+    await expect(page.getByRole('group', { name: 'Rödlistan' })).toBeVisible();
+  });
+
+  test('mobil: kartlänkar och filterknappar är minst 44 px höga', async ({ page }) => {
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page.goto(START());
+    const lank = page.getByRole('link', { name: 'Torsk större än 20 cm, uppväxt, västkusten (test)' });
+    expect((await lank.boundingBox())!.height).toBeGreaterThanOrEqual(44);
+    await page.getByText('Filtrera', { exact: true }).click();
+    const filter = page.getByRole('group', { name: 'Projekt' }).getByRole('button').first();
+    expect((await filter.boundingBox())!.height).toBeGreaterThanOrEqual(44);
+  });
+
   test('startsidan visar arterna som kort', async ({ page }) => {
     await page.goto(START());
     await expect(page.locator('.artkort')).toHaveCount(3);
@@ -972,6 +1009,11 @@ test.describe('kort, knappar och sidfot', () => {
     await page.getByRole('combobox').fill('torsk');
     await knapp.click();
     await expect(page.locator('#traffrubrik')).toBeFocused();
+  });
+
+  test('Om-sidan anger källan till silhuetterna', async ({ page }) => {
+    await page.goto(`${server.url}/dist/index.html?data=/tests/fixtures/data/#/om`);
+    await expect(page.getByText(/Artfaktas illustrationer.*SLU Artdatabanken/)).toBeVisible();
   });
 
   test('Om-sidan och tillgänglighetssidan i vita kort', async ({ page }) => {

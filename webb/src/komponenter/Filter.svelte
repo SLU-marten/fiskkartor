@@ -12,36 +12,52 @@
     onvaxla: (falt: Faltnamn, varde: string) => void;
     /** Fält som inte visas, om de inte har valda värden. */
     dolda?: Faltnamn[];
+    /** Fält under en hopfälld "Fler filter", som är öppen när något av dem har valda värden. */
+    fler?: Faltnamn[];
   };
-  let { fasetter, filter, lang, onvaxla, dolda = [] }: Props = $props();
+  let { fasetter, filter, lang, onvaxla, dolda = [], fler = [] }: Props = $props();
+  const visas = (falt: Faltnamn) => (fasetter[falt].length > 0 && !dolda.includes(falt)) || filter[falt].length > 0;
+  const forsta = $derived(FALTNAMN.filter((f) => !fler.includes(f) && visas(f)));
+  const ovriga = $derived(FALTNAMN.filter((f) => fler.includes(f) && visas(f)));
+  const flerValda = $derived(ovriga.some((f) => filter[f].length > 0));
   let alla = $state<Partial<Record<Faltnamn, boolean>>>({});
 </script>
 
-{#each FALTNAMN as falt (falt)}
-  {#if (fasetter[falt].length && !dolda.includes(falt)) || filter[falt].length}
-    {@const varden = synligaVarden(fasetter[falt], filter[falt], !!alla[falt])}
-    <fieldset>
-      <legend>{faltEtikett(falt, lang)}</legend>
-      <div class="chips">
-        {#each varden as v (v.varde)}
-          <button type="button" aria-pressed={filter[falt].some((x) => lika(x, v.varde))} onclick={() => onvaxla(falt, v.varde)}>
-            {v.varde} <span class="antal">({v.antal})</span>
-          </button>
-        {/each}
-        {#each filter[falt].filter((x) => !fasetter[falt].some((v) => lika(v.varde, x))) as x (x)}
-          <button type="button" aria-pressed="true" onclick={() => onvaxla(falt, x)}>
-            {x} <span class="antal">(0)</span>
-          </button>
-        {/each}
-      </div>
-      {#if fasetter[falt].length > 8}
-        <button type="button" class="fler" onclick={() => (alla[falt] = !alla[falt])} aria-expanded={!!alla[falt]}>
-          {alla[falt] ? t('visa_farre', lang) : visaAlla(fasetter[falt].length, lang)}
+{#snippet grupp(falt: Faltnamn)}
+  {@const varden = synligaVarden(fasetter[falt], filter[falt], !!alla[falt])}
+  <fieldset>
+    <legend>{faltEtikett(falt, lang)}</legend>
+    <div class="chips">
+      {#each varden as v (v.varde)}
+        <button type="button" aria-pressed={filter[falt].some((x) => lika(x, v.varde))} onclick={() => onvaxla(falt, v.varde)}>
+          {v.varde} <span class="antal">({v.antal})</span>
         </button>
-      {/if}
-    </fieldset>
-  {/if}
+      {/each}
+      {#each filter[falt].filter((x) => !fasetter[falt].some((v) => lika(v.varde, x))) as x (x)}
+        <button type="button" aria-pressed="true" onclick={() => onvaxla(falt, x)}>
+          {x} <span class="antal">(0)</span>
+        </button>
+      {/each}
+    </div>
+    {#if fasetter[falt].length > 8}
+      <button type="button" class="fler" onclick={() => (alla[falt] = !alla[falt])} aria-expanded={!!alla[falt]}>
+        {alla[falt] ? t('visa_farre', lang) : visaAlla(fasetter[falt].length, lang)}
+      </button>
+    {/if}
+  </fieldset>
+{/snippet}
+
+{#each forsta as falt (falt)}
+  {@render grupp(falt)}
 {/each}
+{#if ovriga.length}
+  <details class="fler-filter" open={flerValda}>
+    <summary>{t('fler_filter', lang)}</summary>
+    {#each ovriga as falt (falt)}
+      {@render grupp(falt)}
+    {/each}
+  </details>
+{/if}
 
 <style>
   fieldset {
@@ -60,7 +76,7 @@
     gap: 0.35rem;
   }
   .chips button {
-    border: 1px solid var(--linje);
+    border: 1px solid var(--kant);
     background: var(--yta);
     border-radius: 999px;
     min-height: 32px;
@@ -75,6 +91,16 @@
     background: var(--tema);
     border-color: var(--tema);
     color: var(--yta);
+  }
+  .fler-filter summary {
+    margin: 0.25rem 0 0.9rem;
+    color: var(--tema);
+    cursor: pointer;
+  }
+  @media (max-width: 40rem) {
+    .chips button {
+      min-height: 44px;
+    }
   }
   .antal {
     opacity: 0.75;

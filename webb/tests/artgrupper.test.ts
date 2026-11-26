@@ -41,3 +41,17 @@ it('en karta utan art får ett eget kort med kartans namn', () => {
   expect(g.art).toBeNull();
   expect(g.kartor[0].etikett).toBeNull();
 });
+
+it('etiketter som krockar inom ett kort får årtalet, och annars källan', () => {
+  const k1 = { ...karta('g1', 'Gädda uppväxt ostkusten', 'Gädda'), ar: 2021 };
+  const k2 = { ...karta('g2', 'Gädda uppväxt ostkusten', 'Gädda'), ar: 2024 };
+  const k3 = { ...karta('g3', 'Gädda uppväxt ostkusten', 'Gädda'), ar: 2024, kalla: 'PanBalticScope' };
+  const g = grupperaArter([k1, k2]).find((x) => x.namn === 'Gädda')!;
+  expect(g.kartor.map((k) => k.etikett)).toEqual(['Uppväxt ostkusten (2021)', 'Uppväxt ostkusten (2024)']);
+  const h = grupperaArter([k1, k2, k3]).find((x) => x.namn === 'Gädda')!;
+  expect(h.kartor.map((k) => k.etikett).sort()).toEqual([
+    'Uppväxt ostkusten (2021)',
+    'Uppväxt ostkusten (K, 2024)',
+    'Uppväxt ostkusten (PanBalticScope, 2024)',
+  ]);
+});

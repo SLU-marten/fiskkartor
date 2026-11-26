@@ -88,7 +88,7 @@
   <aside class="filterkort" aria-label={t('filter_rubrik', lang)}>
     <details open={bred || harFilter}>
       <summary><h2>{t('filter_rubrik', lang)}</h2></summary>
-      <Filter fasetter={faset} {filter} {lang} onvaxla={vaxla} dolda={['art']} />
+      <Filter fasetter={faset} {filter} {lang} onvaxla={vaxla} dolda={['art']} fler={['rodlista', 'livsmiljo', 'simblasa']} />
     </details>
   </aside>
   <section class="arter" aria-live="polite">

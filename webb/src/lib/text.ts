@@ -56,6 +56,7 @@ export const TEXT = {
   sok_etikett: { sv: 'Sök art, område eller projekt', en: 'Search species, area or project' },
   sok_platshallare: { sv: 'Till exempel torsk, Gadus morhua eller Östersjön', en: 'For example cod, Gadus morhua or Baltic' },
   filter_rubrik: { sv: 'Filtrera', en: 'Filter' },
+  fler_filter: { sv: 'Fler filter', en: 'More filters' },
   sok_knapp: { sv: 'Sök', en: 'Search' },
   rensa_filter: { sv: 'Rensa filter', en: 'Clear filters' },
   visa_farre: { sv: 'Visa färre', en: 'Show fewer' },

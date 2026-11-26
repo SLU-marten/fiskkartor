@@ -28,6 +28,7 @@
     <h2>Licence</h2>
     <p class="lopande">The maps may be used under CC BY 4.0 (preliminary): state the source. The licence will be confirmed later.</p>
     <p class="lopande">Background map © OpenStreetMap contributors, © CARTO.</p>
+    <p class="lopande">The species silhouettes are drawn from Artfakta's illustrations, SLU Artdatabanken.</p>
     <h2>Accessibility</h2>
     <p class="lopande">
       Read about the accessibility of the website and how to report problems:
@@ -56,6 +57,7 @@
     <h2>Licens</h2>
     <p class="lopande">Kartorna får användas enligt CC BY 4.0 (preliminärt): ange källan. Licensen bekräftas senare.</p>
     <p class="lopande">Bakgrundskarta © OpenStreetMap-bidragsgivare, © CARTO.</p>
+    <p class="lopande">Artsilhuetterna är gjorda ur Artfaktas illustrationer, SLU Artdatabanken.</p>
     <h2>Tillgänglighet</h2>
     <p class="lopande">
       Läs om webbplatsens tillgänglighet och hur du rapporterar brister:
