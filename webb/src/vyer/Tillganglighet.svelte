@@ -130,7 +130,11 @@
 <style>
   .sida {
     max-width: 42rem;
-    padding: 2rem 1.5rem 1rem;
+    margin: 1.5rem auto 3rem;
+    padding: 2rem 2rem 2rem;
+    background: var(--yta);
+    border: 1px solid var(--kortkant);
+    border-radius: 4px;
   }
   h1 {
     font-size: clamp(1.75rem, 4vw, 2.25rem);

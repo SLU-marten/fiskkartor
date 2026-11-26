@@ -233,6 +233,15 @@
     padding: 0 0.8rem;
     cursor: pointer;
   }
+  .knapp.mobil {
+    background: var(--tema);
+    color: #ffffff;
+  }
+  .knapp.mobil:hover {
+    background: var(--tema-mork);
+    border-color: var(--tema-mork);
+    color: #ffffff;
+  }
   .knapp:hover {
     border-color: var(--tema-mork);
     color: var(--tema-mork);

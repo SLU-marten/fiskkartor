@@ -18,11 +18,16 @@
 <style>
   .sidfot {
     margin-top: 3rem;
-    padding: 1.25rem 1.5rem 2rem;
-    border-top: 1px solid var(--linje);
-    background: var(--mjuk);
-    color: var(--dampad);
+    padding: 1.5rem 1.5rem 2.25rem;
+    background: var(--tema-mork);
+    color: #ffffff;
     font-size: 0.95rem;
+  }
+  .sidfot a {
+    color: #ffffff;
+  }
+  .sidfot :focus-visible {
+    outline-color: #ffffff;
   }
   p {
     margin: 0 0 0.5rem;

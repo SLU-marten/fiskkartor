@@ -81,6 +81,8 @@
     platshallare={t('sok_platshallare', lang)}
     onskriv={skriv}
     onval={skriv}
+    sokknapp={t('sok_knapp', lang)}
+    onsok={() => document.getElementById('traffrubrik')?.focus()}
   />
   <ul class="projekt">
     {#each projekt as p (p.namn)}
@@ -108,7 +110,7 @@
   </aside>
   <section aria-live="polite">
     <div class="rad">
-      <h2>{antalKartor(traffar.length, lang)}</h2>
+      <h2 id="traffrubrik" tabindex="-1">{antalKartor(traffar.length, lang)}</h2>
       {#if harFilter}
         <button type="button" class="rensa" onclick={rensa}>{t('rensa_filter', lang)}</button>
       {/if}

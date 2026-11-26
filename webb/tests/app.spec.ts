@@ -925,6 +925,54 @@ test.describe('Lagerval och teckenförklaring i kartan', () => {
   }
 });
 
+test.describe('kort, knappar och sidfot', () => {
+  test('sökknappen sitter ihop med fältet och flyttar fokus till träffarna', async ({ page }) => {
+    await page.goto(START());
+    const falt = (await page.getByRole('combobox').boundingBox())!;
+    const knapp = page.getByRole('button', { name: 'Sök', exact: true });
+    await expect(knapp).toHaveCSS('background-color', 'rgb(0, 118, 129)');
+    const k = (await knapp.boundingBox())!;
+    expect(Math.abs(k.x - (falt.x + falt.width))).toBeLessThanOrEqual(1);
+    await page.getByRole('combobox').fill('torsk');
+    await knapp.click();
+    await expect(page.locator('#traffrubrik')).toBeFocused();
+  });
+
+  test('Om-sidan och tillgänglighetssidan i vita kort', async ({ page }) => {
+    await page.goto(`${server.url}/dist/index.html?data=/tests/fixtures/data/#/om`);
+    await expect(page.locator('article.om')).toHaveCSS('background-color', 'rgb(255, 255, 255)');
+    await expect(page.locator('body')).toHaveCSS('background-color', 'rgb(238, 244, 246)');
+    await page.goto(`${server.url}/dist/index.html?data=/tests/fixtures/data/#/tillganglighet`);
+    await expect(page.locator('article.sida')).toHaveCSS('background-color', 'rgb(255, 255, 255)');
+  });
+
+  test('sidfoten är Havsdjup med vita länkar', async ({ page }) => {
+    await page.goto(START());
+    const fot = page.getByRole('contentinfo');
+    await expect(fot).toHaveCSS('background-color', 'rgb(0, 72, 81)');
+    await expect(fot.getByRole('link').first()).toHaveCSS('color', 'rgb(255, 255, 255)');
+  });
+
+  test('Ladda ned är fylld i Havsvik', async ({ page }) => {
+    await page.setViewportSize({ width: 390, height: 844 });
+    await cartoTom(page);
+    await page.goto(KARTA('torsk-test'));
+    const ladda = page.getByRole('button', { name: 'Ladda ned' });
+    await expect(ladda).toHaveCSS('background-color', 'rgb(0, 118, 129)');
+    await expect(ladda).toHaveCSS('color', 'rgb(255, 255, 255)');
+    const kopiera = page.getByRole('button', { name: 'Kopiera länk till vyn' });
+    await expect(kopiera).toHaveCSS('background-color', 'rgb(255, 255, 255)');
+    await expect(kopiera).toHaveCSS('border-top-color', 'rgb(0, 118, 129)');
+  });
+
+  test('kartvyns paneler är vita', async ({ page }) => {
+    await cartoTom(page);
+    await page.goto(KARTA('torsk-test'));
+    await expect(page.locator('.lista')).toHaveCSS('background-color', 'rgb(255, 255, 255)');
+    await expect(page.locator('.kartvy .panel')).toHaveCSS('background-color', 'rgb(255, 255, 255)');
+  });
+});
+
 test.describe('lagerbyte, kartbyte och versioner', () => {
   test('metadatans rubriker är dämpade och värdena tydliga', async ({ page }) => {
     await cartoTom(page);

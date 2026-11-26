@@ -132,6 +132,7 @@
   }
   .lista {
     overflow: auto;
+    background: var(--yta);
     padding: 0.75rem 1rem;
     border-right: 1px solid var(--linje);
     font-size: 0.95rem;
@@ -181,7 +182,7 @@
       gap: 0.5rem;
       height: 44px;
       padding: 0 1rem;
-      background: var(--mjuk);
+      background: var(--sida);
       border-bottom: 1px solid var(--linje);
     }
     .kartyta {
