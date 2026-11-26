@@ -570,7 +570,8 @@ test.describe('efter granskningen', () => {
   test('att byta karta många gånger läcker inga WebGL-ytor', async ({ page }) => {
     await cartoTom(page);
     const varningar: string[] = [];
-    page.on('console', (m) => /WebGL/.test(m.text()) && varningar.push(m.text()));
+    // Bara varningar om för många WebGL-ytor eller tappade ytor; prestandameddelanden från drivrutinen räknas inte.
+    page.on('console', (m) => /Too many active WebGL contexts|CONTEXT_LOST/i.test(m.text()) && varningar.push(m.text()));
     await page.goto(KARTA('torsk-test'));
     await vantaKarta(page);
     const titlar = ['Perch spawning, Baltic Sea (test)', 'Trålfångst, en klass (test)', 'Torsk större än 20 cm, uppväxt, västkusten (test)'];
