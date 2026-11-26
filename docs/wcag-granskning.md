@@ -1,6 +1,6 @@
 # WCAG-granskning av Fiskkartor
 
-**Datum:** 25 november 2026. **Nivå:** WCAG 2.1 AA, som krävs av lagen (2018:1937) om tillgänglighet till
+**Datum:** 25 november 2026, uppdaterad 26 november 2026 efter fas 4 (havslooken). **Nivå:** WCAG 2.1 AA, som krävs av lagen (2018:1937) om tillgänglighet till
 digital offentlig service. **Vem:** egen granskning, gjord av Claude med Playwright. Skärmläsartestet återstår, och
 Mårten gör det.
 
@@ -42,6 +42,22 @@ Granskningen sammanfattas i tillgänglighetsredogörelsen på `#/tillganglighet`
 | 4.1.2 Namn, roll och värde | Lagerval, menyknappen, greppet och reglaget | tester och axe | `aria-expanded` följer läget, och reglaget har värdet i procent som text. | – |
 | 4.1.3 Statusmeddelanden | Kopierad, Sparar bilden, Laddar kartan och fel | genomläsning | `role="status"`, `aria-live` och `role="alert"` finns. | – |
 | Skärmläsare | VoiceOver eller NVDA på en karta | – | Inte gjort ännu (Mårten). | – |
+
+## Fas 4: havslooken
+
+Fas 4 gav appen SLU:s havsfärger, fisksiluetter, en meny som glider in på telefon och en ny startsida med artkort.
+Axe och hela testsviten kördes igen, med 0 överträdelser. Det här kontrollerades särskilt:
+
+| Kriterium | Vad som kontrollerades | Hur | Resultat |
+|---|---|---|---|
+| 1.1.1 Icke-textuellt innehåll | Fiskmönstret i sidhuvudet och menyn, silhuetterna i artkort och listor, kartikonen i kortens länkar | genomläsning och axe | Allt är dekor: mönstret är en bakgrundsbild och silhuetterna och ikonerna är `aria-hidden`. Artens namn står alltid som text bredvid. |
+| 1.4.3 Kontrast (text) | Vit text på Havsvik (sidhuvud, knappar, valda filter), Havsvik på sidans bakgrund, vit text på Havsdjup (sidfot, menyknapp) | `farger.test.ts` och axe | Vitt på Havsvik 5,37:1, och minst 4,69:1 där en fisk ligger bakom texten (fiskarna är vita med 7,5 % täckning). Havsvik på sidans bakgrund 4,84:1. Vitt på Havsdjup 10,3:1. |
+| 1.4.11 Kontrast för icke-text | Kanter på filterknapparna och sökfältet | `farger.test.ts` | Kanterna är 3,4:1 mot vitt. Kortens kanter är dekor och avgränsar inget reglage. |
+| 1.4.10 Omflödning | Startsidans rutnät och filterkort vid 320 px | test `omflödning vid 320 px` | Ingen vågrät rullning. Långa filtervärden radbryts inuti knappen. |
+| 2.1.1 Tangentbord, 2.4.3 Fokusordning | Menyn på telefon | tester i `app.spec.ts` | Fokus flyttas till Stäng menyn när menyn öppnas. Escape och Stäng menyn stänger den och lämnar fokus på Meny, och menyn stängs när fokus lämnar den. Stängd är menyn `visibility: hidden` och går inte att tabba till. |
+| 2.4.7 Synligt fokus | Fokusramen i sidhuvudet, menyn och sidfoten | genomläsning och tester | På Havsvik och Havsdjup är ramen vit. |
+| 2.5.5 Målstorlek (AAA, frivilligt) | Kartlänkar, filterknappar och sökknappen på telefon | test `mobil: kartlänkar och filterknappar är minst 44 px höga` | Minst 44 px höga. |
+| 4.1.2 Namn, roll och värde | Kartlänkarna i artkorten och sökknappen | tester | Länken heter hela kartans namn, även när kortet visar en kortare etikett. Sökknappen heter Sök också när den bara visar förstoringsglaset. |
 
 ## Slutgranskning
 
