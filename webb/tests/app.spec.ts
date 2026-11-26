@@ -113,8 +113,8 @@ test.describe('startsidan', () => {
 
   test('artkorten har artens silhuett', async ({ page }) => {
     await page.goto(START());
-    await expect(page.locator('.artkort').filter({ hasText: 'Torsk' }).locator('svg')).toHaveCount(1);
-    await expect(page.locator('.artkort').filter({ hasText: 'Trålfångst' }).locator('svg')).toHaveCount(0);
+    await expect(page.locator('.artkort').filter({ hasText: 'Torsk' }).locator('.bild svg')).toHaveCount(1);
+    await expect(page.locator('.artkort').filter({ hasText: 'Trålfångst' }).locator('.bild svg')).toHaveCount(0);
   });
 
   test('högst 12 arter först och sedan Visa alla', async ({ page }) => {
