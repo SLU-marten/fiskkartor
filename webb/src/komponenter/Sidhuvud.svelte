@@ -1,7 +1,8 @@
 <script lang="ts">
-  // Sidhuvudet enligt SLU:s profil: logotypen i färg överst till vänster med en fri zon på halva
-  // logotypens höjd, portalens namn och institutionen. Under 40rem ligger menyn bakom en knapp.
-  import logotyp from '../assets/slu-logotyp.png';
+  // Sidhuvudet i Havsvik med ett mönster av fisksiluetter: SLU:s vita logotyp överst till vänster
+  // (den fria zonen är inbyggd i bilden), portalens namn och institutionen. Under 40rem ligger menyn
+  // bakom en knapp.
+  import logotyp from '../assets/slu-logotyp-vit.png';
   import type { Sprak, Vy } from '../lib/rutt';
   import { t } from '../lib/text';
 
@@ -62,7 +63,10 @@
     aria-expanded={oppen}
     aria-controls="huvudmeny"
     bind:this={knapp}
-    onclick={() => (oppen = !oppen)}>{t('meny', lang)}</button
+    onclick={() => (oppen = !oppen)}
+    ><svg class="streck" viewBox="0 0 24 24" aria-hidden="true"
+      ><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none" /></svg
+    >{t('meny', lang)}</button
   >
   <nav id="huvudmeny" class:oppen aria-label={t('huvudmeny', lang)}>
     <a href={lank('start')} aria-current={vy === 'start' ? 'page' : undefined} onclick={() => stang(false)}>{t('meny_start', lang)}</a>
@@ -83,11 +87,14 @@
     height: 4.5rem;
     box-sizing: border-box;
     padding: 0 1.5rem 0 0;
-    /* Linjen är en skugga och inte en kant, så att logotypens vita bakgrund (hela höjden) inte
-       täcker den. z-index lägger den över innehållet nedanför. */
-    box-shadow: 0 1px 0 var(--linje);
+    /* Bandet i Havsvik med fiskmönstret (publicering/inst/skript/silhuetter.R). Mönstret är lika
+       högt som sidhuvudet och upprepas i sidled. z-index lägger sidhuvudet över innehållet nedanför. */
     z-index: 10;
-    background: var(--yta);
+    background: var(--tema) url('../assets/arter/monster-sidhuvud.svg') 0 0 / auto 100% repeat-x;
+    color: #ffffff;
+  }
+  .sidhuvud :focus-visible {
+    outline-color: #ffffff;
   }
   .logotyp {
     display: block;
@@ -103,32 +110,40 @@
     font-weight: 500;
     font-size: 1.4rem;
     text-decoration: none;
-    color: var(--text);
+    color: #ffffff;
   }
   .institution {
     font-size: 0.85rem;
-    color: var(--dampad);
+    color: #ffffff;
   }
   nav {
     margin-left: auto;
     display: flex;
     gap: 1.5rem;
   }
+  nav a {
+    color: #ffffff;
+  }
   nav a[aria-current='page'] {
-    color: var(--text);
     text-decoration: none;
-    border-bottom: 2px solid var(--tema);
+    border-bottom: 2px solid #ffffff;
   }
   .menyknapp {
     display: none;
+    align-items: center;
+    gap: 0.5rem;
     margin-left: auto;
     min-height: 44px;
-    padding: 0 0.75rem;
-    border: 1px solid var(--tema);
-    border-radius: 4px;
-    background: var(--yta);
-    color: var(--tema);
+    padding: 0 0.85rem;
+    border: 0;
+    border-radius: 2px;
+    background: var(--tema-mork);
+    color: #ffffff;
     cursor: pointer;
+  }
+  .streck {
+    width: 20px;
+    height: 20px;
   }
   .hopp {
     position: absolute;
@@ -137,6 +152,7 @@
     z-index: 20;
     padding: 0.5rem 0.75rem;
     background: var(--yta);
+    color: var(--tema);
     border: 2px solid var(--tema);
     border-radius: 4px;
     transform: translateY(-200%);
@@ -161,7 +177,7 @@
   }
   @media (max-width: 40rem) {
     .menyknapp {
-      display: block;
+      display: flex;
     }
     nav {
       display: none;
@@ -187,6 +203,20 @@
   @media (max-width: 22.5rem) {
     .institution {
       display: none;
+    }
+  }
+  /* Tvingade färger tar bort bakgrunden; texten och länkarna får systemets färger. */
+  @media (forced-colors: active) {
+    .sidhuvud,
+    .institution {
+      color: CanvasText;
+    }
+    .namn,
+    nav a {
+      color: LinkText;
+    }
+    .sidhuvud :focus-visible {
+      outline-color: Highlight;
     }
   }
 </style>

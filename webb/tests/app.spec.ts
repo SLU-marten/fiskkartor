@@ -651,6 +651,49 @@ test.describe('sidhuvud, sidfot och titlar', () => {
     await expect(page.getByRole('img', { name: 'SLU, Sveriges lantbruksuniversitet' })).toHaveAttribute('src', /\.png$/);
   });
 
+  test('logotypen är den vita', async ({ page }) => {
+    await page.goto(START());
+    await expect(page.getByRole('img', { name: 'SLU, Sveriges lantbruksuniversitet' })).toHaveAttribute('src', /slu-logotyp-vit.*\.png$/);
+  });
+
+  test('sidhuvudet är Havsvik med fiskmönstret', async ({ page }) => {
+    await page.goto(START());
+    const huvud = page.getByRole('banner');
+    await expect(huvud).toHaveCSS('background-color', 'rgb(0, 118, 129)');
+    expect(await huvud.evaluate((e) => getComputedStyle(e).backgroundImage)).toContain('monster-sidhuvud');
+    await expect(huvud.getByRole('link', { name: 'Fiskkartor' })).toHaveCSS('color', 'rgb(255, 255, 255)');
+    await expect(huvud.getByText('Institutionen för akvatiska resurser')).toHaveCSS('color', 'rgb(255, 255, 255)');
+  });
+
+  test('sidhuvudet vid 320 px', async ({ page }) => {
+    await page.setViewportSize({ width: 320, height: 640 });
+    await page.goto(START());
+    const namn = (await page.getByRole('banner').getByRole('link', { name: 'Fiskkartor' }).boundingBox())!;
+    const knapp = (await page.getByRole('button', { name: 'Meny' }).boundingBox())!;
+    expect(namn.x + namn.width).toBeLessThanOrEqual(knapp.x);
+    expect(knapp.x + knapp.width).toBeLessThanOrEqual(320);
+  });
+
+  test('fokusramen i sidhuvudet är vit', async ({ page }) => {
+    await page.goto(START());
+    const namn = page.getByRole('banner').getByRole('link', { name: 'Fiskkartor' });
+    await page.keyboard.press('Tab');
+    await page.keyboard.press('Tab');
+    await expect(namn).toBeFocused();
+    await expect(namn).toHaveCSS('outline-color', 'rgb(255, 255, 255)');
+  });
+
+  test('tvingade färger: sidhuvudets text och fokus syns', async ({ page }) => {
+    await page.emulateMedia({ forcedColors: 'active' });
+    await page.goto(START());
+    const namn = page.getByRole('banner').getByRole('link', { name: 'Fiskkartor' });
+    await expect(namn).toBeVisible();
+    await page.keyboard.press('Tab');
+    await page.keyboard.press('Tab');
+    await expect(namn).toBeFocused();
+    await expect(namn).toHaveCSS('outline-width', '3px');
+  });
+
   // PNG-filen har SLU:s fria zon inbyggd: märket är halva bildens höjd. Märket ska vara minst 9 mm
   // (cirka 34 px), så bilden är minst 68 px hög, också på mobil.
   for (const [bredd, hojd] of [[1280, 72], [375, 68]] as const) {
