@@ -148,8 +148,9 @@
   }
   /* På en telefon får fältet platsen: knappen visar bara förstoringsglaset men heter fortfarande Sök. */
   @media (max-width: 40rem) {
+    /* 16 px: inte mindre, annars zoomar iOS in när fältet får fokus. */
     input {
-      font-size: 1.05rem;
+      font-size: 1rem;
     }
     .sokknapp {
       width: 48px;

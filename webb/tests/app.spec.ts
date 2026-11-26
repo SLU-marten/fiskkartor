@@ -1424,8 +1424,11 @@ test.describe('slutputs av startsidan', () => {
       await page.setViewportSize({ width: 360, height: 800 });
       await page.goto(START() + lang);
       const falt = page.getByRole('combobox');
-      const { text, ledigt } = await falt.evaluate((e: HTMLInputElement) => {
+      const { text, ledigt } = await falt.evaluate(async (e: HTMLInputElement) => {
         const s = getComputedStyle(e);
+        // Mät med sidans typsnitt, inte med reservtypsnittet medan det laddas.
+        await document.fonts.load(`${s.fontSize} ${s.fontFamily}`);
+        await document.fonts.ready;
         const ctx = document.createElement('canvas').getContext('2d')!;
         ctx.font = `${s.fontSize} ${s.fontFamily}`;
         const ledigt = e.clientWidth - parseFloat(s.paddingLeft) - parseFloat(s.paddingRight);
