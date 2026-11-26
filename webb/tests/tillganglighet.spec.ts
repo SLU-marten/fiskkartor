@@ -19,7 +19,7 @@ test.afterAll(async () => {
 type Fall = { namn: string; adress: () => string; karta?: boolean; sedan?: (page: Page) => Promise<void> };
 
 const klicka = (namn: string) => async (page: Page) => {
-  await page.getByRole('button', { name: namn }).click();
+  await page.getByRole('button', { name: namn, exact: true }).click();
 };
 
 const DATOR: Fall[] = [

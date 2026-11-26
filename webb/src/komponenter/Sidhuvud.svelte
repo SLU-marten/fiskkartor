@@ -3,6 +3,7 @@
   // (den fria zonen är inbyggd i bilden), portalens namn och institutionen. Under 40rem ligger menyn
   // bakom en knapp.
   import logotyp from '../assets/slu-logotyp-vit.png';
+  import { tick } from 'svelte';
   import type { Sprak, Vy } from '../lib/rutt';
   import { t } from '../lib/text';
 
@@ -12,6 +13,8 @@
   let oppen = $state(false);
   let rot: HTMLElement;
   let knapp: HTMLButtonElement;
+  let stangknapp: HTMLButtonElement;
+  let slojan: HTMLDivElement;
 
   function stang(fokus: boolean) {
     oppen = false;
@@ -33,10 +36,18 @@
       const nasta = e.relatedTarget as Node | null;
       if (nasta && !rot.contains(nasta)) stang(false);
     };
+    // Ett tryck på den nedtonade ytan bakom mobilpanelen stänger menyn.
+    const pa_slojan = () => stang(false);
     document.addEventListener('pointerdown', utanfor);
     rot.addEventListener('keydown', tangent);
     rot.addEventListener('focusout', lamnar);
+    slojan.addEventListener('pointerdown', pa_slojan);
+    // På mobil får stängknappen fokus när panelen öppnas.
+    void tick().then(() => {
+      if (oppen && stangknapp.offsetParent !== null) stangknapp.focus();
+    });
     return () => {
+      slojan.removeEventListener('pointerdown', pa_slojan);
       document.removeEventListener('pointerdown', utanfor);
       rot.removeEventListener('keydown', tangent);
       rot.removeEventListener('focusout', lamnar);
@@ -68,10 +79,26 @@
       ><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none" /></svg
     >{t('meny', lang)}</button
   >
+  <div class="slojan" class:oppen bind:this={slojan} aria-hidden="true"></div>
   <nav id="huvudmeny" class:oppen aria-label={t('huvudmeny', lang)}>
+    <div class="panelhuvud">
+      <span class="panelnamn">{t('portalnamn', lang)}</span>
+      <button type="button" class="stang" aria-label={t('stang_meny', lang)} bind:this={stangknapp} onclick={() => stang(true)}
+        ><svg viewBox="0 0 24 24" aria-hidden="true"
+          ><path d="M6 6l12 12M18 6 6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" /></svg
+        ></button
+      >
+    </div>
     <a href={lank('start')} aria-current={vy === 'start' ? 'page' : undefined} onclick={() => stang(false)}>{t('meny_start', lang)}</a>
     <a href={lank('om')} aria-current={vy === 'om' ? 'page' : undefined} onclick={() => stang(false)}>{t('meny_om', lang)}</a>
+    <a
+      class="bara-mobil"
+      href={lank('tillganglighet')}
+      aria-current={vy === 'tillganglighet' ? 'page' : undefined}
+      onclick={() => stang(false)}>{t('meny_tillganglighet', lang)}</a
+    >
     <a href={spraklank} hreflang={lang === 'sv' ? 'en' : 'sv'} data-testid="sprak" onclick={() => stang(false)}>{t('byt_sprak', lang)}</a>
+    <p class="avsandare">{t('avsandare', lang)}</p>
   </nav>
 </header>
 
@@ -175,29 +202,104 @@
       font-size: 0.8rem;
     }
   }
+  .panelhuvud,
+  .bara-mobil,
+  .avsandare,
+  .slojan {
+    display: none;
+  }
+  /* Mobil: menyn är en panel i Havsvik som glider in från höger, med fiskmönstret (varje art en gång)
+     och en nedtonad yta bakom. Stängd är den osynlig, så att Tab inte når länkarna. */
   @media (max-width: 40rem) {
     .menyknapp {
       display: flex;
     }
     nav {
-      display: none;
-    }
-    nav.oppen {
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 2;
+      width: min(316px, 85vw);
+      box-sizing: border-box;
       display: flex;
       flex-direction: column;
       gap: 0;
-      position: absolute;
-      top: 100%;
-      right: 0;
-      left: 0;
-      z-index: 15;
-      background: var(--yta);
-      border-bottom: 1px solid var(--linje);
-      box-shadow: 0 4px 8px rgb(0 0 0 / 12%);
+      margin: 0;
+      padding: 0.5rem 1.25rem 1.5rem;
+      overflow-y: auto;
+      background: var(--tema) url('../assets/arter/monster-meny.svg') 0 0 / 100% auto no-repeat;
+      color: #ffffff;
+      transform: translateX(100%);
+      visibility: hidden;
+      transition:
+        transform 200ms ease,
+        visibility 0s linear 200ms;
     }
-    nav.oppen a {
-      padding: 0.75rem 1rem;
-      border-top: 1px solid var(--linje);
+    nav.oppen {
+      transform: none;
+      visibility: visible;
+      transition: transform 200ms ease;
+    }
+    .panelhuvud {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 52px;
+      border-bottom: 1px solid rgb(255 255 255 / 30%);
+    }
+    .panelnamn {
+      font-size: 1.5rem;
+      font-weight: 500;
+    }
+    .stang {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      margin-right: -0.5rem;
+      border: 0;
+      background: transparent;
+      color: #ffffff;
+      cursor: pointer;
+    }
+    .stang svg {
+      width: 24px;
+      height: 24px;
+    }
+    nav a,
+    .bara-mobil {
+      display: flex;
+      align-items: center;
+      min-height: 52px;
+      padding-left: 0.75rem;
+      border-bottom: 1px solid rgb(255 255 255 / 30%);
+      font-size: 1.15rem;
+      text-decoration: none;
+    }
+    nav a[aria-current='page'] {
+      border-bottom: 1px solid rgb(255 255 255 / 30%);
+      box-shadow: inset 4px 0 0 #ffffff;
+    }
+    .avsandare {
+      display: block;
+      margin: 1.25rem 0 0;
+      font-size: 0.95rem;
+      line-height: 1.45;
+    }
+    .slojan.oppen {
+      display: block;
+      position: fixed;
+      inset: 0;
+      z-index: 1;
+      background: rgb(0 20 24 / 50%);
+    }
+  }
+  @media (max-width: 40rem) and (prefers-reduced-motion: reduce) {
+    nav,
+    nav.oppen {
+      transition: none;
     }
   }
   @media (max-width: 22.5rem) {

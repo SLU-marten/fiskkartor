@@ -13,6 +13,11 @@ export const TEXT = {
   meny_om: { sv: 'Om portalen', en: 'About' },
   meny_tillganglighet: { sv: 'Tillgänglighet', en: 'Accessibility' },
   meny: { sv: 'Meny', en: 'Menu' },
+  stang_meny: { sv: 'Stäng menyn', en: 'Close menu' },
+  avsandare: {
+    sv: 'Fiskkartor tas fram av SLU Aqua, Institutionen för akvatiska resurser.',
+    en: 'Fish maps is produced by SLU Aqua, Department of Aquatic Resources.',
+  },
   huvudmeny: { sv: 'Huvudmeny', en: 'Main menu' },
   zooma_in: { sv: 'Zooma in', en: 'Zoom in' },
   zooma_ut: { sv: 'Zooma ut', en: 'Zoom out' },

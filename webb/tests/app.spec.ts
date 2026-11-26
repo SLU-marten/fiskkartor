@@ -670,7 +670,7 @@ test.describe('sidhuvud, sidfot och titlar', () => {
     await page.setViewportSize({ width: 320, height: 640 });
     await page.goto(START());
     const namn = (await page.getByRole('banner').getByRole('link', { name: 'Fiskkartor' }).boundingBox())!;
-    const knapp = (await page.getByRole('button', { name: 'Meny' }).boundingBox())!;
+    const knapp = (await page.getByRole('button', { name: 'Meny', exact: true }).boundingBox())!;
     expect(namn.x + namn.width).toBeLessThanOrEqual(knapp.x);
     expect(knapp.x + knapp.width).toBeLessThanOrEqual(320);
   });
@@ -744,7 +744,7 @@ test.describe('sidhuvud, sidfot och titlar', () => {
   test('mobil: menyn ligger bakom Meny-knappen', async ({ page }) => {
     await page.setViewportSize({ width: 375, height: 812 });
     await page.goto(START());
-    const meny = page.getByRole('button', { name: 'Meny' });
+    const meny = page.getByRole('button', { name: 'Meny', exact: true });
     await expect(meny).toHaveAttribute('aria-expanded', 'false');
     await expect(page.getByRole('banner').getByRole('link', { name: 'Om portalen' })).toBeHidden();
     await meny.click();
@@ -758,15 +758,73 @@ test.describe('sidhuvud, sidfot och titlar', () => {
   test('mobil: menyn stängs av en länk och av ett klick utanför', async ({ page }) => {
     await page.setViewportSize({ width: 375, height: 812 });
     await page.goto(START());
-    const meny = page.getByRole('button', { name: 'Meny' });
+    const meny = page.getByRole('button', { name: 'Meny', exact: true });
     await meny.click();
     await page.getByRole('banner').getByRole('link', { name: 'Om portalen' }).click();
     await expect(page).toHaveURL(/#\/om/);
     await expect(meny).toHaveAttribute('aria-expanded', 'false');
     await meny.click();
     await expect(meny).toHaveAttribute('aria-expanded', 'true');
-    await page.getByRole('main').click({ position: { x: 10, y: 300 } });
+    // Ett tryck på den nedtonade ytan till vänster om panelen.
+    await page.mouse.click(20, 400);
     await expect(meny).toHaveAttribute('aria-expanded', 'false');
+  });
+
+  test('mobil: menyn glider in från höger med stängknapp', async ({ page }) => {
+    await page.setViewportSize({ width: 375, height: 812 });
+    await page.goto(START());
+    const meny = page.getByRole('button', { name: 'Meny', exact: true });
+    await meny.click();
+    const panel = page.getByRole('navigation', { name: 'Huvudmeny' });
+    await expect(panel).toBeVisible();
+    await expect(panel.getByRole('link', { name: 'Tillgänglighet' })).toBeVisible();
+    await expect(panel.getByText('Fiskkartor tas fram av SLU Aqua, Institutionen för akvatiska resurser.')).toBeVisible();
+    const stang = page.getByRole('button', { name: 'Stäng menyn' });
+    await expect(stang).toBeFocused();
+    await expect(async () => {
+      const ruta = (await panel.boundingBox())!;
+      expect(Math.round(ruta.x + ruta.width)).toBe(375);
+      expect(Math.round(ruta.width)).toBe(316);
+    }).toPass();
+    await stang.click();
+    await expect(meny).toHaveAttribute('aria-expanded', 'false');
+    await expect(meny).toBeFocused();
+  });
+
+  test('mobil: menyns mönster', async ({ page }) => {
+    await page.setViewportSize({ width: 375, height: 812 });
+    await page.goto(START());
+    await page.getByRole('button', { name: 'Meny', exact: true }).click();
+    const panel = page.getByRole('navigation', { name: 'Huvudmeny' });
+    expect(await panel.evaluate((e) => getComputedStyle(e).backgroundImage)).toContain('monster-meny');
+    await expect(panel).toHaveCSS('background-color', 'rgb(0, 118, 129)');
+  });
+
+  test('mobil: stängd meny går inte att nå med Tab', async ({ page }) => {
+    await page.setViewportSize({ width: 375, height: 812 });
+    await page.goto(START());
+    const panel = page.locator('#huvudmeny');
+    await expect(panel).toHaveCSS('visibility', 'hidden');
+    await page.getByRole('button', { name: 'Meny', exact: true }).focus();
+    await page.keyboard.press('Tab');
+    await expect(page.getByRole('link', { name: 'Om portalen' })).not.toBeFocused();
+  });
+
+  test('mobil: menyn går att skrolla på en låg skärm', async ({ page }) => {
+    await page.setViewportSize({ width: 812, height: 360 });
+    await page.goto(START());
+    await page.setViewportSize({ width: 600, height: 360 });
+    await page.getByRole('button', { name: 'Meny', exact: true }).click();
+    const sista = page.getByRole('navigation', { name: 'Huvudmeny' }).getByRole('link', { name: 'In English' });
+    await sista.scrollIntoViewIfNeeded();
+    await expect(sista).toBeInViewport();
+  });
+
+  test('mobil: menyn utan animering vid reducerad rörelse', async ({ page }) => {
+    await page.emulateMedia({ reducedMotion: 'reduce' });
+    await page.setViewportSize({ width: 375, height: 812 });
+    await page.goto(START());
+    await expect(page.locator('#huvudmeny')).toHaveCSS('transition-duration', '0s');
   });
 
   test('hopplänken går förbi sidhuvudet', async ({ page }) => {
@@ -1150,7 +1208,7 @@ test.describe('efter slutgranskningen', () => {
   test('fokus som lämnar mobilmenyn stänger den', async ({ page }) => {
     await page.setViewportSize({ width: 375, height: 812 });
     await page.goto(START());
-    const meny = page.getByRole('button', { name: 'Meny' });
+    const meny = page.getByRole('button', { name: 'Meny', exact: true });
     await meny.click();
     await page.getByRole('banner').getByRole('link', { name: 'In English' }).focus();
     await page.keyboard.press('Tab');
