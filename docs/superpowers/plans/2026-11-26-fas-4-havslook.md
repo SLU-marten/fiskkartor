@@ -501,3 +501,69 @@ it('arVuxen gäller bara vuxen', () => {
 - [ ] **Step 3:** Kör hela sviten igen, med R-sviten:
   `LANG=C.UTF-8 Rscript -e 'testthat::test_local("publicering")'`. Expected: allt godkänt.
 - [ ] **Step 4: Commit** `docs: granskning av havslooken`.
+
+## Tillägg 26 november 01:09–01:11 (Mårtens synpunkter under bygget)
+
+### Task 9: Tydligare skillnad mellan rubrik och värde i metadatalistan
+
+**Files:**
+- Modify: `webb/src/komponenter/Metadata.svelte`.
+- Test: `webb/tests/app.spec.ts`.
+
+- [ ] **Step 1: Skriv det fallerande E2E-testet `metadatans rubriker är dämpade och värdena tydliga`**,
+  på `KARTA('torsk-test')` vid 1280 px:
+  - `dt` har `color` `rgb(89, 89, 89)` och `font-weight` 400;
+  - `dd` har `color` `rgb(34, 34, 34)`;
+  - `dd` har en teckenstorlek minst 2 px större än `dt`.
+- [ ] **Step 2:** Kör testet. Expected: FAIL.
+- [ ] **Step 3: Implementera.**
+  - `dt`: 0.85rem, vikt 400, `var(--dampad)`, `margin-top: 0.75rem`.
+  - `dd`: 1.05rem, `var(--text)`.
+- [ ] **Step 4:** Kör testet. Expected: PASS.
+- [ ] **Step 5: Commit** `feat(webb): tydligare rubriker i metadatan`.
+
+### Task 10: Filtervärden som bara skiljer sig i skiftläge slås ihop
+
+**Files:**
+- Modify: `webb/src/lib/sok.ts` och `webb/src/komponenter/Filter.svelte`.
+- Test: `webb/tests/sok.test.ts`.
+
+**Interfaces:**
+- Produces: `lika(a: string, b: string): boolean`, sant när `a` och `b` är lika utan hänsyn till
+  skiftläge och blanksteg i kanterna.
+
+- [ ] **Step 1: Skriv de fallerande testerna:**
+  - **`fasetter slår ihop värden som bara skiljer sig i skiftläge`:** fyra kartor med livsmiljön
+    "Demersal (bottennära)" ×2 och "Demersal (Bottennära)" ×1 ger en enda post
+    `{ varde: 'Demersal (bottennära)', antal: 3 }`. Den vanligaste stavningen vinner, och vid lika
+    antal den första i bokstavsordning.
+  - **`sok matchar filtervärden utan hänsyn till skiftläge`:** filtret
+    `livsmiljo: ['Demersal (bottennära)']` ger alla tre kartorna.
+- [ ] **Step 2:** Kör `npx vitest run tests/sok.test.ts`. Expected: FAIL.
+- [ ] **Step 3: Implementera.**
+  - `fasetter` grupperar på `toLocaleLowerCase('sv')` av det trimmade värdet.
+  - `sok` jämför med `lika`.
+  - `Filter.svelte` använder `lika` där den jämför valda värden med fasetterna, både för valt läge
+    och för valda värden som saknas i fasetten.
+- [ ] **Step 4:** Kör `npx vitest run` och `npm run build`. Expected: godkänt.
+- [ ] **Step 5: Commit** `fix(webb): filtervärden som bara skiljer sig i skiftläge slås ihop`.
+- [ ] **Step 6: Lista värdena** som skiljer sig bara i skiftläge i katalogen på grenen data (för
+  Mårten).
+
+### Task 11: Projektkorten under sökrutan tas bort
+
+**Files:**
+- Modify: `webb/src/vyer/Start.svelte`.
+- Test: `webb/tests/app.spec.ts`.
+
+- [ ] **Step 1: Ändra testerna.**
+  - Testet `valt projektkort markeras` tas bort.
+  - Nytt test: **`startsidan har inga projektkort`**: `[data-testid^="projekt-"]` har antalet 0, och
+    filtret Projekt finns kvar (gruppen "Projekt").
+  - Andra tester som klickar på projektkorten skrivs om till att använda filtret.
+- [ ] **Step 2:** Kör testerna. Expected: det nya testet FAIL.
+- [ ] **Step 3: Implementera.** Ta bort `ul.projekt` och dess stilar, och beräkningen av projekten
+  om inget annat använder den.
+- [ ] **Step 4:** Kör `npm run build` och `npx playwright test tests/app.spec.ts -g "projekt|startsidan"`.
+  Expected: godkänt.
+- [ ] **Step 5: Commit** `feat(webb): projektkorten under sökrutan tas bort`.
