@@ -632,3 +632,20 @@ Tester:
 - enhetstest för krockande etiketter;
 - E2E för kartlänkens stil och det klickbara enkelkortet, "Fler filter", 44 px på mobil och källan
   på Om-sidan.
+
+## Tillägg: slutputs efter skärmbildsgranskningen (inom Task 8)
+
+Skärmbilderna med den riktiga katalogen (58 arter, 75 kartor) visade några ojämnheter. De rättades
+med ett test för varje:
+
+- **Sidfoten** linjerar med sidans innehåll (en gemensam `.behallare` i `stil.css`, 75rem bred).
+- **Marginalen på telefon** är 16 px för både text och kort.
+- **Utfällbara rubriker** (Filtrera, Fler filter, Alla kartor) har en egen pil som vänds när de
+  öppnas, i stället för webbläsarens triangel.
+- **Långa filtervärden** radbryts vänsterställt, och antalet står kvar på sista raden. Filterkortet
+  är 18rem brett, så att källornas namn oftast får plats på en rad.
+- **Sökfältet på telefon:** knappen visar bara förstoringsglaset men heter fortfarande Sök, och
+  platshållaren är kortare ("Till exempel torsk eller Östersjön"), så att den får plats vid 360 px.
+- **Tomt läge:** utan träffar finns knappen "Visa alla kartor", som tömmer sökningen och filtren, och
+  filterkortet säger "Inga filter passar sökningen."
+- **Om-sidan och tillgänglighetssidan** har samma bredd (42rem) och rubrikvikt som startsidan.

@@ -241,7 +241,8 @@ att visa alla (01:22). Projektkorten under sökrutan tas bort (01:11).
   - till höger kortet "Så läser du kartorna", med teckenförklaringen för klassade kartor (Turkos och
     Havsdjup) och kontinuerliga kartor (havsskalan), och en länk till Om-sidan.
   - På mobil hamnar kortet längst ned på sidan.
-- **Under rutan** ligger filtren till vänster i ett vitt kort, 17rem brett, och arterna till höger.
+- **Under rutan** ligger filtren till vänster i ett vitt kort, 18rem brett (17rem i skissen; breddat
+  så att källornas namn får plats på en rad), och arterna till höger.
   Fältet Art visas inte i filtren, eftersom korten är artlistan. Det visas ändå om adressen har
   ett art-filter.
 - **Ett kort per art:**
