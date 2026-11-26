@@ -70,7 +70,7 @@
 
 <style>
   .om {
-    max-width: 40rem;
+    max-width: 42rem;
     margin: 1.5rem auto 3rem;
     padding: 2rem 2rem 2.5rem;
     background: var(--yta);
@@ -79,6 +79,7 @@
   }
   h1 {
     font-size: clamp(1.75rem, 4vw, 2.25rem);
+    font-weight: 400;
   }
   h2 {
     font-size: 1.2rem;

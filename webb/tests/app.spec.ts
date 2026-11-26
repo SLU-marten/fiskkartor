@@ -1478,4 +1478,20 @@ test.describe('slutputs av startsidan', () => {
     await page.goto(START() + '?q=xyzq');
     await expect(page.locator('.filterkort').getByText('Inga filter passar sökningen.')).toBeVisible();
   });
+
+  test('Om-sidan och tillgänglighetssidan har samma bredd och rubrikstil som startsidan', async ({ page }) => {
+    await page.setViewportSize({ width: 1280, height: 900 });
+    const matt = async (vy: string, sel: string) => {
+      await page.goto(`${server.url}/dist/index.html?data=/tests/fixtures/data/#/${vy}`);
+      const h1 = page.getByRole('heading', { level: 1 });
+      return { bredd: (await page.locator(sel).boundingBox())!.width, vikt: await h1.evaluate((e) => getComputedStyle(e).fontWeight) };
+    };
+    const om = await matt('om', 'article.om');
+    const tg = await matt('tillganglighet', 'article.sida');
+    expect(om.bredd).toBe(tg.bredd);
+    await page.goto(START());
+    const start = await page.getByRole('heading', { level: 1 }).evaluate((e) => getComputedStyle(e).fontWeight);
+    expect(om.vikt).toBe(start);
+    expect(tg.vikt).toBe(start);
+  });
 });
