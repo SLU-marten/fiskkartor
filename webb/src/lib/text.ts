@@ -37,6 +37,22 @@ export const TEXT = {
   forsok_igen: { sv: 'Försök igen', en: 'Try again' },
   kontakt: { sv: 'Frågor', en: 'Questions' },
   hitta_karta: { sv: 'Hitta en fiskkarta', en: 'Find a fish map' },
+  start_ingress: {
+    sv: 'Kartor över områden som är viktiga för fisk i svenska hav och kustvatten, framtagna av SLU Aqua. Sök på art, område eller projekt, eller bläddra bland arterna nedan.',
+    en: 'Maps of areas that are important for fish in Swedish seas and coastal waters, produced by SLU Aqua. Search by species, area or project, or browse the species below.',
+  },
+  lasa_rubrik: { sv: 'Så läser du kartorna', en: 'How to read the maps' },
+  lasa_klassad: {
+    sv: 'Klassade kartor visar områden som är viktiga eller mycket viktiga för arten under ett livsstadium.',
+    en: 'Classified maps show areas that are important or very important for the species at a life stage.',
+  },
+  lasa_kontinuerlig: { sv: 'Kontinuerliga kartor visar modellens sannolikhet.', en: "Continuous maps show the model's probability." },
+  lasa_lank: { sv: 'Mer om kartorna och metoderna', en: 'More about the maps and methods' },
+  viktigt: { sv: 'Viktigt', en: 'Important' },
+  mycket_viktigt: { sv: 'Mycket viktigt', en: 'Very important' },
+  lag: { sv: 'låg', en: 'low' },
+  hog: { sv: 'hög', en: 'high' },
+  oppna_karta: { sv: 'Öppna kartan', en: 'Open the map' },
   sok_etikett: { sv: 'Sök art, område eller projekt', en: 'Search species, area or project' },
   sok_platshallare: { sv: 'Till exempel torsk, Gadus morhua eller Östersjön', en: 'For example cod, Gadus morhua or Baltic' },
   filter_rubrik: { sv: 'Filtrera', en: 'Filter' },
@@ -127,6 +143,17 @@ export function sidtitel(del: string | null, lang: Sprak): string {
 export function antalKartor(n: number, lang: Sprak): string {
   if (lang === 'en') return `${n} ${n === 1 ? 'map' : 'maps'}`;
   return `${n} ${n === 1 ? 'karta' : 'kartor'}`;
+}
+
+/** "58 arter, 75 kartor" / "58 species, 75 maps". */
+export function antalArterKartor(arter: number, kartor: number, lang: Sprak): string {
+  if (lang === 'en') return `${arter} species, ${antalKartor(kartor, lang)}`;
+  return `${arter} ${arter === 1 ? 'art' : 'arter'}, ${antalKartor(kartor, lang)}`;
+}
+
+/** "Visa alla 58 arter" / "Show all 58 species". */
+export function visaAllaArter(n: number, lang: Sprak): string {
+  return lang === 'en' ? `Show all ${n} species` : `Visa alla ${n} arter`;
 }
 
 /** "Visa alla (31)" / "Show all (31)". */

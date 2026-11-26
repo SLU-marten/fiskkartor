@@ -10,13 +10,15 @@
     filter: Filter;
     lang: Sprak;
     onvaxla: (falt: Faltnamn, varde: string) => void;
+    /** Fält som inte visas, om de inte har valda värden. */
+    dolda?: Faltnamn[];
   };
-  let { fasetter, filter, lang, onvaxla }: Props = $props();
+  let { fasetter, filter, lang, onvaxla, dolda = [] }: Props = $props();
   let alla = $state<Partial<Record<Faltnamn, boolean>>>({});
 </script>
 
 {#each FALTNAMN as falt (falt)}
-  {#if fasetter[falt].length || filter[falt].length}
+  {#if (fasetter[falt].length && !dolda.includes(falt)) || filter[falt].length}
     {@const varden = synligaVarden(fasetter[falt], filter[falt], !!alla[falt])}
     <fieldset>
       <legend>{faltEtikett(falt, lang)}</legend>

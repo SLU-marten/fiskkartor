@@ -60,23 +60,59 @@ test.describe('appskalet', () => {
 const START = () => start(server.url);
 
 test.describe('startsidan', () => {
-  test('träfflistan har artikoner', async ({ page }) => {
+  test('startsidan visar arterna som kort', async ({ page }) => {
     await page.goto(START());
-    const torsk = page.getByTestId('traff').filter({ hasText: 'Torsk större än 20 cm' });
-    const ikon = torsk.locator('.artikon');
-    await expect(ikon).toHaveAttribute('aria-hidden', 'true');
-    expect(Math.round((await ikon.boundingBox())!.width)).toBe(44);
-    expect(Math.round((await ikon.locator('svg').boundingBox())!.width)).toBe(20);
-    const tral = page.getByTestId('traff').filter({ hasText: 'Trålfångst, en klass' });
-    await expect(tral.locator('.artikon')).toHaveCount(1);
-    await expect(tral.locator('.artikon svg')).toHaveCount(0);
+    await expect(page.locator('.artkort')).toHaveCount(3);
+    await expect(page.locator('#traffrubrik')).toHaveText('2 arter, 3 kartor');
+    await expect(page.locator('[data-testid^="projekt-"]')).toHaveCount(0);
   });
 
-  test('visar projektkort och bara synliga kartor', async ({ page }) => {
+  test('artkortets knapp öppnar kartan', async ({ page }) => {
+    await cartoTom(page);
+    await page.goto(START());
+    await page.getByRole('link', { name: 'Torsk större än 20 cm, uppväxt, västkusten (test)' }).click();
+    await expect(page).toHaveURL(/#\/karta\/torsk-test/);
+  });
+
+  test('artkorten har artens silhuett', async ({ page }) => {
+    await page.goto(START());
+    await expect(page.locator('.artkort').filter({ hasText: 'Torsk' }).locator('svg')).toHaveCount(1);
+    await expect(page.locator('.artkort').filter({ hasText: 'Trålfångst' }).locator('svg')).toHaveCount(0);
+  });
+
+  test('högst 12 arter först och sedan Visa alla', async ({ page }) => {
+    const katalog = JSON.parse(readFileSync(resolve(WEBB, 'tests', 'fixtures', 'data', 'katalog', 'katalog.json'), 'utf8'));
+    const mall = katalog.kartor.find((k: { id: string }) => k.id === 'torsk-test');
+    const arter = ['Abborre', 'Berggylta', 'Gädda', 'Gös', 'Kolja', 'Lax', 'Makrill', 'Mört', 'Piggvar', 'Rödspätta', 'Sill', 'Sutare', 'Torsk', 'Vitling', 'Ål'];
+    katalog.kartor = arter.map((art, i) => ({ ...mall, id: `art-${i}`, titel: `${art} uppväxt`, falt: { ...mall.falt, art } }));
+    await page.route('**/katalog/katalog.json', (r) => r.fulfill({ body: JSON.stringify(katalog), contentType: 'application/json' }));
+    await page.goto(START());
+    await expect(page.locator('.artkort')).toHaveCount(12);
+    await page.getByRole('button', { name: 'Visa alla 15 arter' }).click();
+    await expect(page.locator('.artkort')).toHaveCount(15);
+    await expect(page.getByRole('button', { name: /Visa alla/ })).toHaveCount(0);
+  });
+
+  test('Art visas inte i startsidans filter', async ({ page }) => {
+    await page.goto(START());
+    await expect(page.getByRole('group', { name: 'Projekt' })).toBeVisible();
+    await expect(page.getByRole('group', { name: 'Art', exact: true })).toHaveCount(0);
+  });
+
+  test('Så läser du kartorna', async ({ page }) => {
+    await page.goto(START());
+    const kort = page.getByRole('complementary', { name: 'Så läser du kartorna' }).first();
+    await expect(kort).toBeVisible();
+    await kort.getByRole('link', { name: 'Mer om kartorna och metoderna' }).click();
+    await expect(page).toHaveURL(/#\/om/);
+  });
+
+  test('visar bara synliga kartor och projektfiltret räknar dem', async ({ page }) => {
     await page.goto(START());
     await expect(page.getByTestId('traff')).toHaveCount(3);
-    await expect(page.getByTestId('projekt-NMK')).toContainText('2 kartor');
-    await expect(page.getByTestId('projekt-PanBalticScope')).toContainText('1 karta');
+    const projekt = page.getByRole('group', { name: 'Projekt' });
+    await expect(projekt.getByRole('button', { name: /NMK/ })).toContainText('(2)');
+    await expect(projekt.getByRole('button', { name: /PanBalticScope/ })).toContainText('(1)');
     await expect(page.getByText('Sill, dold (test)')).toHaveCount(0);
   });
 
@@ -644,7 +680,7 @@ test.describe('sidhuvud, sidfot och titlar', () => {
   test('sidhuvudet har SLU:s logotyp och institutionen', async ({ page }) => {
     await page.goto(START());
     await expect(page.getByRole('img', { name: 'SLU, Sveriges lantbruksuniversitet' })).toBeVisible();
-    await expect(page.getByRole('banner').getByText('Institutionen för akvatiska resurser')).toBeVisible();
+    await expect(page.getByRole('banner').getByText('Institutionen för akvatiska resurser', { exact: true })).toBeVisible();
   });
 
   test('logotypen är SLU:s riktiga, inte platshållaren', async ({ page }) => {
@@ -663,7 +699,7 @@ test.describe('sidhuvud, sidfot och titlar', () => {
     await expect(huvud).toHaveCSS('background-color', 'rgb(0, 118, 129)');
     expect(await huvud.evaluate((e) => getComputedStyle(e).backgroundImage)).toContain('monster-sidhuvud');
     await expect(huvud.getByRole('link', { name: 'Fiskkartor' })).toHaveCSS('color', 'rgb(255, 255, 255)');
-    await expect(huvud.getByText('Institutionen för akvatiska resurser')).toHaveCSS('color', 'rgb(255, 255, 255)');
+    await expect(huvud.getByText('Institutionen för akvatiska resurser', { exact: true })).toHaveCSS('color', 'rgb(255, 255, 255)');
   });
 
   test('sidhuvudet vid 320 px', async ({ page }) => {
@@ -1230,13 +1266,6 @@ test.describe('profil', () => {
   test('sidan har havsgrå bakgrund', async ({ page }) => {
     await page.goto(START());
     await expect(page.locator('body')).toHaveCSS('background-color', 'rgb(238, 244, 246)');
-  });
-
-  test('valt projektkort markeras', async ({ page }) => {
-    await page.goto(START());
-    await page.getByTestId('projekt-NMK').click();
-    await expect(page.getByTestId('projekt-NMK')).toHaveAttribute('aria-pressed', 'true');
-    await expect(page.getByTestId('projekt-NMK')).toHaveCSS('background-color', 'rgb(220, 233, 238)');
   });
 
   test('Om-sidan länkar till tillgänglighetsredogörelsen', async ({ page }) => {

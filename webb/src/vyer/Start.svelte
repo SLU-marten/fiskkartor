@@ -1,11 +1,13 @@
 <script lang="ts">
+  import Artkort from '../komponenter/Artkort.svelte';
   import Filter from '../komponenter/Filter.svelte';
+  import Lasa from '../komponenter/Lasa.svelte';
   import Sokfalt from '../komponenter/Sokfalt.svelte';
-  import Traffar from '../komponenter/Traffar.svelte';
+  import { grupperaArter } from '../lib/artgrupper';
   import { FALTNAMN, type Faltnamn, type Karta } from '../lib/katalog';
   import { byggRutt, medParametrar, skrivRutt, type Rutt, type Sprak } from '../lib/rutt';
   import { fasetter, filterFranQ, forslag, lika, sok, type Fasett } from '../lib/sok';
-  import { antalKartor, t } from '../lib/text';
+  import { antalArterKartor, t, visaAllaArter } from '../lib/text';
 
   type Props = { kartor: Karta[]; rutt: Rutt; lang: Sprak };
   let { kartor, rutt, lang }: Props = $props();
@@ -23,28 +25,18 @@
   );
   const harFilter = $derived(FALTNAMN.some((f) => filter[f].length > 0));
 
-  // Ett kort per projekt: antal kartor, källor och år.
-  const projekt = $derived.by(() => {
-    const grupper = new Map<string, Karta[]>();
-    for (const k of kartor) grupper.set(k.projekt, [...(grupper.get(k.projekt) ?? []), k]);
-    return [...grupper].map(([namn, ks]) => {
-      const ar = ks.map((k) => k.ar);
-      const min = Math.min(...ar);
-      const max = Math.max(...ar);
-      return { namn, antal: ks.length, kallor: kallText(namn, ks), ar: min === max ? String(min) : `${min}–${max}` };
-    }).sort((a, b) => b.antal - a.antal);
+  // Kartorna som artkort. Högst MAX kort först; en ny sökning eller ett nytt filter visar åter MAX.
+  const MAX = 12;
+  const grupper = $derived(grupperaArter(traffar));
+  const antalArter = $derived(grupper.filter((g) => g.art).length);
+  let allaArter = $state(false);
+  $effect(() => {
+    void rutt.q.toString();
+    allaArter = false;
   });
+  const synliga = $derived(allaArter ? grupper : grupper.slice(0, MAX));
 
-  // "Nationell marin kartering (Ryssja)", "… (Trål)" blir "Nationell marin kartering (Ryssja, Trål)".
-  // En källa som heter som projektet nämns inte.
-  function kallText(projekt: string, ks: Karta[]): string {
-    const kallor = [...new Set(ks.map((k) => k.kalla))].filter((k) => k !== projekt).sort(sv.compare);
-    const delar = kallor.map((k) => /^(.*) \((.*)\)$/.exec(k));
-    if (kallor.length > 1 && delar.every((d) => d && d[1] === delar[0]![1])) {
-      return `${delar[0]![1]} (${delar.map((d) => d![2]).join(', ')})`;
-    }
-    return kallor.join(', ');
-  }
+  const sprakQ = $derived(new URLSearchParams(lang === 'en' ? { lang: 'en' } : {}));
 
   // På smala skärmar är filtret hopfällt, så att träffarna syns direkt.
   const bred = typeof matchMedia === 'function' ? matchMedia('(min-width: 52rem)').matches : true;
@@ -72,117 +64,124 @@
   }
 </script>
 
-<section class="topp">
-  <h1>{t('hitta_karta', lang)}</h1>
-  <Sokfalt
-    varde={q}
-    forslag={forslag(kartor, q)}
-    etikett={t('sok_etikett', lang)}
-    platshallare={t('sok_platshallare', lang)}
-    onskriv={skriv}
-    onval={skriv}
-    sokknapp={t('sok_knapp', lang)}
-    onsok={() => document.getElementById('traffrubrik')?.focus()}
-  />
-  <ul class="projekt">
-    {#each projekt as p (p.namn)}
-      <li>
-        <button
-          type="button"
-          data-testid={`projekt-${p.namn}`}
-          aria-pressed={filter.projekt.includes(p.namn)}
-          onclick={() => vaxla('projekt', p.namn)}
-        >
-          <strong>{p.namn}</strong>
-          <span>{antalKartor(p.antal, lang)}, {p.ar}.{p.kallor ? ` ${p.kallor}.` : ''}</span>
-        </button>
-      </li>
-    {/each}
-  </ul>
+<section class="hero">
+  <div class="behallare hero-rutnat">
+    <div class="intro">
+      <h1>{t('hitta_karta', lang)}</h1>
+      <p class="ingress lopande">{t('start_ingress', lang)}</p>
+      <Sokfalt
+        varde={q}
+        forslag={forslag(kartor, q)}
+        etikett={t('sok_etikett', lang)}
+        platshallare={t('sok_platshallare', lang)}
+        onskriv={skriv}
+        onval={skriv}
+        sokknapp={t('sok_knapp', lang)}
+        onsok={() => document.getElementById('traffrubrik')?.focus()}
+      />
+    </div>
+    <div class="bara-dator"><Lasa {lang} lank={byggRutt({ vy: 'om', q: sprakQ })} id="lasa-dator" /></div>
+  </div>
 </section>
 
-<div class="innehall">
-  <aside aria-label={t('filter_rubrik', lang)}>
+<div class="behallare innehall">
+  <aside class="filterkort" aria-label={t('filter_rubrik', lang)}>
     <details open={bred || harFilter}>
       <summary><h2>{t('filter_rubrik', lang)}</h2></summary>
-      <Filter fasetter={faset} {filter} {lang} onvaxla={vaxla} />
+      <Filter fasetter={faset} {filter} {lang} onvaxla={vaxla} dolda={['art']} />
     </details>
   </aside>
-  <section aria-live="polite">
+  <section class="arter" aria-live="polite">
     <div class="rad">
-      <h2 id="traffrubrik" tabindex="-1">{antalKartor(traffar.length, lang)}</h2>
+      <h2 id="traffrubrik" tabindex="-1">{antalArterKartor(antalArter, traffar.length, lang)}</h2>
       {#if harFilter}
         <button type="button" class="rensa" onclick={rensa}>{t('rensa_filter', lang)}</button>
       {/if}
     </div>
     {#if traffar.length}
-      <Traffar kartor={traffar} lank={kartlank} />
+      <ul class="rutnat">
+        {#each synliga as grupp (grupp.nyckel)}
+          <li><Artkort {grupp} lank={kartlank} {lang} /></li>
+        {/each}
+      </ul>
+      {#if grupper.length > synliga.length}
+        <button type="button" class="visa-alla" onclick={() => (allaArter = true)}>{visaAllaArter(grupper.length, lang)}</button>
+      {/if}
     {:else}
       <p>{t('inga_traffar', lang)}</p>
     {/if}
   </section>
+  <div class="bara-mobil"><Lasa {lang} lank={byggRutt({ vy: 'om', q: sprakQ })} id="lasa-mobil" /></div>
 </div>
 
 <style>
-  .topp {
-    padding: 2rem 1.25rem 1.5rem;
-    border-bottom: 1px solid var(--linje);
-    background: var(--yta);
+  .behallare {
+    max-width: 75rem;
+    margin: 0 auto;
+    padding: 0 2rem;
+    box-sizing: border-box;
+  }
+  .hero {
+    padding: 2.75rem 0 2.25rem;
+  }
+  .hero-rutnat {
+    display: grid;
+    grid-template-columns: minmax(0, 1.65fr) minmax(0, 1fr);
+    gap: 3rem;
+    align-items: start;
+  }
+  .intro {
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
   }
   h1 {
-    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    margin: 0;
+    font-size: clamp(2rem, 4vw, 2.9rem);
     font-weight: 400;
+    line-height: 1.1;
   }
-  .projekt {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.75rem;
-    list-style: none;
-    margin: 1.25rem 0 0;
-    padding: 0;
-  }
-  .projekt button {
-    display: grid;
-    gap: 0.15rem;
-    max-width: 26rem;
-    text-align: left;
-    padding: 0.7rem 0.9rem;
-    border: 1px solid var(--linje);
-    border-radius: 6px;
-    background: var(--yta);
-    cursor: pointer;
-  }
-  .projekt button:hover {
-    border-color: var(--tema);
-  }
-  .projekt button[aria-pressed='true'] {
-    background: var(--markering);
-    border-color: var(--tema);
-  }
-  .projekt span {
-    color: var(--dampad);
-    font-size: 0.92rem;
+  .ingress {
+    margin: 0 0 0.4rem;
+    max-width: 36em;
+    font-size: 1.1rem;
   }
   .innehall {
     display: grid;
-    grid-template-columns: minmax(14rem, 20rem) minmax(0, 46rem);
+    grid-template-columns: 17rem minmax(0, 1fr);
     gap: 2rem;
-    padding: 1.5rem 1.25rem 3rem;
+    align-items: start;
+    padding-top: 0.25rem;
+    padding-bottom: 3.5rem;
   }
-  h2 {
-    font-size: 1.15rem;
+  .filterkort {
+    padding: 1.25rem;
+    background: var(--yta);
+    border: 1px solid var(--kortkant);
+    border-radius: 4px;
   }
   summary {
     cursor: pointer;
-    margin-bottom: 0.5rem;
   }
   summary h2 {
     display: inline;
+    margin: 0;
+    font-size: 1.2rem;
+  }
+  .arter {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    min-width: 0;
   }
   .rad {
     display: flex;
     align-items: baseline;
     gap: 1rem;
+  }
+  .rad h2 {
+    margin: 0;
+    font-size: 1.5rem;
   }
   .rensa {
     min-height: 36px;
@@ -193,9 +192,63 @@
     color: var(--tema);
     cursor: pointer;
   }
-  @media (max-width: 52rem) {
+  .rutnat {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(12.5rem, 1fr));
+    gap: 0.875rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .visa-alla {
+    align-self: center;
+    min-height: 48px;
+    margin-top: 0.75rem;
+    padding: 0 1.75rem;
+    border: 1px solid var(--tema);
+    border-radius: 4px;
+    background: var(--yta);
+    color: var(--tema);
+    font-size: 1.05rem;
+    cursor: pointer;
+  }
+  .visa-alla:hover {
+    background: var(--tema);
+    color: #ffffff;
+  }
+  .bara-mobil {
+    display: none;
+  }
+  @media (max-width: 60rem) {
+    .hero-rutnat,
     .innehall {
-      grid-template-columns: 1fr;
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .bara-dator {
+      display: none;
+    }
+    .bara-mobil {
+      display: block;
+    }
+  }
+  @media (max-width: 40rem) {
+    .behallare {
+      padding: 0 0.75rem;
+    }
+    .hero {
+      padding: 1.5rem 0 1.25rem;
+    }
+    .intro {
+      padding: 0 0.25rem;
+    }
+    .innehall {
+      gap: 0.75rem;
+    }
+    .rutnat {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .visa-alla {
+      align-self: stretch;
     }
   }
 </style>
