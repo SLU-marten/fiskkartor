@@ -60,6 +60,18 @@ test.describe('appskalet', () => {
 const START = () => start(server.url);
 
 test.describe('startsidan', () => {
+  test('träfflistan har artikoner', async ({ page }) => {
+    await page.goto(START());
+    const torsk = page.getByTestId('traff').filter({ hasText: 'Torsk större än 20 cm' });
+    const ikon = torsk.locator('.artikon');
+    await expect(ikon).toHaveAttribute('aria-hidden', 'true');
+    expect(Math.round((await ikon.boundingBox())!.width)).toBe(44);
+    expect(Math.round((await ikon.locator('svg').boundingBox())!.width)).toBe(20);
+    const tral = page.getByTestId('traff').filter({ hasText: 'Trålfångst, en klass' });
+    await expect(tral.locator('.artikon')).toHaveCount(1);
+    await expect(tral.locator('.artikon svg')).toHaveCount(0);
+  });
+
   test('visar projektkort och bara synliga kartor', async ({ page }) => {
     await page.goto(START());
     await expect(page.getByTestId('traff')).toHaveCount(3);
@@ -812,6 +824,15 @@ test.describe('Lagerval och teckenförklaring i kartan', () => {
 });
 
 test.describe('lagerbyte, kartbyte och versioner', () => {
+  test('kartvyns lista har mindre ikoner', async ({ page }) => {
+    await cartoTom(page);
+    await page.goto(KARTA('torsk-test'));
+    const ikon = page.locator('.lista .artikon').first();
+    await expect(ikon).toBeVisible();
+    expect(Math.round((await ikon.boundingBox())!.width)).toBe(36);
+    expect(Math.round((await ikon.locator('svg').boundingBox())!.width)).toBe(16);
+  });
+
   test('ett annat lager säger att kartan laddas tills det har laddats', async ({ page }) => {
     await page.goto(KARTA('torsk-test', 'bakgrund=ingen'));
     await vantaKarta(page);

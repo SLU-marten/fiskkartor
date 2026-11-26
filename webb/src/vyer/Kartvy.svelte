@@ -94,7 +94,7 @@
     <nav class="lista" aria-label={t('alla_kartor', lang)}>
       <details open={bred}>
         <summary>{t(sokning ? 'traffar' : 'alla_kartor', lang)} <span>({antalKartor(lista.length, lang)})</span></summary>
-        <Traffar kartor={lista} {lank} aktiv={karta.id} />
+        <Traffar kartor={lista} {lank} aktiv={karta.id} kompakt />
       </details>
     </nav>
     <div class="kartyta">
